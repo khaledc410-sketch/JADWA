@@ -1,0 +1,646 @@
+{
+  "metadata": {
+    "source": "HRDF - Human Resources Development Fund",
+    "source_ar": "صندوق تنمية الموارد البشرية - هدف",
+    "last_updated": "2025-01",
+    "notes": "Nitaqat Saudization ratios and HRDF subsidy programs as of Q1 2025. Ratios subject to periodic ministerial updates by MHRSD."
+  },
+  "nitaqat_bands": {
+    "platinum": {
+      "min_percent": 40,
+      "color": "platinum",
+      "color_ar": "البلاتيني",
+      "benefits": [
+        "No visa restrictions",
+        "Easy work permit transfer from any company",
+        "Priority in government services",
+        "Access to premium HRDF programs",
+        "Exemption from routine labor office inspections"
+      ],
+      "penalties": []
+    },
+    "high_green": {
+      "min_percent": 35,
+      "max_percent": 39.99,
+      "color": "high_green",
+      "color_ar": "الأخضر المرتفع",
+      "benefits": [
+        "Work permit issuance and renewal allowed",
+        "Visa transfer from green and above companies allowed",
+        "Access to HRDF subsidies",
+        "Good standing with MHRSD"
+      ],
+      "penalties": []
+    },
+    "low_green": {
+      "min_percent": 28,
+      "max_percent": 34.99,
+      "color": "low_green",
+      "color_ar": "الأخضر المنخفض",
+      "benefits": [
+        "Work permit renewal allowed",
+        "Limited visa transfer (green and above only)",
+        "Basic HRDF subsidy access"
+      ],
+      "penalties": []
+    },
+    "yellow": {
+      "min_percent": 15,
+      "max_percent": 27.99,
+      "color": "yellow",
+      "color_ar": "الأصفر",
+      "benefits": [],
+      "penalties": [
+        "Cannot transfer visas from platinum or green companies",
+        "Limited new work permit issuance",
+        "Subject to MHRSD monitoring visits"
+      ]
+    },
+    "red": {
+      "min_percent": 0,
+      "max_percent": 14.99,
+      "color": "red",
+      "color_ar": "الأحمر",
+      "benefits": [],
+      "penalties": [
+        "Cannot issue new work permits",
+        "Cannot renew expiring work permits",
+        "Cannot transfer visas from any company",
+        "Subject to mandatory labor inspections and fines",
+        "Risk of business suspension after repeated violations"
+      ]
+    }
+  },
+  "sector_ratios": {
+    "fnb": {
+      "sector_name_ar": "قطاع الأغذية والمشروبات والضيافة",
+      "sector_name_en": "Food & Beverage / Hospitality",
+      "nitaqat_classification": "Category C",
+      "micro_1_to_4": {
+        "label": "Micro (1-4 employees)",
+        "min_saudi_percent": 0,
+        "band": "exempt",
+        "notes": "Micro establishments are exempt from Nitaqat requirements"
+      },
+      "small_5_to_49": {
+        "label": "Small (5-49 employees)",
+        "min_saudi_percent": 10,
+        "band_thresholds": {
+          "platinum": 25,
+          "high_green": 18,
+          "low_green": 10,
+          "yellow": 5,
+          "red": 0
+        }
+      },
+      "medium_50_to_499": {
+        "label": "Medium (50-499 employees)",
+        "min_saudi_percent": 15,
+        "band_thresholds": {
+          "platinum": 30,
+          "high_green": 22,
+          "low_green": 15,
+          "yellow": 8,
+          "red": 0
+        }
+      },
+      "large_500_plus": {
+        "label": "Large (500+ employees)",
+        "min_saudi_percent": 20,
+        "band_thresholds": {
+          "platinum": 35,
+          "high_green": 27,
+          "low_green": 20,
+          "yellow": 10,
+          "red": 0
+        }
+      }
+    },
+    "retail": {
+      "sector_name_ar": "قطاع التجزئة",
+      "sector_name_en": "Retail Trade",
+      "nitaqat_classification": "Category B",
+      "micro_1_to_4": {
+        "label": "Micro (1-4 employees)",
+        "min_saudi_percent": 0,
+        "band": "exempt"
+      },
+      "small_5_to_49": {
+        "label": "Small (5-49 employees)",
+        "min_saudi_percent": 30,
+        "band_thresholds": {
+          "platinum": 55,
+          "high_green": 45,
+          "low_green": 30,
+          "yellow": 20,
+          "red": 0
+        }
+      },
+      "medium_50_to_499": {
+        "label": "Medium (50-499 employees)",
+        "min_saudi_percent": 35,
+        "band_thresholds": {
+          "platinum": 60,
+          "high_green": 50,
+          "low_green": 35,
+          "yellow": 25,
+          "red": 0
+        }
+      },
+      "large_500_plus": {
+        "label": "Large (500+ employees)",
+        "min_saudi_percent": 40,
+        "band_thresholds": {
+          "platinum": 65,
+          "high_green": 55,
+          "low_green": 40,
+          "yellow": 28,
+          "red": 0
+        }
+      }
+    },
+    "real_estate": {
+      "sector_name_ar": "قطاع العقارات",
+      "sector_name_en": "Real Estate",
+      "nitaqat_classification": "Category A",
+      "micro_1_to_4": {
+        "label": "Micro (1-4 employees)",
+        "min_saudi_percent": 0,
+        "band": "exempt"
+      },
+      "small_5_to_49": {
+        "label": "Small (5-49 employees)",
+        "min_saudi_percent": 35,
+        "band_thresholds": {
+          "platinum": 60,
+          "high_green": 50,
+          "low_green": 35,
+          "yellow": 25,
+          "red": 0
+        }
+      },
+      "medium_50_to_499": {
+        "label": "Medium (50-499 employees)",
+        "min_saudi_percent": 40,
+        "band_thresholds": {
+          "platinum": 65,
+          "high_green": 55,
+          "low_green": 40,
+          "yellow": 28,
+          "red": 0
+        }
+      },
+      "large_500_plus": {
+        "label": "Large (500+ employees)",
+        "min_saudi_percent": 45,
+        "band_thresholds": {
+          "platinum": 70,
+          "high_green": 60,
+          "low_green": 45,
+          "yellow": 30,
+          "red": 0
+        }
+      }
+    },
+    "healthcare": {
+      "sector_name_ar": "قطاع الرعاية الصحية",
+      "sector_name_en": "Healthcare",
+      "nitaqat_classification": "Category B",
+      "micro_1_to_4": {
+        "label": "Micro (1-4 employees)",
+        "min_saudi_percent": 0,
+        "band": "exempt"
+      },
+      "small_5_to_49": {
+        "label": "Small (5-49 employees)",
+        "min_saudi_percent": 25,
+        "band_thresholds": {
+          "platinum": 55,
+          "high_green": 40,
+          "low_green": 25,
+          "yellow": 15,
+          "red": 0
+        }
+      },
+      "medium_50_to_499": {
+        "label": "Medium (50-499 employees)",
+        "min_saudi_percent": 30,
+        "band_thresholds": {
+          "platinum": 60,
+          "high_green": 45,
+          "low_green": 30,
+          "yellow": 18,
+          "red": 0
+        }
+      },
+      "large_500_plus": {
+        "label": "Large (500+ employees)",
+        "min_saudi_percent": 35,
+        "band_thresholds": {
+          "platinum": 65,
+          "high_green": 50,
+          "low_green": 35,
+          "yellow": 22,
+          "red": 0
+        }
+      }
+    },
+    "education": {
+      "sector_name_ar": "قطاع التعليم",
+      "sector_name_en": "Education",
+      "nitaqat_classification": "Category A",
+      "micro_1_to_4": {
+        "label": "Micro (1-4 employees)",
+        "min_saudi_percent": 0,
+        "band": "exempt"
+      },
+      "small_5_to_49": {
+        "label": "Small (5-49 employees)",
+        "min_saudi_percent": 40,
+        "band_thresholds": {
+          "platinum": 70,
+          "high_green": 55,
+          "low_green": 40,
+          "yellow": 25,
+          "red": 0
+        }
+      },
+      "medium_50_to_499": {
+        "label": "Medium (50-499 employees)",
+        "min_saudi_percent": 45,
+        "band_thresholds": {
+          "platinum": 75,
+          "high_green": 60,
+          "low_green": 45,
+          "yellow": 30,
+          "red": 0
+        }
+      },
+      "large_500_plus": {
+        "label": "Large (500+ employees)",
+        "min_saudi_percent": 50,
+        "band_thresholds": {
+          "platinum": 80,
+          "high_green": 65,
+          "low_green": 50,
+          "yellow": 35,
+          "red": 0
+        }
+      }
+    },
+    "it_tech": {
+      "sector_name_ar": "قطاع تقنية المعلومات والاتصالات",
+      "sector_name_en": "Information Technology & Telecommunications",
+      "nitaqat_classification": "Category B",
+      "micro_1_to_4": {
+        "label": "Micro (1-4 employees)",
+        "min_saudi_percent": 0,
+        "band": "exempt"
+      },
+      "small_5_to_49": {
+        "label": "Small (5-49 employees)",
+        "min_saudi_percent": 25,
+        "band_thresholds": {
+          "platinum": 50,
+          "high_green": 38,
+          "low_green": 25,
+          "yellow": 15,
+          "red": 0
+        }
+      },
+      "medium_50_to_499": {
+        "label": "Medium (50-499 employees)",
+        "min_saudi_percent": 30,
+        "band_thresholds": {
+          "platinum": 55,
+          "high_green": 42,
+          "low_green": 30,
+          "yellow": 18,
+          "red": 0
+        }
+      },
+      "large_500_plus": {
+        "label": "Large (500+ employees)",
+        "min_saudi_percent": 35,
+        "band_thresholds": {
+          "platinum": 60,
+          "high_green": 48,
+          "low_green": 35,
+          "yellow": 22,
+          "red": 0
+        }
+      }
+    },
+    "finance": {
+      "sector_name_ar": "القطاع المالي والتأمين",
+      "sector_name_en": "Finance, Banking & Insurance",
+      "nitaqat_classification": "Category A",
+      "micro_1_to_4": {
+        "label": "Micro (1-4 employees)",
+        "min_saudi_percent": 0,
+        "band": "exempt"
+      },
+      "small_5_to_49": {
+        "label": "Small (5-49 employees)",
+        "min_saudi_percent": 40,
+        "band_thresholds": {
+          "platinum": 70,
+          "high_green": 55,
+          "low_green": 40,
+          "yellow": 25,
+          "red": 0
+        }
+      },
+      "medium_50_to_499": {
+        "label": "Medium (50-499 employees)",
+        "min_saudi_percent": 50,
+        "band_thresholds": {
+          "platinum": 80,
+          "high_green": 65,
+          "low_green": 50,
+          "yellow": 35,
+          "red": 0
+        }
+      },
+      "large_500_plus": {
+        "label": "Large (500+ employees)",
+        "min_saudi_percent": 60,
+        "band_thresholds": {
+          "platinum": 90,
+          "high_green": 75,
+          "low_green": 60,
+          "yellow": 45,
+          "red": 0
+        }
+      }
+    },
+    "construction": {
+      "sector_name_ar": "قطاع البناء والتشييد",
+      "sector_name_en": "Construction",
+      "nitaqat_classification": "Category C",
+      "micro_1_to_4": {
+        "label": "Micro (1-4 employees)",
+        "min_saudi_percent": 0,
+        "band": "exempt"
+      },
+      "small_5_to_49": {
+        "label": "Small (5-49 employees)",
+        "min_saudi_percent": 6,
+        "band_thresholds": {
+          "platinum": 20,
+          "high_green": 14,
+          "low_green": 6,
+          "yellow": 3,
+          "red": 0
+        }
+      },
+      "medium_50_to_499": {
+        "label": "Medium (50-499 employees)",
+        "min_saudi_percent": 8,
+        "band_thresholds": {
+          "platinum": 25,
+          "high_green": 18,
+          "low_green": 8,
+          "yellow": 4,
+          "red": 0
+        }
+      },
+      "large_500_plus": {
+        "label": "Large (500+ employees)",
+        "min_saudi_percent": 10,
+        "band_thresholds": {
+          "platinum": 30,
+          "high_green": 22,
+          "low_green": 10,
+          "yellow": 5,
+          "red": 0
+        }
+      }
+    },
+    "automotive": {
+      "sector_name_ar": "قطاع السيارات وخدماتها",
+      "sector_name_en": "Automotive & Auto Services",
+      "nitaqat_classification": "Category B",
+      "micro_1_to_4": {
+        "label": "Micro (1-4 employees)",
+        "min_saudi_percent": 0,
+        "band": "exempt"
+      },
+      "small_5_to_49": {
+        "label": "Small (5-49 employees)",
+        "min_saudi_percent": 25,
+        "band_thresholds": {
+          "platinum": 50,
+          "high_green": 38,
+          "low_green": 25,
+          "yellow": 15,
+          "red": 0
+        }
+      },
+      "medium_50_to_499": {
+        "label": "Medium (50-499 employees)",
+        "min_saudi_percent": 30,
+        "band_thresholds": {
+          "platinum": 55,
+          "high_green": 42,
+          "low_green": 30,
+          "yellow": 18,
+          "red": 0
+        }
+      },
+      "large_500_plus": {
+        "label": "Large (500+ employees)",
+        "min_saudi_percent": 35,
+        "band_thresholds": {
+          "platinum": 60,
+          "high_green": 48,
+          "low_green": 35,
+          "yellow": 22,
+          "red": 0
+        }
+      }
+    },
+    "logistics": {
+      "sector_name_ar": "قطاع النقل والخدمات اللوجستية",
+      "sector_name_en": "Logistics & Transportation",
+      "nitaqat_classification": "Category C",
+      "micro_1_to_4": {
+        "label": "Micro (1-4 employees)",
+        "min_saudi_percent": 0,
+        "band": "exempt"
+      },
+      "small_5_to_49": {
+        "label": "Small (5-49 employees)",
+        "min_saudi_percent": 8,
+        "band_thresholds": {
+          "platinum": 22,
+          "high_green": 15,
+          "low_green": 8,
+          "yellow": 4,
+          "red": 0
+        }
+      },
+      "medium_50_to_499": {
+        "label": "Medium (50-499 employees)",
+        "min_saudi_percent": 12,
+        "band_thresholds": {
+          "platinum": 28,
+          "high_green": 20,
+          "low_green": 12,
+          "yellow": 6,
+          "red": 0
+        }
+      },
+      "large_500_plus": {
+        "label": "Large (500+ employees)",
+        "min_saudi_percent": 15,
+        "band_thresholds": {
+          "platinum": 35,
+          "high_green": 25,
+          "low_green": 15,
+          "yellow": 8,
+          "red": 0
+        }
+      }
+    }
+  },
+  "hrdf_subsidies": {
+    "saudi_employee_year1": {
+      "program_name_ar": "دعم توظيف السعوديين - السنة الأولى",
+      "program_name_en": "Saudi Employment Support - Year 1",
+      "percent_of_salary": 50,
+      "max_monthly_sar": 3000,
+      "duration_months": 12,
+      "eligibility": "New Saudi hire registered with GOSI within 3 months of joining",
+      "notes": "Applies to first-time private sector employees and those unemployed for more than 6 months"
+    },
+    "saudi_employee_year2": {
+      "program_name_ar": "دعم توظيف السعوديين - السنة الثانية",
+      "program_name_en": "Saudi Employment Support - Year 2",
+      "percent_of_salary": 25,
+      "max_monthly_sar": 1500,
+      "duration_months": 12,
+      "eligibility": "Employee must have completed Year 1 support period with same employer",
+      "notes": "Continuation of Year 1 support at a reduced rate"
+    },
+    "female_employment_bonus": {
+      "program_name_ar": "مكافأة توظيف المرأة السعودية",
+      "program_name_en": "Saudi Female Employment Bonus",
+      "monthly_sar": 1000,
+      "max_duration_months": 24,
+      "eligibility": "New Saudi female hire in eligible private sector roles",
+      "notes": "Stackable with Year 1 and Year 2 salary support programs"
+    },
+    "on_job_training": {
+      "program_name_ar": "برنامج التدريب أثناء العمل - تقاط",
+      "program_name_en": "On-the-Job Training Program (TAQAT)",
+      "monthly_allowance_sar": 2000,
+      "max_duration_months": 6,
+      "employer_subsidy_percent": 75,
+      "eligibility": "Saudi nationals enrolled in HRDF-approved OJT programs",
+      "notes": "Trainee counts partially toward Nitaqat during training period"
+    },
+    "training_programs": [
+      {
+        "name_ar": "برنامج نافس",
+        "name_en": "Nafis Program",
+        "provider": "Empower - National Programme to Empower Saudi National Citizens",
+        "monthly_support_sar": 4000,
+        "max_duration_months": 36,
+        "target_sectors": ["all_private_sector"],
+        "description_en": "Monthly salary supplement for Saudi employees in the private sector to bridge the wage gap with public sector employment"
+      },
+      {
+        "name_ar": "برنامج تمهير",
+        "name_en": "Tamheer Internship Program",
+        "provider": "HRDF",
+        "monthly_stipend_sar": 2000,
+        "duration_months": 6,
+        "max_extension_months": 6,
+        "target_group": "Fresh Saudi graduates (within 3 years of graduation)",
+        "description_en": "Structured internship providing fresh Saudi graduates with practical private sector experience, HRDF pays full stipend"
+      },
+      {
+        "name_ar": "برنامج التدريب الانتاجي",
+        "name_en": "Productive Training Program",
+        "provider": "HRDF",
+        "subsidy_percent": 50,
+        "max_monthly_sar": 1500,
+        "duration_months": 12,
+        "description_en": "Subsidizes employer cost of training Saudi employees in operational and technical roles"
+      },
+      {
+        "name_ar": "برنامج تطوير القدرات البشرية",
+        "name_en": "Human Capability Development Program (HCDP)",
+        "provider": "HRDF",
+        "max_grant_sar": 50000,
+        "duration_weeks": 16,
+        "target_sectors": ["fnb", "retail", "healthcare", "it_tech", "logistics"],
+        "description_en": "Upskilling and reskilling program for Saudi nationals transitioning into high-demand private sector roles"
+      },
+      {
+        "name_ar": "برنامج لافت",
+        "name_en": "LAFT - Training Fund for Establishments",
+        "provider": "HRDF",
+        "subsidy_percent": 50,
+        "max_grant_sar": 500000,
+        "eligibility": "Establishments with 50+ employees",
+        "description_en": "Co-finances employer-led training initiatives to upskill Saudi workforce in priority sectors"
+      }
+    ]
+  },
+  "gosi_rates": {
+    "notes": "General Organization for Social Insurance (GOSI) contribution rates effective 2024. Contributions calculated on basic salary plus housing allowance.",
+    "saudi_employee": {
+      "employer_percent": 11.75,
+      "employee_percent": 10,
+      "total_percent": 21.75,
+      "breakdown": {
+        "occupational_hazard_employer": 2.0,
+        "annuities_employer": 9.0,
+        "unemployment_insurance_saned_employer": 0.75,
+        "annuities_employee": 9.0,
+        "unemployment_insurance_saned_employee": 1.0
+      }
+    },
+    "expat_employee": {
+      "employer_percent": 2.0,
+      "employee_percent": 0,
+      "total_percent": 2.0,
+      "breakdown": {
+        "occupational_hazard_employer": 2.0
+      },
+      "notes": "Expatriates are covered only for occupational hazards; no pension annuity or unemployment insurance contributions apply"
+    }
+  },
+  "nitaqat_special_cases": {
+    "saudi_woman_multiplier": {
+      "value": 1.0,
+      "notes": "Saudi female employees count as 1 employee in standard Nitaqat calculations as of the 2024 regulatory update"
+    },
+    "disabled_employee_multiplier": {
+      "value": 4.0,
+      "notes": "Saudi employees with a certified disability registered with HRDF count as 4 Saudis toward Nitaqat"
+    },
+    "part_time_saudi_worker": {
+      "multiplier": 0.5,
+      "min_hours_per_week": 20,
+      "notes": "Saudi part-time workers working minimum 20 hours per week count as 0.5 toward Nitaqat"
+    },
+    "remote_worker": {
+      "multiplier": 1.0,
+      "notes": "Saudi remote workers count fully toward Nitaqat if registered with GOSI and have a valid employment contract"
+    },
+    "student_worker": {
+      "multiplier": 0.5,
+      "notes": "Saudi students employed part-time during studies count as 0.5 toward Nitaqat"
+    }
+  },
+  "compliance_calendar": {
+    "quarterly_reporting": "Employers must update GOSI registration quarterly",
+    "annual_nitaqat_review": "MHRSD reviews company Nitaqat band annually in January",
+    "violation_grace_period_days": 90,
+    "fine_per_illegal_worker_sar": 10000,
+    "fine_for_fake_saudization_sar": 100000
+  }
+}

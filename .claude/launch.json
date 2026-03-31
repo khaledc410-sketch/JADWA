@@ -1,0 +1,29 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Frontend (Next.js)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "frontend"],
+      "port": 3000
+    },
+    {
+      "name": "Backend (FastAPI)",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd backend && source venv/bin/activate && uvicorn app.main:app --reload --host 0.0.0.0 --port 8000"],
+      "port": 8000
+    },
+    {
+      "name": "Celery Worker",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "cd backend && source venv/bin/activate && celery -A app.tasks.celery_app worker --loglevel=info --concurrency=4"],
+      "port": null
+    },
+    {
+      "name": "Docker Services (PostgreSQL + Redis)",
+      "runtimeExecutable": "docker",
+      "runtimeArgs": ["compose", "up", "postgres", "redis", "-d"],
+      "port": null
+    }
+  ]
+}

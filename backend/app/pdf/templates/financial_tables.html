@@ -1,0 +1,736 @@
+{% extends "base.html" %}
+
+{% block title %}الجداول المالية - {{ business_name | default('دراسة الجدوى') }}{% endblock %}
+
+{% block extra_styles %}
+<style>
+
+  /* ===== Section title ===== */
+  .fin-section-title {
+    font-size: 13pt;
+    font-weight: 700;
+    color: #1B4332;
+    margin-bottom: 14px;
+    margin-top: 28px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #1B4332;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .fin-section-title:first-of-type { margin-top: 0; }
+
+  .fin-section-title .fin-en-label {
+    font-size: 8pt;
+    font-weight: 400;
+    color: #A0AEC0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin-right: auto;
+  }
+
+  /* ===== P&L Table ===== */
+  .pnl-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    direction: rtl;
+    margin-bottom: 6px;
+  }
+
+  .pnl-table thead tr {
+    background: #1B4332;
+    color: #FFFFFF;
+  }
+
+  .pnl-table thead th {
+    padding: 9px 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 8.5pt;
+    border-left: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .pnl-table thead th:first-child {
+    text-align: right;
+    border-left: none;
+    min-width: 140px;
+  }
+
+  .pnl-table thead th.year-col { min-width: 80px; }
+
+  /* Row types */
+  .pnl-table tbody tr.row-data td {
+    padding: 7px 10px;
+    border-bottom: 1px solid #EDF2F7;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .pnl-table tbody tr.row-data td:first-child {
+    text-align: right;
+    font-size: 9pt;
+    color: #2D3748;
+  }
+
+  .pnl-table tbody tr.row-data:nth-child(even) td { background: #F7F9F7; }
+
+  .pnl-table tbody tr.row-header td {
+    background: #D8F3DC;
+    font-weight: 700;
+    color: #1B4332;
+    padding: 7px 10px;
+    font-size: 9pt;
+    border-top: 1px solid #9AE6B4;
+    border-bottom: 1px solid #9AE6B4;
+  }
+
+  .pnl-table tbody tr.row-header td:first-child { text-align: right; }
+  .pnl-table tbody tr.row-header td:not(:first-child) { text-align: center; }
+
+  .pnl-table tbody tr.row-subtotal td {
+    background: #EBF8FF;
+    font-weight: 600;
+    color: #2B6CB0;
+    padding: 7px 10px;
+    border-top: 1px solid #BEE3F8;
+    font-size: 9pt;
+  }
+
+  .pnl-table tbody tr.row-subtotal td:first-child { text-align: right; }
+  .pnl-table tbody tr.row-subtotal td:not(:first-child) { text-align: center; }
+
+  .pnl-table tbody tr.row-total td {
+    background: #1B4332;
+    color: #FFFFFF;
+    font-weight: 700;
+    padding: 9px 10px;
+    font-size: 9.5pt;
+  }
+
+  .pnl-table tbody tr.row-total td:first-child { text-align: right; }
+  .pnl-table tbody tr.row-total td:not(:first-child) { text-align: center; }
+
+  .pnl-table tbody tr.row-spacer td {
+    height: 6px;
+    padding: 0;
+    background: #FFFFFF;
+    border: none;
+  }
+
+  .pnl-table tfoot tr td {
+    padding: 9px 10px;
+    font-weight: 700;
+    border-top: 2px solid #1B4332;
+    font-size: 9.5pt;
+    background: #F0F7F0;
+  }
+
+  /* Positive / negative coloring */
+  .num-positive { color: #276749; font-weight: 600; }
+  .num-negative { color: #C53030; font-weight: 600; }
+  .num-neutral  { color: #2D3748; }
+
+  /* ===== Cash Flow Table ===== */
+  .cf-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    direction: rtl;
+    margin-bottom: 6px;
+  }
+
+  .cf-table thead tr { background: #2C7A7B; color: #FFFFFF; }
+
+  .cf-table thead th {
+    padding: 9px 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 8.5pt;
+    border-left: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .cf-table thead th:first-child {
+    text-align: right;
+    border-left: none;
+    min-width: 140px;
+  }
+
+  .cf-table tbody tr.row-data td {
+    padding: 7px 10px;
+    border-bottom: 1px solid #EDF2F7;
+    text-align: center;
+    color: #2D3748;
+  }
+
+  .cf-table tbody tr.row-data td:first-child { text-align: right; }
+  .cf-table tbody tr.row-data:nth-child(even) td { background: #F0FDFA; }
+
+  .cf-table tbody tr.row-section td {
+    background: #E6FFFA;
+    font-weight: 700;
+    color: #234E52;
+    padding: 7px 10px;
+    font-size: 8.5pt;
+    border-top: 1px solid #B2F5EA;
+    border-bottom: 1px solid #B2F5EA;
+  }
+
+  .cf-table tbody tr.row-section td:first-child { text-align: right; }
+  .cf-table tbody tr.row-section td:not(:first-child) { text-align: center; }
+
+  .cf-table tbody tr.row-net td {
+    background: #2C7A7B;
+    color: #FFFFFF;
+    font-weight: 700;
+    padding: 9px 10px;
+  }
+
+  .cf-table tbody tr.row-net td:first-child { text-align: right; }
+  .cf-table tbody tr.row-net td:not(:first-child) { text-align: center; }
+
+  /* ===== Break-even analysis ===== */
+  .breakeven-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .breakeven-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    padding: 16px;
+    break-inside: avoid;
+  }
+
+  .breakeven-card .be-title {
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: #4A5568;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #EDF2F7;
+  }
+
+  .breakeven-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px dotted #EDF2F7;
+    font-size: 9pt;
+  }
+
+  .breakeven-row:last-child { border-bottom: none; }
+
+  .breakeven-row .be-label { color: #718096; }
+
+  .breakeven-row .be-value {
+    font-weight: 600;
+    color: #1A202C;
+  }
+
+  .breakeven-row.highlight .be-value { color: #1B4332; font-size: 11pt; }
+
+  /* Chart placeholder */
+  .chart-placeholder {
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(135deg, #F7F9F7 0%, #EDF2F7 100%);
+    border: 2px dashed #CBD5E0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .chart-placeholder .cp-icon { font-size: 24pt; opacity: 0.35; }
+
+  .chart-placeholder .cp-label {
+    font-size: 9pt;
+    color: #A0AEC0;
+    font-weight: 500;
+  }
+
+  .chart-placeholder .cp-sub {
+    font-size: 8pt;
+    color: #CBD5E0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  /* If an actual chart image is passed */
+  .chart-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    border: 1px solid #E2E8F0;
+  }
+
+  /* ===== Financial ratios ===== */
+  .ratios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .ratio-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 12px 14px;
+    break-inside: avoid;
+    text-align: center;
+  }
+
+  .ratio-card .ratio-value {
+    font-size: 14pt;
+    font-weight: 700;
+    color: #1B4332;
+    line-height: 1.2;
+  }
+
+  .ratio-card .ratio-unit {
+    font-size: 8pt;
+    color: #718096;
+  }
+
+  .ratio-card .ratio-label-ar {
+    font-size: 8.5pt;
+    font-weight: 600;
+    color: #4A5568;
+    margin-top: 3px;
+  }
+
+  .ratio-card .ratio-label-en {
+    font-size: 7.5pt;
+    color: #A0AEC0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .ratio-card .ratio-status {
+    margin-top: 5px;
+    display: inline-block;
+    font-size: 7.5pt;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+
+  .status-good    { background: #F0FFF4; color: #276749; }
+  .status-ok      { background: #FFFBEB; color: #B7791F; }
+  .status-concern { background: #FFF5F5; color: #C53030; }
+
+  /* ===== Table footnote ===== */
+  .table-note {
+    font-size: 7.5pt;
+    color: #A0AEC0;
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .table-note::before {
+    content: '* ';
+    color: #718096;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div>
+
+  <!-- Section header -->
+  <div class="section-header" style="margin-bottom:20px;">
+    <div class="section-number">٤</div>
+    <h2 class="section-title" style="margin:0;">التحليل المالي والتوقعات</h2>
+    <span style="margin-right:auto;font-size:8.5pt;color:#A0AEC0;font-family:'Helvetica Neue',Arial,sans-serif;">Financial Analysis & Projections</span>
+  </div>
+
+  <!-- ===== 5-Year P&L ===== -->
+  <div class="fin-section-title">
+    قائمة الأرباح والخسائر التوقعية (5 سنوات)
+    <span class="fin-en-label">Projected Profit & Loss Statement</span>
+  </div>
+
+  <table class="pnl-table">
+    <thead>
+      <tr>
+        <th>البند</th>
+        {% for yr in pnl_years | default(['السنة الأولى','السنة الثانية','السنة الثالثة','السنة الرابعة','السنة الخامسة']) %}
+        <th class="year-col">{{ yr }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Revenue section -->
+      <tr class="row-header">
+        <td>الإيرادات</td>
+        {% for _ in pnl_years | default([1,2,3,4,5]) %}<td>—</td>{% endfor %}
+      </tr>
+      {% set pnl = pnl_data | default({}) %}
+      <tr class="row-data">
+        <td>إيرادات المبيعات الأساسية</td>
+        {% for v in pnl.get('revenue_main', ['600,000','780,000','975,000','1,170,000','1,365,000']) %}
+        <td class="num-positive">{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-data">
+        <td>إيرادات أخرى / خدمات إضافية</td>
+        {% for v in pnl.get('revenue_other', ['30,000','45,000','60,000','75,000','90,000']) %}
+        <td>{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-subtotal">
+        <td>إجمالي الإيرادات</td>
+        {% for v in pnl.get('revenue_total', ['630,000','825,000','1,035,000','1,245,000','1,455,000']) %}
+        <td>{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-spacer"><td colspan="6"></td></tr>
+
+      <!-- COGS -->
+      <tr class="row-header">
+        <td>تكلفة البضاعة المباعة / تكلفة الخدمة</td>
+        {% for _ in pnl_years | default([1,2,3,4,5]) %}<td>—</td>{% endfor %}
+      </tr>
+      <tr class="row-data">
+        <td>المواد الخام ومستلزمات الإنتاج</td>
+        {% for v in pnl.get('cogs_materials', ['189,000','247,500','310,500','373,500','436,500']) %}
+        <td class="num-negative">{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-data">
+        <td>أجور العمالة المباشرة</td>
+        {% for v in pnl.get('cogs_labor', ['108,000','132,000','156,000','180,000','204,000']) %}
+        <td class="num-negative">{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-subtotal">
+        <td>إجمالي تكلفة البضاعة المباعة</td>
+        {% for v in pnl.get('cogs_total', ['297,000','379,500','466,500','553,500','640,500']) %}
+        <td class="num-negative">{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-total">
+        <td>مجمل الربح</td>
+        {% for v in pnl.get('gross_profit', ['333,000','445,500','568,500','691,500','814,500']) %}
+        <td class="num-positive">{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-spacer"><td colspan="6"></td></tr>
+
+      <!-- Operating expenses -->
+      <tr class="row-header">
+        <td>المصروفات التشغيلية</td>
+        {% for _ in pnl_years | default([1,2,3,4,5]) %}<td>—</td>{% endfor %}
+      </tr>
+      <tr class="row-data">
+        <td>الإيجار</td>
+        {% for v in pnl.get('opex_rent', ['96,000','96,000','100,800','100,800','105,840']) %}
+        <td>{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-data">
+        <td>الرواتب والأجور الإدارية</td>
+        {% for v in pnl.get('opex_salaries', ['120,000','132,000','144,000','156,000','168,000']) %}
+        <td>{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-data">
+        <td>التأمينات الاجتماعية (غوسي)</td>
+        {% for v in pnl.get('opex_gosi', ['14,100','15,510','16,920','18,330','19,740']) %}
+        <td>{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-data">
+        <td>المرافق (كهرباء، ماء، اتصالات)</td>
+        {% for v in pnl.get('opex_utilities', ['18,000','19,800','21,600','23,400','25,200']) %}
+        <td>{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-data">
+        <td>التسويق والإعلان</td>
+        {% for v in pnl.get('opex_marketing', ['25,200','24,750','31,050','37,350','43,650']) %}
+        <td>{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-data">
+        <td>الإهلاك والاستهلاك</td>
+        {% for v in pnl.get('opex_depreciation', ['40,000','40,000','40,000','40,000','40,000']) %}
+        <td>{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-data">
+        <td>مصروفات إدارية وعمومية أخرى</td>
+        {% for v in pnl.get('opex_other', ['15,000','16,500','18,000','19,500','21,000']) %}
+        <td>{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-subtotal">
+        <td>إجمالي المصروفات التشغيلية</td>
+        {% for v in pnl.get('opex_total', ['328,300','344,560','372,370','395,380','423,430']) %}
+        <td>{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-spacer"><td colspan="6"></td></tr>
+
+      <!-- EBITDA / Net profit -->
+      <tr class="row-total">
+        <td>صافي الربح التشغيلي (قبل الضريبة)</td>
+        {% for v in pnl.get('ebit', ['4,700','100,940','196,130','296,120','391,070']) %}
+        <td>{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-data">
+        <td>ضريبة القيمة المضافة الصافية (15%)</td>
+        {% for v in pnl.get('vat', ['705','15,141','29,420','44,418','58,661']) %}
+        <td class="num-negative">{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-data">
+        <td>الزكاة (2.5% — مواطنون سعوديون)</td>
+        {% for v in pnl.get('zakat', ['118','2,524','4,903','7,403','9,777']) %}
+        <td class="num-negative">{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-total">
+        <td>صافي الربح بعد الضريبة</td>
+        {% for v in pnl.get('net_profit', ['3,878','83,276','161,808','244,299','322,633']) %}
+        <td class="num-positive">{{ v }}</td>{% endfor %}
+      </tr>
+
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>هامش الربح الصافي</td>
+        {% for v in pnl.get('net_margin', ['0.6%','10.1%','15.6%','19.6%','22.2%']) %}
+        <td style="text-align:center;">{{ v }}</td>{% endfor %}
+      </tr>
+    </tfoot>
+  </table>
+  <div class="table-note">جميع الأرقام بالريال السعودي. تستند التوقعات إلى نمو سنوي 20-25% في الإيرادات استناداً لمعدلات السوق القطاعية.</div>
+
+  <!-- ===== Cash Flow Statement ===== -->
+  <div class="fin-section-title" style="margin-top:24px;">
+    قائمة التدفقات النقدية التوقعية
+    <span class="fin-en-label">Projected Cash Flow Statement</span>
+  </div>
+
+  <table class="cf-table">
+    <thead>
+      <tr>
+        <th>البند</th>
+        {% for yr in pnl_years | default(['السنة الأولى','السنة الثانية','السنة الثالثة','السنة الرابعة','السنة الخامسة']) %}
+        <th>{{ yr }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% set cf = cf_data | default({}) %}
+
+      <tr class="row-section">
+        <td colspan="6">أولاً: التدفقات النقدية من الأنشطة التشغيلية</td>
+      </tr>
+      <tr class="row-data">
+        <td>صافي الربح</td>
+        {% for v in cf.get('net_profit', ['3,878','83,276','161,808','244,299','322,633']) %}
+        <td class="num-positive">{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-data">
+        <td>يُضاف: الإهلاك والاستهلاك</td>
+        {% for v in cf.get('depreciation_add', ['40,000','40,000','40,000','40,000','40,000']) %}
+        <td>{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-data">
+        <td>التغير في رأس المال العامل</td>
+        {% for v in cf.get('working_capital_change', ['(15,000)','(8,000)','(10,000)','(12,000)','(12,000)']) %}
+        <td>{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-section">
+        <td>صافي التدفق من التشغيل</td>
+        {% for v in cf.get('operating_cf', ['28,878','115,276','191,808','272,299','350,633']) %}
+        <td class="num-positive">{{ v }}</td>{% endfor %}
+      </tr>
+
+      <tr class="row-section" style="background:#FFF5F5;color:#742A2A;border-top:2px solid #FEB2B2;">
+        <td colspan="6">ثانياً: التدفقات النقدية من الأنشطة الاستثمارية</td>
+      </tr>
+      <tr class="row-data">
+        <td>شراء أصول ثابتة ومعدات</td>
+        {% for v in cf.get('capex', ['(200,000)','(0)','(50,000)','(0)','(60,000)']) %}
+        <td class="num-negative">{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-section" style="background:#FFF5F5;color:#742A2A;border-top:1px solid #FEB2B2;">
+        <td>صافي التدفق من الاستثمار</td>
+        {% for v in cf.get('investing_cf', ['(200,000)','0','(50,000)','0','(60,000)']) %}
+        <td class="num-negative">{{ v }}</td>{% endfor %}
+      </tr>
+
+      <tr class="row-section" style="background:#EBF8FF;color:#2A4365;border-top:2px solid #BEE3F8;">
+        <td colspan="6">ثالثاً: التدفقات النقدية من الأنشطة التمويلية</td>
+      </tr>
+      <tr class="row-data">
+        <td>رأس مال مدفوع / قروض</td>
+        {% for v in cf.get('financing_in', ['400,000','0','0','0','0']) %}
+        <td class="num-positive">{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-data">
+        <td>سداد قروض</td>
+        {% for v in cf.get('loan_repayment', ['0','(80,000)','(80,000)','(80,000)','(80,000)']) %}
+        <td class="num-negative">{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-section" style="background:#EBF8FF;color:#2A4365;border-top:1px solid #BEE3F8;">
+        <td>صافي التدفق من التمويل</td>
+        {% for v in cf.get('financing_cf', ['400,000','(80,000)','(80,000)','(80,000)','(80,000)']) %}
+        <td>{{ v }}</td>{% endfor %}
+      </tr>
+
+      <tr class="row-net">
+        <td>صافي التغير في النقدية</td>
+        {% for v in cf.get('net_cash_change', ['228,878','35,276','61,808','192,299','210,633']) %}
+        <td>{{ v }}</td>{% endfor %}
+      </tr>
+      <tr class="row-net" style="background:#124E2A;">
+        <td>الرصيد النقدي التراكمي</td>
+        {% for v in cf.get('cumulative_cash', ['228,878','264,154','325,962','518,261','728,894']) %}
+        <td class="num-positive">{{ v }}</td>{% endfor %}
+      </tr>
+    </tbody>
+  </table>
+  <div class="table-note">التدفقات السلبية موضحة بين قوسين. تستند الأرقام إلى افتراضات التشغيل الواردة في القسم الثالث من هذه الدراسة.</div>
+
+  <!-- ===== Break-even Analysis ===== -->
+  <div class="fin-section-title" style="margin-top:24px;">
+    تحليل نقطة التعادل
+    <span class="fin-en-label">Break-even Analysis</span>
+  </div>
+
+  <div class="breakeven-grid">
+
+    <div class="breakeven-card">
+      <div class="be-title">مؤشرات التعادل الرئيسية</div>
+      {% set be = breakeven | default({}) %}
+      <div class="breakeven-row highlight">
+        <span class="be-label">فترة التعادل</span>
+        <span class="be-value">{{ be.get('months', '18') }} شهراً</span>
+      </div>
+      <div class="breakeven-row">
+        <span class="be-label">إيراد التعادل الشهري</span>
+        <span class="be-value">{{ be.get('monthly_revenue_sar', '82,500') }} ريال</span>
+      </div>
+      <div class="breakeven-row">
+        <span class="be-label">عدد المبيعات اليومية للتعادل</span>
+        <span class="be-value">{{ be.get('daily_units', '55') }} وحدة</span>
+      </div>
+      <div class="breakeven-row">
+        <span class="be-label">إجمالي التكاليف الثابتة الشهرية</span>
+        <span class="be-value">{{ be.get('fixed_costs_monthly', '48,000') }} ريال</span>
+      </div>
+      <div class="breakeven-row">
+        <span class="be-label">متوسط هامش المساهمة</span>
+        <span class="be-value">{{ be.get('contribution_margin', '52.8') }}%</span>
+      </div>
+      <div class="breakeven-row">
+        <span class="be-label">هامش الأمان (السنة الثالثة)</span>
+        <span class="be-value">{{ be.get('safety_margin_yr3', '31.2') }}%</span>
+      </div>
+    </div>
+
+    <div class="breakeven-card">
+      <div class="be-title">مخطط التعادل</div>
+      {% if breakeven_chart_path %}
+        <img src="{{ breakeven_chart_path }}" alt="مخطط نقطة التعادل" class="chart-image" style="height:140px;object-fit:contain;">
+      {% else %}
+        <div class="chart-placeholder">
+          <span class="cp-icon">📊</span>
+          <span class="cp-label">مخطط نقطة التعادل</span>
+          <span class="cp-sub">Break-even Chart</span>
+        </div>
+      {% endif %}
+      <div style="font-size:8pt;color:#718096;text-align:center;">
+        المحور الأفقي: الوحدات / الشهور — المحور الرأسي: الريال السعودي
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Revenue growth chart placeholder -->
+  <div class="fin-section-title" style="margin-top:8px;">
+    نمو الإيرادات وصافي الربح (5 سنوات)
+    <span class="fin-en-label">Revenue & Net Profit Growth</span>
+  </div>
+
+  {% if revenue_chart_path %}
+    <img src="{{ revenue_chart_path }}" alt="مخطط نمو الإيرادات" class="chart-image" style="height:180px;object-fit:contain;">
+  {% else %}
+    <div class="chart-placeholder" style="height:180px;">
+      <span class="cp-icon">📈</span>
+      <span class="cp-label">مخطط نمو الإيرادات والأرباح</span>
+      <span class="cp-sub">Revenue & Profit Growth Chart — 5 Years</span>
+    </div>
+  {% endif %}
+
+  <!-- ===== Financial Ratios ===== -->
+  <div class="fin-section-title" style="margin-top:8px;">
+    المؤشرات المالية الرئيسية
+    <span class="fin-en-label">Key Financial Ratios</span>
+  </div>
+
+  {% set ratios = financial_ratios | default({}) %}
+  <div class="ratios-grid">
+
+    <div class="ratio-card">
+      <div class="ratio-value">{{ ratios.get('irr','28') }}<span class="ratio-unit">%</span></div>
+      <div class="ratio-label-ar">معدل العائد الداخلي</div>
+      <div class="ratio-label-en">IRR</div>
+      <span class="ratio-status status-good">ممتاز</span>
+    </div>
+
+    <div class="ratio-card">
+      <div class="ratio-value">{{ ratios.get('npv','542,000') }}<span class="ratio-unit"> ر</span></div>
+      <div class="ratio-label-ar">صافي القيمة الحالية</div>
+      <div class="ratio-label-en">NPV</div>
+      <span class="ratio-status status-good">موجب</span>
+    </div>
+
+    <div class="ratio-card">
+      <div class="ratio-value">{{ ratios.get('roi_5yr','43.4') }}<span class="ratio-unit">%</span></div>
+      <div class="ratio-label-ar">العائد على الاستثمار (5 سنوات)</div>
+      <div class="ratio-label-en">ROI (5-Year)</div>
+      <span class="ratio-status status-good">مقبول</span>
+    </div>
+
+    <div class="ratio-card">
+      <div class="ratio-value">{{ ratios.get('gross_margin_yr3','54.9') }}<span class="ratio-unit">%</span></div>
+      <div class="ratio-label-ar">هامش المجمل (السنة 3)</div>
+      <div class="ratio-label-en">Gross Margin Y3</div>
+      <span class="ratio-status status-good">قوي</span>
+    </div>
+
+    <div class="ratio-card">
+      <div class="ratio-value">{{ ratios.get('net_margin_yr3','15.6') }}<span class="ratio-unit">%</span></div>
+      <div class="ratio-label-ar">هامش الصافي (السنة 3)</div>
+      <div class="ratio-label-en">Net Margin Y3</div>
+      <span class="ratio-status status-ok">مقبول</span>
+    </div>
+
+    <div class="ratio-card">
+      <div class="ratio-value">{{ ratios.get('payback_years','1.5') }}<span class="ratio-unit"> سنة</span></div>
+      <div class="ratio-label-ar">فترة استرداد الاستثمار</div>
+      <div class="ratio-label-en">Payback Period</div>
+      <span class="ratio-status status-good">جيد</span>
+    </div>
+
+    <div class="ratio-card">
+      <div class="ratio-value">{{ ratios.get('current_ratio_yr1','1.8') }}<span class="ratio-unit">x</span></div>
+      <div class="ratio-label-ar">نسبة السيولة الجارية</div>
+      <div class="ratio-label-en">Current Ratio Y1</div>
+      <span class="ratio-status status-good">سليم</span>
+    </div>
+
+    <div class="ratio-card">
+      <div class="ratio-value">{{ ratios.get('debt_equity','0.4') }}<span class="ratio-unit">x</span></div>
+      <div class="ratio-label-ar">نسبة الدين إلى حقوق الملكية</div>
+      <div class="ratio-label-en">Debt / Equity</div>
+      <span class="ratio-status status-good">منخفض</span>
+    </div>
+
+    <div class="ratio-card">
+      <div class="ratio-value">{{ ratios.get('ebitda_margin_yr3','19.0') }}<span class="ratio-unit">%</span></div>
+      <div class="ratio-label-ar">هامش EBITDA (السنة 3)</div>
+      <div class="ratio-label-en">EBITDA Margin Y3</div>
+      <span class="ratio-status status-ok">مقبول</span>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

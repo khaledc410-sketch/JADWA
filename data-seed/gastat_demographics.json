@@ -1,0 +1,389 @@
+{
+  "metadata": {
+    "source": "GASTAT - General Authority for Statistics",
+    "source_ar": "الهيئة العامة للإحصاء",
+    "last_updated": "2024",
+    "reference_year": 2023,
+    "notes": "Population, demographic, and economic data based on GASTAT annual reports and national accounts. GDP figures reference 2023 data with 2024 estimates."
+  },
+  "population": {
+    "total": 32175224,
+    "saudi": 18810932,
+    "non_saudi": 13364292,
+    "saudi_percent": 58.5,
+    "non_saudi_percent": 41.5,
+    "male_percent": 56.4,
+    "female_percent": 43.6,
+    "urban_percent": 84.3,
+    "rural_percent": 15.7,
+    "annual_growth_rate_percent": 1.8,
+    "household_count": 5800000,
+    "avg_household_size": 5.5
+  },
+  "age_distribution": {
+    "notes": "Age distribution of total population (Saudi and non-Saudi)",
+    "0_to_14": {
+      "percent": 24.8,
+      "count_approx": 7979455,
+      "label": "Youth (0-14 years)"
+    },
+    "15_to_24": {
+      "percent": 17.2,
+      "count_approx": 5534138,
+      "label": "Young adults (15-24 years)"
+    },
+    "25_to_34": {
+      "percent": 20.6,
+      "count_approx": 6628096,
+      "label": "Young working age (25-34 years)"
+    },
+    "35_to_44": {
+      "percent": 16.5,
+      "count_approx": 5308912,
+      "label": "Prime working age (35-44 years)"
+    },
+    "45_to_54": {
+      "percent": 11.3,
+      "count_approx": 3635800,
+      "label": "Mature working age (45-54 years)"
+    },
+    "55_to_64": {
+      "percent": 6.1,
+      "count_approx": 1962688,
+      "label": "Pre-retirement (55-64 years)"
+    },
+    "65_plus": {
+      "percent": 3.5,
+      "count_approx": 1126133,
+      "label": "Elderly (65+ years)"
+    },
+    "median_age": 29.2,
+    "dependency_ratio": 0.49
+  },
+  "cities": {
+    "riyadh": {
+      "name_ar": "الرياض",
+      "region": "Riyadh Region",
+      "region_ar": "منطقة الرياض",
+      "population": 7700000,
+      "population_saudi_percent": 42,
+      "area_km2": 1798,
+      "population_density_per_km2": 4282,
+      "gdp_per_capita_sar": 148000,
+      "median_household_income_sar": 12500,
+      "median_monthly_rent_apartment_sar": 3800,
+      "commercial_rent_sqm_monthly_sar": 120,
+      "consumer_spending_index": 108,
+      "unemployment_rate_saudi": 0.07,
+      "top_sectors": ["government_services", "retail", "real_estate", "finance", "fnb"],
+      "notable_malls": ["Riyadh Park", "Mall of Arabia", "Al Nakheel Mall", "Kingdom Centre", "Granada Center"],
+      "districts": [
+        {
+          "name": "Al Olaya (Olaya District)",
+          "name_ar": "العليا",
+          "type": "commercial_premium",
+          "avg_commercial_rent_sqm_monthly_sar": 200,
+          "footfall_index": 135,
+          "notes": "CBD and premium retail corridor"
+        },
+        {
+          "name": "Al Malqa",
+          "name_ar": "الملقا",
+          "type": "residential_high_income",
+          "avg_residential_rent_monthly_sar": 7000,
+          "avg_commercial_rent_sqm_monthly_sar": 100,
+          "footfall_index": 90
+        },
+        {
+          "name": "Diplomatic Quarter (DQ)",
+          "name_ar": "الحي الدبلوماسي",
+          "type": "mixed_premium",
+          "avg_commercial_rent_sqm_monthly_sar": 180,
+          "footfall_index": 85,
+          "notes": "Embassies, premium F&B, and expat residential"
+        },
+        {
+          "name": "Al Diriyah",
+          "name_ar": "الدرعية",
+          "type": "heritage_tourism",
+          "avg_commercial_rent_sqm_monthly_sar": 250,
+          "footfall_index": 120,
+          "notes": "Giga project zone - Diriyah Gate Development"
+        },
+        {
+          "name": "Al Murabbaa",
+          "name_ar": "المربع",
+          "type": "traditional_commercial",
+          "avg_commercial_rent_sqm_monthly_sar": 80,
+          "footfall_index": 100
+        },
+        {
+          "name": "North Riyadh (Hittin / Qurtubah)",
+          "name_ar": "شمال الرياض",
+          "type": "residential_new_growth",
+          "avg_residential_rent_monthly_sar": 5500,
+          "footfall_index": 75
+        }
+      ]
+    },
+    "jeddah": {
+      "name_ar": "جدة",
+      "region": "Makkah Region",
+      "region_ar": "منطقة مكة المكرمة",
+      "population": 4500000,
+      "population_saudi_percent": 35,
+      "area_km2": 1686,
+      "gdp_per_capita_sar": 132000,
+      "median_household_income_sar": 11000,
+      "median_monthly_rent_apartment_sar": 3200,
+      "commercial_rent_sqm_monthly_sar": 100,
+      "consumer_spending_index": 102,
+      "unemployment_rate_saudi": 0.08,
+      "top_sectors": ["trade", "logistics", "tourism", "fnb", "retail"],
+      "notable_malls": ["Red Sea Mall", "Alyasmin Mall", "Mall of Arabia Jeddah", "Al-Andalus Mall"],
+      "districts": [
+        {
+          "name": "Al Balad (Historic District)",
+          "name_ar": "البلد",
+          "type": "heritage_tourism",
+          "avg_commercial_rent_sqm_monthly_sar": 90,
+          "footfall_index": 115,
+          "notes": "UNESCO World Heritage Site - major tourism draw"
+        },
+        {
+          "name": "Al Hamra / Al Rawdah",
+          "name_ar": "الحمراء / الروضة",
+          "type": "commercial_premium",
+          "avg_commercial_rent_sqm_monthly_sar": 150,
+          "footfall_index": 120
+        },
+        {
+          "name": "Al Corniche",
+          "name_ar": "الكورنيش",
+          "type": "mixed_tourism",
+          "avg_commercial_rent_sqm_monthly_sar": 180,
+          "footfall_index": 130,
+          "notes": "30 km waterfront stretch with high F&B and retail density"
+        },
+        {
+          "name": "Obhur",
+          "name_ar": "أبحر",
+          "type": "residential_high_income",
+          "avg_residential_rent_monthly_sar": 8000,
+          "footfall_index": 85
+        }
+      ]
+    },
+    "dammam": {
+      "name_ar": "الدمام",
+      "region": "Eastern Province",
+      "region_ar": "المنطقة الشرقية",
+      "population": 1200000,
+      "population_saudi_percent": 55,
+      "gdp_per_capita_sar": 162000,
+      "median_household_income_sar": 14000,
+      "median_monthly_rent_apartment_sar": 2800,
+      "commercial_rent_sqm_monthly_sar": 90,
+      "consumer_spending_index": 98,
+      "unemployment_rate_saudi": 0.065,
+      "top_sectors": ["oil_gas", "petrochemicals", "logistics", "finance", "real_estate"],
+      "notable_malls": ["Al Shatea Mall", "Dhahran Mall", "Nakheel Mall Dammam"],
+      "districts": [
+        {
+          "name": "Al Faisaliah",
+          "name_ar": "الفيصلية",
+          "type": "commercial",
+          "avg_commercial_rent_sqm_monthly_sar": 100,
+          "footfall_index": 105
+        }
+      ]
+    },
+    "mecca": {
+      "name_ar": "مكة المكرمة",
+      "region": "Makkah Region",
+      "region_ar": "منطقة مكة المكرمة",
+      "population": 2200000,
+      "annual_hajj_visitors": 1800000,
+      "annual_umrah_visitors": 13500000,
+      "population_saudi_percent": 45,
+      "gdp_per_capita_sar": 95000,
+      "median_household_income_sar": 9500,
+      "median_monthly_rent_apartment_sar": 4500,
+      "commercial_rent_sqm_monthly_sar": 200,
+      "consumer_spending_index": 95,
+      "top_sectors": ["religious_tourism", "hospitality", "fnb", "retail", "real_estate"],
+      "access_restriction": "Non-Muslims are not permitted to enter Mecca",
+      "notable_areas": ["Abraj Al-Bait (Clock Tower)", "Al Masjid Al Haram vicinity", "Aziziyah", "Mina", "Arafat"]
+    },
+    "medina": {
+      "name_ar": "المدينة المنورة",
+      "region": "Madinah Region",
+      "region_ar": "منطقة المدينة المنورة",
+      "population": 1400000,
+      "annual_visitors": 8000000,
+      "population_saudi_percent": 50,
+      "gdp_per_capita_sar": 88000,
+      "median_household_income_sar": 9000,
+      "median_monthly_rent_apartment_sar": 3000,
+      "commercial_rent_sqm_monthly_sar": 110,
+      "consumer_spending_index": 88,
+      "top_sectors": ["religious_tourism", "hospitality", "education", "fnb", "retail"],
+      "access_restriction": "Non-Muslims cannot enter the central Al Haram area",
+      "notable_areas": ["Al-Masjid an-Nabawi vicinity", "Al-Manakhah district", "Quba"]
+    },
+    "khobar": {
+      "name_ar": "الخبر",
+      "region": "Eastern Province",
+      "region_ar": "المنطقة الشرقية",
+      "population": 650000,
+      "population_saudi_percent": 50,
+      "gdp_per_capita_sar": 175000,
+      "median_household_income_sar": 15500,
+      "median_monthly_rent_apartment_sar": 3200,
+      "commercial_rent_sqm_monthly_sar": 110,
+      "consumer_spending_index": 115,
+      "unemployment_rate_saudi": 0.055,
+      "top_sectors": ["oil_gas", "finance", "retail", "fnb", "education"],
+      "notable_malls": ["Rashid Mall", "Al Doha Mall", "La Plage Mall"],
+      "notes": "High income area with strong expatriate population due to proximity to Aramco headquarters in Dhahran"
+    },
+    "tabuk": {
+      "name_ar": "تبوك",
+      "region": "Tabuk Region",
+      "region_ar": "منطقة تبوك",
+      "population": 600000,
+      "population_saudi_percent": 72,
+      "gdp_per_capita_sar": 75000,
+      "median_household_income_sar": 8500,
+      "median_monthly_rent_apartment_sar": 1800,
+      "commercial_rent_sqm_monthly_sar": 55,
+      "consumer_spending_index": 78,
+      "unemployment_rate_saudi": 0.09,
+      "top_sectors": ["agriculture", "tourism", "government", "retail", "construction"],
+      "neom_proximity_km": 200,
+      "notes": "Strategic location for NEOM giga-project spillover investment. Red Sea coastline tourism potential."
+    },
+    "abha": {
+      "name_ar": "أبها",
+      "region": "Asir Region",
+      "region_ar": "منطقة عسير",
+      "population": 450000,
+      "population_saudi_percent": 70,
+      "gdp_per_capita_sar": 65000,
+      "median_household_income_sar": 7800,
+      "median_monthly_rent_apartment_sar": 1600,
+      "commercial_rent_sqm_monthly_sar": 45,
+      "consumer_spending_index": 72,
+      "unemployment_rate_saudi": 0.10,
+      "top_sectors": ["tourism", "agriculture", "government", "retail", "education"],
+      "notes": "Mountain tourism destination. Government focus on Asir tourism development under Vision 2030."
+    },
+    "yanbu": {
+      "name_ar": "ينبع",
+      "region": "Madinah Region",
+      "region_ar": "منطقة المدينة المنورة",
+      "population": 350000,
+      "population_saudi_percent": 48,
+      "gdp_per_capita_sar": 120000,
+      "median_household_income_sar": 11500,
+      "median_monthly_rent_apartment_sar": 2200,
+      "commercial_rent_sqm_monthly_sar": 65,
+      "consumer_spending_index": 88,
+      "top_sectors": ["petrochemicals", "manufacturing", "logistics", "retail"],
+      "notes": "Saudi Arabia's industrial city on the Red Sea. Major petrochemical and manufacturing hub."
+    }
+  },
+  "economic_indicators": {
+    "reference_year": 2023,
+    "gdp_sar_billions": 3720,
+    "gdp_usd_billions": 992,
+    "gdp_growth_rate": 0.029,
+    "non_oil_gdp_growth_rate": 0.047,
+    "oil_gdp_growth_rate": -0.008,
+    "gdp_per_capita_sar": 115700,
+    "gdp_per_capita_usd": 30853,
+    "unemployment_rate_total": 0.055,
+    "unemployment_rate_saudi": 0.075,
+    "unemployment_rate_saudi_male": 0.048,
+    "unemployment_rate_saudi_female": 0.152,
+    "labor_force_participation_rate": 0.628,
+    "female_labor_participation_rate": 0.330,
+    "inflation_rate_cpi": 0.021,
+    "current_account_balance_usd_billions": 35.4,
+    "foreign_reserves_usd_billions": 457,
+    "consumer_confidence_index": 118,
+    "purchasing_managers_index_pmi": 56.4,
+    "retail_sales_growth_yoy": 0.064,
+    "private_sector_credit_growth": 0.082,
+    "total_exports_usd_billions": 326,
+    "non_oil_exports_usd_billions": 72,
+    "total_imports_usd_billions": 195,
+    "fdi_inflows_usd_billions": 17.2
+  },
+  "sector_gdp_contributions": {
+    "notes": "Percentage contribution to total GDP at current prices, 2023",
+    "oil_gas": 0.285,
+    "non_oil_total": 0.715,
+    "government_services": 0.162,
+    "retail_trade": 0.078,
+    "real_estate": 0.065,
+    "fnb_hospitality": 0.032,
+    "construction": 0.057,
+    "manufacturing_non_oil": 0.095,
+    "finance_insurance": 0.058,
+    "transport_logistics": 0.048,
+    "information_technology": 0.025,
+    "healthcare": 0.033,
+    "education": 0.041,
+    "tourism_entertainment": 0.021
+  },
+  "consumer_spending_patterns": {
+    "notes": "Average Saudi household spending breakdown, 2023",
+    "housing_utilities_percent": 22.5,
+    "food_beverages_percent": 18.3,
+    "transportation_percent": 15.2,
+    "education_percent": 8.7,
+    "healthcare_percent": 5.4,
+    "clothing_footwear_percent": 6.8,
+    "communication_percent": 4.2,
+    "entertainment_recreation_percent": 7.1,
+    "other_percent": 11.8,
+    "avg_monthly_spending_per_household_sar": 18500,
+    "e_commerce_share_of_retail_percent": 14.2
+  },
+  "retail_market_data": {
+    "total_retail_market_sar_billions": 275,
+    "modern_trade_share_percent": 65,
+    "traditional_trade_share_percent": 35,
+    "shopping_mall_gla_sqm_millions": 8.2,
+    "vacancy_rate_malls_riyadh_percent": 8,
+    "vacancy_rate_malls_jeddah_percent": 11,
+    "avg_mall_footfall_per_week_per_sqm": 0.12,
+    "top_retail_categories_by_revenue": ["electronics", "food_beverage", "fashion_apparel", "health_beauty", "furniture_homeware"]
+  },
+  "fnb_market_data": {
+    "total_market_sar_billions": 85,
+    "qsr_share_percent": 42,
+    "casual_dining_share_percent": 28,
+    "fine_dining_share_percent": 8,
+    "cafes_coffee_share_percent": 12,
+    "other_percent": 10,
+    "annual_growth_rate_percent": 7.5,
+    "delivery_share_of_orders_percent": 38,
+    "top_delivery_platforms": ["HungerStation", "Jahez", "Careem NOW", "Noon Food"],
+    "avg_restaurant_payback_years": 3.5,
+    "avg_cafe_payback_years": 2.8
+  },
+  "labor_market": {
+    "total_workforce": 15200000,
+    "saudi_workforce": 4100000,
+    "expat_workforce": 11100000,
+    "private_sector_saudi_employment_percent": 22,
+    "public_sector_saudi_employment_percent": 78,
+    "avg_saudi_private_sector_salary_sar": 8500,
+    "avg_saudi_public_sector_salary_sar": 14200,
+    "avg_expat_salary_sar": 4200,
+    "minimum_wage_saudi_sar": 4000,
+    "top_employing_sectors_saudi": ["government", "retail", "education", "healthcare", "finance"]
+  }
+}

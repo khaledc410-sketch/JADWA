@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}دراسة الجدوى الاقتصادية - جدوى{% endblock %}</title>
+  <style>
+    /* ===== Google Fonts - Noto Naskh Arabic ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+
+    /* ===== CSS Variables - JADWA Brand ===== */
+    :root {
+      --primary-color: #1B4332;
+      --primary-light: #2D6A4F;
+      --primary-pale: #D8F3DC;
+      --secondary-color: #B7950B;
+      --secondary-light: #F0C040;
+      --accent-color: #40916C;
+      --accent-light: #52B788;
+      --text-primary: #1A202C;
+      --text-secondary: #4A5568;
+      --text-muted: #718096;
+      --text-inverse: #FFFFFF;
+      --bg-white: #FFFFFF;
+      --bg-light: #F7F9F7;
+      --bg-section: #F0F7F0;
+      --border-light: #E2E8F0;
+      --border-medium: #CBD5E0;
+      --shadow-soft: 0 2px 8px rgba(0,0,0,0.08);
+      --shadow-medium: 0 4px 16px rgba(0,0,0,0.12);
+      --font-main: 'Noto Naskh Arabic', 'Amiri', 'Arial', serif;
+      --font-mono: 'Courier New', monospace;
+      --font-size-base: 11pt;
+      --font-size-sm: 9.5pt;
+      --font-size-xs: 8.5pt;
+      --font-size-lg: 13pt;
+      --font-size-xl: 16pt;
+      --font-size-2xl: 20pt;
+      --font-size-3xl: 26pt;
+      --line-height-normal: 1.8;
+      --line-height-tight: 1.4;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --spacing-2xl: 48px;
+      --page-margin-top: 25mm;
+      --page-margin-bottom: 22mm;
+      --page-margin-side: 20mm;
+    }
+
+    /* ===== Reset & Base ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: var(--font-size-base);
+      direction: rtl;
+    }
+
+    body {
+      font-family: var(--font-main);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-normal);
+      color: var(--text-primary);
+      background-color: var(--bg-white);
+      direction: rtl;
+      text-align: right;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ===== Page Layout (WeasyPrint) ===== */
+    @page {
+      size: A4;
+      margin: var(--page-margin-top) var(--page-margin-side) var(--page-margin-bottom) var(--page-margin-side);
+
+      @top-right {
+        content: element(page-header);
+      }
+
+      @bottom-center {
+        content: element(page-footer);
+      }
+    }
+
+    @page :first {
+      @top-right { content: none; }
+      @bottom-center { content: none; }
+    }
+
+    /* ===== Running Header ===== */
+    #running-header {
+      position: running(page-header);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 6px 0 8px 0;
+      border-bottom: 2px solid var(--primary-color);
+      direction: rtl;
+    }
+
+    #running-header .header-report-title {
+      font-size: 8.5pt;
+      color: var(--text-secondary);
+      font-weight: 500;
+      flex: 1;
+      text-align: right;
+    }
+
+    #running-header .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #running-header .header-logo .logo-mark {
+      width: 22px;
+      height: 22px;
+      background: var(--primary-color);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #running-header .header-logo .logo-mark span {
+      color: var(--secondary-color);
+      font-weight: 700;
+      font-size: 9pt;
+    }
+
+    #running-header .header-logo .logo-text {
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--primary-color);
+      letter-spacing: 0.5px;
+    }
+
+    #running-header .header-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--border-medium);
+      margin: 0 8px;
+    }
+
+    /* ===== Running Footer ===== */
+    #running-footer {
+      position: running(page-footer);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 6px 0 0 0;
+      border-top: 1px solid var(--border-light);
+      direction: rtl;
+    }
+
+    #running-footer .footer-confidential {
+      font-size: 7.5pt;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    #running-footer .footer-page-num {
+      font-size: 8pt;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    #running-footer .footer-page-num::before {
+      content: "صفحة ";
+    }
+
+    #running-footer .footer-page-num::after {
+      content: " من " counter(pages);
+    }
+
+    #running-footer .footer-page-num .counter {
+      content: counter(page);
+    }
+
+    #running-footer .footer-brand {
+      font-size: 7.5pt;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    /* ===== Page counter ===== */
+    .page-number::after {
+      content: counter(page);
+    }
+    .pages-total::after {
+      content: counter(pages);
+    }
+
+    /* ===== Page break helpers ===== */
+    .page-break-before { page-break-before: always; }
+    .page-break-after  { page-break-after: always; }
+    .page-break-avoid  { page-break-inside: avoid; }
+    .keep-together     { break-inside: avoid; }
+    .keep-with-next    { break-after: avoid; }
+
+    /* ===== Main content wrapper ===== */
+    .report-body {
+      direction: rtl;
+      text-align: right;
+    }
+
+    /* ===== Typography ===== */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-main);
+      color: var(--primary-color);
+      line-height: var(--line-height-tight);
+      margin-bottom: var(--spacing-md);
+      font-weight: 700;
+    }
+
+    h1 { font-size: var(--font-size-3xl); }
+    h2 { font-size: var(--font-size-2xl); }
+    h3 { font-size: var(--font-size-xl); }
+    h4 { font-size: var(--font-size-lg); }
+    h5 { font-size: var(--font-size-base); font-weight: 600; }
+    h6 { font-size: var(--font-size-sm); font-weight: 600; }
+
+    p {
+      margin-bottom: var(--spacing-md);
+      text-align: justify;
+      color: var(--text-primary);
+    }
+
+    strong, b { font-weight: 700; }
+    em, i     { font-style: italic; }
+
+    /* ===== Lists ===== */
+    ul, ol {
+      padding-right: var(--spacing-lg);
+      padding-left: 0;
+      margin-bottom: var(--spacing-md);
+    }
+
+    li {
+      margin-bottom: var(--spacing-xs);
+      line-height: var(--line-height-normal);
+    }
+
+    ul li::marker {
+      color: var(--accent-color);
+      font-size: 0.9em;
+    }
+
+    /* ===== Tables ===== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: var(--spacing-lg);
+      font-size: var(--font-size-sm);
+      direction: rtl;
+    }
+
+    thead tr {
+      background: var(--primary-color);
+      color: var(--text-inverse);
+    }
+
+    thead th {
+      padding: 10px 12px;
+      text-align: right;
+      font-weight: 600;
+      font-size: var(--font-size-sm);
+      letter-spacing: 0.2px;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: var(--bg-light);
+    }
+
+    tbody tr:hover {
+      background-color: var(--primary-pale);
+    }
+
+    tbody td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border-light);
+      text-align: right;
+      vertical-align: middle;
+    }
+
+    tfoot tr {
+      background: var(--bg-section);
+      font-weight: 700;
+    }
+
+    tfoot td {
+      padding: 10px 12px;
+      border-top: 2px solid var(--primary-color);
+      text-align: right;
+    }
+
+    /* ===== Cards ===== */
+    .card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      box-shadow: var(--shadow-soft);
+      break-inside: avoid;
+    }
+
+    .card-primary {
+      background: var(--primary-color);
+      color: var(--text-inverse);
+      border: none;
+    }
+
+    .card-accent {
+      border-right: 4px solid var(--accent-color);
+      background: var(--bg-section);
+    }
+
+    /* ===== Metric cards ===== */
+    .metric-card {
+      text-align: center;
+      padding: var(--spacing-md);
+      background: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      break-inside: avoid;
+    }
+
+    .metric-card .metric-value {
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      color: var(--primary-color);
+      line-height: 1.2;
+    }
+
+    .metric-card .metric-label {
+      font-size: var(--font-size-xs);
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .metric-card .metric-unit {
+      font-size: var(--font-size-sm);
+      color: var(--text-muted);
+    }
+
+    /* ===== Section header ===== */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 2px solid var(--primary-color);
+    }
+
+    .section-number {
+      background: var(--primary-color);
+      color: var(--text-inverse);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: var(--font-size-sm);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: var(--font-size-xl);
+      color: var(--primary-color);
+      font-weight: 700;
+      margin: 0;
+    }
+
+    /* ===== Callout / highlight boxes ===== */
+    .callout {
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-md);
+      break-inside: avoid;
+      border-right: 4px solid;
+    }
+
+    .callout-info    { background: #EBF8FF; border-color: #3182CE; color: #2C5282; }
+    .callout-success { background: var(--primary-pale); border-color: var(--primary-color); color: var(--primary-color); }
+    .callout-warning { background: #FFFBEB; border-color: #D69E2E; color: #744210; }
+    .callout-danger  { background: #FFF5F5; border-color: #E53E3E; color: #742A2A; }
+
+    /* ===== Grid utilities ===== */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--spacing-md);
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: var(--spacing-md);
+    }
+
+    /* ===== Badge ===== */
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      line-height: 1.8;
+    }
+
+    .badge-primary  { background: var(--primary-pale);  color: var(--primary-color); }
+    .badge-gold     { background: #FEF3C7;               color: #92400E; }
+    .badge-blue     { background: #EBF8FF;               color: #2C5282; }
+    .badge-gray     { background: #EDF2F7;               color: #4A5568; }
+    .badge-red      { background: #FFF5F5;               color: #C53030; }
+
+    /* ===== Divider ===== */
+    .divider {
+      height: 1px;
+      background: var(--border-light);
+      margin: var(--spacing-lg) 0;
+    }
+
+    .divider-thick {
+      height: 2px;
+      background: var(--primary-color);
+      margin: var(--spacing-xl) 0;
+    }
+
+    /* ===== Language toggle classes ===== */
+    .ar { direction: rtl; text-align: right; font-family: var(--font-main); }
+    .en { direction: ltr; text-align: left; font-family: 'Helvetica Neue', Arial, sans-serif; }
+    .bilingual-row { display: flex; justify-content: space-between; align-items: center; }
+    .text-en { font-size: 0.9em; color: var(--text-secondary); }
+
+    /* ===== Utility ===== */
+    .text-center { text-align: center !important; }
+    .text-right  { text-align: right !important; }
+    .text-left   { text-align: left !important; }
+    .text-muted  { color: var(--text-muted) !important; }
+    .text-primary-color { color: var(--primary-color) !important; }
+    .text-gold   { color: var(--secondary-color) !important; }
+    .text-small  { font-size: var(--font-size-sm) !important; }
+    .text-xs     { font-size: var(--font-size-xs) !important; }
+    .font-bold   { font-weight: 700 !important; }
+    .mb-0 { margin-bottom: 0 !important; }
+    .mb-sm { margin-bottom: var(--spacing-sm) !important; }
+    .mb-md { margin-bottom: var(--spacing-md) !important; }
+    .mb-lg { margin-bottom: var(--spacing-lg) !important; }
+    .mt-lg { margin-top: var(--spacing-lg) !important; }
+    .mt-xl { margin-top: var(--spacing-xl) !important; }
+    .w-full { width: 100% !important; }
+    .no-margin { margin: 0 !important; }
+    .no-padding { padding: 0 !important; }
+
+    /* ===== Print tweaks ===== */
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .no-print { display: none !important; }
+      a { text-decoration: none; color: inherit; }
+      img { max-width: 100%; }
+    }
+  </style>
+  {% block extra_styles %}{% endblock %}
+</head>
+<body>
+  <!-- Running Header (WeasyPrint picks up position:running) -->
+  <div id="running-header">
+    <div class="header-report-title">{{ report_title | default('دراسة الجدوى الاقتصادية') }}</div>
+    <div class="header-logo">
+      <div class="logo-mark"><span>ج</span></div>
+      <span class="logo-text">JADWA</span>
+      <div class="header-divider"></div>
+      <span style="font-size:7.5pt;color:var(--text-muted);">{{ client_name | default('') }}</span>
+    </div>
+  </div>
+
+  <!-- Running Footer -->
+  <div id="running-footer">
+    <div class="footer-brand">منصة جدوى للدراسات الاقتصادية</div>
+    <div class="footer-page-num"><span class="page-number"></span></div>
+    <div class="footer-confidential">سري ومحفوظ الحقوق — للاستخدام الداخلي فقط</div>
+  </div>
+
+  <!-- Main report body -->
+  <div class="report-body">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>

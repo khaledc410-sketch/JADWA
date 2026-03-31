@@ -1,0 +1,569 @@
+{
+  "metadata": {
+    "source": "Vision 2030 Office + NTP - National Transformation Program",
+    "source_ar": "مكتب رؤية المملكة 2030 + برنامج التحول الوطني",
+    "last_updated": "2025-01",
+    "notes": "Vision 2030 KPIs, targets, giga-projects, and incentive programs as of Q1 2025. Current values based on latest available government reports."
+  },
+  "vision_overview": {
+    "launch_year": 2016,
+    "target_year": 2030,
+    "vision_statement_en": "A vibrant society, a thriving economy, and an ambitious nation",
+    "vision_statement_ar": "مجتمع حيوي واقتصاد مزدهر ووطن طموح",
+    "lead_authority": "Council of Economic and Development Affairs (CEDA)",
+    "lead_authority_ar": "مجلس الشؤون الاقتصادية والتنمية"
+  },
+  "pillars": {
+    "vibrant_society": {
+      "pillar_name_ar": "مجتمع حيوي",
+      "pillar_name_en": "Vibrant Society",
+      "vision_aspiration": "A society of identity, wellbeing, and togetherness",
+      "targets": {
+        "life_expectancy": {
+          "indicator": "Average life expectancy (years)",
+          "current_2024": 75.0,
+          "target_2030": 80.0,
+          "unit": "years"
+        },
+        "household_income_savings_rate": {
+          "indicator": "Saudi household savings rate",
+          "current_2024": 0.06,
+          "target_2030": 0.10,
+          "unit": "percent_of_income"
+        },
+        "volunteerism_hours": {
+          "indicator": "Annual volunteer hours per Saudi citizen",
+          "current_2024": 11,
+          "target_2030": 100,
+          "unit": "hours_per_year"
+        },
+        "physical_activity_rate": {
+          "indicator": "Saudi citizens exercising at least once a week",
+          "current_2024": 0.36,
+          "target_2030": 0.40,
+          "unit": "percent_of_citizens"
+        },
+        "cultural_events": {
+          "indicator": "Number of annual cultural and entertainment events",
+          "current_2024": 4600,
+          "target_2030": 6000,
+          "unit": "events_per_year"
+        },
+        "umrah_capacity": {
+          "indicator": "Annual Umrah visitors",
+          "current_2024": 13500000,
+          "target_2030": 30000000,
+          "unit": "visitors_per_year"
+        }
+      },
+      "key_programs": ["Quality of Life Program", "Housing Program", "Health Sector Transformation Program"]
+    },
+    "thriving_economy": {
+      "pillar_name_ar": "اقتصاد مزدهر",
+      "pillar_name_en": "Thriving Economy",
+      "vision_aspiration": "A diversified and sustainable economy driven by the private sector",
+      "targets": {
+        "sme_gdp_contribution": {
+          "indicator": "SME contribution to GDP",
+          "current_2024": 0.29,
+          "target_2030": 0.35,
+          "unit": "percent_of_gdp"
+        },
+        "non_oil_revenue_sar_billions": {
+          "indicator": "Non-oil government revenues (SAR billions)",
+          "current_2024": 411,
+          "target_2030": 1000,
+          "unit": "sar_billions"
+        },
+        "non_oil_exports_percent_of_non_oil_gdp": {
+          "indicator": "Non-oil exports as % of non-oil GDP",
+          "current_2024": 0.16,
+          "target_2030": 0.50,
+          "unit": "percent"
+        },
+        "unemployment_rate": {
+          "indicator": "Saudi unemployment rate",
+          "current_2024": 0.075,
+          "target_2030": 0.07,
+          "unit": "percent"
+        },
+        "female_labor_participation_rate": {
+          "indicator": "Saudi female labor market participation",
+          "current_2024": 0.33,
+          "target_2030": 0.30,
+          "notes": "Target was originally 30%; achieved early; new target raised to 35%",
+          "unit": "percent"
+        },
+        "private_sector_gdp_contribution": {
+          "indicator": "Private sector contribution to GDP",
+          "current_2024": 0.40,
+          "target_2030": 0.65,
+          "unit": "percent_of_gdp"
+        },
+        "fdi_percent_of_gdp": {
+          "indicator": "Foreign Direct Investment as % of GDP",
+          "current_2024": 0.019,
+          "target_2030": 0.055,
+          "unit": "percent_of_gdp"
+        },
+        "local_content_manufacturing": {
+          "indicator": "Local content in manufacturing sector",
+          "current_2024": 0.36,
+          "target_2030": 0.50,
+          "unit": "percent"
+        },
+        "logistics_performance_index": {
+          "indicator": "Global Logistics Performance Index rank",
+          "current_2024": 38,
+          "target_2030": 25,
+          "unit": "global_rank"
+        },
+        "global_competitiveness_rank": {
+          "indicator": "World Economic Forum Competitiveness Index rank",
+          "current_2024": 30,
+          "target_2030": 15,
+          "unit": "global_rank"
+        }
+      },
+      "key_programs": ["National Industrial Development and Logistics Program", "Financial Sector Development Program", "Quality of Life Program", "Saudi Vision Realization Programs"]
+    },
+    "ambitious_nation": {
+      "pillar_name_ar": "وطن طموح",
+      "pillar_name_en": "Ambitious Nation",
+      "vision_aspiration": "An effective, ambitious, accountable government",
+      "targets": {
+        "government_effectiveness_rank": {
+          "indicator": "UN E-Government Development Index rank",
+          "current_2024": 30,
+          "target_2030": 15,
+          "unit": "global_rank"
+        },
+        "transparency_index": {
+          "indicator": "Transparency International Corruption Perception Index score",
+          "current_2024": 52,
+          "target_2030": 60,
+          "unit": "score_0_to_100"
+        },
+        "government_digital_services": {
+          "indicator": "Government services available digitally",
+          "current_2024": 0.92,
+          "target_2030": 1.0,
+          "unit": "percent"
+        },
+        "social_development": {
+          "indicator": "Saudi households benefiting from social development programs",
+          "current_2024": 1200000,
+          "target_2030": 1500000,
+          "unit": "households"
+        }
+      },
+      "key_programs": ["National Transformation Program", "Fiscal Balance Program", "Privatization Program"]
+    }
+  },
+  "giga_projects": [
+    {
+      "name": "NEOM",
+      "name_ar": "نيوم",
+      "investment_sar_billions": 500,
+      "investment_usd_billions": 133,
+      "location": "Tabuk Region (Gulf of Aqaba)",
+      "sectors": ["tech", "tourism", "real_estate", "renewable_energy", "biotech", "logistics"],
+      "components": ["THE LINE", "SINDALAH Island", "AQABA", "OXAGON Industrial City", "TROJENA Mountain Resort"],
+      "expected_completion": 2030,
+      "jobs_target": 380000,
+      "gdp_contribution_sar_billions": 180,
+      "authority": "NEOM Company (PIF subsidiary)",
+      "website": "www.neom.com",
+      "description_en": "World's most ambitious urban development project: a zero-carbon smart city, island luxury destination, industrial port city, and mountain resort spanning 26,500 km² in northwest Saudi Arabia",
+      "business_opportunities": ["Construction", "Technology solutions", "Hospitality", "Retail franchises", "Healthcare", "Education"]
+    },
+    {
+      "name": "Red Sea Project",
+      "name_ar": "مشروع البحر الأحمر",
+      "official_name": "Red Sea Global",
+      "investment_sar_billions": 135,
+      "investment_usd_billions": 36,
+      "location": "Red Sea coast, northwest KSA",
+      "sectors": ["luxury_tourism", "hospitality", "marine_conservation", "real_estate"],
+      "components": ["50 resort islands", "Amaala ultra-luxury destination", "25+ hotels (8,000+ rooms)", "2 international airports"],
+      "expected_completion": 2030,
+      "jobs_target": 70000,
+      "annual_visitors_target": 1000000,
+      "authority": "Red Sea Global (PIF subsidiary)",
+      "website": "www.redseaglobal.com",
+      "description_en": "Ultra-luxury island tourism destination across 50 islands on the Red Sea, designed to be 100% renewable energy powered and regenerative by nature",
+      "business_opportunities": ["Luxury hospitality", "Marine sports", "Premium retail", "Food & beverage", "Wellness and spa"]
+    },
+    {
+      "name": "Diriyah Gate",
+      "name_ar": "بوابة الدرعية",
+      "investment_sar_billions": 100,
+      "investment_usd_billions": 26.7,
+      "location": "Al Diriyah, Riyadh",
+      "sectors": ["heritage_tourism", "culture", "hospitality", "retail", "entertainment"],
+      "components": ["UNESCO World Heritage Al-Turaif District", "Bujairi Terrace", "50+ F&B concepts", "30,000 seats event area", "Luxury hotels"],
+      "expected_completion": 2030,
+      "annual_visitors_target": 27000000,
+      "authority": "Diriyah Gate Development Authority (DGDA)",
+      "website": "www.dgda.gov.sa",
+      "description_en": "Transforming the birthplace of the Saudi state (Al-Turaif UNESCO site) into a global heritage, cultural, and dining destination in Riyadh",
+      "business_opportunities": ["F&B concepts", "Artisan retail", "Cultural tourism", "Luxury hospitality", "Event management"]
+    },
+    {
+      "name": "Qiddiya",
+      "name_ar": "القدية",
+      "investment_sar_billions": 150,
+      "investment_usd_billions": 40,
+      "location": "Al Qiddiya, 45km west of Riyadh",
+      "sectors": ["entertainment", "sports", "arts", "education", "gaming", "esports"],
+      "components": ["Six Flags theme park", "Motor sports racing circuit (Formula 1 grade)", "Safari world", "Water park", "Esports arena", "Golf courses"],
+      "area_km2": 367,
+      "expected_completion": 2030,
+      "annual_visitors_target": 17000000,
+      "authority": "Qiddiya Investment Company (PIF subsidiary)",
+      "website": "www.qiddiya.com",
+      "description_en": "Saudi Arabia's new entertainment capital: a 367 km² destination for sports, arts, and entertainment serving as Riyadh's entertainment hub under Vision 2030",
+      "business_opportunities": ["F&B at theme parks", "Sports retail", "Entertainment technology", "Hospitality", "Logistics and transport"]
+    },
+    {
+      "name": "ROSHN",
+      "name_ar": "روشن",
+      "investment_sar_billions": 280,
+      "investment_usd_billions": 74.7,
+      "location": "Nationwide (Riyadh, Jeddah, Eastern Province, Makkah)",
+      "sectors": ["residential_real_estate", "retail", "community_services"],
+      "homes_target": 400000,
+      "communities_planned": 11,
+      "expected_completion": 2030,
+      "authority": "ROSHN Group (PIF subsidiary)",
+      "website": "www.roshn.sa",
+      "description_en": "Saudi Arabia's national real estate developer building integrated communities with homes, retail, schools, clinics, and mosques to increase Saudi homeownership rate",
+      "business_opportunities": ["Residential retail anchors", "Neighborhood F&B", "Healthcare clinics", "Education centers", "Community services"]
+    },
+    {
+      "name": "King Salman Park",
+      "name_ar": "حديقة الملك سلمان",
+      "investment_sar_billions": 23,
+      "investment_usd_billions": 6.1,
+      "location": "Riyadh (former airport site)",
+      "sectors": ["tourism", "entertainment", "culture", "retail", "hospitality"],
+      "area_km2": 16,
+      "expected_completion": 2028,
+      "authority": "Royal Commission for Riyadh City",
+      "description_en": "Massive urban park in central Riyadh on the former King Khalid Airport site, featuring cultural facilities, sports venues, hotels, and retail"
+    },
+    {
+      "name": "Riyadh Sport Boulevard",
+      "name_ar": "مسار الرياض الرياضي",
+      "investment_sar_billions": 18,
+      "location": "Riyadh",
+      "sectors": ["sports", "wellness", "retail", "entertainment"],
+      "length_km": 135,
+      "expected_completion": 2030,
+      "authority": "Royal Commission for Riyadh City",
+      "description_en": "135 km linear park and sports corridor through central Riyadh with cycling tracks, fitness facilities, and retail"
+    },
+    {
+      "name": "Amaala",
+      "name_ar": "أمالا",
+      "investment_sar_billions": 112,
+      "investment_usd_billions": 30,
+      "location": "Red Sea coast, Prince Mohammed bin Salman Nature Reserve",
+      "sectors": ["ultra_luxury_tourism", "wellness", "arts", "hospitality"],
+      "expected_completion": 2028,
+      "authority": "Red Sea Global",
+      "description_en": "Ultra-luxury wellness and arts destination on the Red Sea, targeting high-net-worth international visitors with curated wellness, sports, and cultural experiences"
+    }
+  ],
+  "incentive_programs": [
+    {
+      "id": "IP-001",
+      "name_ar": "برنامج نطاقات",
+      "name_en": "Nitaqat Saudization Program",
+      "provider": "HRDF - Ministry of Human Resources",
+      "benefit_type": "saudization_support",
+      "max_benefit_sar": 150000,
+      "benefit_description_en": "Annual subsidy of up to 50% of Saudi employee salary for Year 1 and 25% for Year 2, up to maximum monthly caps",
+      "eligibility": "All private sector establishments",
+      "website": "hrdf.org.sa"
+    },
+    {
+      "id": "IP-002",
+      "name_ar": "برنامج كفالة لضمان القروض",
+      "name_en": "Kafalah Loan Guarantee Program",
+      "provider": "SIDF + Saudi Commercial Banks",
+      "benefit_type": "loan_guarantee",
+      "max_benefit_sar": 5000000,
+      "guarantee_coverage_percent": 80,
+      "guarantee_fee_percent": 1.5,
+      "benefit_description_en": "Government-backed guarantee covering up to 80% of bank loan principal, enabling SMEs without sufficient collateral to access commercial financing",
+      "eligibility": "Saudi SMEs with annual revenue below SAR 200M",
+      "website": "kafalah.com"
+    },
+    {
+      "id": "IP-003",
+      "name_ar": "برنامج تسريع منشآت",
+      "name_en": "Monsha'at SME Accelerator",
+      "provider": "Monsha'at - General Authority for SMEs",
+      "benefit_type": "grant_plus_mentorship",
+      "max_benefit_sar": 500000,
+      "equity_dilution_percent": 0,
+      "benefit_description_en": "Equity-free accelerator grant, workspace, mentorship, and investor access for early-stage Saudi startups and SMEs",
+      "eligibility": "Saudi-owned startups less than 3 years old with MVP",
+      "website": "monshaat.gov.sa"
+    },
+    {
+      "id": "IP-004",
+      "name_ar": "تأشيرة المستثمر الأجنبي المميزة",
+      "name_en": "MISA Premium Residency / Investor Visa",
+      "provider": "MISA - Ministry of Investment",
+      "benefit_type": "residency_immigration",
+      "one_time_fee_sar": 800000,
+      "benefit_description_en": "Permanent residency for foreign investors and qualified individuals, allowing 100% business ownership, sponsoring family, and unrestricted employment without a Saudi sponsor",
+      "eligibility": "Foreign nationals with qualifying investment or professional background",
+      "website": "misa.gov.sa"
+    },
+    {
+      "id": "IP-005",
+      "name_ar": "برنامج تقديم خدمات الاستثمار (وصل)",
+      "name_en": "MISA Investment Support Program (WASL)",
+      "provider": "MISA",
+      "benefit_type": "licensing_facilitation",
+      "max_benefit_sar": 0,
+      "benefit_description_en": "One-stop shop for foreign investors to obtain all licenses, permits, and government approvals through a single MISA window within 30 days",
+      "eligibility": "Foreign companies and investors establishing in KSA",
+      "timeline_days": 30,
+      "website": "misa.gov.sa"
+    },
+    {
+      "id": "IP-006",
+      "name_ar": "مزايا المناطق الاقتصادية الخاصة",
+      "name_en": "Special Economic Zone (SEZ) Benefits",
+      "provider": "MISA + Zone Authorities",
+      "benefit_type": "tax_and_regulatory_incentives",
+      "max_benefit_sar": 0,
+      "benefit_description_en": "Zero corporate tax, zero VAT, zero customs duties, 100% foreign ownership, and streamlined regulations for businesses operating within designated SEZs (Jazan, KAEC, Ras Al Khair, NEOM)",
+      "eligibility": "Businesses establishing operations within approved SEZ boundaries",
+      "applicable_zones": ["Jazan SEZ", "King Abdullah Economic City", "Ras Al Khair SEZ", "NEOM"]
+    },
+    {
+      "id": "IP-007",
+      "name_ar": "برنامج المحتوى المحلي",
+      "name_en": "Local Content Development Program",
+      "provider": "MISA + Local Content Authority (Etimad)",
+      "benefit_type": "procurement_preference",
+      "max_benefit_sar": 0,
+      "benefit_description_en": "Preference points in government procurement for companies meeting local content requirements. Reduces competition from imports and increases market access for Saudi-based manufacturers.",
+      "eligibility": "Companies with verified local content above sector minimums",
+      "website": "localcontent.gov.sa"
+    },
+    {
+      "id": "IP-008",
+      "name_ar": "برنامج نافس - الدعم الوظيفي",
+      "name_en": "Nafis Private Sector Employment Support",
+      "provider": "Empower Program (CEDA)",
+      "benefit_type": "wage_subsidy",
+      "max_benefit_sar": 144000,
+      "monthly_benefit_sar": 4000,
+      "max_duration_months": 36,
+      "benefit_description_en": "Monthly salary supplement of SAR 4,000 per Saudi employee in the private sector to bridge the wage gap with public sector employment and incentivize private sector careers",
+      "eligibility": "Saudi nationals newly employed in private sector",
+      "website": "nafis.gov.sa"
+    },
+    {
+      "id": "IP-009",
+      "name_ar": "برنامج تحفيز السياحة",
+      "name_en": "Tourism Investment Incentive Program",
+      "provider": "Ministry of Tourism + Saudi Tourism Authority",
+      "benefit_type": "grants_and_financing",
+      "max_benefit_sar": 50000000,
+      "benefit_description_en": "Concessional financing, land grants, and marketing support for tourism projects in designated tourism zones including Red Sea, Asir, Al-Ula, and NEOM",
+      "eligibility": "Hotels, resorts, attractions, and experience providers",
+      "website": "tourism.gov.sa"
+    },
+    {
+      "id": "IP-010",
+      "name_ar": "الرخصة الاستثمارية السريعة",
+      "name_en": "Fast-Track Investment License",
+      "provider": "MISA",
+      "benefit_type": "expedited_licensing",
+      "max_benefit_sar": 0,
+      "timeline_days": 1,
+      "benefit_description_en": "Instant online investment license issuance for approved business activities, replacing the previous weeks-long process. Applicable to most commercial and service sector activities.",
+      "eligibility": "Foreign investors in approved sectors",
+      "website": "misa.gov.sa"
+    },
+    {
+      "id": "IP-011",
+      "name_ar": "برنامج ضمان التصدير",
+      "name_en": "Saudi Export-Import Bank (EXIM) Guarantee",
+      "provider": "Saudi EXIM Bank",
+      "benefit_type": "export_financing_guarantee",
+      "max_benefit_sar": 100000000,
+      "benefit_description_en": "Export credit guarantees, financing, and insurance for Saudi exporters and companies entering international markets with Saudi-made products or services",
+      "eligibility": "Saudi companies exporting goods or services",
+      "website": "saudiexim.gov.sa"
+    },
+    {
+      "id": "IP-012",
+      "name_ar": "مبادرة الشريك الاستراتيجي",
+      "name_en": "Saudi Aramco In-Kingdom Total Value Add (IKTVA)",
+      "provider": "Saudi Aramco",
+      "benefit_type": "preferred_supplier_status",
+      "max_benefit_sar": 0,
+      "benefit_description_en": "Preferred supplier program for businesses contributing to Aramco's in-Kingdom value add target of 70% by 2030. Access to Aramco supply chain contracts worth tens of billions SAR annually.",
+      "eligibility": "Manufacturers and service providers in energy-related sectors",
+      "website": "aramco.com"
+    }
+  ],
+  "sector_targets_2030": {
+    "tourism": {
+      "sector_name_ar": "السياحة",
+      "gdp_target_percent": 10,
+      "current_gdp_percent_2024": 3.0,
+      "annual_visitors_target": 150000000,
+      "annual_visitors_current_2024": 100000000,
+      "jobs_target": 1000000,
+      "jobs_current_2024": 750000,
+      "investment_target_sar_billions": 500,
+      "key_initiatives": ["Red Sea Project", "NEOM Sindalah", "Diriyah Gate", "Amaala", "AlUla", "Asir Tourism"]
+    },
+    "retail": {
+      "sector_name_ar": "التجزئة",
+      "gdp_target_percent": 10,
+      "current_gdp_percent_2024": 7.8,
+      "jobs_target": 1200000,
+      "e_commerce_share_target_percent": 25,
+      "e_commerce_share_current_2024_percent": 14.2,
+      "key_initiatives": ["National Retail Strategy", "Saudi Made Program", "Maroof e-commerce platform"]
+    },
+    "fnb": {
+      "sector_name_ar": "الأغذية والمشروبات",
+      "market_size_target_sar_billions": 140,
+      "market_size_current_2024_sar_billions": 85,
+      "local_content_target_percent": 40,
+      "local_content_current_2024_percent": 26,
+      "jobs_target": 600000,
+      "key_initiatives": ["Saudi Food Safety Authority upgrade", "National Food Strategy", "Agricultural development"]
+    },
+    "logistics": {
+      "sector_name_ar": "اللوجستيات",
+      "gdp_target_percent": 10,
+      "current_gdp_percent_2024": 4.8,
+      "global_rank_target": 25,
+      "global_rank_current_2024": 38,
+      "investment_target_sar_billions": 150,
+      "key_initiatives": ["National Transport and Logistics Strategy", "King Salman Energy Park", "Saudi Landbridge (railway)"]
+    },
+    "entertainment": {
+      "sector_name_ar": "الترفيه",
+      "gdp_target_percent": 3,
+      "current_gdp_percent_2024": 1.0,
+      "household_spending_target_percent": 6,
+      "household_spending_current_2024_percent": 2.9,
+      "key_initiatives": ["Qiddiya", "General Entertainment Authority (GEA) events", "Saudi Sports for All"]
+    },
+    "technology": {
+      "sector_name_ar": "التقنية والاقتصاد الرقمي",
+      "gdp_target_percent": 5,
+      "current_gdp_percent_2024": 2.5,
+      "startup_ecosystem_target_rank": 15,
+      "digital_economy_target_sar_billions": 200,
+      "key_initiatives": ["LEAP Tech Conference", "Saudi Digital Academy", "Cloud-first Government Policy", "AI Strategy"]
+    },
+    "manufacturing": {
+      "sector_name_ar": "التصنيع",
+      "gdp_target_percent": 12,
+      "current_gdp_percent_2024": 9.5,
+      "industrial_cities_investment_sar_billions": 27,
+      "local_content_target_percent": 50,
+      "key_initiatives": ["National Industrial Development Program", "SIDF loan expansion", "Industrial SEZs", "Defense manufacturing (SAMI)"]
+    },
+    "renewable_energy": {
+      "sector_name_ar": "الطاقة المتجددة",
+      "renewable_capacity_target_gw": 58.7,
+      "renewable_capacity_current_2024_gw": 12,
+      "renewable_share_of_electricity_target_percent": 50,
+      "investment_target_sar_billions": 300,
+      "key_initiatives": ["NEOM Green Hydrogen", "ACWA Power renewables", "Saudi Aramco carbon capture", "NEOM solar and wind"]
+    }
+  },
+  "vision_realization_programs": [
+    {
+      "id": "VRP-001",
+      "name_ar": "برنامج التحول الوطني",
+      "name_en": "National Transformation Program (NTP)",
+      "focus": "Government efficiency and public sector reform",
+      "lead": "Multiple ministries"
+    },
+    {
+      "id": "VRP-002",
+      "name_ar": "برنامج التوازن المالي",
+      "name_en": "Fiscal Balance Program",
+      "focus": "Government budget sustainability and non-oil revenue growth",
+      "lead": "Ministry of Finance"
+    },
+    {
+      "id": "VRP-003",
+      "name_ar": "برنامج جودة الحياة",
+      "name_en": "Quality of Life Program",
+      "focus": "Entertainment, sports, culture, and social wellbeing",
+      "lead": "General Entertainment Authority"
+    },
+    {
+      "id": "VRP-004",
+      "name_ar": "برنامج التطوير الوطني للصناعة واللوجستيات",
+      "name_en": "National Industrial Development and Logistics Program (NIDLP)",
+      "focus": "Manufacturing, mining, energy, and logistics sector development",
+      "lead": "Ministry of Industry and Mineral Resources"
+    },
+    {
+      "id": "VRP-005",
+      "name_ar": "برنامج تطوير القطاع المالي",
+      "name_en": "Financial Sector Development Program (FSDP)",
+      "focus": "Banking sector, capital markets, FinTech, and insurance development",
+      "lead": "SAMA + Capital Market Authority"
+    },
+    {
+      "id": "VRP-006",
+      "name_ar": "برنامج الخصخصة",
+      "name_en": "Privatization Program",
+      "focus": "Transferring state-owned assets to private sector",
+      "lead": "National Center for Privatization (NCP)",
+      "target_proceeds_sar_billions": 200
+    },
+    {
+      "id": "VRP-007",
+      "name_ar": "برنامج تنمية الموارد البشرية الوطنية",
+      "name_en": "Human Capability Development Program (HCDP)",
+      "focus": "Education, skills development, and Saudi workforce readiness",
+      "lead": "Ministry of Education + HRDF"
+    },
+    {
+      "id": "VRP-008",
+      "name_ar": "صندوق الاستثمارات العامة",
+      "name_en": "Public Investment Fund (PIF) Program",
+      "focus": "Building a diversified investment portfolio and co-funding giga projects",
+      "lead": "PIF",
+      "aum_target_sar_trillions": 7.5,
+      "aum_current_2024_sar_trillions": 2.9
+    }
+  ],
+  "public_investment_fund": {
+    "name_ar": "صندوق الاستثمارات العامة",
+    "name_en": "Public Investment Fund (PIF)",
+    "established": 1971,
+    "type": "Sovereign Wealth Fund",
+    "aum_usd_billions_2024": 770,
+    "aum_sar_trillions_2024": 2.9,
+    "target_aum_2030_usd_billions": 2000,
+    "key_subsidiaries": [
+      "Saudi Aramco (partial)", "SABIC (partial)", "STC Group", "Ma'aden",
+      "NEOM Company", "Red Sea Global", "Diriyah Gate Development Authority",
+      "Qiddiya Investment Company", "ROSHN Group", "Saudi Telecom Company",
+      "Savvy Games Group", "LIV Golf"
+    ],
+    "domestic_investment_target_sar_billions_2021_2025": 1000,
+    "international_investment_target_usd_billions_by_2030": 500
+  }
+}

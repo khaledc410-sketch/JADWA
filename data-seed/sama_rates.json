@@ -1,0 +1,312 @@
+{
+  "metadata": {
+    "source": "SAMA + SIDF",
+    "source_ar": "البنك المركزي السعودي (ساما) + صندوق التنمية الصناعية السعودي",
+    "last_updated": "2025-01",
+    "notes": "SAMA policy rates, SAIBOR benchmarks, SIDF financing programs, and Monsha'at SME programs as of Q1 2025. Rates subject to SAMA monetary policy decisions."
+  },
+  "saibor_rates": {
+    "as_of_date": "2025-01-15",
+    "currency": "SAR",
+    "notes": "Saudi Arabian Interbank Offered Rate (SAIBOR). SAR is pegged to USD at 3.75, so SAIBOR closely tracks US Fed Funds Rate.",
+    "overnight": 5.70,
+    "1_week": 5.72,
+    "1_month": 5.85,
+    "3_month": 5.95,
+    "6_month": 6.10,
+    "12_month": 6.20
+  },
+  "sama_policy_rate": {
+    "repo_rate_percent": 6.00,
+    "reverse_repo_rate_percent": 5.50,
+    "last_change_date": "2023-07",
+    "direction": "hold",
+    "notes": "SAMA held rates steady in 2024 following the US Fed pause. Rate cuts expected as global inflation normalizes."
+  },
+  "bank_lending_rates": {
+    "as_of_date": "2025-01-15",
+    "notes": "Average rates across Saudi commercial banks for standard products",
+    "sme_loan_average": 7.5,
+    "sme_loan_range": {"min": 6.5, "max": 9.0},
+    "personal_loan_average": 8.2,
+    "mortgage_residential_average": 6.8,
+    "mortgage_residential_range": {"min": 5.5, "max": 8.0},
+    "commercial_real_estate_average": 7.2,
+    "commercial_real_estate_range": {"min": 6.0, "max": 8.5},
+    "auto_loan_average": 5.9,
+    "working_capital_facility_average": 7.0,
+    "letter_of_credit_fee_percent": 1.5
+  },
+  "sidf_programs": [
+    {
+      "id": "SIDF-001",
+      "name_ar": "برنامج تمويل المنشآت الصغيرة والمتوسطة",
+      "name_en": "SME Financing Program",
+      "provider": "SIDF",
+      "max_financing_sar": 30000000,
+      "max_financing_percent": 75,
+      "interest_rate_percent": 2.5,
+      "interest_type": "fixed",
+      "max_term_years": 15,
+      "grace_period_years": 2,
+      "min_equity_percent": 25,
+      "eligible_sectors": ["manufacturing", "agri_food", "healthcare", "logistics", "tourism"],
+      "requirements": [
+        "Saudi-registered company with valid CR",
+        "Operating for minimum 2 years or new industrial project",
+        "Business plan with financial projections",
+        "GOSI compliance certificate",
+        "Zakat certificate from ZATCA",
+        "Feasibility study for new projects"
+      ],
+      "description_en": "Concessional financing for Saudi SMEs in industrial and productive sectors to support capacity expansion and modernization"
+    },
+    {
+      "id": "SIDF-002",
+      "name_ar": "القرض الصناعي",
+      "name_en": "Industrial Loan Program",
+      "provider": "SIDF",
+      "max_financing_sar": 200000000,
+      "max_financing_percent": 50,
+      "interest_rate_percent": 2.0,
+      "interest_type": "fixed",
+      "max_term_years": 20,
+      "grace_period_years": 3,
+      "min_equity_percent": 50,
+      "eligible_sectors": ["heavy_manufacturing", "petrochemicals", "mining", "defense_industries"],
+      "requirements": [
+        "Saudi industrial company with valid industrial license",
+        "Project must be in Saudi Arabia",
+        "Minimum project value SAR 10 million",
+        "Environmental compliance documentation",
+        "Feasibility study approved by SIDF",
+        "Audited financial statements (3 years for existing companies)"
+      ],
+      "description_en": "Long-term concessional financing for large-scale industrial projects contributing to Vision 2030 industrial diversification goals"
+    },
+    {
+      "id": "SIDF-003",
+      "name_ar": "برنامج كفالة لضمان القروض",
+      "name_en": "Kafalah Loan Guarantee Program",
+      "provider": "Kafalah (SIDF + Commercial Banks)",
+      "max_financing_sar": 5000000,
+      "max_guarantee_percent": 80,
+      "guarantee_fee_percent": 1.5,
+      "interest_rate_percent": 0,
+      "interest_type": "commercial_bank_rate_applies",
+      "max_term_years": 5,
+      "eligible_sectors": ["all_sectors_excluding_real_estate_speculation"],
+      "requirements": [
+        "SME with annual revenue below SAR 200 million",
+        "Operating for minimum 1 year",
+        "Not classified as red in Nitaqat",
+        "No defaults on existing loans",
+        "Valid commercial registration",
+        "GOSI and ZATCA compliance"
+      ],
+      "description_en": "Government-backed loan guarantee program reducing bank risk exposure to enable SME access to commercial bank financing at market rates. Kafalah guarantees up to 80% of loan principal."
+    },
+    {
+      "id": "SIDF-004",
+      "name_ar": "تمويل المنشآت الصغيرة جداً",
+      "name_en": "Micro Enterprise Financing",
+      "provider": "SIDF",
+      "max_financing_sar": 500000,
+      "max_financing_percent": 90,
+      "interest_rate_percent": 0,
+      "interest_type": "interest_free",
+      "max_term_years": 5,
+      "grace_period_years": 1,
+      "eligible_sectors": ["manufacturing", "crafts", "food_processing", "small_scale_services"],
+      "requirements": [
+        "Saudi national owner",
+        "Business with fewer than 5 employees",
+        "Valid commercial registration",
+        "Training completion at approved SIDF center"
+      ],
+      "description_en": "Interest-free micro financing for very small Saudi-owned enterprises and artisans to formalize and scale their businesses"
+    },
+    {
+      "id": "SIDF-005",
+      "name_ar": "برنامج القرض التكميلي",
+      "name_en": "Supplementary Loan Program",
+      "provider": "SIDF",
+      "max_financing_sar": 10000000,
+      "max_financing_percent": 50,
+      "interest_rate_percent": 2.5,
+      "interest_type": "fixed",
+      "max_term_years": 10,
+      "eligible_sectors": ["all_industrial_sectors"],
+      "requirements": [
+        "Must have existing SIDF loan in good standing",
+        "Expansion or modernization project",
+        "Audited financials showing profitability",
+        "Updated feasibility study"
+      ],
+      "description_en": "Supplementary financing for existing SIDF clients seeking to expand capacity or modernize production facilities"
+    }
+  ],
+  "monshaat_programs": [
+    {
+      "id": "MONO-001",
+      "name_ar": "برنامج منشآت - التمويل المباشر",
+      "name_en": "Monsha'at Direct Financing",
+      "provider": "Monsha'at (SME General Authority)",
+      "max_financing_sar": 2000000,
+      "interest_rate_percent": 0,
+      "interest_type": "interest_free",
+      "max_term_years": 5,
+      "target_stage": ["startup", "early_growth"],
+      "eligible_sectors": ["all_private_sectors"],
+      "requirements": [
+        "Saudi-owned SME or startup",
+        "Valid commercial registration",
+        "Completed Monsha'at business development assessment",
+        "Business plan or pitch deck"
+      ],
+      "description_en": "Interest-free direct loans from Monsha'at for early-stage Saudi SMEs and startups to fund initial operations and growth"
+    },
+    {
+      "id": "MONO-002",
+      "name_ar": "برنامج ريادة الأعمال - المسرّع",
+      "name_en": "Monsha'at Accelerator Program",
+      "provider": "Monsha'at",
+      "grant_amount_sar": 500000,
+      "equity_stake_percent": 0,
+      "duration_months": 6,
+      "target_stage": ["startup"],
+      "cohort_size": 20,
+      "eligible_sectors": ["tech", "fnb", "retail", "healthcare", "education"],
+      "requirements": [
+        "Saudi-founded startup less than 3 years old",
+        "Minimum viable product (MVP) required",
+        "Saudi co-founder with minimum 51% ownership",
+        "Application via Monsha'at portal"
+      ],
+      "description_en": "Equity-free accelerator grant program providing mentorship, workspace, and capital to high-potential Saudi startups"
+    },
+    {
+      "id": "MONO-003",
+      "name_ar": "برنامج منشآت للمرأة الرائدة",
+      "name_en": "Monsha'at Women Entrepreneur Support",
+      "provider": "Monsha'at",
+      "grant_amount_sar": 300000,
+      "max_loan_sar": 1000000,
+      "interest_rate_percent": 0,
+      "target_gender": "female",
+      "eligible_sectors": ["all_private_sectors"],
+      "requirements": [
+        "Saudi female entrepreneur",
+        "Majority female ownership (51%+)",
+        "Valid commercial registration or intent to register",
+        "Business plan submission"
+      ],
+      "description_en": "Dedicated support program for Saudi female entrepreneurs including interest-free financing, mentoring, and market access support"
+    },
+    {
+      "id": "MONO-004",
+      "name_ar": "الضامن السعودي للتمويل الأصغر",
+      "name_en": "Saudi Guarantee for Microfinance",
+      "provider": "Monsha'at + Participating Microfinance Institutions",
+      "max_financing_sar": 200000,
+      "max_guarantee_percent": 85,
+      "interest_rate_percent": 6.0,
+      "max_term_years": 3,
+      "target_stage": ["micro_enterprise"],
+      "eligible_sectors": ["all_sectors"],
+      "requirements": [
+        "Individual Saudi entrepreneur or micro-enterprise",
+        "Annual revenue below SAR 3 million",
+        "Valid national ID and CR",
+        "No record of loan defaults"
+      ],
+      "description_en": "Microfinance guarantee scheme enabling individual Saudi entrepreneurs to access small loans from licensed microfinance institutions"
+    }
+  ],
+  "tax_rates": {
+    "notes": "Saudi tax and zakat rates as of 2025. Saudi nationals and GCC nationals pay Zakat; foreign investors pay Corporate Income Tax.",
+    "vat": {
+      "standard_rate_percent": 15,
+      "zero_rated_categories": ["exports", "international_services", "medicines", "medical_equipment", "specific_financial_services"],
+      "exempt_categories": ["residential_rent", "bare_land", "local_passenger_transport"],
+      "registration_threshold_sar": 375000,
+      "effective_date": "2020-07"
+    },
+    "zakat_percent": {
+      "rate": 2.5,
+      "base": "zakatable_assets_net_of_liabilities",
+      "applicable_to": "Saudi and GCC nationals; Saudi-owned legal entities",
+      "paid_to": "ZATCA"
+    },
+    "withholding_tax": {
+      "services_percent": 5,
+      "royalties_percent": 15,
+      "dividends_percent": 5,
+      "technical_services_percent": 5,
+      "management_fees_percent": 20,
+      "rent_percent": 5,
+      "applicable_to": "Payments to non-resident entities"
+    },
+    "corporate_income_tax_foreign": {
+      "rate_percent": 20,
+      "applicable_to": "Foreign-owned companies or foreign shareholder portion of mixed ownership",
+      "notes": "Saudi or GCC national shareholders pay Zakat at 2.5%; non-GCC foreign shareholders pay CIT at 20% on their proportionate share of income"
+    },
+    "real_estate_transaction_tax": {
+      "rate_percent": 5,
+      "applicable_to": "Sale or transfer of real estate",
+      "effective_date": "2020-10"
+    },
+    "excise_tax": {
+      "carbonated_drinks_percent": 50,
+      "energy_drinks_percent": 100,
+      "tobacco_percent": 100,
+      "electronic_cigarettes_percent": 100
+    }
+  },
+  "special_economic_zones": [
+    {
+      "name_ar": "المنطقة الاقتصادية الخاصة في جازان",
+      "name_en": "Jazan Special Economic Zone (JSEZ)",
+      "operator": "SIDF",
+      "location": "Jazan",
+      "corporate_tax_rate_percent": 0,
+      "vat_rate_percent": 0,
+      "customs_duty_percent": 0,
+      "max_foreign_ownership_percent": 100,
+      "focus_sectors": ["petrochemicals", "metals", "food_processing", "logistics"],
+      "description_en": "Saudi Arabia's first industrial SEZ with zero tax, zero VAT, and zero customs for manufacturers"
+    },
+    {
+      "name_ar": "المنطقة الاقتصادية الخاصة في الملك عبدالله",
+      "name_en": "King Abdullah Economic City (KAEC)",
+      "operator": "Emaar Economic City",
+      "location": "Rabigh, Makkah Region",
+      "corporate_tax_rate_percent": 0,
+      "customs_duty_percent": 0,
+      "max_foreign_ownership_percent": 100,
+      "focus_sectors": ["logistics", "pharma", "light_manufacturing", "education", "healthcare"],
+      "description_en": "Integrated city with industrial valley, port, and residential zones offering competitive incentives for investors"
+    },
+    {
+      "name_ar": "المنطقة الاقتصادية الخاصة في رأس الخير",
+      "name_en": "Ras Al Khair Special Economic Zone",
+      "operator": "RCJY / Maaden",
+      "location": "Ras Al Khair, Eastern Province",
+      "corporate_tax_rate_percent": 0,
+      "focus_sectors": ["mining", "metals_processing", "downstream_petrochemicals"],
+      "description_en": "Industrial SEZ focused on mining and metals downstream processing adjacent to major mineral extraction facilities"
+    },
+    {
+      "name_ar": "منطقة نيوم الاقتصادية",
+      "name_en": "NEOM Economic Zone",
+      "operator": "NEOM Company",
+      "location": "Tabuk Region",
+      "corporate_tax_rate_percent": 0,
+      "vat_rate_percent": 0,
+      "max_foreign_ownership_percent": 100,
+      "focus_sectors": ["tech", "energy", "tourism", "biotech", "logistics"],
+      "description_en": "Flagship giga-project SEZ with separate regulatory framework, targeting advanced technology and sustainable industries"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+backend/venv/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+venv/
+.env
+.env.local
+*.sqlite3
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+.vercel/
+*.tsbuildinfo
+.env*.local
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# PDF / temp outputs
+/tmp/
+*.pdf
+
+# Alembic
+backend/alembic/versions/*.py
+
+# Test artifacts
+.pytest_cache/
+htmlcov/
+.coverage

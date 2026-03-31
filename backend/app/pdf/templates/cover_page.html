@@ -1,0 +1,423 @@
+{% extends "base.html" %}
+
+{% block title %}غلاف - {{ business_name | default('دراسة الجدوى') }}{% endblock %}
+
+{% block extra_styles %}
+<style>
+  /* ===== Cover Page Override — no running header/footer on this page ===== */
+  @page cover-page {
+    size: A4;
+    margin: 0;
+    @top-right   { content: none; }
+    @bottom-center { content: none; }
+  }
+
+  .cover-page {
+    page: cover-page;
+    width: 210mm;
+    min-height: 297mm;
+    background-color: #1B4332;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Noto Naskh Arabic', 'Amiri', Arial, serif;
+  }
+
+  /* ===== Geometric background decorations ===== */
+  .cover-page::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    left: -80px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: rgba(183, 149, 11, 0.12);
+    pointer-events: none;
+  }
+
+  .cover-page::after {
+    content: '';
+    position: absolute;
+    bottom: 60px;
+    right: -60px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    pointer-events: none;
+  }
+
+  /* ===== Gold accent bar at top ===== */
+  .cover-top-bar {
+    height: 6px;
+    background: linear-gradient(90deg, #B7950B 0%, #F0C040 50%, #B7950B 100%);
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  /* ===== Top branding strip ===== */
+  .cover-header-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .cover-jadwa-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cover-logo-mark {
+    width: 36px;
+    height: 36px;
+    background: #B7950B;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .cover-logo-mark span {
+    font-size: 18pt;
+    font-weight: 700;
+    color: #1B4332;
+    line-height: 1;
+  }
+
+  .cover-logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .cover-logo-en {
+    font-size: 13pt;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: 2px;
+    line-height: 1.1;
+  }
+
+  .cover-logo-ar {
+    font-size: 8pt;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.5px;
+  }
+
+  .cover-report-type-badge {
+    background: rgba(183,149,11,0.2);
+    border: 1px solid rgba(183,149,11,0.5);
+    color: #F0C040;
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 8.5pt;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== Center hero section ===== */
+  .cover-hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 40px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== Sector badge ===== */
+  .cover-sector-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(183,149,11,0.15);
+    border: 1px solid rgba(183,149,11,0.4);
+    color: #F0C040;
+    padding: 6px 20px;
+    border-radius: 24px;
+    font-size: 9pt;
+    font-weight: 600;
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+  }
+
+  .cover-sector-badge .sector-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #F0C040;
+    flex-shrink: 0;
+  }
+
+  /* ===== Client logo placeholder ===== */
+  .cover-client-logo {
+    width: 90px;
+    height: 90px;
+    background: rgba(255,255,255,0.08);
+    border: 2px solid rgba(255,255,255,0.20);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .cover-client-logo img {
+    max-width: 80px;
+    max-height: 80px;
+    object-fit: contain;
+  }
+
+  .cover-client-logo .logo-placeholder-text {
+    font-size: 8pt;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    padding: 8px;
+  }
+
+  /* ===== Business name ===== */
+  .cover-business-name {
+    font-size: 30pt;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.25;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .cover-business-name-en {
+    font-size: 14pt;
+    font-weight: 400;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  /* ===== Gold divider ===== */
+  .cover-divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #B7950B, transparent);
+    border-radius: 2px;
+    margin: 0 auto 20px auto;
+  }
+
+  /* ===== Report subtitle ===== */
+  .cover-subtitle {
+    font-size: 15pt;
+    font-weight: 600;
+    color: rgba(255,255,255,0.88);
+    margin-bottom: 8px;
+  }
+
+  .cover-subtitle-en {
+    font-size: 9.5pt;
+    color: rgba(255,255,255,0.45);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin-bottom: 28px;
+  }
+
+  /* ===== Key info pills ===== */
+  .cover-info-pills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .cover-pill {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.75);
+    padding: 5px 14px;
+    border-radius: 16px;
+    font-size: 8.5pt;
+  }
+
+  /* ===== Confidential notice ===== */
+  .cover-confidential {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(229, 62, 62, 0.12);
+    border: 1px solid rgba(229, 62, 62, 0.30);
+    color: #FC8181;
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 8pt;
+    font-weight: 600;
+  }
+
+  .cover-confidential .conf-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #FC8181;
+    flex-shrink: 0;
+  }
+
+  /* ===== Bottom info strip ===== */
+  .cover-footer-strip {
+    padding: 20px 40px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    direction: rtl;
+    background: rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-footer-block {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .cover-footer-label {
+    font-size: 7.5pt;
+    color: rgba(255,255,255,0.40);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .cover-footer-value {
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .cover-footer-value-en {
+    font-size: 8pt;
+    color: rgba(255,255,255,0.45);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  /* ===== Bottom gold bar ===== */
+  .cover-bottom-bar {
+    height: 4px;
+    background: linear-gradient(90deg, #1B4332 0%, #B7950B 50%, #1B4332 100%);
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  /* ===== Sector label mapping ===== */
+  .sector-fnb       { --sector-label: 'قطاع الأغذية والمشروبات'; }
+  .sector-retail    { --sector-label: 'قطاع التجزئة'; }
+  .sector-franchise { --sector-label: 'قطاع الامتياز التجاري'; }
+  .sector-realestate{ --sector-label: 'قطاع العقارات'; }
+  .sector-services  { --sector-label: 'قطاع الخدمات'; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="cover-page">
+
+  <!-- Gold top bar -->
+  <div class="cover-top-bar"></div>
+
+  <!-- Top branding strip -->
+  <div class="cover-header-strip">
+    <div class="cover-jadwa-brand">
+      <div class="cover-logo-mark"><span>ج</span></div>
+      <div class="cover-logo-text">
+        <span class="cover-logo-en">JADWA</span>
+        <span class="cover-logo-ar">منصة دراسات الجدوى الذكية</span>
+      </div>
+    </div>
+    <div class="cover-report-type-badge">دراسة جدوى اقتصادية</div>
+  </div>
+
+  <!-- Hero section -->
+  <div class="cover-hero">
+
+    <!-- Sector badge -->
+    <div class="cover-sector-badge">
+      <span class="sector-dot"></span>
+      {% if sector == 'fnb' %}قطاع الأغذية والمشروبات
+      {% elif sector == 'retail' %}قطاع التجزئة
+      {% elif sector == 'franchise' %}قطاع الامتياز التجاري
+      {% elif sector == 'real_estate' %}قطاع العقارات
+      {% elif sector == 'services' %}قطاع الخدمات
+      {% else %}{{ sector_label | default('قطاع تجاري') }}
+      {% endif %}
+    </div>
+
+    <!-- Client logo -->
+    <div class="cover-client-logo">
+      {% if client_logo_path %}
+        <img src="{{ client_logo_path }}" alt="{{ business_name }}">
+      {% else %}
+        <span class="logo-placeholder-text">شعار<br>المنشأة</span>
+      {% endif %}
+    </div>
+
+    <!-- Business name -->
+    <div class="cover-business-name">{{ business_name | default('اسم المشروع') }}</div>
+    {% if business_name_en %}
+    <div class="cover-business-name-en">{{ business_name_en }}</div>
+    {% endif %}
+
+    <!-- Divider -->
+    <div class="cover-divider"></div>
+
+    <!-- Report subtitle -->
+    <div class="cover-subtitle">دراسة الجدوى الاقتصادية</div>
+    <div class="cover-subtitle-en">Economic Feasibility Study</div>
+
+    <!-- Info pills -->
+    <div class="cover-info-pills">
+      {% if city %}<div class="cover-pill">{{ city }}</div>{% endif %}
+      {% if report_year %}<div class="cover-pill">{{ report_year }}</div>{% endif %}
+      {% if investment_label %}<div class="cover-pill">{{ investment_label }}</div>{% endif %}
+    </div>
+
+    <!-- Confidential notice -->
+    <div class="cover-confidential">
+      <span class="conf-dot"></span>
+      سري — للاستخدام الداخلي فقط
+    </div>
+
+  </div>
+
+  <!-- Footer strip -->
+  <div class="cover-footer-strip">
+
+    <div class="cover-footer-block">
+      <span class="cover-footer-label">أعدّت بواسطة</span>
+      <span class="cover-footer-value">منصة جدوى</span>
+      <span class="cover-footer-value-en">JADWA Platform</span>
+    </div>
+
+    <div class="cover-footer-block" style="text-align:center;">
+      <span class="cover-footer-label">التاريخ الميلادي</span>
+      <span class="cover-footer-value">{{ gregorian_date | default('2025') }}</span>
+    </div>
+
+    <div class="cover-footer-block" style="text-align:left;direction:rtl;">
+      <span class="cover-footer-label">التاريخ الهجري</span>
+      <span class="cover-footer-value">{{ hijri_date | default('1446هـ') }}</span>
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="cover-bottom-bar"></div>
+
+</div>
+{% endblock %}

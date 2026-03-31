@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Economic Feasibility Study — {{ report.project_name_en | default(report.project_name_ar | default('Project')) }}</title>
+  {% set lang = 'en' %}
+  {% include "base_styles.html" %}
+  <style>
+    /* ── English LTR overrides ── */
+    html { direction: ltr; unicode-bidi: normal; }
+    body { direction: ltr; text-align: left; font-family: 'Helvetica Neue', Arial, sans-serif; }
+    h1,h2,h3,h4,h5,h6 { font-family: 'Helvetica Neue', Arial, sans-serif; }
+    p { text-align: left; }
+    ul, ol { padding-left: var(--sp-lg); padding-right: 0; }
+    table { direction: ltr; }
+    thead th { text-align: left; }
+    tbody td { text-align: left; }
+    tfoot td { text-align: left; }
+    .card-accent { border-left: 4px solid var(--secondary); border-right: none; }
+    .callout { border-left: 4px solid; border-right: none; }
+    .section-header { flex-direction: row; }
+    .subsection-header::before { order: -1; }
+    /* running header */
+    #running-header { direction: ltr; }
+    #running-header .hdr-title { text-align: left; }
+    #running-footer { direction: ltr; }
+    /* cover */
+    .cover-page { direction: ltr; }
+    .cover-hero { direction: ltr; }
+    .cover-footer-strip { direction: ltr; }
+    /* financial table */
+    .ft { direction: ltr; }
+    .ft thead th { text-align: center; }
+    .ft thead th:first-child { text-align: left; }
+    .ft tbody tr.rd td { text-align: center; }
+    .ft tbody tr.rd td:first-child { text-align: left; }
+    .ft tbody tr.rh td:first-child { text-align: left; }
+    .ft tbody tr.rs td:first-child { text-align: left; }
+    .ft tbody tr.rt td:first-child { text-align: left; }
+    .ft tfoot td:first-child { text-align: left; }
+    /* tables */
+    .data-table th { text-align: left; }
+    .data-table td { text-align: left; }
+    .comp-table thead th { text-align: left; }
+    .comp-table tbody td { text-align: left; }
+    .risk-table thead th { text-align: left; }
+    .risk-table tbody td { text-align: left; }
+    /* swot */
+    .swot-list li { padding-left: 14px; padding-right: 0; }
+    .swot-list li::before { left: 2px; right: auto; }
+    /* executive summary */
+    .executive-summary-box { border-left: 4px solid var(--primary); border-right: none; border-radius: var(--r-md) 0 0 var(--r-md); padding: var(--sp-lg) var(--sp-md) var(--sp-lg) var(--sp-xl); }
+    .executive-summary-box .esb-title::before { margin-right: var(--sp-sm); margin-left: 0; }
+    /* vision bars */
+    .v-bar .v-fill { background: linear-gradient(90deg, #1B4332, #52B788); }
+    /* kpi */
+    .kpi-card::before { border-radius: var(--r-md) var(--r-md) 0 0; }
+    /* nitaqat */
+    .nit-badge { direction: ltr; }
+    /* general shared classes for EN */
+    .ft { width:100%; border-collapse:collapse; font-size:9pt; direction:ltr; margin-bottom:6px; }
+    .ft thead tr { background:#1B4332; color:#fff; }
+    .ft thead th { padding:9px 10px; text-align:center; font-weight:600; font-size:8.5pt; border-right:1px solid rgba(255,255,255,0.14); }
+    .ft thead th:first-child { text-align:left; border-right:none; min-width:160px; }
+    .ft tbody tr.rd td { padding:7px 10px; border-bottom:1px solid #EDF2F7; text-align:center; }
+    .ft tbody tr.rd td:first-child { text-align:left; color:#2D3748; }
+    .ft tbody tr.rd:nth-child(even) td { background:#F7F9F7; }
+    .ft tbody tr.rh td { background:#D8F3DC; font-weight:700; color:#1B4332; padding:7px 10px; border-top:1px solid #9AE6B4; border-bottom:1px solid #9AE6B4; }
+    .ft tbody tr.rh td:first-child { text-align:left; }
+    .ft tbody tr.rs td { background:#EBF8FF; font-weight:600; color:#2B6CB0; padding:7px 10px; border-top:1px solid #BEE3F8; }
+    .ft tbody tr.rs td:first-child { text-align:left; }
+    .ft tbody tr.rs td:not(:first-child) { text-align:center; }
+    .ft tbody tr.rt td { background:#1B4332; color:#fff; font-weight:700; padding:9px 10px; }
+    .ft tbody tr.rt td:first-child { text-align:left; }
+    .ft tbody tr.rt td:not(:first-child) { text-align:center; }
+    .ft tbody tr.rsp td { height:6px; padding:0; background:#fff; border:none; }
+    .ft tfoot td { padding:9px 10px; font-weight:700; border-top:2px solid #1B4332; font-size:9.5pt; background:#F0F7F0; text-align:center; }
+    .ft tfoot td:first-child { text-align:left; }
+    .comp-table { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:var(--sp-md); }
+    .comp-table thead tr { background:#2C7A7B; color:#fff; }
+    .comp-table thead th { padding:8px 10px; text-align:left; font-weight:600; }
+    .comp-table tbody td { padding:7px 10px; border-bottom:1px solid var(--border-light); }
+    .comp-table tbody tr:nth-child(even) td { background:#F0FDFA; }
+    .rec-box { background:#1B4332; color:#fff; border-radius:10px; padding:18px 22px; display:flex; align-items:flex-start; gap:14px; break-inside:avoid; }
+    .rec-box .rec-title { font-size:11pt; font-weight:700; color:#F0C040; margin-bottom:6px; }
+    .rec-box .rec-text { font-size:9.5pt; color:rgba(255,255,255,0.85); line-height:1.8; margin:0; text-align:left; }
+    .risk-table { width:100%; border-collapse:collapse; font-size:8.5pt; }
+    .risk-table thead tr { background:#1B4332; color:#fff; }
+    .risk-table thead th { padding:9px 10px; text-align:left; font-weight:600; }
+    .risk-table tbody td { padding:8px 10px; border-bottom:1px solid var(--border-light); }
+    .risk-table tbody tr:nth-child(even) td { background:var(--off-white); }
+    .risk-h { display:inline-block; padding:2px 9px; border-radius:12px; background:#FFF5F5; color:#C53030; border:1px solid #FC8181; font-weight:600; font-size:8pt; }
+    .risk-m { display:inline-block; padding:2px 9px; border-radius:12px; background:#FFFBEB; color:#B7791F; border:1px solid #F6AD55; font-weight:600; font-size:8pt; }
+    .risk-l { display:inline-block; padding:2px 9px; border-radius:12px; background:#F0FFF4; color:#276749; border:1px solid #68D391; font-weight:600; font-size:8pt; }
+    .v-bar { margin-bottom:10px; break-inside:avoid; }
+    .v-bar .v-label { display:flex; justify-content:space-between; font-size:8.5pt; color:var(--text-secondary); margin-bottom:4px; font-weight:500; }
+    .v-bar .v-track { width:100%; height:9px; background:var(--border-light); border-radius:5px; overflow:hidden; }
+    .v-bar .v-fill { height:100%; background:linear-gradient(90deg,#1B4332,#52B788); border-radius:5px; }
+    .nit-badge { display:inline-flex; align-items:center; gap:6px; padding:4px 14px; border-radius:20px; font-size:8.5pt; font-weight:600; }
+    .nit-platinum { background:#E8EAF6; color:#303F9F; border:1px solid #9FA8DA; }
+    .nit-green    { background:#F0FFF4; color:#276749; border:1px solid #9AE6B4; }
+    .nit-yellow   { background:#FFFBEB; color:#B7791F; border:1px solid #FAD689; }
+    .nit-red      { background:#FFF5F5; color:#C53030; border:1px solid #FEB2B2; }
+    .v-score-bar { width:100%; height:5px; background:#E2E8F0; border-radius:3px; margin-top:6px; overflow:hidden; }
+    .v-score-fill { height:100%; background:linear-gradient(90deg,#1B4332,#40916C); border-radius:3px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     RUNNING HEADER / FOOTER
+═══════════════════════════════════════════════════════════════ -->
+<div id="running-header">
+  <div class="hdr-brand">
+    <div class="hdr-mark"><span>ج</span></div>
+    <span class="hdr-name">JADWA</span>
+    <div class="hdr-sep"></div>
+    <span style="font-size:7.5pt;color:var(--text-muted);">{{ report.client_name | default('') }}</span>
+  </div>
+  <div class="hdr-title" style="text-align:right;">Economic Feasibility Study — {{ report.project_name_en | default(report.project_name_ar | default('Project')) }}</div>
+</div>
+
+<div id="running-footer">
+  <div class="footer-conf">Confidential — Internal Use Only</div>
+  <div class="footer-pg">Page <span class="page-number"></span> of <span class="pages-total"></span></div>
+  <div class="footer-brand">JADWA Economic Studies Platform</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     1. COVER PAGE
+═══════════════════════════════════════════════════════════════ -->
+<div class="cover-page" style="page:cover-page;width:210mm;min-height:297mm;background:#1B4332;color:#fff;display:flex;flex-direction:column;direction:ltr;position:relative;overflow:hidden;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <div style="height:5px;background:linear-gradient(90deg,#B7950B,#F0C040,#B7950B);flex-shrink:0;"></div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 28px;border-bottom:1px solid rgba(255,255,255,0.10);">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:36px;height:36px;background:#B7950B;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+        <span style="font-size:18pt;font-weight:700;color:#1B4332;line-height:1;">ج</span>
+      </div>
+      <div style="display:flex;flex-direction:column;">
+        <span style="font-size:13pt;font-weight:700;color:#fff;letter-spacing:2px;">JADWA</span>
+        <span style="font-size:8pt;color:rgba(255,255,255,0.55);">Intelligent Feasibility Studies Platform</span>
+      </div>
+    </div>
+    {% if branding is defined and branding.logo_url %}
+      <img src="{{ branding.logo_url }}" style="height:36px;object-fit:contain;" alt="client logo">
+    {% endif %}
+    <div style="background:rgba(183,149,11,0.2);border:1px solid rgba(183,149,11,0.5);color:#F0C040;padding:5px 16px;border-radius:20px;font-size:8.5pt;font-weight:600;">Economic Feasibility Study</div>
+  </div>
+
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 40px;text-align:center;position:relative;z-index:1;">
+    <!-- Sector badge -->
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(183,149,11,0.15);border:1px solid rgba(183,149,11,0.4);color:#F0C040;padding:6px 20px;border-radius:24px;font-size:9pt;font-weight:600;margin-bottom:28px;">
+      <span style="width:7px;height:7px;border-radius:50%;background:#F0C040;flex-shrink:0;display:inline-block;"></span>
+      {% if report.sector == 'fnb' %}Food &amp; Beverage Sector
+      {% elif report.sector == 'retail' %}Retail Sector
+      {% elif report.sector == 'franchise' %}Franchise Sector
+      {% elif report.sector == 'real_estate' %}Real Estate Sector
+      {% elif report.sector == 'services' %}Services Sector
+      {% elif report.sector == 'healthcare' %}Healthcare Sector
+      {% elif report.sector == 'education' %}Education Sector
+      {% elif report.sector == 'logistics' %}Logistics &amp; Transport Sector
+      {% elif report.sector == 'technology' %}Technology &amp; IT Sector
+      {% else %}{{ report.sector_en | default('Commercial Sector') }}
+      {% endif %}
+    </div>
+
+    <!-- Client logo -->
+    <div style="width:88px;height:88px;background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.20);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:22px;overflow:hidden;">
+      {% if branding is defined and branding.logo_url %}
+        <img src="{{ branding.logo_url }}" style="max-width:78px;max-height:78px;object-fit:contain;">
+      {% else %}
+        <span style="font-size:8pt;color:rgba(255,255,255,0.35);text-align:center;">Company<br>Logo</span>
+      {% endif %}
+    </div>
+
+    <div style="font-size:30pt;font-weight:700;color:#fff;line-height:1.25;margin-bottom:10px;">
+      {{ report.project_name_en | default(report.project_name_ar | default('Project Name')) }}
+    </div>
+    {% if report.project_name_ar %}
+    <div style="font-size:13pt;font-weight:400;color:rgba(255,255,255,0.5);margin-bottom:22px;font-family:'Noto Naskh Arabic','Amiri',Arial,serif;direction:rtl;">{{ report.project_name_ar }}</div>
+    {% endif %}
+
+    <div style="width:64px;height:3px;background:linear-gradient(90deg,transparent,#B7950B,transparent);border-radius:2px;margin:0 auto 20px;"></div>
+
+    <div style="font-size:16pt;font-weight:600;color:rgba(255,255,255,0.88);margin-bottom:6px;">Economic Feasibility Study</div>
+    <div style="font-size:9.5pt;color:rgba(255,255,255,0.45);margin-bottom:26px;">دراسة الجدوى الاقتصادية</div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;">
+      {% if report.city_en or report.city_ar %}<div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.75);padding:5px 14px;border-radius:16px;font-size:8.5pt;">{{ report.city_en | default(report.city_ar) }}</div>{% endif %}
+      {% if report.report_year %}<div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.75);padding:5px 14px;border-radius:16px;font-size:8.5pt;">{{ report.report_year }}</div>{% endif %}
+      {% if report.investment_label %}<div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.75);padding:5px 14px;border-radius:16px;font-size:8.5pt;">{{ report.investment_label }}</div>{% endif %}
+    </div>
+
+    <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(229,62,62,0.12);border:1px solid rgba(229,62,62,0.28);color:#FC8181;padding:5px 16px;border-radius:20px;font-size:8pt;font-weight:600;">
+      <span style="width:6px;height:6px;border-radius:50%;background:#FC8181;display:inline-block;"></span>
+      Confidential — Internal Use Only
+    </div>
+  </div>
+
+  <div style="padding:18px 40px;border-top:1px solid rgba(255,255,255,0.10);display:flex;align-items:flex-start;justify-content:space-between;background:rgba(0,0,0,0.14);">
+    <div style="display:flex;flex-direction:column;gap:3px;">
+      <span style="font-size:7pt;color:rgba(255,255,255,0.38);">Prepared by</span>
+      <span style="font-size:9.5pt;font-weight:600;color:rgba(255,255,255,0.85);">JADWA Platform</span>
+      <span style="font-size:7.5pt;color:rgba(255,255,255,0.42);">منصة جدوى</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:3px;text-align:center;">
+      <span style="font-size:7pt;color:rgba(255,255,255,0.38);">Date (Gregorian)</span>
+      <span style="font-size:9.5pt;font-weight:600;color:rgba(255,255,255,0.85);">{{ report.gregorian_date | default('2026') }}</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:3px;text-align:right;">
+      <span style="font-size:7pt;color:rgba(255,255,255,0.38);">Date (Hijri)</span>
+      <span style="font-size:9.5pt;font-weight:600;color:rgba(255,255,255,0.85);">{{ report.hijri_date | default('1447 AH') }}</span>
+    </div>
+  </div>
+  <div style="height:4px;background:linear-gradient(90deg,#1B4332,#B7950B,#1B4332);flex-shrink:0;"></div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     2. TABLE OF CONTENTS
+═══════════════════════════════════════════════════════════════ -->
+<div style="margin-bottom:var(--sp-2xl);">
+  <div class="section-header">
+    <div class="section-title" style="font-size:var(--fs-2xl);">Table of Contents</div>
+  </div>
+
+  {% set toc_items = [
+    ('1',  'Executive Summary',                    '3'),
+    ('2',  'Project Overview',                     '6'),
+    ('3',  'Macroeconomic Context',                '9'),
+    ('4',  'Market Analysis',                      '11'),
+    ('5',  'Target Market &amp; Segmentation',     '16'),
+    ('6',  'Competitive Analysis',                 '19'),
+    ('7',  'Legal &amp; Regulatory Framework',     '23'),
+    ('8',  'HR &amp; Nitaqat Plan',                '27'),
+    ('9',  '5-Year Financial Projections',         '30'),
+    ('10', 'Funding &amp; Financing Options',      '36'),
+    ('11', 'Risk Assessment',                      '38'),
+    ('12', 'Vision 2030 Alignment',                '41'),
+    ('13', 'Conclusions &amp; Recommendations',    '43'),
+    ('14', 'Appendix',                             '45'),
+  ] %}
+  {% for num, title, pg in toc_items %}
+  <div style="display:flex;align-items:baseline;justify-content:space-between;padding:7px 0;border-bottom:1px dotted var(--border-light);break-inside:avoid;">
+    <div style="display:flex;align-items:baseline;gap:10px;flex:1;">
+      <span style="font-size:var(--fs-sm);font-weight:700;color:var(--primary);min-width:24px;">{{ num }}</span>
+      <span style="font-size:var(--fs-base);font-weight:600;color:var(--text-dark);">{{ title }}</span>
+    </div>
+    <div style="flex:1;border-bottom:1px dotted var(--border-mid);margin:0 8px;height:1px;align-self:center;"></div>
+    <span style="font-size:var(--fs-sm);font-weight:600;color:var(--primary);white-space:nowrap;">{{ pg }}</span>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     3. EXECUTIVE SUMMARY
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">1</div>
+  <h2 class="section-title" style="margin:0;">Executive Summary</h2>
+</div>
+
+{% set fin = report.financials | default({}) %}
+<div class="kpi-grid">
+  <div class="kpi-card accent-green">
+    <div class="kpi-value">{{ fin.total_investment_sar | default('—') }}<span class="kpi-unit"> SAR</span></div>
+    <div class="kpi-label">Investment Required</div>
+    <div class="kpi-label-en">رأس المال المطلوب</div>
+  </div>
+  <div class="kpi-card accent-gold">
+    <div class="kpi-value">{{ fin.breakeven_months | default('—') }}<span class="kpi-unit"> mo.</span></div>
+    <div class="kpi-label">Break-even Period</div>
+    <div class="kpi-label-en">فترة التعادل</div>
+  </div>
+  <div class="kpi-card accent-teal">
+    <div class="kpi-value">{{ fin.net_profit_5yr | default('—') }}<span class="kpi-unit"> SAR</span></div>
+    <div class="kpi-label">5-Year Net Profit</div>
+    <div class="kpi-label-en">صافي الربح (5 سنوات)</div>
+  </div>
+  <div class="kpi-card accent-blue">
+    <div class="kpi-value">{{ fin.irr_percent | default('—') }}<span class="kpi-unit">%</span></div>
+    <div class="kpi-label">IRR</div>
+    <div class="kpi-label-en">معدل العائد الداخلي</div>
+  </div>
+  <div class="kpi-card accent-purple">
+    <div class="kpi-value">{{ report.vision2030_score | default('—') }}<span class="kpi-unit">/100</span></div>
+    <div class="kpi-label">Vision 2030 Score</div>
+    <div class="kpi-label-en">توافق رؤية 2030</div>
+    <div class="v-score-bar"><div class="v-score-fill" style="width:{{ report.vision2030_score | default(70) }}%;"></div></div>
+  </div>
+</div>
+
+<div class="grid-2" style="margin-bottom:var(--sp-lg);">
+  <div>
+    <div class="executive-summary-box">
+      <div class="esb-title">Project Overview</div>
+      {% if report.executive_summary %}
+        {% for para in report.executive_summary %}
+          <p>{{ para }}</p>
+        {% endfor %}
+      {% else %}
+        <p>This report presents a comprehensive economic feasibility study for the proposed project, including an in-depth analysis of the target market, detailed financial projections, and an assessment of alignment with Saudi Vision 2030 objectives.</p>
+        <p>Study findings indicate strong economic viability with the potential to reach break-even within the projected timeframe and sustain revenue growth over the next five years.</p>
+      {% endif %}
+    </div>
+  </div>
+  <div>
+    <div style="font-size:10pt;font-weight:700;color:var(--primary);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border-light);">Core Project Data</div>
+    {% set details = [
+      ('Project Name',   report.project_name_en | default(report.project_name_ar | default('—'))),
+      ('Sector',         report.sector_en | default(report.sector_ar | default('—'))),
+      ('Location',       report.city_en | default(report.city_ar | default('—'))),
+      ('Area',           (report.area_sqm | default('—')) ~ ' m²'),
+      ('Employees',      (report.employees_count | default('—')) ~ ' staff'),
+      ('Saudization',    (report.saudization_percent | default('—')) ~ '%'),
+      ('Ownership',      report.ownership_type_en | default(report.ownership_type | default('Sole Proprietorship'))),
+      ('Launch Date',    report.launch_date | default('—')),
+    ] %}
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+      {% for label, val in details %}
+      <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 8px;background:var(--white);border:1px solid var(--border-light);border-radius:6px;break-inside:avoid;">
+        <span style="font-size:8pt;color:var(--text-muted);font-weight:500;white-space:nowrap;">{{ label }}:</span>
+        <span style="font-size:8.5pt;color:var(--text-dark);font-weight:600;flex:1;">{{ val }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- SWOT -->
+<div style="font-size:13pt;font-weight:700;color:var(--primary);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--primary);">
+  SWOT Analysis
+</div>
+<div class="swot-grid">
+  {% set sw = report.swot | default({}) %}
+  <div class="swot-strengths">
+    <div class="swot-header"><div class="swot-icon-box">S</div><div><div class="swot-cell-title">Strengths</div><span class="swot-subtitle">نقاط القوة</span></div></div>
+    <ul class="swot-list">{% for item in sw.strengths_en | default(sw.strengths | default(['Strategic location with high footfall','Experienced local management team','Clear product/service differentiation','Competitive operating costs'])) %}<li>{{ item }}</li>{% endfor %}</ul>
+  </div>
+  <div class="swot-weaknesses">
+    <div class="swot-header"><div class="swot-icon-box">W</div><div><div class="swot-cell-title">Weaknesses</div><span class="swot-subtitle">نقاط الضعف</span></div></div>
+    <ul class="swot-list">{% for item in sw.weaknesses_en | default(sw.weaknesses | default(['High initial rental costs','Need to build brand awareness','Initial dependency on a limited customer base'])) %}<li>{{ item }}</li>{% endfor %}</ul>
+  </div>
+  <div class="swot-opportunities">
+    <div class="swot-header"><div class="swot-icon-box">O</div><div><div class="swot-cell-title">Opportunities</div><span class="swot-subtitle">الفرص</span></div></div>
+    <ul class="swot-list">{% for item in sw.opportunities_en | default(sw.opportunities | default(['Growing domestic demand driven by demographic shifts','Government support programs (Monsh\'aat, Kafala)','Vision 2030 economic diversification agenda','Digital expansion and e-commerce channels'])) %}<li>{{ item }}</li>{% endfor %}</ul>
+  </div>
+  <div class="swot-threats">
+    <div class="swot-header"><div class="swot-icon-box">T</div><div><div class="swot-cell-title">Threats</div><span class="swot-subtitle">التهديدات</span></div></div>
+    <ul class="swot-list">{% for item in sw.threats_en | default(sw.threats | default(['Intensifying competition from large chains','Raw material price volatility','Potential regulatory changes','VAT margin pressure'])) %}<li>{{ item }}</li>{% endfor %}</ul>
+  </div>
+</div>
+
+<div class="rec-box">
+  <div style="font-size:22pt;line-height:1;margin-top:2px;flex-shrink:0;">✅</div>
+  <div style="flex:1;">
+    <div class="rec-title">Study Recommendation</div>
+    <p class="rec-text">{{ report.recommendation_en | default(report.recommendation | default('Based on the study findings and comprehensive financial analysis, it is recommended to proceed with the proposed project in accordance with the phased implementation plan, while adhering to financial controls and leveraging available HR support programs.')) }}</p>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     4. PROJECT OVERVIEW
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">2</div>
+  <h2 class="section-title" style="margin:0;">Project Overview</h2>
+</div>
+
+{% set proj = report.project_overview | default({}) %}
+<div class="executive-summary-box">
+  <div class="esb-title">Project Description</div>
+  <p>{{ proj.description_en | default(proj.description | default('The project aims to deliver a differentiated product/service that meets the needs of the local market and contributes to an enhanced consumer experience, in line with national development objectives.')) }}</p>
+</div>
+
+<div class="subsection-header">Strategic Objectives</div>
+<ul>
+  {% for goal in proj.strategic_goals_en | default(proj.strategic_goals | default(['Achieve break-even within the target period','Build a competitive market share in the chosen geography','Create employment opportunities for Saudi nationals per Nitaqat requirements','Expand to additional branches after Year 3 of operations'])) %}
+  <li>{{ goal }}</li>
+  {% endfor %}
+</ul>
+
+<div class="subsection-header">Business Model</div>
+<p>{{ proj.business_model_en | default(proj.business_model | default('The project adopts a hybrid business model combining physical and digital channels, with a focus on building a loyal customer base through rewards programs and exceptional service experiences.')) }}</p>
+
+<div class="subsection-header">Implementation Timeline</div>
+<table class="data-table">
+  <thead><tr><th>Phase</th><th>Description</th><th>Duration</th><th>Key Milestones</th></tr></thead>
+  <tbody>
+  {% for phase in proj.timeline_en | default(proj.timeline | default([
+    {'stage':'Foundation Phase','desc':'Licensing, fit-out, recruitment','duration':'Month 1–3','milestones':'Obtain licenses, sign lease'},
+    {'stage':'Launch Phase','desc':'Official opening & soft launch','duration':'Month 4–6','milestones':'Grand opening, first marketing campaign'},
+    {'stage':'Growth Phase','desc':'Build customer base, scale operations','duration':'Month 7–24','milestones':'Reach break-even, additional hires'},
+    {'stage':'Expansion Phase','desc':'New branches or additional channels','duration':'Year 3+','milestones':'Geographic expansion, increased capacity'},
+  ])) %}
+  <tr><td>{{ phase.stage }}</td><td>{{ phase.desc }}</td><td style="white-space:nowrap;">{{ phase.duration }}</td><td>{{ phase.milestones }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     5. MACROECONOMIC CONTEXT
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">3</div>
+  <h2 class="section-title" style="margin:0;">Macroeconomic Context</h2>
+</div>
+
+{% set macro = report.macroeconomic | default({}) %}
+<div class="kpi-grid-4" style="margin-bottom:var(--sp-lg);">
+  <div class="kpi-card accent-green">
+    <div class="kpi-value">{{ macro.gdp_growth | default('6.0') }}<span class="kpi-unit">%</span></div>
+    <div class="kpi-label">GDP Growth</div>
+    <div class="kpi-label-en">نمو الناتج المحلي</div>
+  </div>
+  <div class="kpi-card accent-gold">
+    <div class="kpi-value">{{ macro.inflation | default('2.3') }}<span class="kpi-unit">%</span></div>
+    <div class="kpi-label">Inflation Rate</div>
+    <div class="kpi-label-en">معدل التضخم</div>
+  </div>
+  <div class="kpi-card accent-blue">
+    <div class="kpi-value">{{ macro.saudization_rate | default('36.5') }}<span class="kpi-unit">%</span></div>
+    <div class="kpi-label">Saudization Rate</div>
+    <div class="kpi-label-en">نسبة التوطين</div>
+  </div>
+  <div class="kpi-card accent-secondary">
+    <div class="kpi-value">{{ macro.population_m | default('36.4') }}<span class="kpi-unit">M</span></div>
+    <div class="kpi-label">Total Population</div>
+    <div class="kpi-label-en">إجمالي السكان</div>
+  </div>
+</div>
+
+<p>{{ macro.overview_en | default(macro.overview | default('Saudi Arabia is undergoing an unprecedented economic transformation led by Vision 2030, centered on diversifying national income and developing non-oil sectors. Non-oil GDP has achieved significant growth in recent years, driven by government infrastructure spending and rising domestic consumption levels.')) }}</p>
+
+<div class="subsection-header">Relevant Sector Indicators</div>
+<table class="data-table">
+  <thead><tr><th>Indicator</th><th>Value</th><th>Source</th><th>Trend</th></tr></thead>
+  <tbody>
+  {% for ind in macro.sector_indicators_en | default(macro.sector_indicators | default([
+    {'name':'Sector Market Size','value':'—','source':'GASTAT','trend':'↑ Growing'},
+    {'name':'Annual Growth Rate','value':'—','source':'SAMA','trend':'↑ Positive'},
+    {'name':'Active Establishments','value':'—','source':'MoC','trend':'↑ Expanding'},
+    {'name':'Consumer Spending','value':'—','source':'MoE','trend':'↑ Stable'},
+  ])) %}
+  <tr><td>{{ ind.name }}</td><td style="font-weight:600;color:var(--primary);">{{ ind.value }}</td><td style="font-size:8pt;color:var(--text-muted);">{{ ind.source }}</td><td style="color:var(--green-dark);font-weight:600;">{{ ind.trend }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     6. MARKET ANALYSIS
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">4</div>
+  <h2 class="section-title" style="margin:0;">Market Analysis</h2>
+</div>
+
+{% set mkt = report.market_analysis | default({}) %}
+<p>{{ mkt.overview_en | default(mkt.overview | default('The target market is experiencing accelerating demand growth, driven by demographic factors and shifts in Saudi consumer behaviour, alongside the transformations that digital technology has introduced to purchasing and consumption patterns.')) }}</p>
+
+<div class="grid-2" style="margin-bottom:var(--sp-lg);">
+  <div class="card">
+    <div style="font-size:10pt;font-weight:700;color:var(--primary);margin-bottom:10px;">Total Addressable Market (TAM)</div>
+    <div style="font-size:20pt;font-weight:700;color:var(--primary);">{{ mkt.tam | default('—') }}</div>
+    <p style="font-size:8.5pt;color:var(--text-muted);margin-top:4px;margin-bottom:0;">{{ mkt.tam_note_en | default(mkt.tam_note | default('Total market size at the national level')) }}</p>
+  </div>
+  <div class="card">
+    <div style="font-size:10pt;font-weight:700;color:var(--primary);margin-bottom:10px;">Serviceable Addressable Market (SAM)</div>
+    <div style="font-size:20pt;font-weight:700;color:var(--secondary);">{{ mkt.sam | default('—') }}</div>
+    <p style="font-size:8.5pt;color:var(--text-muted);margin-top:4px;margin-bottom:0;">{{ mkt.sam_note_en | default(mkt.sam_note | default('Available market within the target geographic area')) }}</p>
+  </div>
+</div>
+
+<div class="subsection-header">Key Market Trends</div>
+<ul>
+  {% for trend in mkt.trends_en | default(mkt.trends | default(['Growing demand for specialised, high-quality products and services','Youth population (15–35 years) exceeds 60% of demographic composition','Accelerating digital transformation in buying behaviour and brand interaction','Rising consumer interest in unique, differentiated experiences','Demand concentrated in major cities: Riyadh, Jeddah, Eastern Province'])) %}
+  <li>{{ trend }}</li>
+  {% endfor %}
+</ul>
+
+<div class="subsection-header">Market Growth Chart</div>
+<div class="chart-container">
+  {% if charts is defined and charts.market_growth %}
+    <img src="{{ charts.market_growth }}" alt="Market Growth Chart">
+    <div class="chart-caption">Target market size growth over 5 years — SAR</div>
+  {% else %}
+    <div class="chart-placeholder" style="height:180px;">
+      <span style="font-size:24pt;opacity:0.35;">📊</span>
+      <span class="cp-label">Market Growth Chart</span>
+    </div>
+  {% endif %}
+</div>
+
+<div class="subsection-header">Growth Drivers &amp; Barriers</div>
+<div class="grid-2">
+  <div class="callout callout-success">
+    <div style="font-weight:700;margin-bottom:6px;">Growth Drivers</div>
+    <ul style="margin-bottom:0;padding-left:var(--sp-md);">
+      {% for d in mkt.drivers_en | default(mkt.drivers | default(['Government support for SMEs','Rising household disposable income','Shift towards local content and national products'])) %}
+      <li>{{ d }}</li>{% endfor %}
+    </ul>
+  </div>
+  <div class="callout callout-warning">
+    <div style="font-weight:700;margin-bottom:6px;">Barriers</div>
+    <ul style="margin-bottom:0;padding-left:var(--sp-md);">
+      {% for b in mkt.barriers_en | default(mkt.barriers | default(['High rental costs in prime locations','Competition from large retail chains','Initial capital requirements'])) %}
+      <li>{{ b }}</li>{% endfor %}
+    </ul>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     7. TARGET MARKET & SEGMENTATION
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">5</div>
+  <h2 class="section-title" style="margin:0;">Target Market &amp; Segmentation</h2>
+</div>
+
+{% set tgt = report.target_market | default({}) %}
+<p>{{ tgt.overview_en | default(tgt.overview | default('The project targets carefully defined customer segments based on demographic, psychographic and purchasing behaviour analysis, focusing on segments with high purchasing power and quality consciousness.')) }}</p>
+
+<div class="subsection-header">Target Customer Segments</div>
+<table class="data-table">
+  <thead><tr><th>Segment</th><th>Description</th><th>Estimated Size</th><th>Priority</th></tr></thead>
+  <tbody>
+  {% for seg in tgt.segments_en | default(tgt.segments | default([
+    {'name':'Primary Segment','desc':'Young Saudis (20–35), middle–high income, residing in major cities','size':'—','priority':'High'},
+    {'name':'Secondary Segment','desc':'Saudi families, high income, seeking premium quality','size':'—','priority':'Medium'},
+    {'name':'Business Segment','desc':'Small and medium enterprises','size':'—','priority':'Secondary'},
+  ])) %}
+  <tr>
+    <td style="font-weight:600;">{{ seg.name }}</td>
+    <td>{{ seg.desc }}</td>
+    <td>{{ seg.size }}</td>
+    <td><span class="badge {% if seg.priority in ['High','عالية'] %}badge-primary{% elif seg.priority in ['Medium','متوسطة'] %}badge-gold{% else %}badge-gray{% endif %}">{{ seg.priority }}</span></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     8. COMPETITIVE ANALYSIS
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">6</div>
+  <h2 class="section-title" style="margin:0;">Competitive Analysis</h2>
+</div>
+
+{% set comp = report.competitive_analysis | default({}) %}
+<p>{{ comp.overview_en | default(comp.overview | default('The target market is characterised by moderate competition with clear gaps that the project can exploit to build a sustainable competitive advantage.')) }}</p>
+
+<table class="comp-table">
+  <thead>
+    <tr><th>Competitor</th><th>Market Share</th><th>Strengths</th><th>Weaknesses</th><th>Threat Level</th></tr>
+  </thead>
+  <tbody>
+  {% for c in comp.competitors_en | default(comp.competitors | default([
+    {'name':'Competitor A','share':'—','strengths':'Established brand','weaknesses':'High prices','threat':'Medium'},
+    {'name':'Competitor B','share':'—','strengths':'Wide distribution network','weaknesses':'Inconsistent quality','threat':'Low'},
+    {'name':'Competitor C','share':'—','strengths':'Advanced technology','weaknesses':'Poor customer service','threat':'High'},
+  ])) %}
+  <tr>
+    <td style="font-weight:600;">{{ c.name }}</td>
+    <td style="text-align:center;">{{ c.share }}</td>
+    <td>{{ c.strengths }}</td>
+    <td>{{ c.weaknesses }}</td>
+    <td><span class="{% if c.threat in ['High','مرتفع'] %}risk-h{% elif c.threat in ['Medium','متوسط'] %}risk-m{% else %}risk-l{% endif %}">{{ c.threat }}</span></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="callout callout-success">
+  <p style="margin-bottom:0;"><strong>Competitive Advantage:</strong> {{ comp.competitive_advantage_en | default(comp.competitive_advantage | default('The project holds a clear competitive advantage in delivering an integrated experience combining high quality with competitive pricing, focused on exceptional customer service that builds long-term relationships.')) }}</p>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     9. LEGAL & REGULATORY
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">7</div>
+  <h2 class="section-title" style="margin:0;">Legal &amp; Regulatory Framework</h2>
+</div>
+
+{% set legal = report.legal | default({}) %}
+<p>{{ legal.overview_en | default(legal.overview | default('Establishing the project requires fulfilling specific regulatory and licensing requirements under the regulations in force in the Kingdom of Saudi Arabia. These requirements have been significantly streamlined in recent years through government digital transformation initiatives.')) }}</p>
+
+<div class="subsection-header">Incorporation &amp; Licensing Requirements</div>
+<table class="data-table">
+  <thead><tr><th>Permit / Licence</th><th>Issuing Authority</th><th>Est. Duration</th><th>Est. Fee</th><th>Status</th></tr></thead>
+  <tbody>
+  {% for lic in legal.licenses_en | default(legal.licenses | default([
+    {'name':'Commercial Registration','authority':'Ministry of Commerce','duration':'3–5 days','fee':'—','priority':'Mandatory'},
+    {'name':'Municipal Licence','authority':'Regional Municipality','duration':'2–4 weeks','fee':'—','priority':'Mandatory'},
+    {'name':'Operating Certificate','authority':'Local Municipality','duration':'1 week','fee':'—','priority':'Mandatory'},
+    {'name':'GOSI Registration','authority':'General Organisation for Social Insurance','duration':'Immediate','fee':'—','priority':'Mandatory'},
+    {'name':'ZATCA Registration','authority':'Zakat, Tax & Customs Authority','duration':'Immediate','fee':'—','priority':'Mandatory'},
+  ])) %}
+  <tr>
+    <td style="font-weight:600;">{{ lic.name }}</td>
+    <td>{{ lic.authority }}</td>
+    <td>{{ lic.duration }}</td>
+    <td>{{ lic.fee }}</td>
+    <td><span class="badge badge-primary">{{ lic.priority }}</span></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="subsection-header">Tax &amp; Zakat Compliance</div>
+<div class="grid-2">
+  <div class="card card-accent">
+    <div style="font-weight:700;color:var(--primary);margin-bottom:6px;">Value Added Tax (VAT)</div>
+    <p style="font-size:9pt;margin-bottom:0;">Rate: {{ legal.vat_rate | default('15%') }} — Registration required when annual revenues exceed SAR 375,000. Quarterly filing.</p>
+  </div>
+  <div class="card card-accent">
+    <div style="font-weight:700;color:var(--primary);margin-bottom:6px;">Zakat (Saudi nationals)</div>
+    <p style="font-size:9pt;margin-bottom:0;">Rate: {{ legal.zakat_rate | default('2.5%') }} of the Zakat base. Annual filing with the Zakat, Tax &amp; Customs Authority.</p>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     10. HR & NITAQAT PLAN
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">8</div>
+  <h2 class="section-title" style="margin:0;">HR &amp; Nitaqat Plan</h2>
+</div>
+
+{% set hr = report.hr_plan | default({}) %}
+<div class="grid-2" style="margin-bottom:var(--sp-lg);">
+  <div class="card">
+    <div style="font-weight:700;color:var(--primary);margin-bottom:var(--sp-sm);">Workforce Profile</div>
+    {% set rows = [
+      ('Total Employees',   hr.total_employees | default(report.employees_count | default('—'))),
+      ('Saudi Employees',   hr.saudi_employees | default('—')),
+      ('Expat Employees',   hr.expat_employees | default('—')),
+    ] %}
+    {% for label, val in rows %}
+    <div style="display:flex;justify-content:space-between;font-size:9.5pt;padding-bottom:5px;border-bottom:1px dotted var(--border-light);">
+      <span style="color:var(--text-muted);">{{ label }}</span>
+      <span style="font-weight:700;color:var(--primary);">{{ val }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="card">
+    <div style="font-weight:700;color:var(--primary);margin-bottom:var(--sp-sm);">Nitaqat Classification</div>
+    <p style="font-size:9pt;">Target Saudization: <strong style="color:var(--primary);">{{ report.saudization_percent | default('—') }}%</strong></p>
+    <div style="margin-top:8px;">
+      {% set nitaqat = hr.nitaqat_band | default('Green') %}
+      <span class="nit-badge {% if nitaqat in ['Platinum','بلاتيني'] %}nit-platinum{% elif nitaqat in ['Green','أخضر'] %}nit-green{% elif nitaqat in ['Yellow','أصفر'] %}nit-yellow{% else %}nit-red{% endif %}">
+        {{ nitaqat }} Band
+      </span>
+    </div>
+    <p style="font-size:8.5pt;color:var(--text-muted);margin-top:8px;margin-bottom:0;">{{ hr.nitaqat_note_en | default(hr.nitaqat_note | default('This band permits sponsorship and visa renewal without restrictions.')) }}</p>
+  </div>
+</div>
+
+<div class="subsection-header">Staffing Plan &amp; Salary Schedule</div>
+<table class="data-table">
+  <thead><tr><th>Position</th><th>Count</th><th>Nationality</th><th>Monthly Salary (SAR)</th><th>Annual (SAR)</th></tr></thead>
+  <tbody>
+  {% for pos in hr.positions_en | default(hr.positions | default([
+    {'title':'General Manager','count':'1','nationality':'Saudi','monthly':'—','annual':'—'},
+    {'title':'Operations Supervisor','count':'1','nationality':'Saudi','monthly':'—','annual':'—'},
+    {'title':'Customer Service Staff','count':'3','nationality':'Saudi/Expat','monthly':'—','annual':'—'},
+    {'title':'Accountant','count':'1','nationality':'Saudi','monthly':'—','annual':'—'},
+    {'title':'Operations Workers','count':'4','nationality':'Expat','monthly':'—','annual':'—'},
+  ])) %}
+  <tr>
+    <td>{{ pos.title }}</td>
+    <td style="text-align:center;">{{ pos.count }}</td>
+    <td><span class="badge {% if 'Saudi' in pos.nationality or 'سعودي' in pos.nationality %}badge-primary{% else %}badge-gray{% endif %}">{{ pos.nationality }}</span></td>
+    <td style="text-align:center;font-weight:600;">{{ pos.monthly }}</td>
+    <td style="text-align:center;">{{ pos.annual }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr><td colspan="3">Total Annual Salary Cost</td><td></td><td style="font-weight:700;color:var(--primary);text-align:center;">{{ hr.total_salary_annual | default('—') }}</td></tr>
+  </tfoot>
+</table>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     11. FINANCIAL PROJECTIONS
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">9</div>
+  <h2 class="section-title" style="margin:0;">5-Year Financial Projections</h2>
+</div>
+
+{% set pnl = report.financials.pnl | default({}) %}
+{% set pnl_years = report.financials.pnl_years_en | default(['Year 1','Year 2','Year 3','Year 4','Year 5']) %}
+
+<div style="font-size:12pt;font-weight:700;color:var(--primary);margin-bottom:12px;padding-bottom:7px;border-bottom:2px solid var(--primary);display:flex;align-items:center;justify-content:space-between;">
+  Projected Profit &amp; Loss Statement
+  <span style="font-size:8pt;font-weight:400;color:var(--text-faint);">All figures in SAR</span>
+</div>
+
+<table class="ft">
+  <thead>
+    <tr>
+      <th>Line Item</th>
+      {% for yr in pnl_years %}<th>{{ yr }}</th>{% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="rh"><td>Revenue</td>{% for _ in pnl_years %}<td>—</td>{% endfor %}</tr>
+    <tr class="rd">
+      <td>Core Sales Revenue</td>
+      {% for v in pnl.revenue_main | default(['600,000','780,000','975,000','1,170,000','1,365,000']) %}
+      <td class="num-positive">{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rd">
+      <td>Other Revenue / Additional Services</td>
+      {% for v in pnl.revenue_other | default(['30,000','45,000','60,000','75,000','90,000']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rs">
+      <td>Total Revenue</td>
+      {% for v in pnl.revenue_total | default(['630,000','825,000','1,035,000','1,245,000','1,455,000']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rsp"><td colspan="6"></td></tr>
+
+    <tr class="rh"><td>Cost of Goods Sold / Service Cost</td>{% for _ in pnl_years %}<td>—</td>{% endfor %}</tr>
+    <tr class="rd">
+      <td>Raw Materials &amp; Production Supplies</td>
+      {% for v in pnl.cogs_materials | default(['189,000','247,500','310,500','373,500','436,500']) %}
+      <td class="num-negative">{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rd">
+      <td>Direct Labour Wages</td>
+      {% for v in pnl.cogs_labor | default(['108,000','132,000','156,000','180,000','204,000']) %}
+      <td class="num-negative">{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rs">
+      <td>Total COGS</td>
+      {% for v in pnl.cogs_total | default(['297,000','379,500','466,500','553,500','640,500']) %}
+      <td class="num-negative">{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rt">
+      <td>Gross Profit</td>
+      {% for v in pnl.gross_profit | default(['333,000','445,500','568,500','691,500','814,500']) %}
+      <td class="num-positive">{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rsp"><td colspan="6"></td></tr>
+
+    <tr class="rh"><td>Operating Expenses</td>{% for _ in pnl_years %}<td>—</td>{% endfor %}</tr>
+    <tr class="rd"><td>Rent</td>{% for v in pnl.opex_rent | default(['96,000','96,000','100,800','100,800','105,840']) %}<td>{{ v }}</td>{% endfor %}</tr>
+    <tr class="rd"><td>Administrative Salaries</td>{% for v in pnl.opex_salaries | default(['120,000','132,000','144,000','156,000','168,000']) %}<td>{{ v }}</td>{% endfor %}</tr>
+    <tr class="rd"><td>Social Insurance (GOSI)</td>{% for v in pnl.opex_gosi | default(['14,100','15,510','16,920','18,330','19,740']) %}<td>{{ v }}</td>{% endfor %}</tr>
+    <tr class="rd"><td>Utilities (Electricity, Water, Comms)</td>{% for v in pnl.opex_utilities | default(['18,000','19,800','21,600','23,400','25,200']) %}<td>{{ v }}</td>{% endfor %}</tr>
+    <tr class="rd"><td>Marketing &amp; Advertising</td>{% for v in pnl.opex_marketing | default(['25,200','24,750','31,050','37,350','43,650']) %}<td>{{ v }}</td>{% endfor %}</tr>
+    <tr class="rd"><td>Depreciation &amp; Amortisation</td>{% for v in pnl.opex_depreciation | default(['40,000','40,000','40,000','40,000','40,000']) %}<td>{{ v }}</td>{% endfor %}</tr>
+    <tr class="rd"><td>Other General &amp; Administrative</td>{% for v in pnl.opex_other | default(['15,000','16,500','18,000','19,500','21,000']) %}<td>{{ v }}</td>{% endfor %}</tr>
+    <tr class="rs">
+      <td>Total Operating Expenses</td>
+      {% for v in pnl.opex_total | default(['328,300','344,560','372,370','395,380','423,430']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rsp"><td colspan="6"></td></tr>
+
+    <tr class="rt">
+      <td>Operating Profit / EBIT (before tax)</td>
+      {% for v in pnl.ebit | default(['4,700','100,940','196,130','296,120','391,070']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rd">
+      <td>Net VAT (15%)</td>
+      {% for v in pnl.vat | default(['705','15,141','29,420','44,418','58,661']) %}
+      <td class="num-negative">{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rd">
+      <td>Zakat (2.5%)</td>
+      {% for v in pnl.zakat | default(['118','2,524','4,903','7,403','9,777']) %}
+      <td class="num-negative">{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rt">
+      <td>Net Profit After Tax</td>
+      {% for v in pnl.net_profit | default(['3,878','83,276','161,808','244,299','322,633']) %}
+      <td class="num-positive">{{ v }}</td>{% endfor %}
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>Net Profit Margin</td>
+      {% for v in pnl.net_margin | default(['0.6%','10.1%','15.6%','19.6%','22.2%']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+  </tfoot>
+</table>
+<div class="table-note">All figures in Saudi Riyals (SAR). Projections assume 20–25% annual revenue growth based on sector market rates.</div>
+
+<div class="chart-container" style="margin-top:var(--sp-md);">
+  {% if charts is defined and charts.revenue_projection %}
+    <img src="{{ charts.revenue_projection }}" alt="Revenue Growth Chart">
+    <div class="chart-caption">Revenue and Net Profit over 5 Years — SAR</div>
+  {% else %}
+    <div class="chart-placeholder" style="height:180px;">
+      <span style="font-size:24pt;opacity:0.35;">📈</span>
+      <span class="cp-label">Revenue &amp; Net Profit Growth Chart (5 Years)</span>
+    </div>
+  {% endif %}
+</div>
+
+<div class="page-break"></div>
+
+<!-- Key ratios -->
+{% set ratios = report.financials.ratios | default({}) %}
+<div style="font-size:12pt;font-weight:700;color:var(--primary);margin-bottom:12px;padding-bottom:7px;border-bottom:2px solid var(--primary);">Key Financial Ratios</div>
+<div class="kpi-grid-3">
+  {% set ratio_cards = [
+    (ratios.irr | default('28'), '%', 'Internal Rate of Return', 'IRR', 'accent-green', 'Excellent'),
+    (ratios.npv | default('—'), ' SAR', 'Net Present Value', 'NPV', 'accent-teal', 'Positive'),
+    (ratios.roi_5yr | default('—'), '%', '5-Year Return on Investment', 'ROI 5Y', 'accent-gold', 'Good'),
+    (ratios.gross_margin_yr3 | default('—'), '%', 'Gross Margin (Year 3)', 'Gross Margin Y3', 'accent-blue', 'Strong'),
+    (ratios.net_margin_yr3 | default('—'), '%', 'Net Margin (Year 3)', 'Net Margin Y3', 'accent-secondary', 'Acceptable'),
+    (ratios.payback_years | default('—'), ' yr', 'Payback Period', 'Payback Period', 'accent-green', 'Good'),
+  ] %}
+  {% for val, unit, label, sublabel, accent, status in ratio_cards %}
+  <div class="kpi-card {{ accent }}">
+    <div class="kpi-value">{{ val }}<span class="kpi-unit">{{ unit }}</span></div>
+    <div class="kpi-label">{{ label }}</div>
+    <div class="kpi-label-en">{{ sublabel }}</div>
+    <div style="margin-top:5px;display:inline-block;font-size:7.5pt;padding:1px 8px;border-radius:10px;background:var(--green-light);color:var(--green-dark);font-weight:600;">{{ status }}</div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Break-even -->
+{% set be = report.financials.breakeven | default({}) %}
+<div style="font-size:12pt;font-weight:700;color:var(--primary);margin:var(--sp-lg) 0 12px;padding-bottom:7px;border-bottom:2px solid var(--primary);">Break-even Analysis</div>
+<div class="grid-2">
+  <div class="card">
+    <div style="font-size:9.5pt;font-weight:700;color:var(--text-secondary);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border-light);">Key Break-even Metrics</div>
+    {% set be_rows = [
+      ('Break-even Period',          (be.months | default('18')) ~ ' months'),
+      ('Monthly Break-even Revenue', (be.monthly_revenue | default('—')) ~ ' SAR'),
+      ('Monthly Fixed Costs',        (be.fixed_costs_monthly | default('—')) ~ ' SAR'),
+      ('Contribution Margin',        (be.contribution_margin | default('—')) ~ '%'),
+      ('Safety Margin (Year 3)',      (be.safety_margin_yr3 | default('—')) ~ '%'),
+    ] %}
+    {% for label, val in be_rows %}
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px dotted var(--border-light);font-size:9pt;">
+      <span style="color:var(--text-muted);">{{ label }}</span>
+      <span style="font-weight:600;color:var(--text-dark);">{{ val }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="card">
+    <div style="font-size:9.5pt;font-weight:700;color:var(--text-secondary);margin-bottom:10px;">Break-even Chart</div>
+    {% if charts is defined and charts.breakeven %}
+      <img src="{{ charts.breakeven }}" style="width:100%;border-radius:var(--r-md);border:1px solid var(--border-light);">
+    {% else %}
+      <div class="chart-placeholder" style="height:130px;">
+        <span style="font-size:22pt;opacity:0.35;">📊</span>
+        <span class="cp-label">Break-even Chart</span>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     12. FUNDING
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">10</div>
+  <h2 class="section-title" style="margin:0;">Funding &amp; Financing Options</h2>
+</div>
+
+{% set fund = report.funding | default({}) %}
+<p>{{ fund.overview_en | default(fund.overview | default('This section reviews financing options available to the project, evaluating the advantages and drawbacks of each in light of the project\'s financial position and capital requirements.')) }}</p>
+
+<table class="data-table">
+  <thead><tr><th>Financing Option</th><th>% of Funding</th><th>Est. Cost</th><th>Advantages</th><th>Recommendation</th></tr></thead>
+  <tbody>
+  {% for opt in fund.options_en | default(fund.options | default([
+    {'name':'Self-Funding','pct':'40%','cost':'Zero','pros':'No interest or external obligations','rec':'Recommended'},
+    {'name':'Commercial Bank Loan','pct':'40%','cost':'5–7%','pros':'Flexible repayment schedule','rec':'Optional'},
+    {'name':'Development Fund Programs','pct':'20%','cost':'2–4%','pros':'Favourable terms for SMEs','rec':'Advisable'},
+  ])) %}
+  <tr>
+    <td style="font-weight:600;">{{ opt.name }}</td>
+    <td style="text-align:center;font-weight:600;color:var(--primary);">{{ opt.pct }}</td>
+    <td style="text-align:center;">{{ opt.cost }}</td>
+    <td>{{ opt.pros }}</td>
+    <td><span class="badge badge-primary">{{ opt.rec }}</span></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="callout callout-info">
+  <p style="margin-bottom:0;"><strong>Note:</strong> {{ fund.note_en | default(fund.note | default('It is advisable to contact the Small and Medium Enterprises General Authority (Monsh\'aat) and banks such as Al Rajhi or ANB to enquire about SME financing programmes compliant with Islamic finance principles.')) }}</p>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     13. RISK ASSESSMENT
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">11</div>
+  <h2 class="section-title" style="margin:0;">Risk Assessment</h2>
+</div>
+
+{% set risks = report.risk_assessment | default({}) %}
+<p>{{ risks.overview_en | default(risks.overview | default('This section identifies the key risks that may affect the project during establishment and operations phases, along with proposed mitigation measures for each risk.')) }}</p>
+
+<table class="risk-table">
+  <thead>
+    <tr><th>Risk</th><th>Probability</th><th>Impact</th><th>Level</th><th>Mitigation Measures</th></tr>
+  </thead>
+  <tbody>
+  {% for risk in risks.risks_en | default(risks.risks | default([
+    {'name':'Demand Decline','prob':'Low','impact':'High','level':'Medium','mitigation':'Diversify sales channels and target segments'},
+    {'name':'Rent Cost Escalation','prob':'Medium','impact':'Medium','level':'Medium','mitigation':'Secure a long-term fixed-rate lease'},
+    {'name':'Difficulty Recruiting Saudi Talent','prob':'Medium','impact':'Medium','level':'Medium','mitigation':'Partner with employment agencies and offer competitive incentives'},
+    {'name':'Regulatory Change','prob':'Low','impact':'High','level':'Low','mitigation':'Monitor regulatory updates; engage a legal adviser'},
+    {'name':'Intensifying Competition','prob':'High','impact':'Medium','level':'High','mitigation':'Enhance differentiation and loyalty programmes'},
+    {'name':'Raw Material Price Volatility','prob':'Medium','impact':'Medium','level':'Medium','mitigation':'Long-term supply contracts with multiple vendors'},
+    {'name':'Liquidity Risk','prob':'Low','impact':'High','level':'Low','mitigation':'Maintain a cash reserve of at least 3 months of operations'},
+  ])) %}
+  <tr>
+    <td style="font-weight:600;">{{ risk.name }}</td>
+    <td><span class="{% if risk.prob in ['High','مرتفع'] %}risk-h{% elif risk.prob in ['Medium','متوسط'] %}risk-m{% else %}risk-l{% endif %}">{{ risk.prob }}</span></td>
+    <td><span class="{% if risk.impact in ['High','مرتفع'] %}risk-h{% elif risk.impact in ['Medium','متوسط'] %}risk-m{% else %}risk-l{% endif %}">{{ risk.impact }}</span></td>
+    <td><span class="{% if risk.level in ['High','مرتفع'] %}risk-h{% elif risk.level in ['Medium','متوسط'] %}risk-m{% else %}risk-l{% endif %}">{{ risk.level }}</span></td>
+    <td>{{ risk.mitigation }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="chart-container" style="margin-top:var(--sp-md);">
+  {% if charts is defined and charts.risk_matrix %}
+    <img src="{{ charts.risk_matrix }}" alt="Risk Matrix">
+    <div class="chart-caption">Risk Matrix — Probability vs. Impact</div>
+  {% else %}
+    <div class="chart-placeholder" style="height:160px;">
+      <span style="font-size:24pt;opacity:0.35;">🎯</span>
+      <span class="cp-label">Risk Matrix — Probability vs. Impact</span>
+    </div>
+  {% endif %}
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     14. VISION 2030 ALIGNMENT
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">12</div>
+  <h2 class="section-title" style="margin:0;">Vision 2030 Alignment</h2>
+</div>
+
+{% set v30 = report.vision2030 | default({}) %}
+<div class="grid-2" style="margin-bottom:var(--sp-lg);">
+  <div>
+    <p>{{ v30.overview_en | default(v30.overview | default('The proposed project aligns with several strategic objectives of Saudi Vision 2030, particularly in the pillars of economic diversification, private sector development, and raising Saudization rates.')) }}</p>
+    <div style="margin-top:var(--sp-md);">
+      {% set v30_dims = v30.dimensions_en | default(v30.dimensions | default([
+        {'name':'National Economic Diversification','score':80},
+        {'name':'Saudization Rate (Nitaqat)','score':75},
+        {'name':'SME Support &amp; Development','score':85},
+        {'name':'Private Sector Growth','score':70},
+        {'name':'Digital Transformation','score':65},
+        {'name':'Non-Oil Export Development','score':55},
+      ])) %}
+      {% for dim in v30_dims %}
+      <div class="v-bar">
+        <div class="v-label"><span>{{ dim.name }}</span><span style="font-weight:700;color:var(--primary);">{{ dim.score }}%</span></div>
+        <div class="v-track"><div class="v-fill" style="width:{{ dim.score }}%;"></div></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--sp-md);">
+    <div style="width:110px;height:110px;border-radius:50%;background:var(--primary);color:var(--white);display:flex;flex-direction:column;align-items:center;justify-content:center;border:4px solid var(--secondary);">
+      <div style="font-size:26pt;font-weight:700;line-height:1;">{{ report.vision2030_score | default('72') }}</div>
+      <div style="font-size:8pt;color:rgba(255,255,255,0.7);">/100</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:10pt;font-weight:700;color:var(--primary);">Overall Alignment Score</div>
+      <div style="font-size:8pt;color:var(--text-muted);">درجة التوافق الكلية</div>
+    </div>
+  </div>
+</div>
+
+<div class="subsection-header">Relevant Vision 2030 Initiatives</div>
+<ul>
+  {% for init in v30.initiatives_en | default(v30.initiatives | default(['National Industrial Development and Logistics Program (NIDLP)','Human Resources Development Program','Public Investment Fund Private Sector Support Initiative','SME Employment Localisation Support Program'])) %}
+  <li>{{ init }}</li>
+  {% endfor %}
+</ul>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     15. CONCLUSIONS
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">13</div>
+  <h2 class="section-title" style="margin:0;">Conclusions &amp; Recommendations</h2>
+</div>
+
+{% set conc = report.conclusions | default({}) %}
+<div class="executive-summary-box">
+  <div class="esb-title">Study Conclusions</div>
+  <p>{{ conc.summary_en | default(conc.summary | default('Based on the comprehensive analysis contained in this study, the proposed project demonstrates strong economic viability with the potential to generate attractive returns in the medium term, alongside clear alignment with Saudi Vision 2030 requirements in the areas of Saudization and economic diversification.')) }}</p>
+</div>
+
+<div class="subsection-header">Executive Recommendations</div>
+<ol style="padding-left:var(--sp-lg);">
+  {% for rec in conc.recommendations_en | default(conc.recommendations | default([
+    'Commence registration and licensing procedures upon making the investment decision',
+    'Secure a long-term fixed-rate lease to protect against rent increases',
+    'Contact the SME General Authority to explore concessional financing options',
+    'Build a qualified Saudi workforce from the foundation phase to ensure Nitaqat compliance',
+    'Implement an integrated accounting system from Day 1 to track performance against budget',
+    'Launch a pre-opening marketing campaign to build brand awareness before the grand opening',
+  ])) %}
+  <li style="margin-bottom:var(--sp-sm);">{{ rec }}</li>
+  {% endfor %}
+</ol>
+
+<div class="rec-box" style="margin-top:var(--sp-lg);">
+  <div style="font-size:22pt;line-height:1;margin-top:2px;flex-shrink:0;">✅</div>
+  <div style="flex:1;">
+    <div class="rec-title">Final Decision</div>
+    <p class="rec-text">{{ conc.final_recommendation_en | default(conc.final_recommendation | default('It is recommended to proceed with implementing the project in accordance with the proposed phased plan, focusing on building a strong customer base in Year 1 and expanding progressively in subsequent years. All study indicators suggest that the project represents an attractive investment opportunity in light of current economic conditions and Vision 2030 objectives.')) }}</p>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     16. APPENDIX
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">14</div>
+  <h2 class="section-title" style="margin:0;">Appendix</h2>
+</div>
+
+<div class="subsection-header">A. Sources &amp; References</div>
+<ul>
+  {% for src in report.sources_en | default(report.sources | default([
+    'General Authority for Statistics (GASTAT) — Annual GDP Report',
+    'Saudi Central Bank (SAMA) — Annual Report',
+    'Ministry of Human Resources &amp; Social Development — Labour Market Statistics',
+    'Zakat, Tax &amp; Customs Authority (ZATCA) — Registration &amp; Compliance Guide',
+    'General Organisation for Social Insurance (GOSI) — Insurance Regulations',
+    'Private Sector Development Program — Vision 2030',
+  ])) %}
+  <li>{{ src }}</li>
+  {% endfor %}
+</ul>
+
+<div class="subsection-header">B. Key Financial Assumptions</div>
+<table class="data-table">
+  <thead><tr><th>Assumption</th><th>Value</th><th>Rationale</th></tr></thead>
+  <tbody>
+  {% for assump in report.assumptions_en | default(report.assumptions | default([
+    {'name':'Annual Revenue Growth Rate','value':'20–25%','rationale':'Based on sector growth benchmarks'},
+    {'name':'Annual Inflation Rate','value':'2.5%','rationale':'SAMA statistics'},
+    {'name':'Discount Rate (WACC)','value':'12%','rationale':'Weighted average cost of capital'},
+    {'name':'VAT Rate','value':'15%','rationale':'ZATCA'},
+    {'name':'Average Saudi Salary (entry-level)','value':'—','rationale':'Salary surveys — MHRSD'},
+  ])) %}
+  <tr><td>{{ assump.name }}</td><td style="font-weight:600;color:var(--primary);text-align:center;">{{ assump.value }}</td><td>{{ assump.rationale }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="subsection-header">C. Disclaimer</div>
+<div class="callout callout-warning">
+  <p style="font-size:8.5pt;margin-bottom:0;">This study has been prepared for planning and preliminary evaluation purposes only. Financial projections are based on assumptions and data available at the time of preparation and may be affected by market changes and the regulatory environment. This study does not constitute a guarantee that the projected results will be achieved. It is recommended to consult financial and legal specialists before making any investment decision.</p>
+</div>
+
+<div style="margin-top:var(--sp-2xl);padding-top:var(--sp-md);border-top:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:center;font-size:7.5pt;color:var(--text-muted);">
+  <span style="color:var(--primary);font-weight:600;">JADWA Economic Studies Platform</span>
+  <span>{{ report.gregorian_date | default('2026') }} | {{ report.hijri_date | default('1447 AH') }}</span>
+  <span>Confidential — All Rights Reserved</span>
+</div>
+
+</body>
+</html>

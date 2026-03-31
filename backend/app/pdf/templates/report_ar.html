@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>دراسة الجدوى الاقتصادية — {{ report.project_name_ar | default('المشروع') }}</title>
+  {% set lang = 'ar' %}
+  {% include "base_styles.html" %}
+  <style>
+    /* ── Arabic-specific overrides ── */
+    .cover-hero { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px 40px; text-align:center; position:relative; z-index:1; }
+    .cover-sector-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(183,149,11,0.15); border:1px solid rgba(183,149,11,0.4); color:#F0C040; padding:6px 20px; border-radius:24px; font-size:9pt; font-weight:600; margin-bottom:28px; }
+    .cover-sector-badge .sector-dot { width:7px; height:7px; border-radius:50%; background:#F0C040; flex-shrink:0; }
+    .cover-client-logo { width:88px; height:88px; background:rgba(255,255,255,0.08); border:2px solid rgba(255,255,255,0.20); border-radius:16px; display:flex; align-items:center; justify-content:center; margin-bottom:22px; overflow:hidden; }
+    .cover-client-logo img { max-width:78px; max-height:78px; object-fit:contain; }
+    .cover-logo-placeholder { font-size:8pt; color:rgba(255,255,255,0.35); text-align:center; }
+    .cover-info-pills { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:20px; }
+    .cover-pill { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); color:rgba(255,255,255,0.75); padding:5px 14px; border-radius:16px; font-size:8.5pt; }
+    .cover-jadwa-brand { display:flex; align-items:center; gap:10px; }
+    .cover-logo-mark { width:36px; height:36px; background:#B7950B; border-radius:8px; display:flex; align-items:center; justify-content:center; }
+    .cover-logo-mark span { font-size:18pt; font-weight:700; color:#1B4332; line-height:1; }
+    .cover-logo-en { font-size:13pt; font-weight:700; color:#fff; letter-spacing:2px; }
+    .cover-logo-ar { font-size:8pt; color:rgba(255,255,255,0.55); }
+    .cover-report-type-badge { background:rgba(183,149,11,0.2); border:1px solid rgba(183,149,11,0.5); color:#F0C040; padding:5px 16px; border-radius:20px; font-size:8.5pt; font-weight:600; }
+    .cover-business-name { font-size:30pt; font-weight:700; color:#fff; line-height:1.25; margin-bottom:10px; }
+    .cover-business-name-en { font-size:13pt; font-weight:400; color:rgba(255,255,255,0.5); margin-bottom:22px; font-family:'Helvetica Neue',Arial,sans-serif; }
+    /* financial table shorthands */
+    .ft { width:100%; border-collapse:collapse; font-size:9pt; direction:rtl; margin-bottom:6px; }
+    .ft thead tr { background:#1B4332; color:#fff; }
+    .ft thead th { padding:9px 10px; text-align:center; font-weight:600; font-size:8.5pt; border-left:1px solid rgba(255,255,255,0.14); }
+    .ft thead th:first-child { text-align:right; border-left:none; min-width:140px; }
+    .ft tbody tr.rd td { padding:7px 10px; border-bottom:1px solid #EDF2F7; text-align:center; }
+    .ft tbody tr.rd td:first-child { text-align:right; color:#2D3748; }
+    .ft tbody tr.rd:nth-child(even) td { background:#F7F9F7; }
+    .ft tbody tr.rh td { background:#D8F3DC; font-weight:700; color:#1B4332; padding:7px 10px; border-top:1px solid #9AE6B4; border-bottom:1px solid #9AE6B4; }
+    .ft tbody tr.rh td:first-child { text-align:right; }
+    .ft tbody tr.rs td { background:#EBF8FF; font-weight:600; color:#2B6CB0; padding:7px 10px; border-top:1px solid #BEE3F8; }
+    .ft tbody tr.rs td:first-child { text-align:right; }
+    .ft tbody tr.rs td:not(:first-child) { text-align:center; }
+    .ft tbody tr.rt td { background:#1B4332; color:#fff; font-weight:700; padding:9px 10px; }
+    .ft tbody tr.rt td:first-child { text-align:right; }
+    .ft tbody tr.rt td:not(:first-child) { text-align:center; }
+    .ft tbody tr.rsp td { height:6px; padding:0; background:#fff; border:none; }
+    .ft tfoot td { padding:9px 10px; font-weight:700; border-top:2px solid #1B4332; font-size:9.5pt; background:#F0F7F0; text-align:center; }
+    .ft tfoot td:first-child { text-align:right; }
+    /* competitive table */
+    .comp-table { width:100%; border-collapse:collapse; font-size:8.5pt; direction:rtl; margin-bottom:var(--sp-md); }
+    .comp-table thead tr { background:#2C7A7B; color:#fff; }
+    .comp-table thead th { padding:8px 10px; text-align:right; font-weight:600; }
+    .comp-table tbody td { padding:7px 10px; border-bottom:1px solid var(--border-light); }
+    .comp-table tbody tr:nth-child(even) td { background:#F0FDFA; }
+    /* recommendation box */
+    .rec-box { background:#1B4332; color:#fff; border-radius:10px; padding:18px 22px; display:flex; align-items:flex-start; gap:14px; break-inside:avoid; }
+    .rec-box .rec-title { font-size:11pt; font-weight:700; color:#F0C040; margin-bottom:6px; }
+    .rec-box .rec-text { font-size:9.5pt; color:rgba(255,255,255,0.85); line-height:1.8; margin:0; text-align:justify; }
+    /* risk matrix */
+    .risk-table { width:100%; border-collapse:collapse; font-size:8.5pt; direction:rtl; }
+    .risk-table thead tr { background:#1B4332; color:#fff; }
+    .risk-table thead th { padding:9px 10px; text-align:right; font-weight:600; }
+    .risk-table tbody td { padding:8px 10px; border-bottom:1px solid var(--border-light); }
+    .risk-table tbody tr:nth-child(even) td { background:var(--off-white); }
+    .risk-h { display:inline-block; padding:2px 9px; border-radius:12px; background:#FFF5F5; color:#C53030; border:1px solid #FC8181; font-weight:600; font-size:8pt; }
+    .risk-m { display:inline-block; padding:2px 9px; border-radius:12px; background:#FFFBEB; color:#B7791F; border:1px solid #F6AD55; font-weight:600; font-size:8pt; }
+    .risk-l { display:inline-block; padding:2px 9px; border-radius:12px; background:#F0FFF4; color:#276749; border:1px solid #68D391; font-weight:600; font-size:8pt; }
+    /* vision bars */
+    .v-bar { margin-bottom:10px; break-inside:avoid; }
+    .v-bar .v-label { display:flex; justify-content:space-between; font-size:8.5pt; color:var(--text-secondary); margin-bottom:4px; font-weight:500; }
+    .v-bar .v-track { width:100%; height:9px; background:var(--border-light); border-radius:5px; overflow:hidden; }
+    .v-bar .v-fill { height:100%; background:linear-gradient(90deg,#1B4332,#52B788); border-radius:5px; }
+    /* nitaqat */
+    .nit-badge { display:inline-flex; align-items:center; gap:6px; padding:4px 14px; border-radius:20px; font-size:8.5pt; font-weight:600; }
+    .nit-platinum { background:#E8EAF6; color:#303F9F; border:1px solid #9FA8DA; }
+    .nit-green    { background:#F0FFF4; color:#276749; border:1px solid #9AE6B4; }
+    .nit-yellow   { background:#FFFBEB; color:#B7791F; border:1px solid #FAD689; }
+    .nit-red      { background:#FFF5F5; color:#C53030; border:1px solid #FEB2B2; }
+    /* KPI vision score bar */
+    .v-score-bar { width:100%; height:5px; background:#E2E8F0; border-radius:3px; margin-top:6px; overflow:hidden; }
+    .v-score-fill { height:100%; background:linear-gradient(90deg,#1B4332,#40916C); border-radius:3px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     RUNNING HEADER / FOOTER  (WeasyPrint position:running)
+═══════════════════════════════════════════════════════════════ -->
+<div id="running-header">
+  <div class="hdr-title">دراسة الجدوى الاقتصادية — {{ report.project_name_ar | default('المشروع') }}</div>
+  <div class="hdr-brand">
+    <div class="hdr-mark"><span>ج</span></div>
+    <span class="hdr-name">JADWA</span>
+    <div class="hdr-sep"></div>
+    <span style="font-size:7.5pt;color:var(--text-muted);">{{ report.client_name | default('') }}</span>
+  </div>
+</div>
+
+<div id="running-footer">
+  <div class="footer-brand">منصة جدوى للدراسات الاقتصادية</div>
+  <div class="footer-pg">صفحة <span class="page-number"></span> من <span class="pages-total"></span></div>
+  <div class="footer-conf">سري ومحفوظ الحقوق — للاستخدام الداخلي فقط</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     1. COVER PAGE
+═══════════════════════════════════════════════════════════════ -->
+<div class="cover-page">
+  <div style="height:5px;background:linear-gradient(90deg,#B7950B,#F0C040,#B7950B);flex-shrink:0;"></div>
+
+  <div class="cover-header-strip">
+    <div class="cover-jadwa-brand">
+      <div class="cover-logo-mark"><span>ج</span></div>
+      <div style="display:flex;flex-direction:column;gap:0;">
+        <span class="cover-logo-en">JADWA</span>
+        <span class="cover-logo-ar">منصة دراسات الجدوى الذكية</span>
+      </div>
+    </div>
+    {% if branding is defined and branding.logo_url %}
+      <img src="{{ branding.logo_url }}" style="height:36px;object-fit:contain;" alt="client logo">
+    {% endif %}
+    <div class="cover-report-type-badge">دراسة جدوى اقتصادية</div>
+  </div>
+
+  <div class="cover-hero">
+    <div class="cover-sector-badge">
+      <span class="sector-dot"></span>
+      {% if report.sector == 'fnb' %}قطاع الأغذية والمشروبات
+      {% elif report.sector == 'retail' %}قطاع التجزئة
+      {% elif report.sector == 'franchise' %}قطاع الامتياز التجاري
+      {% elif report.sector == 'real_estate' %}قطاع العقارات
+      {% elif report.sector == 'services' %}قطاع الخدمات
+      {% elif report.sector == 'healthcare' %}قطاع الرعاية الصحية
+      {% elif report.sector == 'education' %}قطاع التعليم
+      {% elif report.sector == 'logistics' %}قطاع اللوجستيات والنقل
+      {% elif report.sector == 'technology' %}قطاع التقنية والمعلومات
+      {% else %}{{ report.sector_ar | default('قطاع تجاري') }}
+      {% endif %}
+    </div>
+
+    <div class="cover-client-logo">
+      {% if branding is defined and branding.logo_url %}
+        <img src="{{ branding.logo_url }}" alt="{{ report.project_name_ar }}">
+      {% else %}
+        <span class="cover-logo-placeholder">شعار<br>المنشأة</span>
+      {% endif %}
+    </div>
+
+    <div class="cover-business-name">{{ report.project_name_ar | default('اسم المشروع') }}</div>
+    {% if report.project_name_en %}
+    <div class="cover-business-name-en">{{ report.project_name_en }}</div>
+    {% endif %}
+
+    <div style="width:64px;height:3px;background:linear-gradient(90deg,transparent,#B7950B,transparent);border-radius:2px;margin:0 auto 20px auto;"></div>
+
+    <div style="font-size:16pt;font-weight:600;color:rgba(255,255,255,0.88);margin-bottom:6px;">دراسة الجدوى الاقتصادية</div>
+    <div style="font-size:9.5pt;color:rgba(255,255,255,0.45);font-family:'Helvetica Neue',Arial,sans-serif;margin-bottom:26px;">Economic Feasibility Study</div>
+
+    <div class="cover-info-pills">
+      {% if report.city_ar %}<div class="cover-pill">{{ report.city_ar }}</div>{% endif %}
+      {% if report.report_year %}<div class="cover-pill">{{ report.report_year }}</div>{% endif %}
+      {% if report.investment_label %}<div class="cover-pill">{{ report.investment_label }}</div>{% endif %}
+      {% if report.hijri_date %}<div class="cover-pill">{{ report.hijri_date }}</div>{% endif %}
+    </div>
+
+    <div style="display:inline-flex;align-items:center;gap:7px;background:rgba(229,62,62,0.12);border:1px solid rgba(229,62,62,0.28);color:#FC8181;padding:5px 16px;border-radius:20px;font-size:8pt;font-weight:600;">
+      <span style="width:6px;height:6px;border-radius:50%;background:#FC8181;flex-shrink:0;display:inline-block;"></span>
+      سري — للاستخدام الداخلي فقط
+    </div>
+  </div>
+
+  <div class="cover-footer-strip">
+    <div class="cover-footer-block">
+      <span class="cover-footer-label">أعدّت بواسطة</span>
+      <span class="cover-footer-value">منصة جدوى</span>
+      <span class="cover-footer-value-en">JADWA Platform</span>
+    </div>
+    <div class="cover-footer-block" style="text-align:center;">
+      <span class="cover-footer-label">التاريخ الميلادي</span>
+      <span class="cover-footer-value">{{ report.gregorian_date | default('2026') }}</span>
+    </div>
+    <div class="cover-footer-block">
+      <span class="cover-footer-label">التاريخ الهجري</span>
+      <span class="cover-footer-value">{{ report.hijri_date | default('1447هـ') }}</span>
+    </div>
+  </div>
+  <div style="height:4px;background:linear-gradient(90deg,#1B4332,#B7950B,#1B4332);flex-shrink:0;"></div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     2. TABLE OF CONTENTS
+═══════════════════════════════════════════════════════════════ -->
+<div style="margin-bottom:var(--sp-2xl);">
+  <div class="section-header">
+    <div class="section-title" style="font-size:var(--fs-2xl);">فهرس المحتويات</div>
+    <span class="section-title-en">Table of Contents</span>
+  </div>
+
+  {% set toc_items = [
+    ('١', 'الملخص التنفيذي', 'Executive Summary', '3'),
+    ('٢', 'نظرة عامة على المشروع', 'Project Overview', '6'),
+    ('٣', 'السياق الاقتصادي الكلي', 'Macroeconomic Context', '9'),
+    ('٤', 'تحليل السوق', 'Market Analysis', '11'),
+    ('٥', 'السوق المستهدف والتجزئة', 'Target Market & Segmentation', '16'),
+    ('٦', 'تحليل المنافسين', 'Competitive Analysis', '19'),
+    ('٧', 'الإطار القانوني والتنظيمي', 'Legal & Regulatory Framework', '23'),
+    ('٨', 'خطة الموارد البشرية ونطاقات', 'HR & Nitaqat Plan', '27'),
+    ('٩', 'التوقعات المالية (5 سنوات)', 'Financial Projections (5-Year)', '30'),
+    ('١٠', 'خيارات التمويل', 'Funding & Financing Options', '36'),
+    ('١١', 'تقييم المخاطر', 'Risk Assessment', '38'),
+    ('١٢', 'التوافق مع رؤية 2030', 'Vision 2030 Alignment', '41'),
+    ('١٣', 'الخلاصة والتوصيات', 'Conclusions & Recommendations', '43'),
+    ('١٤', 'الملاحق', 'Appendix', '45'),
+  ] %}
+  {% for num, ar, en, pg in toc_items %}
+  <div style="display:flex;align-items:baseline;justify-content:space-between;padding:7px 0;border-bottom:1px dotted var(--border-light);break-inside:avoid;">
+    <div style="display:flex;align-items:baseline;gap:10px;flex:1;">
+      <span style="font-size:var(--fs-sm);font-weight:700;color:var(--primary);min-width:24px;">{{ num }}</span>
+      <span style="font-size:var(--fs-base);font-weight:600;color:var(--text-dark);">{{ ar }}</span>
+      <span style="font-size:8pt;color:var(--text-faint);font-family:'Helvetica Neue',Arial,sans-serif;">{{ en }}</span>
+    </div>
+    <div style="flex:1;border-bottom:1px dotted var(--border-mid);margin:0 8px;height:1px;align-self:center;"></div>
+    <span style="font-size:var(--fs-sm);font-weight:600;color:var(--primary);font-family:'Helvetica Neue',Arial,sans-serif;white-space:nowrap;">{{ pg }}</span>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     3. EXECUTIVE SUMMARY
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">١</div>
+  <h2 class="section-title" style="margin:0;">الملخص التنفيذي</h2>
+  <span class="section-title-en">Executive Summary</span>
+</div>
+
+<!-- KPI Cards -->
+{% set fin = report.financials | default({}) %}
+<div class="kpi-grid">
+  <div class="kpi-card accent-green">
+    <div class="kpi-value">{{ fin.total_investment_sar | default('—') }}<span class="kpi-unit"> ريال</span></div>
+    <div class="kpi-label">رأس المال المطلوب</div>
+    <div class="kpi-label-en">Investment Required</div>
+  </div>
+  <div class="kpi-card accent-gold">
+    <div class="kpi-value">{{ fin.breakeven_months | default('—') }}<span class="kpi-unit"> شهراً</span></div>
+    <div class="kpi-label">فترة التعادل</div>
+    <div class="kpi-label-en">Break-even Period</div>
+  </div>
+  <div class="kpi-card accent-teal">
+    <div class="kpi-value">{{ fin.net_profit_5yr | default('—') }}<span class="kpi-unit"> ريال</span></div>
+    <div class="kpi-label">صافي الربح (5 سنوات)</div>
+    <div class="kpi-label-en">5-Year Net Profit</div>
+  </div>
+  <div class="kpi-card accent-blue">
+    <div class="kpi-value">{{ fin.irr_percent | default('—') }}<span class="kpi-unit">%</span></div>
+    <div class="kpi-label">معدل العائد الداخلي</div>
+    <div class="kpi-label-en">IRR</div>
+  </div>
+  <div class="kpi-card accent-purple">
+    <div class="kpi-value">{{ report.vision2030_score | default('—') }}<span class="kpi-unit">/100</span></div>
+    <div class="kpi-label">توافق رؤية 2030</div>
+    <div class="kpi-label-en">Vision 2030 Score</div>
+    <div class="v-score-bar"><div class="v-score-fill" style="width:{{ report.vision2030_score | default(70) }}%;"></div></div>
+  </div>
+</div>
+
+<!-- Summary text + project details -->
+<div class="grid-2" style="margin-bottom:var(--sp-lg);">
+  <div>
+    <div class="executive-summary-box">
+      <div class="esb-title">نبذة عن المشروع</div>
+      {% if report.executive_summary %}
+        {% for para in report.executive_summary %}
+          <p>{{ para }}</p>
+        {% endfor %}
+      {% else %}
+        <p>يُقدّم هذا التقرير دراسة جدوى اقتصادية شاملة للمشروع المقترح، تتضمن تحليلاً معمّقاً للسوق المستهدف والجداول المالية التفصيلية، وتقييماً لمدى توافق المشروع مع أهداف رؤية المملكة 2030.</p>
+        <p>تشير نتائج الدراسة إلى جدوى اقتصادية واعدة مع إمكانية تحقيق نقطة التعادل ضمن الإطار الزمني المحدد، ونمو مستدام في الإيرادات على مدى السنوات الخمس المقبلة.</p>
+      {% endif %}
+    </div>
+  </div>
+  <div>
+    <div style="font-size:10pt;font-weight:700;color:var(--primary);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border-light);">بيانات المشروع الأساسية</div>
+    {% set details = [
+      ('اسم المشروع', report.project_name_ar | default('—')),
+      ('القطاع',      report.sector_ar | default('—')),
+      ('الموقع',      report.city_ar | default('—')),
+      ('المساحة',     (report.area_sqm | default('—')) ~ ' م²'),
+      ('الموظفون',    (report.employees_count | default('—')) ~ ' موظف'),
+      ('نسبة السعودة', (report.saudization_percent | default('—')) ~ '%'),
+      ('صيغة الملكية', report.ownership_type | default('ملكية فردية')),
+      ('تاريخ التشغيل', report.launch_date | default('—')),
+    ] %}
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+      {% for label, val in details %}
+      <div style="display:flex;align-items:flex-start;gap:6px;padding:6px 8px;background:var(--white);border:1px solid var(--border-light);border-radius:6px;break-inside:avoid;">
+        <span style="font-size:8pt;color:var(--text-muted);font-weight:500;white-space:nowrap;">{{ label }}:</span>
+        <span style="font-size:8.5pt;color:var(--text-dark);font-weight:600;text-align:right;flex:1;">{{ val }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- SWOT -->
+<div style="font-size:13pt;font-weight:700;color:var(--primary);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--primary);">
+  تحليل SWOT <span style="font-size:8pt;font-weight:400;color:var(--text-faint);font-family:'Helvetica Neue',Arial,sans-serif;">Strengths · Weaknesses · Opportunities · Threats</span>
+</div>
+<div class="swot-grid">
+  {% set sw = report.swot | default({}) %}
+  <div class="swot-strengths">
+    <div class="swot-header"><div class="swot-icon-box">S</div><div><div class="swot-cell-title">نقاط القوة</div><span class="swot-subtitle">Strengths</span></div></div>
+    <ul class="swot-list">{% for item in sw.strengths | default(['موقع استراتيجي متميز','فريق إدارة ذو خبرة محلية','منتج/خدمة بتمايز واضح','تكاليف تشغيل تنافسية']) %}<li>{{ item }}</li>{% endfor %}</ul>
+  </div>
+  <div class="swot-weaknesses">
+    <div class="swot-header"><div class="swot-icon-box">W</div><div><div class="swot-cell-title">نقاط الضعف</div><span class="swot-subtitle">Weaknesses</span></div></div>
+    <ul class="swot-list">{% for item in sw.weaknesses | default(['ارتفاع تكلفة الإيجار المبدئي','الحاجة لبناء الوعي بالعلامة التجارية','اعتماد أولي على شريحة عملاء محدودة']) %}<li>{{ item }}</li>{% endfor %}</ul>
+  </div>
+  <div class="swot-opportunities">
+    <div class="swot-header"><div class="swot-icon-box">O</div><div><div class="swot-cell-title">الفرص</div><span class="swot-subtitle">Opportunities</span></div></div>
+    <ul class="swot-list">{% for item in sw.opportunities | default(['نمو الطلب المحلي مدفوعاً بالتحول الديموغرافي','برامج دعم هدف وكفالة','توجهات رؤية 2030 نحو تنويع الاقتصاد','التوسع الرقمي وقنوات البيع الإلكترونية']) %}<li>{{ item }}</li>{% endfor %}</ul>
+  </div>
+  <div class="swot-threats">
+    <div class="swot-header"><div class="swot-icon-box">T</div><div><div class="swot-cell-title">التهديدات</div><span class="swot-subtitle">Threats</span></div></div>
+    <ul class="swot-list">{% for item in sw.threats | default(['تصاعد حدة المنافسة','تقلبات أسعار المواد الخام','احتمالية تغيير اللوائح القطاعية','ضغوط ضريبة القيمة المضافة']) %}<li>{{ item }}</li>{% endfor %}</ul>
+  </div>
+</div>
+
+<!-- Recommendation -->
+<div class="rec-box">
+  <div style="font-size:22pt;line-height:1;margin-top:2px;flex-shrink:0;">✅</div>
+  <div style="flex:1;">
+    <div class="rec-title">توصية الدراسة</div>
+    <p class="rec-text">{{ report.recommendation | default('بناءً على نتائج الدراسة والتحليل المالي الشامل، يُوصى بالمضي قُدُماً في تنفيذ المشروع المقترح، مع مراعاة الالتزام بخطة التشغيل المرحلية وتطبيق آليات الرقابة المالية الدورية، والاستفادة من برامج دعم الموارد البشرية المتاحة.') }}</p>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     4. PROJECT OVERVIEW
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">٢</div>
+  <h2 class="section-title" style="margin:0;">نظرة عامة على المشروع</h2>
+  <span class="section-title-en">Project Overview</span>
+</div>
+
+{% set proj = report.project_overview | default({}) %}
+<div class="executive-summary-box">
+  <div class="esb-title">وصف المشروع</div>
+  <p>{{ proj.description | default('يهدف المشروع إلى تقديم منتج/خدمة متميزة تلبّي احتياجات السوق المحلية، وتُسهم في رفع مستوى تجربة المستهلك السعودي في إطار التوجهات التنموية الوطنية.') }}</p>
+</div>
+
+<div class="subsection-header">الأهداف الاستراتيجية</div>
+<ul>
+  {% for goal in proj.strategic_goals | default(['تحقيق نقطة التعادل خلال الفترة المستهدفة','بناء حصة سوقية تنافسية في المنطقة الجغرافية المختارة','توفير فرص عمل للكوادر السعودية وفق متطلبات نطاقات','التوسع التدريجي في فروع إضافية بعد سنة التشغيل الثالثة']) %}
+  <li>{{ goal }}</li>
+  {% endfor %}
+</ul>
+
+<div class="subsection-header">نموذج العمل</div>
+<p>{{ proj.business_model | default('يعتمد المشروع نموذج عمل هجيناً يجمع بين القناة المادية والرقمية، مع التركيز على بناء قاعدة عملاء مخلصين من خلال برامج الولاء والتجربة المتميزة.') }}</p>
+
+<div class="subsection-header">الجدول الزمني للتنفيذ</div>
+<table class="data-table">
+  <thead><tr><th>المرحلة</th><th>الوصف</th><th>المدة</th><th>الإنجازات الرئيسية</th></tr></thead>
+  <tbody>
+  {% for phase in proj.timeline | default([
+    {'stage':'مرحلة التأسيس','desc':'الترخيص، التجهيز، التوظيف','duration':'شهر 1-3','milestones':'استخراج التراخيص، توقيع عقد الإيجار'},
+    {'stage':'مرحلة الإطلاق','desc':'الافتتاح والتشغيل التجريبي','duration':'شهر 4-6','milestones':'الافتتاح الرسمي، حملة التسويق الأولى'},
+    {'stage':'مرحلة النمو','desc':'بناء قاعدة العملاء وتوسيع العمليات','duration':'شهر 7-24','milestones':'تحقيق نقطة التعادل، توظيف كوادر إضافية'},
+    {'stage':'مرحلة التوسع','desc':'افتتاح فروع جديدة أو قنوات إضافية','duration':'السنة 3+','milestones':'التوسع الجغرافي، رفع الطاقة الإنتاجية'},
+  ]) %}
+  <tr><td>{{ phase.stage }}</td><td>{{ phase.desc }}</td><td style="white-space:nowrap;">{{ phase.duration }}</td><td>{{ phase.milestones }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% if report.sector in ['fnb','retail','franchise'] %}
+<div class="subsection-header">تفاصيل الموقع والمساحة</div>
+<div class="grid-2">
+  <div class="card">
+    <div style="font-size:9.5pt;font-weight:700;color:var(--primary);margin-bottom:8px;">مواصفات الموقع</div>
+    <p style="font-size:9pt;">{{ proj.location_details | default('يقع المشروع في موقع استراتيجي مكتمل الخدمات بمساحة إجمالية تُلبّي متطلبات التشغيل الكاملة.') }}</p>
+  </div>
+  <div class="card">
+    <div style="font-size:9.5pt;font-weight:700;color:var(--primary);margin-bottom:8px;">توزيع المساحة</div>
+    <p style="font-size:9pt;">{{ proj.space_breakdown | default('المساحة الإجمالية موزعة بين المنطقة التشغيلية والمستودعات والمنطقة الإدارية وفق أفضل المعايير التصميمية.') }}</p>
+  </div>
+</div>
+{% endif %}
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     5. MACROECONOMIC CONTEXT
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">٣</div>
+  <h2 class="section-title" style="margin:0;">السياق الاقتصادي الكلي</h2>
+  <span class="section-title-en">Macroeconomic Context</span>
+</div>
+
+{% set macro = report.macroeconomic | default({}) %}
+<div class="kpi-grid-4" style="margin-bottom:var(--sp-lg);">
+  <div class="kpi-card accent-green">
+    <div class="kpi-value">{{ macro.gdp_growth | default('6.0') }}<span class="kpi-unit">%</span></div>
+    <div class="kpi-label">نمو الناتج المحلي الإجمالي</div>
+    <div class="kpi-label-en">GDP Growth</div>
+  </div>
+  <div class="kpi-card accent-gold">
+    <div class="kpi-value">{{ macro.inflation | default('2.3') }}<span class="kpi-unit">%</span></div>
+    <div class="kpi-label">معدل التضخم</div>
+    <div class="kpi-label-en">Inflation Rate</div>
+  </div>
+  <div class="kpi-card accent-blue">
+    <div class="kpi-value">{{ macro.saudization_rate | default('36.5') }}<span class="kpi-unit">%</span></div>
+    <div class="kpi-label">نسبة توطين الوظائف</div>
+    <div class="kpi-label-en">Saudization Rate</div>
+  </div>
+  <div class="kpi-card accent-secondary">
+    <div class="kpi-value">{{ macro.population_m | default('36.4') }}<span class="kpi-unit">م</span></div>
+    <div class="kpi-label">إجمالي السكان</div>
+    <div class="kpi-label-en">Total Population</div>
+  </div>
+</div>
+
+<p>{{ macro.overview | default('تشهد المملكة العربية السعودية مرحلة تحوّل اقتصادي غير مسبوقة تقودها رؤية 2030، تتمحور حول تنويع مصادر الدخل الوطني وتطوير قطاعات غير نفطية. وقد حقّق الناتج المحلي الإجمالي غير النفطي نمواً ملحوظاً خلال السنوات الأخيرة، مدفوعاً بالإنفاق الحكومي على البنية التحتية، وارتفاع مستويات الاستهلاك المحلي.') }}</p>
+
+<div class="subsection-header">المؤشرات القطاعية ذات الصلة</div>
+<table class="data-table">
+  <thead><tr><th>المؤشر</th><th>القيمة</th><th>المصدر</th><th>الاتجاه</th></tr></thead>
+  <tbody>
+  {% for ind in macro.sector_indicators | default([
+    {'name':'حجم السوق القطاعي','value':'—','source':'هيئة الإحصاء العامة','trend':'↑ نمو'},
+    {'name':'معدل النمو السنوي','value':'—','source':'ساما','trend':'↑ إيجابي'},
+    {'name':'عدد المنشآت النشطة','value':'—','source':'وزارة التجارة','trend':'↑ توسع'},
+    {'name':'الإنفاق الاستهلاكي','value':'—','source':'وزارة الاقتصاد','trend':'↑ مستقر'},
+  ]) %}
+  <tr><td>{{ ind.name }}</td><td style="font-weight:600;color:var(--primary);">{{ ind.value }}</td><td style="font-size:8pt;color:var(--text-muted);">{{ ind.source }}</td><td style="color:var(--green-dark);font-weight:600;">{{ ind.trend }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<p>{{ macro.conclusion | default('تُتيح هذه المؤشرات الاقتصادية الإيجابية بيئة ملائمة لإطلاق المشروع المقترح، لا سيما في ظل السياسات الحكومية الداعمة للقطاع الخاص وبرامج تحفيز الاستثمار.') }}</p>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     6. MARKET ANALYSIS
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">٤</div>
+  <h2 class="section-title" style="margin:0;">تحليل السوق</h2>
+  <span class="section-title-en">Market Analysis</span>
+</div>
+
+{% set mkt = report.market_analysis | default({}) %}
+<p>{{ mkt.overview | default('يشهد السوق المستهدف نمواً متسارعاً في الطلب، مدفوعاً بعوامل ديموغرافية وتغيّرات في سلوك المستهلك السعودي، إلى جانب التحوّلات التي أحدثتها التقنية الرقمية في أنماط الشراء والاستهلاك.') }}</p>
+
+<div class="grid-2" style="margin-bottom:var(--sp-lg);">
+  <div class="card">
+    <div style="font-size:10pt;font-weight:700;color:var(--primary);margin-bottom:10px;">حجم السوق الإجمالي (TAM)</div>
+    <div style="font-size:20pt;font-weight:700;color:var(--primary);">{{ mkt.tam | default('—') }}</div>
+    <p style="font-size:8.5pt;color:var(--text-muted);margin-top:4px;margin-bottom:0;">{{ mkt.tam_note | default('إجمالي حجم السوق المستهدف على المستوى الوطني') }}</p>
+  </div>
+  <div class="card">
+    <div style="font-size:10pt;font-weight:700;color:var(--primary);margin-bottom:10px;">السوق المخدوم (SAM)</div>
+    <div style="font-size:20pt;font-weight:700;color:var(--secondary);">{{ mkt.sam | default('—') }}</div>
+    <p style="font-size:8.5pt;color:var(--text-muted);margin-top:4px;margin-bottom:0;">{{ mkt.sam_note | default('الجزء المتاح من السوق ضمن النطاق الجغرافي المستهدف') }}</p>
+  </div>
+</div>
+
+<div class="subsection-header">اتجاهات السوق الرئيسية</div>
+<ul>
+  {% for trend in mkt.trends | default(['تنامي الطلب على الخدمات والمنتجات المتخصصة عالية الجودة','ارتفاع نسبة الشباب (15-35 عاماً) ضمن التركيبة السكانية إلى أكثر من 60%','التحوّل الرقمي المتسارع في سلوك الشراء والتفاعل مع العلامات التجارية','تنامي اهتمام المستهلك بتجارب فريدة ومتميزة','ارتفاع الطلب في المدن الكبرى: الرياض وجدة والمنطقة الشرقية']) %}
+  <li>{{ trend }}</li>
+  {% endfor %}
+</ul>
+
+<div class="subsection-header">مخطط نمو السوق</div>
+<div class="chart-container">
+  {% if charts is defined and charts.market_growth %}
+    <img src="{{ charts.market_growth }}" alt="مخطط نمو السوق">
+    <div class="chart-caption">نمو حجم السوق المستهدف على مدى 5 سنوات — بالريال السعودي</div>
+  {% else %}
+    <div class="chart-placeholder" style="height:180px;">
+      <span style="font-size:24pt;opacity:0.35;">📊</span>
+      <span class="cp-label">مخطط نمو السوق</span>
+      <span style="font-size:8pt;color:var(--text-faint);font-family:'Helvetica Neue',Arial,sans-serif;">Market Growth Chart</span>
+    </div>
+  {% endif %}
+</div>
+
+<div class="subsection-header">العوامل الدافعة والمعيقة</div>
+<div class="grid-2">
+  <div class="callout callout-success">
+    <div style="font-weight:700;margin-bottom:6px;">العوامل الدافعة للنمو</div>
+    <ul style="margin-bottom:0;padding-right:var(--sp-md);">
+      {% for d in mkt.drivers | default(['الدعم الحكومي لقطاع المنشآت الصغيرة والمتوسطة','نمو الدخل المتاح للأسر السعودية','التحوّل نحو المحتوى المحلي والمنتج الوطني']) %}
+      <li>{{ d }}</li>{% endfor %}
+    </ul>
+  </div>
+  <div class="callout callout-warning">
+    <div style="font-weight:700;margin-bottom:6px;">العوامل المعيقة</div>
+    <ul style="margin-bottom:0;padding-right:var(--sp-md);">
+      {% for b in mkt.barriers | default(['ارتفاع تكاليف الإيجار في المواقع الاستراتيجية','المنافسة من السلاسل التجارية الكبرى','متطلبات رأس المال الأولي']) %}
+      <li>{{ b }}</li>{% endfor %}
+    </ul>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     7. TARGET MARKET & SEGMENTATION
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">٥</div>
+  <h2 class="section-title" style="margin:0;">السوق المستهدف والتجزئة</h2>
+  <span class="section-title-en">Target Market &amp; Segmentation</span>
+</div>
+
+{% set tgt = report.target_market | default({}) %}
+<p>{{ tgt.overview | default('يستهدف المشروع شريحة عملاء محددة بعناية بناءً على التحليل الديموغرافي والنفسي وسلوك الشراء، مع التركيز على الشرائح ذات القوة الشرائية المرتفعة والاهتمام بالجودة.') }}</p>
+
+<div class="subsection-header">شرائح العملاء المستهدفة</div>
+<table class="data-table">
+  <thead><tr><th>الشريحة</th><th>الوصف</th><th>الحجم التقديري</th><th>الأولوية</th></tr></thead>
+  <tbody>
+  {% for seg in tgt.segments | default([
+    {'name':'الشريحة الأساسية','desc':'الشباب السعودي (20-35 عاماً)، دخل متوسط-مرتفع، مقيم في المدن الكبرى','size':'—','priority':'عالية'},
+    {'name':'الشريحة الثانوية','desc':'العائلات السعودية، دخل مرتفع، باحثون عن جودة متميزة','size':'—','priority':'متوسطة'},
+    {'name':'شريحة الأعمال','desc':'المنشآت والشركات الصغيرة والمتوسطة','size':'—','priority':'ثانوية'},
+  ]) %}
+  <tr>
+    <td style="font-weight:600;">{{ seg.name }}</td>
+    <td>{{ seg.desc }}</td>
+    <td>{{ seg.size }}</td>
+    <td><span class="badge {% if seg.priority == 'عالية' %}badge-primary{% elif seg.priority == 'متوسطة' %}badge-gold{% else %}badge-gray{% endif %}">{{ seg.priority }}</span></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="subsection-header">الحصة السوقية المستهدفة</div>
+<div class="chart-container">
+  {% if charts is defined and charts.market_share %}
+    <img src="{{ charts.market_share }}" alt="الحصة السوقية المستهدفة">
+    <div class="chart-caption">الحصة السوقية المستهدفة خلال 5 سنوات</div>
+  {% else %}
+    <div class="chart-placeholder" style="height:160px;">
+      <span style="font-size:24pt;opacity:0.35;">🥧</span>
+      <span class="cp-label">مخطط الحصة السوقية المستهدفة</span>
+    </div>
+  {% endif %}
+</div>
+
+<p>{{ tgt.penetration_strategy | default('تعتمد استراتيجية اختراق السوق على بناء علاقات قوية مع العملاء المبكرين وتحفيزهم على الترويج للمشروع عبر التوصيات الشخصية والقنوات الرقمية.') }}</p>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     8. COMPETITIVE ANALYSIS
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">٦</div>
+  <h2 class="section-title" style="margin:0;">تحليل المنافسين</h2>
+  <span class="section-title-en">Competitive Analysis</span>
+</div>
+
+{% set comp = report.competitive_analysis | default({}) %}
+<p>{{ comp.overview | default('يتميز السوق المستهدف بمنافسة معتدلة مع وجود فجوات واضحة يمكن للمشروع استثمارها لبناء ميزة تنافسية مستدامة.') }}</p>
+
+<table class="comp-table">
+  <thead>
+    <tr>
+      <th>المنافس</th><th>الحصة السوقية</th><th>نقاط القوة</th><th>نقاط الضعف</th><th>التهديد</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for c in comp.competitors | default([
+    {'name':'المنافس الأول','share':'—','strengths':'علامة تجارية راسخة','weaknesses':'أسعار مرتفعة','threat':'متوسط'},
+    {'name':'المنافس الثاني','share':'—','strengths':'شبكة توزيع واسعة','weaknesses':'جودة متذبذبة','threat':'منخفض'},
+    {'name':'المنافس الثالث','share':'—','strengths':'تكنولوجيا متقدمة','weaknesses':'خدمة عملاء ضعيفة','threat':'مرتفع'},
+  ]) %}
+  <tr>
+    <td style="font-weight:600;">{{ c.name }}</td>
+    <td style="text-align:center;">{{ c.share }}</td>
+    <td>{{ c.strengths }}</td>
+    <td>{{ c.weaknesses }}</td>
+    <td><span class="{% if c.threat == 'مرتفع' %}risk-h{% elif c.threat == 'متوسط' %}risk-m{% else %}risk-l{% endif %}">{{ c.threat }}</span></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="subsection-header">الميزة التنافسية للمشروع</div>
+<div class="callout callout-success">
+  <p style="margin-bottom:0;">{{ comp.competitive_advantage | default('يتمتع المشروع بميزة تنافسية واضحة تتمثل في تقديم تجربة متكاملة تجمع بين الجودة العالية والسعر التنافسي، مع تركيز على خدمة عملاء استثنائية تبني علاقات طويلة الأمد مع العملاء.') }}</p>
+</div>
+
+<div class="subsection-header">تحليل قوى بورتر الخمس</div>
+<table class="data-table">
+  <thead><tr><th>القوة</th><th>المستوى</th><th>التأثير على المشروع</th></tr></thead>
+  <tbody>
+  {% for force in comp.porter_forces | default([
+    {'name':'تهديد الداخلين الجدد','level':'متوسط','impact':'يمكن التحوط منه عبر بناء ولاء العملاء المبكر'},
+    {'name':'قوة المورّدين','level':'منخفض','impact':'تعدد المورّدين يُقلل الاعتماد على مورّد واحد'},
+    {'name':'قوة المشترين','level':'متوسط','impact':'بناء ولاء العملاء يقلص تأثير هذه القوة'},
+    {'name':'تهديد البدائل','level':'متوسط','impact':'التمايز الواضح في الجودة والتجربة يُقلل الأثر'},
+    {'name':'حدة التنافس الحالي','level':'متوسط','impact':'سوق في مرحلة نمو يوفر مساحة لجميع اللاعبين'},
+  ]) %}
+  <tr>
+    <td style="font-weight:600;">{{ force.name }}</td>
+    <td><span class="{% if force.level == 'مرتفع' %}risk-h{% elif force.level == 'متوسط' %}risk-m{% else %}risk-l{% endif %}">{{ force.level }}</span></td>
+    <td>{{ force.impact }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     9. LEGAL & REGULATORY
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">٧</div>
+  <h2 class="section-title" style="margin:0;">الإطار القانوني والتنظيمي</h2>
+  <span class="section-title-en">Legal &amp; Regulatory Framework</span>
+</div>
+
+{% set legal = report.legal | default({}) %}
+<p>{{ legal.overview | default('يستلزم تأسيس المشروع استيفاء متطلبات تنظيمية وترخيصية محددة وفق الأنظمة السارية في المملكة العربية السعودية، وهي متطلبات تميّزت في السنوات الأخيرة بالتبسيط والتحديث ضمن مبادرات التحوّل الرقمي الحكومية.') }}</p>
+
+<div class="subsection-header">متطلبات التأسيس والتراخيص</div>
+<table class="data-table">
+  <thead><tr><th>التصريح / الترخيص</th><th>الجهة المختصة</th><th>المدة التقديرية</th><th>الرسوم التقديرية</th><th>الأولوية</th></tr></thead>
+  <tbody>
+  {% for lic in legal.licenses | default([
+    {'name':'السجل التجاري','authority':'وزارة التجارة','duration':'3-5 أيام','fee':'—','priority':'إلزامي'},
+    {'name':'رخصة البلدية','authority':'أمانة المنطقة','duration':'2-4 أسابيع','fee':'—','priority':'إلزامي'},
+    {'name':'شهادة التشغيل','authority':'البلدية المختصة','duration':'أسبوع','fee':'—','priority':'إلزامي'},
+    {'name':'تسجيل التأمينات الاجتماعية','authority':'المؤسسة العامة للتأمينات الاجتماعية','duration':'فوري','fee':'—','priority':'إلزامي'},
+    {'name':'تسجيل في هيئة الزكاة والضريبة','authority':'هيئة الزكاة والضريبة والجمارك','duration':'فوري','fee':'—','priority':'إلزامي'},
+  ]) %}
+  <tr>
+    <td style="font-weight:600;">{{ lic.name }}</td>
+    <td>{{ lic.authority }}</td>
+    <td>{{ lic.duration }}</td>
+    <td>{{ lic.fee }}</td>
+    <td><span class="badge badge-primary">{{ lic.priority }}</span></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% if report.sector in ['fnb'] %}
+<div class="subsection-header">متطلبات قطاع الأغذية والمشروبات</div>
+<ul>
+  {% for req in legal.sector_requirements | default(['الحصول على شهادة الصحة والسلامة الغذائية من وزارة الصحة','تطبيق نظام HACCP لسلامة الغذاء','رخصة صحية سنوية من البلدية المختصة','التقيّد بمعايير هيئة الغذاء والدواء السعودية (SFDA)']) %}
+  <li>{{ req }}</li>{% endfor %}
+</ul>
+{% elif report.sector in ['healthcare'] %}
+<div class="subsection-header">متطلبات قطاع الرعاية الصحية</div>
+<ul>
+  {% for req in legal.sector_requirements | default(['ترخيص من وزارة الصحة أو الهيئة السعودية للاعتماد الصحي','اعتماد الكوادر الطبية من الهيئة السعودية للتخصصات الصحية','التقيّد بأنظمة حماية بيانات المرضى']) %}
+  <li>{{ req }}</li>{% endfor %}
+</ul>
+{% endif %}
+
+<div class="subsection-header">التزامات الامتثال الضريبي</div>
+<div class="grid-2">
+  <div class="card card-accent">
+    <div style="font-weight:700;color:var(--primary);margin-bottom:6px;">ضريبة القيمة المضافة (VAT)</div>
+    <p style="font-size:9pt;margin-bottom:0;">نسبة {{ legal.vat_rate | default('15%') }} — يجب التسجيل عند تجاوز الإيرادات السنوية 375,000 ريال. التقديم فصلي.</p>
+  </div>
+  <div class="card card-accent">
+    <div style="font-weight:700;color:var(--primary);margin-bottom:6px;">الزكاة (للمواطنين السعوديين)</div>
+    <p style="font-size:9pt;margin-bottom:0;">نسبة {{ legal.zakat_rate | default('2.5%') }} من وعاء الزكاة. التقديم سنوي لدى هيئة الزكاة والضريبة والجمارك.</p>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     10. HR & NITAQAT PLAN
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">٨</div>
+  <h2 class="section-title" style="margin:0;">خطة الموارد البشرية ونطاقات</h2>
+  <span class="section-title-en">HR &amp; Nitaqat Plan</span>
+</div>
+
+{% set hr = report.hr_plan | default({}) %}
+<div class="grid-2" style="margin-bottom:var(--sp-lg);">
+  <div class="card">
+    <div style="font-weight:700;color:var(--primary);margin-bottom:var(--sp-sm);">ملف الموظفين</div>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <div style="display:flex;justify-content:space-between;font-size:9.5pt;padding-bottom:5px;border-bottom:1px dotted var(--border-light);">
+        <span style="color:var(--text-muted);">إجمالي الموظفين</span>
+        <span style="font-weight:700;color:var(--primary);">{{ hr.total_employees | default(report.employees_count | default('—')) }}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:9.5pt;padding-bottom:5px;border-bottom:1px dotted var(--border-light);">
+        <span style="color:var(--text-muted);">الموظفون السعوديون</span>
+        <span style="font-weight:700;color:var(--green-dark);">{{ hr.saudi_employees | default('—') }}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:9.5pt;">
+        <span style="color:var(--text-muted);">الموظفون الوافدون</span>
+        <span style="font-weight:700;">{{ hr.expat_employees | default('—') }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div style="font-weight:700;color:var(--primary);margin-bottom:var(--sp-sm);">توصيف نطاقات</div>
+    <p style="font-size:9pt;">نسبة السعودة المستهدفة: <strong style="color:var(--primary);">{{ report.saudization_percent | default('—') }}%</strong></p>
+    <div style="margin-top:8px;">
+      {% set nitaqat = hr.nitaqat_band | default('أخضر') %}
+      <span class="nit-badge {% if nitaqat == 'بلاتيني' %}nit-platinum{% elif nitaqat == 'أخضر' %}nit-green{% elif nitaqat == 'أصفر' %}nit-yellow{% else %}nit-red{% endif %}">
+        نطاق {{ nitaqat }}
+      </span>
+    </div>
+    <p style="font-size:8.5pt;color:var(--text-muted);margin-top:8px;margin-bottom:0;">{{ hr.nitaqat_note | default('يُتيح هذا النطاق استقدام العمالة الوافدة وتجديد التأشيرات بدون قيود.') }}</p>
+  </div>
+</div>
+
+<div class="subsection-header">الهيكل الوظيفي والرواتب</div>
+<table class="data-table">
+  <thead><tr><th>المسمى الوظيفي</th><th>العدد</th><th>الجنسية</th><th>الراتب الشهري (ريال)</th><th>السنوي (ريال)</th></tr></thead>
+  <tbody>
+  {% for pos in hr.positions | default([
+    {'title':'مدير عام','count':'1','nationality':'سعودي','monthly':'—','annual':'—'},
+    {'title':'مشرف تشغيل','count':'1','nationality':'سعودي','monthly':'—','annual':'—'},
+    {'title':'موظف خدمة عملاء','count':'3','nationality':'سعودي/وافد','monthly':'—','annual':'—'},
+    {'title':'محاسب','count':'1','nationality':'سعودي','monthly':'—','annual':'—'},
+    {'title':'عمال تشغيل','count':'4','nationality':'وافد','monthly':'—','annual':'—'},
+  ]) %}
+  <tr>
+    <td>{{ pos.title }}</td>
+    <td style="text-align:center;">{{ pos.count }}</td>
+    <td><span class="badge {% if 'سعودي' in pos.nationality %}badge-primary{% else %}badge-gray{% endif %}">{{ pos.nationality }}</span></td>
+    <td style="text-align:center;font-weight:600;">{{ pos.monthly }}</td>
+    <td style="text-align:center;">{{ pos.annual }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3">إجمالي تكلفة الرواتب السنوية</td>
+      <td></td>
+      <td style="font-weight:700;color:var(--primary);text-align:center;">{{ hr.total_salary_annual | default('—') }}</td>
+    </tr>
+  </tfoot>
+</table>
+
+<div class="subsection-header">برامج التدريب والتطوير</div>
+<p>{{ hr.training_plan | default('يتضمن المشروع برنامجاً تدريبياً متكاملاً للموظفين الجدد يغطي المهارات التقنية والوظيفية، إلى جانب برامج تطوير مستمر لرفع الكفاءة وتحقيق مستهدفات السعودة.') }}</p>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     11. FINANCIAL PROJECTIONS (5-YEAR)
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">٩</div>
+  <h2 class="section-title" style="margin:0;">التوقعات المالية (5 سنوات)</h2>
+  <span class="section-title-en">5-Year Financial Projections</span>
+</div>
+
+{% set pnl = report.financials.pnl | default({}) %}
+{% set pnl_years = report.financials.pnl_years | default(['السنة الأولى','السنة الثانية','السنة الثالثة','السنة الرابعة','السنة الخامسة']) %}
+
+<!-- P&L -->
+<div style="font-size:12pt;font-weight:700;color:var(--primary);margin-bottom:12px;padding-bottom:7px;border-bottom:2px solid var(--primary);display:flex;align-items:center;gap:10px;">
+  قائمة الأرباح والخسائر التوقعية
+  <span style="font-size:8pt;font-weight:400;color:var(--text-faint);font-family:'Helvetica Neue',Arial,sans-serif;margin-right:auto;">Projected P&amp;L Statement</span>
+</div>
+
+<table class="ft">
+  <thead>
+    <tr>
+      <th>البند</th>
+      {% for yr in pnl_years %}<th>{{ yr }}</th>{% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="rh"><td>الإيرادات</td>{% for _ in pnl_years %}<td>—</td>{% endfor %}</tr>
+    <tr class="rd">
+      <td>إيرادات المبيعات الأساسية</td>
+      {% for v in pnl.revenue_main | default(['600,000','780,000','975,000','1,170,000','1,365,000']) %}
+      <td class="num-positive">{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rd">
+      <td>إيرادات أخرى / خدمات إضافية</td>
+      {% for v in pnl.revenue_other | default(['30,000','45,000','60,000','75,000','90,000']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rs">
+      <td>إجمالي الإيرادات</td>
+      {% for v in pnl.revenue_total | default(['630,000','825,000','1,035,000','1,245,000','1,455,000']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rsp"><td colspan="6"></td></tr>
+
+    <tr class="rh"><td>تكلفة البضاعة المباعة / تكلفة الخدمة</td>{% for _ in pnl_years %}<td>—</td>{% endfor %}</tr>
+    <tr class="rd">
+      <td>المواد الخام ومستلزمات الإنتاج</td>
+      {% for v in pnl.cogs_materials | default(['189,000','247,500','310,500','373,500','436,500']) %}
+      <td class="num-negative">{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rd">
+      <td>أجور العمالة المباشرة</td>
+      {% for v in pnl.cogs_labor | default(['108,000','132,000','156,000','180,000','204,000']) %}
+      <td class="num-negative">{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rs">
+      <td>إجمالي تكلفة البضاعة المباعة</td>
+      {% for v in pnl.cogs_total | default(['297,000','379,500','466,500','553,500','640,500']) %}
+      <td class="num-negative">{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rt">
+      <td>مجمل الربح</td>
+      {% for v in pnl.gross_profit | default(['333,000','445,500','568,500','691,500','814,500']) %}
+      <td class="num-positive">{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rsp"><td colspan="6"></td></tr>
+
+    <tr class="rh"><td>المصروفات التشغيلية</td>{% for _ in pnl_years %}<td>—</td>{% endfor %}</tr>
+    <tr class="rd">
+      <td>الإيجار</td>
+      {% for v in pnl.opex_rent | default(['96,000','96,000','100,800','100,800','105,840']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rd">
+      <td>الرواتب والأجور الإدارية</td>
+      {% for v in pnl.opex_salaries | default(['120,000','132,000','144,000','156,000','168,000']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rd">
+      <td>التأمينات الاجتماعية (غوسي)</td>
+      {% for v in pnl.opex_gosi | default(['14,100','15,510','16,920','18,330','19,740']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rd">
+      <td>المرافق (كهرباء، ماء، اتصالات)</td>
+      {% for v in pnl.opex_utilities | default(['18,000','19,800','21,600','23,400','25,200']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rd">
+      <td>التسويق والإعلان</td>
+      {% for v in pnl.opex_marketing | default(['25,200','24,750','31,050','37,350','43,650']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rd">
+      <td>الإهلاك والاستهلاك</td>
+      {% for v in pnl.opex_depreciation | default(['40,000','40,000','40,000','40,000','40,000']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rd">
+      <td>مصروفات إدارية وعمومية أخرى</td>
+      {% for v in pnl.opex_other | default(['15,000','16,500','18,000','19,500','21,000']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rs">
+      <td>إجمالي المصروفات التشغيلية</td>
+      {% for v in pnl.opex_total | default(['328,300','344,560','372,370','395,380','423,430']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rsp"><td colspan="6"></td></tr>
+
+    <tr class="rt">
+      <td>صافي الربح التشغيلي (قبل الضريبة)</td>
+      {% for v in pnl.ebit | default(['4,700','100,940','196,130','296,120','391,070']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rd">
+      <td>ضريبة القيمة المضافة الصافية (15%)</td>
+      {% for v in pnl.vat | default(['705','15,141','29,420','44,418','58,661']) %}
+      <td class="num-negative">{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rd">
+      <td>الزكاة (2.5%)</td>
+      {% for v in pnl.zakat | default(['118','2,524','4,903','7,403','9,777']) %}
+      <td class="num-negative">{{ v }}</td>{% endfor %}
+    </tr>
+    <tr class="rt">
+      <td>صافي الربح بعد الضريبة</td>
+      {% for v in pnl.net_profit | default(['3,878','83,276','161,808','244,299','322,633']) %}
+      <td class="num-positive">{{ v }}</td>{% endfor %}
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>هامش الربح الصافي</td>
+      {% for v in pnl.net_margin | default(['0.6%','10.1%','15.6%','19.6%','22.2%']) %}
+      <td>{{ v }}</td>{% endfor %}
+    </tr>
+  </tfoot>
+</table>
+<div class="table-note">جميع الأرقام بالريال السعودي. الأرقام مبنية على افتراضات نمو سنوي 20-25% في الإيرادات.</div>
+
+<!-- Revenue chart -->
+<div class="chart-container" style="margin-top:var(--sp-md);">
+  {% if charts is defined and charts.revenue_projection %}
+    <img src="{{ charts.revenue_projection }}" alt="مخطط نمو الإيرادات">
+    <div class="chart-caption">الإيرادات وصافي الربح على مدى 5 سنوات — بالريال السعودي</div>
+  {% else %}
+    <div class="chart-placeholder" style="height:180px;">
+      <span style="font-size:24pt;opacity:0.35;">📈</span>
+      <span class="cp-label">مخطط نمو الإيرادات والأرباح (5 سنوات)</span>
+    </div>
+  {% endif %}
+</div>
+
+<div class="page-break"></div>
+
+<!-- Key financial ratios -->
+{% set ratios = report.financials.ratios | default({}) %}
+<div style="font-size:12pt;font-weight:700;color:var(--primary);margin-bottom:12px;padding-bottom:7px;border-bottom:2px solid var(--primary);">المؤشرات المالية الرئيسية <span style="font-size:8pt;font-weight:400;color:var(--text-faint);font-family:'Helvetica Neue',Arial,sans-serif;margin-right:auto;">Key Financial Ratios</span></div>
+<div class="kpi-grid-3">
+  {% set ratio_cards = [
+    (ratios.irr | default('28'), '%', 'معدل العائد الداخلي', 'IRR', 'accent-green', 'ممتاز'),
+    (ratios.npv | default('—'), ' ر', 'صافي القيمة الحالية', 'NPV', 'accent-teal', 'موجب'),
+    (ratios.roi_5yr | default('—'), '%', 'العائد على الاستثمار (5 سنوات)', 'ROI 5Y', 'accent-gold', 'جيد'),
+    (ratios.gross_margin_yr3 | default('—'), '%', 'هامش المجمل (السنة 3)', 'Gross Margin Y3', 'accent-blue', 'قوي'),
+    (ratios.net_margin_yr3 | default('—'), '%', 'هامش الصافي (السنة 3)', 'Net Margin Y3', 'accent-secondary', 'مقبول'),
+    (ratios.payback_years | default('—'), ' سنة', 'فترة استرداد الاستثمار', 'Payback Period', 'accent-green', 'جيد'),
+  ] %}
+  {% for val, unit, label_ar, label_en, accent, status in ratio_cards %}
+  <div class="kpi-card {{ accent }}">
+    <div class="kpi-value">{{ val }}<span class="kpi-unit">{{ unit }}</span></div>
+    <div class="kpi-label">{{ label_ar }}</div>
+    <div class="kpi-label-en">{{ label_en }}</div>
+    <div style="margin-top:5px;display:inline-block;font-size:7.5pt;padding:1px 8px;border-radius:10px;background:var(--green-light);color:var(--green-dark);font-weight:600;">{{ status }}</div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Break-even -->
+{% set be = report.financials.breakeven | default({}) %}
+<div style="font-size:12pt;font-weight:700;color:var(--primary);margin:var(--sp-lg) 0 12px;padding-bottom:7px;border-bottom:2px solid var(--primary);">تحليل نقطة التعادل <span style="font-size:8pt;font-weight:400;color:var(--text-faint);font-family:'Helvetica Neue',Arial,sans-serif;">Break-even Analysis</span></div>
+<div class="grid-2">
+  <div class="card">
+    <div style="font-size:9.5pt;font-weight:700;color:var(--text-secondary);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border-light);">مؤشرات التعادل الرئيسية</div>
+    {% set be_rows = [
+      ('فترة التعادل', (be.months | default('18')) ~ ' شهراً'),
+      ('إيراد التعادل الشهري', (be.monthly_revenue | default('—')) ~ ' ريال'),
+      ('التكاليف الثابتة الشهرية', (be.fixed_costs_monthly | default('—')) ~ ' ريال'),
+      ('هامش المساهمة', (be.contribution_margin | default('—')) ~ '%'),
+      ('هامش الأمان (السنة 3)', (be.safety_margin_yr3 | default('—')) ~ '%'),
+    ] %}
+    {% for label, val in be_rows %}
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px dotted var(--border-light);font-size:9pt;">
+      <span style="color:var(--text-muted);">{{ label }}</span>
+      <span style="font-weight:600;color:var(--text-dark);">{{ val }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="card">
+    <div style="font-size:9.5pt;font-weight:700;color:var(--text-secondary);margin-bottom:10px;">مخطط نقطة التعادل</div>
+    {% if charts is defined and charts.breakeven %}
+      <img src="{{ charts.breakeven }}" style="width:100%;border-radius:var(--r-md);border:1px solid var(--border-light);">
+    {% else %}
+      <div class="chart-placeholder" style="height:130px;">
+        <span style="font-size:22pt;opacity:0.35;">📊</span>
+        <span class="cp-label">مخطط نقطة التعادل</span>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     12. FUNDING & FINANCING
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">١٠</div>
+  <h2 class="section-title" style="margin:0;">خيارات التمويل</h2>
+  <span class="section-title-en">Funding &amp; Financing Options</span>
+</div>
+
+{% set fund = report.funding | default({}) %}
+<p>{{ fund.overview | default('يستعرض هذا القسم خيارات التمويل المتاحة للمشروع، مع تقييم مزايا وعيوب كل خيار في ضوء الوضع المالي للمشروع ومتطلبات رأس المال.') }}</p>
+
+<table class="data-table">
+  <thead><tr><th>خيار التمويل</th><th>نسبة التمويل</th><th>التكلفة التقديرية</th><th>المزايا</th><th>التوصية</th></tr></thead>
+  <tbody>
+  {% for opt in fund.options | default([
+    {'name':'تمويل ذاتي','pct':'40%','cost':'صفر','pros':'بدون فوائد أو التزامات خارجية','rec':'مُوصى به'},
+    {'name':'قرض بنكي تجاري','pct':'40%','cost':'5-7%','pros':'مرونة في السداد','rec':'اختياري'},
+    {'name':'برامج صندوق التنمية','pct':'20%','cost':'2-4%','pros':'شروط ميسرة لدعم المنشآت الصغيرة','rec':'يُستحسن'},
+  ]) %}
+  <tr>
+    <td style="font-weight:600;">{{ opt.name }}</td>
+    <td style="text-align:center;font-weight:600;color:var(--primary);">{{ opt.pct }}</td>
+    <td style="text-align:center;">{{ opt.cost }}</td>
+    <td>{{ opt.pros }}</td>
+    <td><span class="badge badge-primary">{{ opt.rec }}</span></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="callout callout-info">
+  <p style="margin-bottom:0;"><strong>ملاحظة:</strong> {{ fund.note | default('يُنصح بالتواصل مع صندوق التنمية للمنشآت الصغيرة والمتوسطة (Monsha\'at) ومصرف الراجحي أو البنك الأهلي للاستفسار عن برامج تمويل المنشآت الصغيرة المتوافقة مع أحكام الشريعة الإسلامية.') }}</p>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     13. RISK ASSESSMENT
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">١١</div>
+  <h2 class="section-title" style="margin:0;">تقييم المخاطر</h2>
+  <span class="section-title-en">Risk Assessment</span>
+</div>
+
+{% set risks = report.risk_assessment | default({}) %}
+<p>{{ risks.overview | default('يرصد هذا القسم المخاطر الرئيسية التي قد تواجه المشروع خلال مراحل التأسيس والتشغيل، مع استعراض إجراءات التخفيف المقترحة لكل خطر.') }}</p>
+
+<table class="risk-table">
+  <thead>
+    <tr>
+      <th>المخاطرة</th><th>الاحتمالية</th><th>الأثر</th><th>مستوى الخطر</th><th>إجراءات التخفيف</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for risk in risks.risks | default([
+    {'name':'تراجع الطلب','prob':'منخفض','impact':'مرتفع','level':'متوسط','mitigation':'تنويع قنوات البيع والشرائح المستهدفة'},
+    {'name':'ارتفاع تكاليف الإيجار','prob':'متوسط','impact':'متوسط','level':'متوسط','mitigation':'تأمين عقد إيجار طويل الأمد بسعر ثابت'},
+    {'name':'صعوبة استقطاب كفاءات سعودية','prob':'متوسط','impact':'متوسط','level':'متوسط','mitigation':'التعاون مع جهات التشغيل وتقديم حوافز مناسبة'},
+    {'name':'تغيّر اللوائح التنظيمية','prob':'منخفض','impact':'مرتفع','level':'منخفض','mitigation':'متابعة التحديثات التنظيمية والاستعانة بمستشار قانوني'},
+    {'name':'تصاعد المنافسة','prob':'مرتفع','impact':'متوسط','level':'مرتفع','mitigation':'تعزيز التمييز والولاء عبر برامج المكافآت'},
+    {'name':'تقلبات أسعار المواد الخام','prob':'متوسط','impact':'متوسط','level':'متوسط','mitigation':'عقود توريد طويلة الأمد وتعدد المورّدين'},
+    {'name':'مخاطر السيولة','prob':'منخفض','impact':'مرتفع','level':'منخفض','mitigation':'الحفاظ على احتياطي نقدي لا يقل عن 3 أشهر تشغيل'},
+  ]) %}
+  <tr>
+    <td style="font-weight:600;">{{ risk.name }}</td>
+    <td><span class="{% if risk.prob == 'مرتفع' %}risk-h{% elif risk.prob == 'متوسط' %}risk-m{% else %}risk-l{% endif %}">{{ risk.prob }}</span></td>
+    <td><span class="{% if risk.impact == 'مرتفع' %}risk-h{% elif risk.impact == 'متوسط' %}risk-m{% else %}risk-l{% endif %}">{{ risk.impact }}</span></td>
+    <td><span class="{% if risk.level == 'مرتفع' %}risk-h{% elif risk.level == 'متوسط' %}risk-m{% else %}risk-l{% endif %}">{{ risk.level }}</span></td>
+    <td>{{ risk.mitigation }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="chart-container" style="margin-top:var(--sp-md);">
+  {% if charts is defined and charts.risk_matrix %}
+    <img src="{{ charts.risk_matrix }}" alt="مصفوفة المخاطر">
+    <div class="chart-caption">مصفوفة المخاطر — الاحتمالية مقابل الأثر</div>
+  {% else %}
+    <div class="chart-placeholder" style="height:160px;">
+      <span style="font-size:24pt;opacity:0.35;">🎯</span>
+      <span class="cp-label">مصفوفة المخاطر — Probability vs. Impact</span>
+    </div>
+  {% endif %}
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     14. VISION 2030 ALIGNMENT
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">١٢</div>
+  <h2 class="section-title" style="margin:0;">التوافق مع رؤية 2030</h2>
+  <span class="section-title-en">Vision 2030 Alignment</span>
+</div>
+
+{% set v30 = report.vision2030 | default({}) %}
+<div class="grid-2" style="margin-bottom:var(--sp-lg);">
+  <div>
+    <p>{{ v30.overview | default('يتوافق المشروع المقترح مع عدد من الأهداف الاستراتيجية لرؤية المملكة 2030، ولا سيما في محاور تنويع الاقتصاد وتطوير القطاع الخاص ورفع نسب التوطين.') }}</p>
+    <div style="margin-top:var(--sp-md);">
+      {% set v30_dims = v30.dimensions | default([
+        {'name':'تنويع الاقتصاد الوطني','score':80},
+        {'name':'رفع مستوى التوطين (نطاقات)','score':75},
+        {'name':'دعم المنشآت الصغيرة والمتوسطة','score':85},
+        {'name':'تطوير القطاع الخاص','score':70},
+        {'name':'التحول الرقمي','score':65},
+        {'name':'تنمية الصادرات غير النفطية','score':55},
+      ]) %}
+      {% for dim in v30_dims %}
+      <div class="v-bar">
+        <div class="v-label"><span>{{ dim.name }}</span><span style="font-weight:700;color:var(--primary);">{{ dim.score }}%</span></div>
+        <div class="v-track"><div class="v-fill" style="width:{{ dim.score }}%;"></div></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--sp-md);">
+    <div style="width:110px;height:110px;border-radius:50%;background:var(--primary);color:var(--white);display:flex;flex-direction:column;align-items:center;justify-content:center;border:4px solid var(--secondary);">
+      <div style="font-size:26pt;font-weight:700;line-height:1;">{{ report.vision2030_score | default('72') }}</div>
+      <div style="font-size:8pt;color:rgba(255,255,255,0.7);">/100</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:10pt;font-weight:700;color:var(--primary);">درجة التوافق الكلية</div>
+      <div style="font-size:8pt;color:var(--text-muted);">Overall Alignment Score</div>
+    </div>
+  </div>
+</div>
+
+<div class="subsection-header">مبادرات رؤية 2030 ذات الصلة</div>
+<ul>
+  {% for init in v30.initiatives | default(['برنامج تطوير الصناعة الوطنية والخدمات اللوجستية (ندلب)','برنامج تنمية الموارد البشرية','مبادرة صندوق الاستثمارات العامة لدعم القطاع الخاص','برنامج دعم توطين وظائف المنشآت الصغيرة والمتوسطة']) %}
+  <li>{{ init }}</li>
+  {% endfor %}
+</ul>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     15. CONCLUSIONS
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">١٣</div>
+  <h2 class="section-title" style="margin:0;">الخلاصة والتوصيات</h2>
+  <span class="section-title-en">Conclusions &amp; Recommendations</span>
+</div>
+
+{% set conc = report.conclusions | default({}) %}
+<div class="executive-summary-box">
+  <div class="esb-title">خلاصة الدراسة</div>
+  <p>{{ conc.summary | default('بناءً على التحليل الشامل الوارد في هذه الدراسة، يتضح أن المشروع المقترح يتمتع بجدوى اقتصادية جيدة، وإمكانية تحقيق عوائد مُجزية على المدى المتوسط، مع توافق واضح مع متطلبات رؤية المملكة 2030 في محاور التوطين وتنويع الاقتصاد.') }}</p>
+</div>
+
+<div class="subsection-header">التوصيات التنفيذية</div>
+<ol style="padding-right:var(--sp-lg);">
+  {% for rec in conc.recommendations | default([
+    'البدء في إجراءات التسجيل والترخيص فور اتخاذ قرار التنفيذ',
+    'تأمين عقد إيجار طويل الأمد بشروط ثابتة للحماية من ارتفاع الأسعار',
+    'التواصل مع صندوق التنمية للمنشآت الصغيرة والمتوسطة لاستكشاف خيارات التمويل الميسّر',
+    'بناء فريق عمل سعودي مؤهّل من المرحلة التأسيسية لضمان الامتثال لنطاقات',
+    'تطبيق نظام مالي محاسبي متكامل منذ اليوم الأول لمتابعة الأداء مقابل الميزانية',
+    'إطلاق حملة تسويقية مبكرة قبيل الافتتاح لبناء الوعي بالعلامة التجارية',
+  ]) %}
+  <li style="margin-bottom:var(--sp-sm);">{{ rec }}</li>
+  {% endfor %}
+</ol>
+
+<div class="rec-box" style="margin-top:var(--sp-lg);">
+  <div style="font-size:22pt;line-height:1;margin-top:2px;flex-shrink:0;">✅</div>
+  <div style="flex:1;">
+    <div class="rec-title">القرار النهائي</div>
+    <p class="rec-text">{{ conc.final_recommendation | default('يُوصى بالمضي قُدُماً في تنفيذ المشروع وفق الخطة المرحلية المُقترحة، مع التركيز على بناء قاعدة عملاء راسخة في السنة الأولى، والتوسع التدريجي في السنوات التالية. تُشير جميع مؤشرات الدراسة إلى أن المشروع يمثّل فرصة استثمارية جاذبة في ظل المتغيرات الاقتصادية الراهنة وتوجهات رؤية 2030.') }}</p>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     16. APPENDIX
+═══════════════════════════════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-number">١٤</div>
+  <h2 class="section-title" style="margin:0;">الملاحق</h2>
+  <span class="section-title-en">Appendix</span>
+</div>
+
+<div class="subsection-header">أ. المصادر والمراجع</div>
+<ul>
+  {% for src in report.sources | default([
+    'هيئة الإحصاء العامة — التقرير السنوي للناتج المحلي الإجمالي',
+    'مؤسسة النقد العربي السعودي (ساما) — التقرير السنوي',
+    'وزارة الموارد البشرية والتنمية الاجتماعية — إحصاءات سوق العمل',
+    'هيئة الزكاة والضريبة والجمارك — دليل التسجيل والامتثال',
+    'المؤسسة العامة للتأمينات الاجتماعية (غوسي) — لوائح التأمين',
+    'برنامج تطوير القطاع الخاص — رؤية 2030',
+  ]) %}
+  <li>{{ src }}</li>
+  {% endfor %}
+</ul>
+
+<div class="subsection-header">ب. الافتراضات المالية الأساسية</div>
+<table class="data-table">
+  <thead><tr><th>الافتراض</th><th>القيمة</th><th>المبرر</th></tr></thead>
+  <tbody>
+  {% for assump in report.assumptions | default([
+    {'name':'معدل نمو الإيرادات السنوي','value':'20-25%','rationale':'استناداً لمعدلات نمو القطاع'},
+    {'name':'معدل التضخم السنوي','value':'2.5%','rationale':'إحصاءات ساما'},
+    {'name':'معدل الخصم (WACC)','value':'12%','rationale':'متوسط تكلفة رأس المال المرجّح'},
+    {'name':'ضريبة القيمة المضافة','value':'15%','rationale':'هيئة الزكاة والضريبة والجمارك'},
+    {'name':'أجور العمالة السعودية (متوسط)','value':'—','rationale':'مسوحات الأجور — وزارة الموارد البشرية'},
+  ]) %}
+  <tr><td>{{ assump.name }}</td><td style="font-weight:600;color:var(--primary);text-align:center;">{{ assump.value }}</td><td>{{ assump.rationale }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="subsection-header">ج. إخلاء المسؤولية</div>
+<div class="callout callout-warning">
+  <p style="font-size:8.5pt;margin-bottom:0;">هذه الدراسة معدّة لأغراض التخطيط والتقييم الأولي فقط. تستند التوقعات المالية إلى افتراضات وبيانات متاحة وقت إعداد التقرير، وقد تتأثر بتغيّرات السوق والبيئة التنظيمية. لا تُعدّ هذه الدراسة ضماناً لتحقق النتائج المتوقعة. يُنصح باستشارة مختصين ماليين وقانونيين قبل اتخاذ أي قرار استثماري.</p>
+</div>
+
+<div style="margin-top:var(--sp-2xl);padding-top:var(--sp-md);border-top:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:center;font-size:7.5pt;color:var(--text-muted);">
+  <span style="color:var(--primary);font-weight:600;">منصة جدوى للدراسات الاقتصادية</span>
+  <span>{{ report.gregorian_date | default('2026') }} | {{ report.hijri_date | default('1447هـ') }}</span>
+  <span>سري ومحفوظ الحقوق</span>
+</div>
+
+</body>
+</html>
