@@ -79,11 +79,15 @@
 </head>
 <body>
 
+{% if watermark_text is defined and watermark_text %}
+<div class="watermark-overlay">{{ watermark_text }}</div>
+{% endif %}
+
 <!-- ═══════════════════════════════════════════════════════════════
      RUNNING HEADER / FOOTER  (WeasyPrint position:running)
 ═══════════════════════════════════════════════════════════════ -->
 <div id="running-header">
-  <div class="hdr-title">دراسة الجدوى الاقتصادية — {{ report.project_name_ar | default('المشروع') }}</div>
+  <div class="hdr-title">دراسة الجدوى الاقتصادية — {{ report.project_name_ar | default(project_name | default('المشروع')) }}</div>
   <div class="hdr-brand">
     <div class="hdr-mark"><span>ج</span></div>
     <span class="hdr-name">JADWA</span>
@@ -211,14 +215,13 @@
     ('١٤', 'الملاحق', 'Appendix', '45'),
   ] %}
   {% for num, ar, en, pg in toc_items %}
-  <div style="display:flex;align-items:baseline;justify-content:space-between;padding:7px 0;border-bottom:1px dotted var(--border-light);break-inside:avoid;">
-    <div style="display:flex;align-items:baseline;gap:10px;flex:1;">
-      <span style="font-size:var(--fs-sm);font-weight:700;color:var(--primary);min-width:24px;">{{ num }}</span>
-      <span style="font-size:var(--fs-base);font-weight:600;color:var(--text-dark);">{{ ar }}</span>
-      <span style="font-size:8pt;color:var(--text-faint);font-family:'Helvetica Neue',Arial,sans-serif;">{{ en }}</span>
+  <div class="toc-entry">
+    <div class="toc-number">{{ num }}</div>
+    <div class="toc-title">
+      {{ ar }}
+      <span class="toc-title-en">{{ en }}</span>
     </div>
-    <div style="flex:1;border-bottom:1px dotted var(--border-mid);margin:0 8px;height:1px;align-self:center;"></div>
-    <span style="font-size:var(--fs-sm);font-weight:600;color:var(--primary);font-family:'Helvetica Neue',Arial,sans-serif;white-space:nowrap;">{{ pg }}</span>
+    <div class="toc-page">{{ pg }}</div>
   </div>
   {% endfor %}
 </div>
@@ -480,16 +483,19 @@
   {% endfor %}
 </ul>
 
-<div class="subsection-header">مخطط نمو السوق</div>
+<div class="subsection-header">تحليل حجم السوق</div>
 <div class="chart-container">
   {% if charts is defined and charts.market_growth %}
-    <img src="{{ charts.market_growth }}" alt="مخطط نمو السوق">
+    <img src="{{ charts.market_growth }}" alt="مخطط نمو السوق" class="chart-image">
     <div class="chart-caption">نمو حجم السوق المستهدف على مدى 5 سنوات — بالريال السعودي</div>
+  {% elif chart_market %}
+    <img src="{{ chart_market }}" alt="تحليل حجم السوق" class="chart-image">
+    <div class="chart-caption">تحليل حجم السوق — TAM / SAM / SOM</div>
   {% else %}
     <div class="chart-placeholder" style="height:180px;">
       <span style="font-size:24pt;opacity:0.35;">📊</span>
-      <span class="cp-label">مخطط نمو السوق</span>
-      <span style="font-size:8pt;color:var(--text-faint);font-family:'Helvetica Neue',Arial,sans-serif;">Market Growth Chart</span>
+      <span class="cp-label">مخطط حجم السوق</span>
+      <span style="font-size:8pt;color:var(--text-faint);font-family:var(--font-en);">Market Size Chart — TAM / SAM / SOM</span>
     </div>
   {% endif %}
 </div>
@@ -759,6 +765,17 @@
 <div class="subsection-header">برامج التدريب والتطوير</div>
 <p>{{ hr.training_plan | default('يتضمن المشروع برنامجاً تدريبياً متكاملاً للموظفين الجدد يغطي المهارات التقنية والوظيفية، إلى جانب برامج تطوير مستمر لرفع الكفاءة وتحقيق مستهدفات السعودة.') }}</p>
 
+<!-- Nitaqat workforce chart -->
+<div class="chart-container" style="margin-top:var(--sp-md);">
+  {% if chart_nitaqat %}
+    <img src="{{ chart_nitaqat }}" alt="مخطط نطاقات" class="chart-image">
+    <div class="chart-caption">توزيع القوى العاملة — سعودي / وافد ومستوى نطاقات</div>
+  {% elif charts is defined and charts.nitaqat %}
+    <img src="{{ charts.nitaqat }}" alt="مخطط نطاقات" class="chart-image">
+    <div class="chart-caption">توزيع القوى العاملة — سعودي / وافد ومستوى نطاقات</div>
+  {% endif %}
+</div>
+
 <div class="page-break"></div>
 
 <!-- ═══════════════════════════════════════════════════════════════
@@ -907,12 +924,47 @@
   {% if charts is defined and charts.revenue_projection %}
     <img src="{{ charts.revenue_projection }}" alt="مخطط نمو الإيرادات">
     <div class="chart-caption">الإيرادات وصافي الربح على مدى 5 سنوات — بالريال السعودي</div>
+  {% elif chart_revenue %}
+    <img src="{{ chart_revenue }}" alt="مخطط نمو الإيرادات" class="chart-image">
+    <div class="chart-caption">الإيرادات وصافي الربح على مدى 5 سنوات — بالريال السعودي</div>
   {% else %}
     <div class="chart-placeholder" style="height:180px;">
       <span style="font-size:24pt;opacity:0.35;">📈</span>
       <span class="cp-label">مخطط نمو الإيرادات والأرباح (5 سنوات)</span>
     </div>
   {% endif %}
+</div>
+
+<!-- Cost Breakdown + Cash Flow Waterfall (side by side) -->
+<div class="charts-row" style="margin-top:var(--sp-lg);">
+  <div class="chart-container">
+    {% if chart_cost_breakdown %}
+      <img src="{{ chart_cost_breakdown }}" alt="توزيع التكاليف" class="chart-image">
+      <div class="chart-caption">توزيع تكاليف السنة الأولى</div>
+    {% elif charts is defined and charts.cost_breakdown %}
+      <img src="{{ charts.cost_breakdown }}" alt="توزيع التكاليف" class="chart-image">
+      <div class="chart-caption">توزيع تكاليف السنة الأولى</div>
+    {% else %}
+      <div class="chart-placeholder" style="height:160px;">
+        <span style="font-size:22pt;opacity:0.35;">🍩</span>
+        <span class="cp-label">توزيع التكاليف</span>
+      </div>
+    {% endif %}
+  </div>
+  <div class="chart-container">
+    {% if chart_cashflow_waterfall %}
+      <img src="{{ chart_cashflow_waterfall }}" alt="شلال التدفقات النقدية" class="chart-image">
+      <div class="chart-caption">شلال التدفقات النقدية التراكمية</div>
+    {% elif charts is defined and charts.cashflow_waterfall %}
+      <img src="{{ charts.cashflow_waterfall }}" alt="شلال التدفقات النقدية" class="chart-image">
+      <div class="chart-caption">شلال التدفقات النقدية التراكمية</div>
+    {% else %}
+      <div class="chart-placeholder" style="height:160px;">
+        <span style="font-size:22pt;opacity:0.35;">📊</span>
+        <span class="cp-label">شلال التدفقات النقدية</span>
+      </div>
+    {% endif %}
+  </div>
 </div>
 
 <div class="page-break"></div>
@@ -1052,7 +1104,10 @@
 
 <div class="chart-container" style="margin-top:var(--sp-md);">
   {% if charts is defined and charts.risk_matrix %}
-    <img src="{{ charts.risk_matrix }}" alt="مصفوفة المخاطر">
+    <img src="{{ charts.risk_matrix }}" alt="مصفوفة المخاطر" class="chart-image">
+    <div class="chart-caption">مصفوفة المخاطر — الاحتمالية مقابل الأثر</div>
+  {% elif chart_risk %}
+    <img src="{{ chart_risk }}" alt="مصفوفة المخاطر" class="chart-image">
     <div class="chart-caption">مصفوفة المخاطر — الاحتمالية مقابل الأثر</div>
   {% else %}
     <div class="chart-placeholder" style="height:160px;">

@@ -107,6 +107,10 @@
 </head>
 <body>
 
+{% if watermark_text is defined and watermark_text %}
+<div class="watermark-overlay">{{ watermark_text }}</div>
+{% endif %}
+
 <!-- ═══════════════════════════════════════════════════════════════
      RUNNING HEADER / FOOTER
 ═══════════════════════════════════════════════════════════════ -->
@@ -493,6 +497,9 @@
   {% if charts is defined and charts.market_growth %}
     <img src="{{ charts.market_growth }}" alt="Market Growth Chart">
     <div class="chart-caption">Target market size growth over 5 years — SAR</div>
+  {% elif chart_market %}
+    <img src="{{ chart_market }}" alt="Market Size Analysis" class="chart-image">
+    <div class="chart-caption">Market Size Analysis — TAM / SAM / SOM</div>
   {% else %}
     <div class="chart-placeholder" style="height:180px;">
       <span style="font-size:24pt;opacity:0.35;">📊</span>
@@ -700,6 +707,17 @@
   </tfoot>
 </table>
 
+<!-- Nitaqat workforce chart -->
+<div class="chart-container" style="margin-top:var(--sp-md);">
+  {% if chart_nitaqat %}
+    <img src="{{ chart_nitaqat }}" alt="Nitaqat Workforce" class="chart-image">
+    <div class="chart-caption">Workforce Distribution — Saudi / Expat & Nitaqat Band</div>
+  {% elif charts is defined and charts.nitaqat %}
+    <img src="{{ charts.nitaqat }}" alt="Nitaqat Workforce" class="chart-image">
+    <div class="chart-caption">Workforce Distribution — Saudi / Expat & Nitaqat Band</div>
+  {% endif %}
+</div>
+
 <div class="page-break"></div>
 
 <!-- ═══════════════════════════════════════════════════════════════
@@ -817,12 +835,45 @@
   {% if charts is defined and charts.revenue_projection %}
     <img src="{{ charts.revenue_projection }}" alt="Revenue Growth Chart">
     <div class="chart-caption">Revenue and Net Profit over 5 Years — SAR</div>
+  {% elif chart_revenue %}
+    <img src="{{ chart_revenue }}" alt="Revenue Projection" class="chart-image">
+    <div class="chart-caption">Revenue and Net Profit over 5 Years — SAR</div>
   {% else %}
     <div class="chart-placeholder" style="height:180px;">
       <span style="font-size:24pt;opacity:0.35;">📈</span>
       <span class="cp-label">Revenue &amp; Net Profit Growth Chart (5 Years)</span>
     </div>
   {% endif %}
+</div>
+
+<!-- Cost Breakdown + Cash Flow Waterfall -->
+<div class="charts-row" style="margin-top:var(--sp-lg);">
+  <div class="chart-container">
+    {% if chart_cost_breakdown %}
+      <img src="{{ chart_cost_breakdown }}" alt="Cost Breakdown" class="chart-image">
+      <div class="chart-caption">Year 1 Cost Breakdown</div>
+    {% elif charts is defined and charts.cost_breakdown %}
+      <img src="{{ charts.cost_breakdown }}" alt="Cost Breakdown" class="chart-image">
+      <div class="chart-caption">Year 1 Cost Breakdown</div>
+    {% else %}
+      <div class="chart-placeholder" style="height:160px;">
+        <span class="cp-label">Cost Breakdown</span>
+      </div>
+    {% endif %}
+  </div>
+  <div class="chart-container">
+    {% if chart_cashflow_waterfall %}
+      <img src="{{ chart_cashflow_waterfall }}" alt="Cash Flow Waterfall" class="chart-image">
+      <div class="chart-caption">Cumulative Cash Flow Waterfall</div>
+    {% elif charts is defined and charts.cashflow_waterfall %}
+      <img src="{{ charts.cashflow_waterfall }}" alt="Cash Flow Waterfall" class="chart-image">
+      <div class="chart-caption">Cumulative Cash Flow Waterfall</div>
+    {% else %}
+      <div class="chart-placeholder" style="height:160px;">
+        <span class="cp-label">Cash Flow Waterfall</span>
+      </div>
+    {% endif %}
+  </div>
 </div>
 
 <div class="page-break"></div>
@@ -958,8 +1009,11 @@
 
 <div class="chart-container" style="margin-top:var(--sp-md);">
   {% if charts is defined and charts.risk_matrix %}
-    <img src="{{ charts.risk_matrix }}" alt="Risk Matrix">
+    <img src="{{ charts.risk_matrix }}" alt="Risk Matrix" class="chart-image">
     <div class="chart-caption">Risk Matrix — Probability vs. Impact</div>
+  {% elif chart_risk %}
+    <img src="{{ chart_risk }}" alt="Risk Matrix" class="chart-image">
+    <div class="chart-caption">Risk Matrix — Likelihood vs. Impact</div>
   {% else %}
     <div class="chart-placeholder" style="height:160px;">
       <span style="font-size:24pt;opacity:0.35;">🎯</span>

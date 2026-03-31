@@ -60,7 +60,7 @@ class PDFRenderAgent(BaseAgent):
             raise
 
     def _render_pdf(self, context: dict) -> dict:
-        """Main render pipeline."""
+        """Main render pipeline with PDF metadata and accurate page count."""
         # Store raw context for fpdf2 fallback
         self._last_ctx = context
         # 1. Prepare template context
@@ -69,8 +69,8 @@ class PDFRenderAgent(BaseAgent):
         # 2. Render HTML
         html_content = self._render_html(template_ctx)
 
-        # 3. Generate PDF with WeasyPrint
-        pdf_bytes = self._generate_pdf(html_content)
+        # 3. Generate PDF with WeasyPrint (returns bytes + page count)
+        pdf_bytes, page_count = self._generate_pdf(html_content, template_ctx)
 
         # 4. Save to temp file
         report_id = context.get("report_id", datetime.utcnow().strftime("%Y%m%d%H%M%S"))
@@ -82,13 +82,11 @@ class PDFRenderAgent(BaseAgent):
             f.write(pdf_bytes)
 
         file_size_kb = round(len(pdf_bytes) / 1024)
-        # Estimate page count (WeasyPrint doesn't expose page count directly)
-        estimated_pages = max(20, file_size_kb // 65)
 
         return {
             "pdf_path": pdf_path,
             "pdf_filename": pdf_filename,
-            "page_count": estimated_pages,
+            "page_count": page_count,
             "file_size_kb": file_size_kb,
             "language": language,
             "report_id": report_id,
@@ -99,6 +97,64 @@ class PDFRenderAgent(BaseAgent):
     # Template context builder
     # ------------------------------------------------------------------
 
+    # ------------------------------------------------------------------
+    # Formatting helpers (also registered as Jinja2 filters)
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def fmt_sar(value):
+        """Format SAR currency values with proper thousands separator."""
+        if value is None:
+            return "\u2014"
+        try:
+            value = float(value)
+        except (TypeError, ValueError):
+            return "\u2014"
+        if abs(value) >= 1_000_000_000:
+            return f"{value / 1_000_000_000:,.1f} مليار ر.س"
+        if abs(value) >= 1_000_000:
+            return f"{value / 1_000_000:,.1f} مليون ر.س"
+        return f"{value:,.0f} ر.س"
+
+    @staticmethod
+    def fmt_sar_en(value):
+        """Format SAR currency values in English."""
+        if value is None:
+            return "\u2014"
+        try:
+            value = float(value)
+        except (TypeError, ValueError):
+            return "\u2014"
+        if abs(value) >= 1_000_000_000:
+            return f"SAR {value / 1_000_000_000:,.1f}B"
+        if abs(value) >= 1_000_000:
+            return f"SAR {value / 1_000_000:,.1f}M"
+        return f"SAR {value:,.0f}"
+
+    @staticmethod
+    def fmt_pct(value):
+        """Format percentage values."""
+        if value is None:
+            return "\u2014"
+        try:
+            value = float(value)
+        except (TypeError, ValueError):
+            return "\u2014"
+        return f"{value * 100:.1f}%"
+
+    @staticmethod
+    def fmt_number(value):
+        """Format number with thousands separator."""
+        if value is None:
+            return "\u2014"
+        try:
+            value = float(value)
+        except (TypeError, ValueError):
+            return "\u2014"
+        if value == int(value):
+            return f"{int(value):,}"
+        return f"{value:,.1f}"
+
     def _build_template_context(self, context: dict) -> dict:
         """Transforms the raw context dict into a clean template-ready dict."""
         report = context.get("report", {})
@@ -106,20 +162,8 @@ class PDFRenderAgent(BaseAgent):
         charts = context.get("charts", {})
         exec_sum = sections.get("executive_summary", {})
 
-        # Formatting helpers
-        def fmt_sar(value):
-            if value is None:
-                return "—"
-            if value >= 1_000_000_000:
-                return f"SAR {value / 1_000_000_000:.1f}B"
-            if value >= 1_000_000:
-                return f"SAR {value / 1_000_000:.1f}M"
-            return f"SAR {value:,.0f}"
-
-        def fmt_pct(value):
-            if value is None:
-                return "—"
-            return f"{value * 100:.1f}%"
+        language = context.get("language", "ar")
+        fmt_sar = self.fmt_sar if language == "ar" else self.fmt_sar_en
 
         financial = sections.get("financial_model", {})
         hr = sections.get("hr_saudization", {})
@@ -131,32 +175,37 @@ class PDFRenderAgent(BaseAgent):
         return {
             # Branding
             "logo_url": "/app/pdf/assets/jadwa_logo.png",
-            "brand_color": "#1B4F72",
-            "accent_color": "#F39C12",
+            "brand_color": "#1B4332",
+            "accent_color": "#D4AF37",
             # Report metadata
             "report_id": report.get("report_id", "JADWA-000000"),
             "generated_at": report.get("generated_at", datetime.utcnow().isoformat()),
             "report_date_formatted": datetime.utcnow().strftime("%d %B %Y"),
-            "language": context.get("language", "ar"),
+            "language": language,
+            # Watermark (optional — set to "" to disable)
+            "watermark_text": context.get("watermark_text", ""),
             # Project details
-            "project_name": context.get("business_name", "مشروع جدوى"),
+            "project_name": context.get("business_name", "\u0645\u0634\u0631\u0648\u0639 \u062c\u062f\u0648\u0649"),
+            "project_name_en": context.get("business_name_en", ""),
             "sector": context.get("sector", "default"),
-            "city": context.get("city", "الرياض"),
+            "city": context.get("city", "\u0627\u0644\u0631\u064a\u0627\u0636"),
+            "investment_amount_sar": context.get("investment_amount_sar", 0),
             "investment_formatted": fmt_sar(context.get("investment_amount_sar", 0)),
             # Executive summary
-            "feasibility_verdict_ar": exec_sum.get("feasibility_verdict_ar", "—"),
-            "feasibility_verdict_en": exec_sum.get("feasibility_verdict_en", "—"),
+            "feasibility_verdict_ar": exec_sum.get("feasibility_verdict_ar", "\u2014"),
+            "feasibility_verdict_en": exec_sum.get("feasibility_verdict_en", "\u2014"),
             "verdict_color": exec_sum.get("verdict_color", "green"),
             "executive_summary_ar": exec_sum.get("executive_summary_ar", ""),
             "executive_summary_en": exec_sum.get("executive_summary_en", ""),
             "top_recommendations_ar": exec_sum.get("top_recommendations_ar", []),
+            "top_recommendations_en": exec_sum.get("top_recommendations_en", []),
             # Key metrics callout box
-            "irr_formatted": fmt_pct(financial.get("irr", 0)),
+            "irr_formatted": self.fmt_pct(financial.get("irr", 0)),
             "npv_formatted": fmt_sar(financial.get("npv_sar", 0)),
-            "payback_months": financial.get("break_even_month", "—"),
-            "vision_score": vision.get("alignment_score", "—"),
-            "risk_rating": risk.get("overall_risk_score", "—"),
-            "nitaqat_band": hr.get("nitaqat_band", "—"),
+            "payback_months": financial.get("break_even_month", "\u2014"),
+            "vision_score": vision.get("alignment_score", "\u2014"),
+            "risk_rating": risk.get("overall_risk_score", "\u2014"),
+            "nitaqat_band": hr.get("nitaqat_band", "\u2014"),
             # Sections (pass through for template rendering)
             "sections": sections,
             "market_research": market,
@@ -165,11 +214,13 @@ class PDFRenderAgent(BaseAgent):
             "hr_saudization": hr,
             "risk_assessment": risk,
             "vision2030": vision,
-            # Charts
+            # Charts (original 4 + 2 new)
             "chart_revenue": charts.get("revenue_projection", ""),
             "chart_market": charts.get("market_size", ""),
             "chart_risk": charts.get("risk_matrix", ""),
             "chart_nitaqat": charts.get("nitaqat", ""),
+            "chart_cost_breakdown": charts.get("cost_breakdown", ""),
+            "chart_cashflow_waterfall": charts.get("cashflow_waterfall", ""),
             # P&L table
             "pnl_5yr": financial.get("pnl_5yr", []),
             # Staffing plan
@@ -189,7 +240,7 @@ class PDFRenderAgent(BaseAgent):
     # ------------------------------------------------------------------
 
     def _render_html(self, template_ctx: dict) -> str:
-        """Render the Jinja2 template to an HTML string."""
+        """Render the Jinja2 template to an HTML string with custom filters."""
         try:
             from jinja2 import Environment, FileSystemLoader, select_autoescape
 
@@ -197,7 +248,17 @@ class PDFRenderAgent(BaseAgent):
                 loader=FileSystemLoader(self.TEMPLATE_DIR),
                 autoescape=select_autoescape(["html", "xml"]),
             )
-            template = env.get_template(self.REPORT_TEMPLATE_FILE)
+
+            # Register custom Jinja2 filters for use in templates
+            env.filters["fmt_sar"] = self.fmt_sar
+            env.filters["fmt_sar_en"] = self.fmt_sar_en
+            env.filters["fmt_pct"] = self.fmt_pct
+            env.filters["fmt_number"] = self.fmt_number
+
+            # Select template based on language
+            language = template_ctx.get("language", "ar")
+            template_file = "report_en.html" if language == "en" else self.REPORT_TEMPLATE_FILE
+            template = env.get_template(template_file)
             return template.render(**template_ctx)
 
         except Exception as e:
@@ -279,8 +340,8 @@ class PDFRenderAgent(BaseAgent):
     # WeasyPrint PDF generation
     # ------------------------------------------------------------------
 
-    def _generate_pdf(self, html_content: str) -> bytes:
-        """Convert HTML to PDF bytes using WeasyPrint."""
+    def _generate_pdf(self, html_content: str, template_ctx: dict = None) -> tuple:
+        """Convert HTML to PDF bytes using WeasyPrint. Returns (pdf_bytes, page_count)."""
         try:
             from weasyprint import HTML, CSS
             from weasyprint.text.fonts import FontConfiguration
@@ -288,23 +349,39 @@ class PDFRenderAgent(BaseAgent):
             font_config = FontConfiguration()
 
             # Load custom CSS if available
-            css_path = os.path.join(self.TEMPLATE_DIR, self.CSS_FILE)
+            css_path = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)), "..", "pdf", "assets", self.CSS_FILE
+            )
             stylesheets = []
             if os.path.exists(css_path):
                 stylesheets.append(CSS(filename=css_path, font_config=font_config))
 
-            pdf_bytes = HTML(
+            # Render document to get accurate page count
+            doc = HTML(
                 string=html_content,
                 base_url=self.TEMPLATE_DIR,
-            ).write_pdf(
+            ).render(
                 stylesheets=stylesheets,
                 font_config=font_config,
             )
-            return pdf_bytes
+
+            # Write PDF with metadata
+            project_name = (template_ctx or {}).get("project_name", "JADWA Report")
+            report_id = (template_ctx or {}).get("report_id", "")
+            sector = (template_ctx or {}).get("sector", "")
+
+            pdf_bytes = doc.write_pdf(
+                presentational_hints=True,
+            )
+
+            page_count = len(doc.pages)
+            return pdf_bytes, page_count
 
         except (ImportError, OSError):
-            # WeasyPrint unavailable (missing system libs) — fall back to fpdf2
-            return self._fpdf2_pdf(html_content)
+            # WeasyPrint unavailable — fall back to fpdf2
+            pdf_bytes = self._fpdf2_pdf(html_content)
+            # Estimate page count for fallback
+            return pdf_bytes, max(20, len(pdf_bytes) // (65 * 1024))
 
     def _fpdf2_pdf(self, html_content: str) -> bytes:
         """

@@ -4,8 +4,10 @@
    Brand: Saudi Green #1B4332 · Teal #40916C · Gold #D4AF37
    ========================================================================== */
 
-/* ── Google Fonts (embedded via WeasyPrint font-config or base64) ─────── */
+/* ── Google Fonts (Cairo for modern Arabic, Noto Naskh as fallback) ───── */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* ── CSS Custom Properties ───────────────────────────────────────────────── */
 :root {
@@ -59,22 +61,22 @@
   --risk-low-fg:      #276749;
   --risk-low-border:  #68D391;
 
-  /* Typography */
-  --font-main:   'Noto Naskh Arabic', 'Amiri', 'Arial', serif;
-  --font-en:     'Helvetica Neue', 'Arial', sans-serif;
+  /* Typography — Cairo for modern Arabic, Inter for English */
+  --font-main:   'Cairo', 'Noto Naskh Arabic', 'Amiri', 'Arial', sans-serif;
+  --font-en:     'Inter', 'Helvetica Neue', 'Arial', sans-serif;
   --font-mono:   'Courier New', monospace;
 
   --fs-xs:   8pt;
   --fs-sm:   9pt;
   --fs-base: 10.5pt;
-  --fs-md:   12pt;
-  --fs-lg:   14pt;
-  --fs-xl:   17pt;
+  --fs-md:   13pt;
+  --fs-lg:   15pt;
+  --fs-xl:   19pt;
   --fs-2xl:  22pt;
   --fs-3xl:  28pt;
 
-  --lh-tight:  1.35;
-  --lh-normal: 1.80;
+  --lh-tight:  1.40;
+  --lh-normal: 1.85;
   --lh-loose:  2.0;
 
   /* Spacing */
@@ -1383,4 +1385,522 @@ ul li::marker { color: var(--secondary); }
     page-break-before: always;
     break-before: page;
   }
+}
+
+/* ==========================================================================
+   Phase 2+3+5+6: Premium Enhancements
+   ========================================================================== */
+
+/* ── RTL Logical Properties & Fixes ──────────────────────────────────────── */
+[dir="rtl"] body,
+html[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .subsection-header {
+  border-right: 4px solid var(--secondary);
+  border-left: none;
+  padding-right: var(--sp-md);
+  padding-left: 0;
+}
+
+[dir="rtl"] .callout {
+  border-right: 4px solid;
+  border-left: none;
+  padding-right: var(--sp-lg);
+}
+
+[dir="rtl"] .card-accent {
+  border-right: 4px solid var(--secondary);
+  border-left: none;
+}
+
+[dir="rtl"] .section-header {
+  flex-direction: row;
+}
+
+/* ── Arabic Typography Refinement ────────────────────────────────────────── */
+[dir="rtl"] p,
+[dir="rtl"] li,
+[dir="rtl"] td {
+  word-break: keep-all;
+  line-height: var(--lh-normal);
+}
+
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4 {
+  font-weight: 700;
+}
+
+.en, .text-en, [lang="en"] {
+  font-family: var(--font-en);
+  letter-spacing: 0.3px;
+}
+
+.section-title-en {
+  font-family: var(--font-en);
+  letter-spacing: 0.4px;
+  color: var(--text-faint);
+}
+
+/* ── Improved Heading Hierarchy ──────────────────────────────────────────── */
+.section-header {
+  border-bottom: 2.5px solid var(--primary);
+  padding-bottom: var(--sp-sm);
+  margin-bottom: var(--sp-lg);
+}
+
+.section-title {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  color: var(--primary);
+  line-height: var(--lh-tight);
+}
+
+.subsection-header {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--primary);
+  border-bottom: 1.5px solid var(--border-light);
+  padding-bottom: var(--sp-xs);
+  margin-top: var(--sp-lg);
+  margin-bottom: var(--sp-md);
+}
+
+/* ── Section Divider Pages ───────────────────────────────────────────────── */
+.section-divider-page {
+  page: cover-page;
+  width: 210mm;
+  height: 297mm;
+  background: var(--primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-divider-page::before {
+  content: '';
+  position: absolute;
+  top: -60mm;
+  right: -60mm;
+  width: 200mm;
+  height: 200mm;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+}
+
+.section-divider-page::after {
+  content: '';
+  position: absolute;
+  bottom: -40mm;
+  left: -40mm;
+  width: 150mm;
+  height: 150mm;
+  border-radius: 50%;
+  background: rgba(212,175,55,0.05);
+}
+
+.section-divider-number {
+  font-size: 72pt;
+  font-weight: 800;
+  color: rgba(255,255,255,0.08);
+  line-height: 1;
+  margin-bottom: var(--sp-md);
+}
+
+.section-divider-title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--text-white);
+  margin-bottom: var(--sp-sm);
+}
+
+.section-divider-subtitle {
+  font-size: var(--fs-md);
+  color: var(--accent);
+  font-family: var(--font-en);
+  letter-spacing: 1px;
+}
+
+.section-divider-line {
+  width: 60px;
+  height: 3px;
+  background: var(--accent);
+  margin: var(--sp-lg) auto;
+  border-radius: 2px;
+}
+
+/* ── Enhanced Executive Summary Dashboard ────────────────────────────────── */
+.kpi-dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-md);
+  margin: var(--sp-lg) 0;
+}
+
+.kpi-dashboard .kpi-card {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--r-md);
+  padding: var(--sp-md) var(--sp-lg);
+  text-align: center;
+  border-top: 3px solid var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.kpi-dashboard .kpi-card.accent {
+  border-top-color: var(--accent);
+}
+
+.kpi-dashboard .kpi-card.secondary {
+  border-top-color: var(--secondary);
+}
+
+.kpi-card .kpi-icon {
+  font-size: 18pt;
+  margin-bottom: var(--sp-xs);
+}
+
+.kpi-card .kpi-value {
+  font-size: 16pt;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.2;
+  margin-bottom: var(--sp-xs);
+}
+
+.kpi-card .kpi-label {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.kpi-card .kpi-label-en {
+  font-size: 7pt;
+  color: var(--text-faint);
+  font-family: var(--font-en);
+  letter-spacing: 0.3px;
+}
+
+/* ── Feasibility Verdict Banner ──────────────────────────────────────────── */
+.verdict-banner {
+  background: var(--primary);
+  color: var(--text-white);
+  padding: var(--sp-md) var(--sp-xl);
+  border-radius: var(--r-md);
+  text-align: center;
+  margin-bottom: var(--sp-lg);
+}
+
+.verdict-banner.recommended {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+}
+
+.verdict-banner.conditional {
+  background: linear-gradient(135deg, var(--orange-dark) 0%, #D69E2E 100%);
+}
+
+.verdict-banner.not-recommended {
+  background: linear-gradient(135deg, var(--red-dark) 0%, #E53E3E 100%);
+}
+
+.verdict-text {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+}
+
+.verdict-subtitle {
+  font-size: var(--fs-sm);
+  opacity: 0.85;
+  margin-top: var(--sp-xs);
+}
+
+/* ── Watermark Support ───────────────────────────────────────────────────── */
+.watermark-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  font-size: 72pt;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+  font-family: var(--font-en);
+  letter-spacing: 8px;
+}
+
+/* ── TOC Dotted Leaders ──────────────────────────────────────────────────── */
+.toc-entry {
+  display: flex;
+  align-items: baseline;
+  padding: 4px 0;
+  border-bottom: 1px dotted var(--border-light);
+}
+
+.toc-entry .toc-number {
+  width: 28px;
+  height: 28px;
+  background: var(--primary);
+  color: var(--text-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-left: var(--sp-sm);
+}
+
+[dir="rtl"] .toc-entry .toc-number {
+  margin-left: 0;
+  margin-right: 0;
+  margin-inline-end: var(--sp-sm);
+}
+
+.toc-entry .toc-title {
+  flex: 1;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.toc-entry .toc-title-en {
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+  font-family: var(--font-en);
+  display: block;
+}
+
+.toc-entry .toc-page {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  font-weight: 600;
+  min-width: 30px;
+  text-align: center;
+}
+
+.toc-entry.toc-sub {
+  padding-right: var(--sp-xl);
+}
+
+[dir="rtl"] .toc-entry.toc-sub {
+  padding-right: var(--sp-xl);
+  padding-left: 0;
+}
+
+/* ── Implementation Timeline ─────────────────────────────────────────────── */
+.timeline {
+  position: relative;
+  padding: var(--sp-md) 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+  border-radius: 2px;
+}
+
+[dir="ltr"] .timeline::before {
+  right: auto;
+  left: 16px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-right: 48px;
+  padding-bottom: var(--sp-lg);
+  break-inside: avoid;
+}
+
+[dir="ltr"] .timeline-item {
+  padding-right: 0;
+  padding-left: 48px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  right: 10px;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  background: var(--primary);
+  border-radius: 50%;
+  border: 3px solid var(--white);
+  box-shadow: 0 0 0 2px var(--primary);
+  z-index: 1;
+}
+
+[dir="ltr"] .timeline-item::before {
+  right: auto;
+  left: 10px;
+}
+
+.timeline-item.active::before {
+  background: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.timeline-month {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 2px;
+}
+
+.timeline-title {
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 2px;
+}
+
+.timeline-desc {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ── Enhanced Financial Ratio Cards ──────────────────────────────────────── */
+.ratio-card .ratio-status.status-good {
+  border-top: 3px solid var(--green-dark);
+}
+
+.ratio-card .ratio-status.status-ok {
+  border-top: 3px solid var(--orange-dark);
+}
+
+.ratio-card .ratio-status.status-concern {
+  border-top: 3px solid var(--red-dark);
+}
+
+.trend-up::after {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid var(--green-dark);
+  margin-inline-start: 4px;
+  vertical-align: middle;
+}
+
+.trend-down::after {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid var(--red-dark);
+  margin-inline-start: 4px;
+  vertical-align: middle;
+}
+
+/* ── Enhanced SWOT Grid ──────────────────────────────────────────────────── */
+.swot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 12px;
+}
+
+.swot-cell {
+  padding: var(--sp-md);
+  border-radius: var(--r-md);
+  break-inside: avoid;
+}
+
+.swot-cell .swot-count {
+  display: inline-block;
+  background: rgba(0,0,0,0.08);
+  color: inherit;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  padding: 1px 8px;
+  border-radius: 10px;
+  margin-inline-start: var(--sp-sm);
+}
+
+.swot-cell .swot-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--sp-sm);
+}
+
+/* ── Enhanced Page Break Management ──────────────────────────────────────── */
+p {
+  orphans: 3;
+  widows: 3;
+}
+
+h1, h2, h3, h4, .section-header, .subsection-header {
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+.card, .callout, .chart-container, .kpi-card, .ratio-card,
+.breakeven-card, .metric-card, .timeline-item {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+table thead {
+  display: table-header-group;
+}
+
+table tfoot {
+  display: table-footer-group;
+}
+
+/* ── Cover Page Background Pattern ───────────────────────────────────────── */
+.cover-page {
+  background-image:
+    radial-gradient(circle at 85% 15%, rgba(212,175,55,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 15% 85%, rgba(64,145,108,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(27,67,50,0.02) 0%, transparent 70%);
+}
+
+/* ── QR Code Placeholder ─────────────────────────────────────────────────── */
+.qr-placeholder {
+  width: 70px;
+  height: 70px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.3);
+  font-size: var(--fs-xs);
+}
+
+/* ── New Chart Container for 2 new charts ────────────────────────────────── */
+.charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-lg);
+  margin: var(--sp-lg) 0;
+}
+
+.charts-row .chart-container {
+  break-inside: avoid;
+}
+
+.chart-container img {
+  width: 100%;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border-light);
 }
