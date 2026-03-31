@@ -148,6 +148,9 @@ All agents inherit from `BaseAgent` (`backend/app/agents/base_agent.py`):
 - Type hints throughout (from `typing` imports)
 - Pydantic models for request/response validation
 - SQLAlchemy models with declarative base
+- **Formatting**: Black (line length default 88)
+- **Import sorting**: isort (Black-compatible profile)
+- **Linting**: flake8
 
 ### Database
 - **snake_case** for table and column names
@@ -180,9 +183,25 @@ See `backend/.env.example` for required variables:
 - **Financial constants**: VAT 15%, Zakat 2.5%, SAIBOR 5.95%, SIDF rate 3.5%
 - **Subscription plans**: Basic (SAR 99/mo, 2 reports), Pro (SAR 299/mo, 10 reports), Enterprise (SAR 799/mo, unlimited)
 
+## Testing
+
+- **Framework**: pytest + httpx (AsyncClient for FastAPI endpoint testing)
+- **Run tests**: `pytest` from `/backend`
+- Test files go in `/backend/tests/` following `test_*.py` naming
+- Use `httpx.AsyncClient` with `app` for async endpoint tests
+- Fixtures for database sessions, authenticated users, sample projects
+
+## Deployment
+
+- **Frontend**: Vercel
+- **Backend**: Railway or Render (Docker-based)
+- **Database**: Managed PostgreSQL (Railway/Render add-on)
+- **Redis**: Managed Redis instance
+- **CORS**: Already configured for `*.vercel.app` domains
+
 ## Known Gaps
 
-- No test suite (no pytest config or test files)
+- No test suite yet (pytest + httpx planned)
 - No CI/CD pipeline (no GitHub Actions)
 - No Alembic migrations generated yet
 - Frontend not implemented
