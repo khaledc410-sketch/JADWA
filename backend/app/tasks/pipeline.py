@@ -100,9 +100,13 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
         # ── TIER 2: PARALLEL ANALYSIS ───────────────────────────────────
         _update_run(db, run_id, step="تحليل السوق والبيئة التنظيمية...", progress=12)
 
-        from app.agents.market_research_agent import MarketResearchAgent
-        from app.agents.legal_regulatory_agent import LegalRegulatoryAgent
-        from app.agents.hr_saudization_agent import HRSaudizationAgent
+        from app.agents.market.orchestrator import (
+            MarketOrchestrator as MarketResearchAgent,
+        )
+        from app.agents.legal.orchestrator import (
+            LegalOrchestrator as LegalRegulatoryAgent,
+        )
+        from app.agents.hr.orchestrator import HROrchestrator as HRSaudizationAgent
 
         market_result = legal_result = hr_result = {}
         franchise_result = real_estate_result = {}
@@ -125,7 +129,9 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
 
             # Add sector-specific agents
             if sector == "franchise":
-                from app.agents.franchise_agent import FranchiseAgent
+                from app.agents.franchise.orchestrator import (
+                    FranchiseOrchestrator as FranchiseAgent,
+                )
 
                 futures["franchise"] = executor.submit(
                     lambda: FranchiseAgent(db=db, run_id=run_id).run(ctx)
@@ -167,7 +173,9 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
             "legal": legal_result,
         }
 
-        from app.agents.financial_modeling_agent import FinancialModelingAgent
+        from app.agents.financial.orchestrator import (
+            FinancialOrchestrator as FinancialModelingAgent,
+        )
         from app.agents.competitive_analysis_agent import CompetitiveAnalysisAgent
 
         financial_result = competitive_result = {}
@@ -203,7 +211,7 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
             "real_estate": real_estate_result,
         }
 
-        from app.agents.vision2030_agent import Vision2030Agent
+        from app.agents.vision.orchestrator import VisionOrchestrator as Vision2030Agent
         from app.agents.risk_assessment_agent import RiskAssessmentAgent
 
         vision_result = risk_result = {}
@@ -282,13 +290,31 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
             }
         )
 
-        _update_run(db, run_id, step="حفظ التقرير...", progress=95)
+        _update_run(db, run_id, step="رفع التقرير إلى التخزين السحابي...", progress=95)
+
+        # Upload PDF to S3
+        import os
+
+        pdf_path = pdf_result.get("pdf_path", "")
+        s3_key = ""
+        if pdf_path and os.path.exists(pdf_path):
+            try:
+                from app.services.storage import get_storage
+
+                storage = get_storage()
+                s3_key = (
+                    f"reports/{run_id}/{pdf_result.get('pdf_filename', 'report.pdf')}"
+                )
+                storage.upload_pdf(pdf_path, s3_key)
+                os.remove(pdf_path)  # Clean up temp file
+            except Exception:
+                s3_key = pdf_path  # Fallback to local path
 
         # Save output record
         output = ReportOutput(
             run_id=run_id,
             language=language,
-            pdf_url=pdf_result.get("pdf_path", ""),
+            pdf_url=s3_key or pdf_path,
             page_count=pdf_result.get("page_count", 0),
             file_size_kb=pdf_result.get("file_size_kb", 0),
             generation_time_seconds=(

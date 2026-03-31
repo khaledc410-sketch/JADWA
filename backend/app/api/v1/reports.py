@@ -116,4 +116,18 @@ def download_report(
     )
     if not output or not output.pdf_url:
         raise HTTPException(404, "Report not ready or not found")
-    return {"pdf_url": output.pdf_url, "page_count": output.page_count}
+
+    # Generate presigned URL from S3 key
+    from app.services.storage import get_storage
+
+    try:
+        storage = get_storage()
+        presigned_url = storage.generate_presigned_url(output.pdf_url, expires_in=3600)
+        return {
+            "pdf_url": presigned_url,
+            "page_count": output.page_count,
+            "expires_in_seconds": 3600,
+        }
+    except Exception:
+        # Fallback to stored URL (local path or direct URL)
+        return {"pdf_url": output.pdf_url, "page_count": output.page_count}

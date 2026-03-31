@@ -4,7 +4,9 @@ All 15 JADWA agents inherit from this class.
 """
 
 from abc import ABC, abstractmethod
+import concurrent.futures
 from datetime import datetime
+import json
 from typing import Any, Optional
 import anthropic
 from app.core.config import settings
@@ -116,6 +118,37 @@ class BaseAgent(ABC):
 
         return f"Analyze the following business project data and provide your analysis:\n\n{json.dumps(context, ensure_ascii=False, indent=2)}"
 
+    def _parse_json_output(self, raw: str) -> dict:
+        """Try to parse JSON from Claude's text response."""
+        try:
+            # Try direct parse
+            return json.loads(raw)
+        except (json.JSONDecodeError, TypeError):
+            pass
+        # Try to extract JSON block from markdown
+        if "```json" in raw:
+            start = raw.index("```json") + 7
+            end = raw.index("```", start)
+            try:
+                return json.loads(raw[start:end])
+            except (json.JSONDecodeError, ValueError):
+                pass
+        if "```" in raw:
+            start = raw.index("```") + 3
+            end = raw.index("```", start)
+            try:
+                return json.loads(raw[start:end])
+            except (json.JSONDecodeError, ValueError):
+                pass
+        # Try to find JSON object in text
+        for i, c in enumerate(raw):
+            if c == "{":
+                try:
+                    return json.loads(raw[i:])
+                except json.JSONDecodeError:
+                    continue
+        return {"raw_output": raw}
+
     def _log_to_db(
         self, input_data: dict, output_data: dict, status: str, error: str = None
     ):
@@ -155,3 +188,119 @@ class BaseAgent(ABC):
             self.db.commit()
         except Exception:
             pass  # Don't let logging failures break the pipeline
+
+
+class SubAgentOrchestrator(BaseAgent):
+    """
+    Orchestrator that runs multiple specialized sub-agents in parallel,
+    then feeds all outputs to a reviewer agent for synthesis.
+
+    Subclass and override:
+      - get_sub_agents(context) -> list of BaseAgent instances
+      - reviewer_system_prompt -> str
+      - name, description
+    """
+
+    reviewer_max_tokens: int = 8192
+    reviewer_temperature: float = 0.2
+
+    @abstractmethod
+    def get_sub_agents(self, context: dict) -> list:
+        """Return list of sub-agent instances to run in parallel."""
+        pass
+
+    @property
+    @abstractmethod
+    def reviewer_system_prompt(self) -> str:
+        """System prompt for the reviewer agent that synthesizes sub-agent outputs."""
+        pass
+
+    @property
+    def system_prompt(self) -> str:
+        return self.reviewer_system_prompt
+
+    def run(self, context: dict) -> dict:
+        """
+        1. Run all sub-agents in parallel
+        2. Collect their outputs
+        3. Feed all outputs to reviewer agent for synthesis
+        4. Return reviewer's final output
+        """
+        self.started_at = datetime.utcnow()
+
+        try:
+            # Step 1: Get sub-agents
+            sub_agents = self.get_sub_agents(context)
+            sub_results = {}
+
+            # Step 2: Run sub-agents in parallel
+            with concurrent.futures.ThreadPoolExecutor(
+                max_workers=len(sub_agents)
+            ) as executor:
+                future_map = {}
+                for agent in sub_agents:
+                    future = executor.submit(agent.run, context)
+                    future_map[future] = agent.name
+
+                for future in concurrent.futures.as_completed(future_map):
+                    agent_name = future_map[future]
+                    try:
+                        result = future.result(timeout=300)
+                        sub_results[agent_name] = result
+                    except Exception as e:
+                        sub_results[agent_name] = {
+                            "error": str(e),
+                            "status": "failed",
+                        }
+
+            # Step 3: Run reviewer to synthesize
+            reviewer_context = {
+                "sub_agent_outputs": sub_results,
+                "original_context": context,
+            }
+            result = self._run_reviewer(reviewer_context)
+
+            self.completed_at = datetime.utcnow()
+
+            # Sum up tokens from all sub-agents
+            for agent in sub_agents:
+                self.tokens_used += agent.tokens_used
+
+            self._log_to_db(context, result, status="completed")
+            return result
+
+        except Exception as e:
+            self.completed_at = datetime.utcnow()
+            self._log_to_db(context, {}, status="failed", error=str(e))
+            raise
+
+    def _run_reviewer(self, reviewer_context: dict) -> dict:
+        """Run the reviewer agent to synthesize all sub-agent outputs."""
+        messages = [
+            {
+                "role": "user",
+                "content": (
+                    "You have received outputs from multiple specialized sub-agents. "
+                    "Review, cross-validate, and synthesize them into a single cohesive output.\n\n"
+                    "Sub-agent outputs:\n"
+                    f"{json.dumps(reviewer_context['sub_agent_outputs'], ensure_ascii=False, indent=2)}\n\n"
+                    "Original project context:\n"
+                    f"{json.dumps(reviewer_context['original_context'], ensure_ascii=False, indent=2)}\n\n"
+                    "Return a JSON object with the final synthesized analysis. "
+                    "Resolve any conflicts between sub-agents by choosing the most reliable data. "
+                    "No text outside the JSON block."
+                ),
+            }
+        ]
+
+        response = self.client.messages.create(
+            model=settings.CLAUDE_MODEL,
+            max_tokens=self.reviewer_max_tokens,
+            temperature=self.reviewer_temperature,
+            system=self.reviewer_system_prompt,
+            messages=messages,
+        )
+        self.tokens_used += response.usage.input_tokens + response.usage.output_tokens
+
+        text = "\n".join(b.text for b in response.content if hasattr(b, "text"))
+        return self._parse_json_output(text)

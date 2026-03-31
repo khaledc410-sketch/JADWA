@@ -27,6 +27,36 @@ services:
       timeout: 3s
       retries: 5
 
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: jadwa_minio
+      MINIO_ROOT_PASSWORD: jadwa_minio_dev_pass
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  minio_init:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set jadwa http://minio:9000 jadwa_minio jadwa_minio_dev_pass &&
+      mc mb --ignore-existing jadwa/jadwa-reports &&
+      echo 'Bucket jadwa-reports created'
+      "
+    restart: "no"
+
   backend:
     build:
       context: ./backend
@@ -39,10 +69,17 @@ services:
       SECRET_KEY: dev-secret-key-change-in-production
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
       ENVIRONMENT: development
+      S3_ENDPOINT: http://minio:9000
+      S3_PUBLIC_ENDPOINT: http://localhost:9000
+      AWS_ACCESS_KEY_ID: jadwa_minio
+      AWS_SECRET_ACCESS_KEY: jadwa_minio_dev_pass
+      S3_BUCKET: jadwa-reports
     depends_on:
       postgres:
         condition: service_healthy
       redis:
+        condition: service_healthy
+      minio:
         condition: service_healthy
     volumes:
       - ./backend:/app
@@ -59,10 +96,17 @@ services:
       SECRET_KEY: dev-secret-key-change-in-production
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
       ENVIRONMENT: development
+      S3_ENDPOINT: http://minio:9000
+      S3_PUBLIC_ENDPOINT: http://localhost:9000
+      AWS_ACCESS_KEY_ID: jadwa_minio
+      AWS_SECRET_ACCESS_KEY: jadwa_minio_dev_pass
+      S3_BUCKET: jadwa-reports
     depends_on:
       postgres:
         condition: service_healthy
       redis:
+        condition: service_healthy
+      minio:
         condition: service_healthy
     volumes:
       - ./backend:/app
@@ -87,3 +131,4 @@ services:
 
 volumes:
   postgres_data:
+  minio_data:

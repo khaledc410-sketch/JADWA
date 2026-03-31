@@ -30,6 +30,9 @@ class Settings(BaseSettings):
     AWS_ACCESS_KEY_ID: Optional[str] = None
     AWS_SECRET_ACCESS_KEY: Optional[str] = None
     AWS_REGION: str = "me-south-1"  # Bahrain region (closest to Saudi)
+    S3_PUBLIC_ENDPOINT: Optional[str] = (
+        None  # For presigned URLs reachable from browser
+    )
 
     # Moyasar (Saudi payment gateway)
     MOYASAR_SECRET_KEY: Optional[str] = None
