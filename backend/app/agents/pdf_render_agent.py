@@ -311,9 +311,29 @@ class PDFRenderAgent(BaseAgent):
         Generate a real multi-page PDF using fpdf2.
         Falls back to this when WeasyPrint cannot load system libs (e.g. arch mismatch on macOS).
         Uses Arabic Unicode font when available; English-only Helvetica otherwise.
+        Arabic text is shaped via arabic-reshaper + python-bidi so ligatures and RTL display correctly.
         """
         from fpdf import FPDF
         import io
+        import re as _re
+
+        # ── Arabic text shaping ───────────────────────────────────────────────
+        _AR_RANGE = _re.compile(
+            r"[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]"
+        )
+
+        try:
+            import arabic_reshaper
+            from bidi.algorithm import get_display as _bidi_display
+
+            def shape(text: str) -> str:
+                if not text or not _AR_RANGE.search(text):
+                    return text
+                return _bidi_display(arabic_reshaper.reshape(text))
+        except ImportError:
+
+            def shape(text: str) -> str:
+                return text
 
         # Need a font with BOTH Arabic and Latin glyphs (Arial Unicode, NotoSans, etc.)
         BILINGUAL_FONT_CANDIDATES = [
@@ -341,17 +361,19 @@ class PDFRenderAgent(BaseAgent):
 
         # ── helpers ──────────────────────────────────────────────────────────
         def H1(txt):
-            pdf.set_font(fn, "" if fn == "Arabic" else "B", 18)
+            pdf.set_font(fn, "" if fn != "Helvetica" else "B", 18)
             pdf.set_fill_color(27, 67, 50)
             pdf.set_text_color(255, 255, 255)
-            pdf.cell(0, 12, txt, new_x="LMARGIN", new_y="NEXT", fill=True, align="C")
+            pdf.cell(
+                0, 12, shape(txt), new_x="LMARGIN", new_y="NEXT", fill=True, align="C"
+            )
             pdf.ln(3)
 
         def H2(txt):
-            pdf.set_font(fn, "" if fn == "Arabic" else "B", 11)
+            pdf.set_font(fn, "" if fn != "Helvetica" else "B", 11)
             pdf.set_fill_color(27, 67, 50)
             pdf.set_text_color(255, 255, 255)
-            pdf.cell(0, 8, txt, new_x="LMARGIN", new_y="NEXT", fill=True)
+            pdf.cell(0, 8, shape(txt), new_x="LMARGIN", new_y="NEXT", fill=True)
             pdf.set_text_color(30, 30, 30)
             pdf.ln(2)
 
@@ -359,15 +381,15 @@ class PDFRenderAgent(BaseAgent):
             pdf.set_font(fn, "", size)
             pdf.set_text_color(30, 30, 30)
             if txt:
-                pdf.multi_cell(0, 6, txt)
+                pdf.multi_cell(0, 6, shape(str(txt)))
             pdf.ln(1)
 
         def TH(headers_widths):
-            pdf.set_font(fn, "" if fn == "Arabic" else "B", 9)
+            pdf.set_font(fn, "" if fn != "Helvetica" else "B", 9)
             pdf.set_fill_color(27, 67, 50)
             pdf.set_text_color(255, 255, 255)
             for hdr, w in headers_widths:
-                pdf.cell(w, 7, hdr, border=1, fill=True)
+                pdf.cell(w, 7, shape(hdr), border=1, fill=True)
             pdf.ln()
             pdf.set_text_color(30, 30, 30)
 
@@ -378,7 +400,7 @@ class PDFRenderAgent(BaseAgent):
             else:
                 pdf.set_fill_color(255, 255, 255)
             for val, w, align in cells_widths:
-                pdf.cell(w, 6, str(val), border=1, fill=True, align=align)
+                pdf.cell(w, 6, shape(str(val)), border=1, fill=True, align=align)
             pdf.ln()
 
         # ── pull context ──────────────────────────────────────────────────────
@@ -399,7 +421,7 @@ class PDFRenderAgent(BaseAgent):
         pdf.cell(
             0,
             8,
-            "Feasibility Study  |  دراسة الجدوى",
+            shape("Feasibility Study  |  دراسة الجدوى"),
             new_x="LMARGIN",
             new_y="NEXT",
             align="C",
@@ -416,7 +438,7 @@ class PDFRenderAgent(BaseAgent):
         verdict_en = exec_s.get("feasibility_verdict_en", "")
         if verdict_en:
             pdf.ln(3)
-            pdf.set_font(fn, "" if fn == "Arabic" else "B", 14)
+            pdf.set_font(fn, "" if fn != "Helvetica" else "B", 14)
             pdf.set_text_color(39, 174, 96)
             pdf.cell(
                 0,
@@ -541,7 +563,7 @@ class PDFRenderAgent(BaseAgent):
                 ("Opportunities", "opportunities"),
                 ("Threats", "threats"),
             ]:
-                pdf.set_font(fn, "" if fn == "Arabic" else "B", 10)
+                pdf.set_font(fn, "" if fn != "Helvetica" else "B", 10)
                 pdf.set_text_color(27, 67, 50)
                 pdf.cell(0, 7, label, new_x="LMARGIN", new_y="NEXT")
                 for item in swot.get(key, []):
