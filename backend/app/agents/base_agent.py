@@ -127,11 +127,18 @@ class BaseAgent(ABC):
         text_blocks = [b.text for b in response.content if hasattr(b, "text")]
         return {"raw_output": "\n".join(text_blocks), "agent": self.name}
 
+    @staticmethod
+    def _truncate_context(context: dict, max_chars: int = 3000) -> str:
+        """Serialize context to JSON, truncating to max_chars if needed."""
+        serialized = json.dumps(context, ensure_ascii=False, indent=2)
+        if len(serialized) <= max_chars:
+            return serialized
+        return serialized[:max_chars] + "\n... [truncated]"
+
     def _build_user_message(self, context: dict) -> str:
         """Build the user message from context dict. Override for custom formatting."""
-        import json
-
-        return f"Analyze the following business project data and provide your analysis:\n\n{json.dumps(context, ensure_ascii=False, indent=2)}"
+        truncated = self._truncate_context(context, max_chars=3000)
+        return f"Analyze the following business project data and provide your analysis:\n\n{truncated}"
 
     def _parse_json_output(self, raw: str) -> dict:
         """Try to parse JSON from Claude's text response."""
@@ -289,8 +296,51 @@ class SubAgentOrchestrator(BaseAgent):
             self._log_to_db(context, {}, status="failed", error=str(e))
             raise
 
+    @staticmethod
+    def _slim_context_for_reviewer(original_context: dict) -> dict:
+        """Extract only essential fields from the original context for the reviewer."""
+        slim = {}
+        for key in ("sector", "language"):
+            if key in original_context:
+                slim[key] = original_context[key]
+        # Include a compact version of intake (top-level scalars only)
+        if "intake" in original_context and isinstance(
+            original_context["intake"], dict
+        ):
+            intake = original_context["intake"]
+            slim["intake_summary"] = {
+                k: v
+                for k, v in intake.items()
+                if isinstance(v, (str, int, float, bool)) and len(str(v)) < 200
+            }
+        if "validated" in original_context and isinstance(
+            original_context["validated"], dict
+        ):
+            slim["completeness_score"] = original_context["validated"].get(
+                "completeness_score"
+            )
+        return slim
+
+    @staticmethod
+    def _truncate_sub_outputs(sub_outputs: dict, max_per_agent: int = 2000) -> dict:
+        """Truncate each sub-agent output to max_per_agent chars."""
+        truncated = {}
+        for agent_name, output in sub_outputs.items():
+            serialized = json.dumps(output, ensure_ascii=False, indent=2)
+            if len(serialized) > max_per_agent:
+                serialized = serialized[:max_per_agent] + "\n... [truncated]"
+            truncated[agent_name] = serialized
+        return truncated
+
     def _run_reviewer(self, reviewer_context: dict) -> dict:
         """Run the reviewer agent to synthesize all sub-agent outputs."""
+        slim_context = self._slim_context_for_reviewer(
+            reviewer_context["original_context"]
+        )
+        truncated_outputs = self._truncate_sub_outputs(
+            reviewer_context["sub_agent_outputs"]
+        )
+
         messages = [
             {
                 "role": "user",
@@ -298,9 +348,9 @@ class SubAgentOrchestrator(BaseAgent):
                     "You have received outputs from multiple specialized sub-agents. "
                     "Review, cross-validate, and synthesize them into a single cohesive output.\n\n"
                     "Sub-agent outputs:\n"
-                    f"{json.dumps(reviewer_context['sub_agent_outputs'], ensure_ascii=False, indent=2)}\n\n"
-                    "Original project context:\n"
-                    f"{json.dumps(reviewer_context['original_context'], ensure_ascii=False, indent=2)}\n\n"
+                    f"{json.dumps(truncated_outputs, ensure_ascii=False, indent=2)}\n\n"
+                    "Project context:\n"
+                    f"{json.dumps(slim_context, ensure_ascii=False, indent=2)}\n\n"
                     "Return a JSON object with the final synthesized analysis. "
                     "Resolve any conflicts between sub-agents by choosing the most reliable data. "
                     "No text outside the JSON block."

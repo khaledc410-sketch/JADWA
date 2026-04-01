@@ -20,6 +20,29 @@ from app.models.report import ReportRun, ReportOutput
 from app.models.project import Project
 
 
+def _extract_essentials(result: dict, max_chars: int = 1500) -> dict:
+    """
+    Extract essential fields from an agent result, dropping raw_output
+    and truncating to max_chars to keep downstream context small.
+    """
+    if not result or not isinstance(result, dict):
+        return result
+    # Drop raw_output (the largest field), keep structured keys
+    slim = {k: v for k, v in result.items() if k != "raw_output"}
+    # If stripping raw_output left nothing useful, fall back to truncated raw
+    if not slim or (len(slim) == 1 and "agent" in slim):
+        raw = result.get("raw_output", "")
+        slim["summary"] = raw[:max_chars] + ("..." if len(raw) > max_chars else "")
+        slim["agent"] = result.get("agent", "")
+    import json as _json
+
+    serialized = _json.dumps(slim, ensure_ascii=False)
+    if len(serialized) > max_chars:
+        # Brute-force truncate the whole dict serialization
+        slim = {"summary": serialized[:max_chars] + "... [truncated]"}
+    return slim
+
+
 def _update_run(
     db,
     run_id: str,
@@ -168,9 +191,9 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
         # ── TIER 2b: FINANCIAL + COMPETITIVE (depend on market + hr) ──
         ctx_2b = {
             **ctx,
-            "market": market_result,
-            "hr": hr_result,
-            "legal": legal_result,
+            "market": _extract_essentials(market_result),
+            "hr": _extract_essentials(hr_result),
+            "legal": _extract_essentials(legal_result),
         }
 
         from app.agents.financial.orchestrator import (
@@ -205,10 +228,10 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
         # ── TIER 2c: VISION2030 + RISK (need all prior outputs) ──
         ctx_2c = {
             **ctx_2b,
-            "financial": financial_result,
-            "competitive": competitive_result,
-            "franchise": franchise_result,
-            "real_estate": real_estate_result,
+            "financial": _extract_essentials(financial_result),
+            "competitive": _extract_essentials(competitive_result),
+            "franchise": _extract_essentials(franchise_result),
+            "real_estate": _extract_essentials(real_estate_result),
         }
 
         from app.agents.vision.orchestrator import VisionOrchestrator as Vision2030Agent
