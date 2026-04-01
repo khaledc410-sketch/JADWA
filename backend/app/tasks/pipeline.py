@@ -120,7 +120,7 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
         def run_hr():
             return HRSaudizationAgent(db=db, run_id=run_id).run(ctx)
 
-        with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
             futures = {
                 "market": executor.submit(run_market),
                 "legal": executor.submit(run_legal),

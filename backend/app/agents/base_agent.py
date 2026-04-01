@@ -66,6 +66,8 @@ class BaseAgent(ABC):
 
     def _run_agent_loop(self, messages: list) -> dict:
         """Agentic loop: keep calling Claude until no more tool_use calls."""
+        import time as _time
+
         while True:
             kwargs = {
                 "model": settings.CLAUDE_MODEL,
@@ -76,7 +78,20 @@ class BaseAgent(ABC):
             if self.tools:
                 kwargs["tools"] = self.tools
 
-            response = self.client.messages.create(**kwargs)
+            # Retry with exponential backoff for rate limits
+            max_retries = 8
+            for attempt in range(max_retries):
+                try:
+                    response = self.client.messages.create(**kwargs)
+                    break
+                except Exception as e:
+                    if "429" in str(e) or "rate_limit" in str(e):
+                        wait = min(2**attempt * 5, 120)  # 5s, 10s, 20s, ... max 120s
+                        _time.sleep(wait)
+                        if attempt == max_retries - 1:
+                            raise
+                    else:
+                        raise
             self.tokens_used += (
                 response.usage.input_tokens + response.usage.output_tokens
             )
@@ -233,9 +248,9 @@ class SubAgentOrchestrator(BaseAgent):
             sub_agents = self.get_sub_agents(context)
             sub_results = {}
 
-            # Step 2: Run sub-agents in parallel
+            # Step 2: Run sub-agents (limited concurrency to avoid API rate limits)
             with concurrent.futures.ThreadPoolExecutor(
-                max_workers=len(sub_agents)
+                max_workers=min(2, len(sub_agents))
             ) as executor:
                 future_map = {}
                 for agent in sub_agents:

@@ -41,7 +41,7 @@ def normalize_sector(sector: str) -> str:
 
 
 @lru_cache(maxsize=10)
-def _load_json(filename: str) -> dict | list:
+def _load_json(filename: str) -> Any:
     """Load and cache a JSON seed file."""
     path = os.path.join(settings.DATA_SEED_PATH, filename)
     if not os.path.exists(path):
@@ -50,7 +50,7 @@ def _load_json(filename: str) -> dict | list:
         return json.load(f)
 
 
-def load_seed(source: str) -> dict | list:
+def load_seed(source: str) -> Any:
     """Load a seed JSON file by source name.
 
     Valid sources: sama_rates, rfta_franchises, gastat_demographics,

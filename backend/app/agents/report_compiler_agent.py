@@ -134,25 +134,23 @@ class ReportCompilerAgent(BaseAgent):
 
     def execute_tool(self, tool_name: str, tool_input: dict) -> Any:
         if tool_name == "compile_executive_summary":
-            return self._compile_executive_summary(**tool_input)
+            return self._compile_executive_summary(tool_input)
         if tool_name == "assemble_report_sections":
-            return self._assemble_report_sections(**tool_input)
+            return self._assemble_report_sections(tool_input)
         if tool_name == "validate_report_completeness":
-            return self._validate_report_completeness(**tool_input)
+            return self._validate_report_completeness(tool_input)
         raise NotImplementedError(f"Unknown tool: {tool_name}")
 
-    def _compile_executive_summary(
-        self,
-        project_name: str,
-        sector: str,
-        investment_sar: float = 0,
-        irr: float = 0,
-        npv_sar: float = 0,
-        payback_months: int = 0,
-        vision_score: int = 75,
-        risk_rating: str = "medium",
-        nitaqat_band: str = "low_green",
-    ) -> dict:
+    def _compile_executive_summary(self, data: dict) -> dict:
+        project_name = data.get("project_name", "")
+        sector = data.get("sector", "")
+        investment_sar = data.get("investment_sar", 0)
+        irr = data.get("irr", 0)
+        npv_sar = data.get("npv_sar", data.get("npv", 0))
+        payback_months = data.get("payback_months", 0)
+        vision_score = data.get("vision_score", 75)
+        risk_rating = data.get("risk_rating", "medium")
+        nitaqat_band = data.get("nitaqat_band", "low_green")
         # Determine feasibility verdict
         if irr > 0.20 and risk_rating in ["low", "medium"] and vision_score >= 70:
             verdict_en = "RECOMMENDED"
@@ -212,9 +210,9 @@ class ReportCompilerAgent(BaseAgent):
             ],
         }
 
-    def _assemble_report_sections(
-        self, sections_data: dict, report_template: str = "standard_sme"
-    ) -> dict:
+    def _assemble_report_sections(self, data: dict) -> dict:
+        sections_data = data.get("sections_data", data)
+        report_template = data.get("report_template", "standard_sme")
         report = {
             "report_id": f"JADWA-{datetime.utcnow().strftime('%Y%m%d%H%M%S')}",
             "report_template": report_template,
@@ -238,9 +236,9 @@ class ReportCompilerAgent(BaseAgent):
 
         return report
 
-    def _validate_report_completeness(
-        self, report: dict, required_sections: list = None
-    ) -> dict:
+    def _validate_report_completeness(self, data: dict) -> dict:
+        report = data.get("report", data)
+        required_sections = data.get("required_sections", None)
         if required_sections is None:
             required_sections = [
                 s

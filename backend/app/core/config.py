@@ -1,3 +1,5 @@
+import os
+
 from pydantic_settings import BaseSettings
 from typing import Optional
 
@@ -46,4 +48,10 @@ class Settings(BaseSettings):
         case_sensitive = True
 
 
-settings = Settings()
+_settings = Settings()
+
+# Shell env vars take priority over empty .env values
+if not _settings.ANTHROPIC_API_KEY and os.environ.get("ANTHROPIC_API_KEY"):
+    _settings.ANTHROPIC_API_KEY = os.environ["ANTHROPIC_API_KEY"]
+
+settings = _settings
