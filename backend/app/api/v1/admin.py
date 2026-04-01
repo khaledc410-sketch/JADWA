@@ -240,6 +240,7 @@ def admin_get_agent_logs(
                 if log.started_at and log.completed_at
                 else None
             ),
+            "output_data": log.output_data if log.output_data else {},
         }
         for log in logs
     ]
