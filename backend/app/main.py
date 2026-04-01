@@ -10,14 +10,13 @@ from app.api.v1 import auth, projects, reports, admin, templates
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Create tables on startup (use Alembic in production)
-    if settings.ENVIRONMENT == "development":
-        try:
-            Base.metadata.create_all(bind=engine)
-        except Exception as e:
-            print(f"WARNING: Could not connect to database on startup: {e}")
-            print(
-                "The server will start, but DB-dependent endpoints will fail until PostgreSQL is running."
-            )
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        print(f"WARNING: Could not connect to database on startup: {e}")
+        print(
+            "The server will start, but DB-dependent endpoints will fail until PostgreSQL is running."
+        )
     # Pre-load seed data into memory
     from app.services.data_tools import load_seed
 
@@ -49,10 +48,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "https://*.vercel.app",
-    ],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
