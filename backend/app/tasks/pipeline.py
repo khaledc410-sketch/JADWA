@@ -20,6 +20,26 @@ from app.models.report import ReportRun, ReportOutput
 from app.models.project import Project
 
 
+def _load_completed_agents(db, run_id: str) -> dict:
+    """Load previously completed agent outputs for resume support."""
+    from app.models.report import AgentLog
+
+    logs = (
+        db.query(AgentLog)
+        .filter(
+            AgentLog.run_id == run_id,
+            AgentLog.status == "completed",
+            AgentLog.output_data.isnot(None),
+        )
+        .all()
+    )
+    return {
+        log.agent_name: log.output_data
+        for log in logs
+        if log.output_data and log.output_data != {}
+    }
+
+
 def _extract_essentials(result: dict, max_chars: int = 1500) -> dict:
     """
     Extract essential fields from an agent result, dropping raw_output
@@ -84,32 +104,43 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
         intake = project.intake_data
         sector = project.sector
 
+        # Load previously completed agents for resume support
+        cached = _load_completed_agents(db, run_id)
+
         run.started_at = datetime.utcnow()
+        run.error_message = None
         _update_run(db, run_id, status="running", step="بدء التحليل...", progress=2)
 
         # ── TIER 1: INTAKE ──────────────────────────────────────────────
         _update_run(db, run_id, step="التحقق من البيانات المدخلة...", progress=5)
-        from app.agents.intake_validation_agent import IntakeValidationAgent
 
-        intake_agent = IntakeValidationAgent(db=db, run_id=run_id)
-        validated = intake_agent.run(
-            {"intake": intake, "sector": sector, "language": language}
-        )
+        if "IntakeValidationAgent" in cached:
+            validated = cached["IntakeValidationAgent"]
+        else:
+            from app.agents.intake_validation_agent import IntakeValidationAgent
 
-        if validated.get("completeness_score", 100) < 50:
-            _update_run(
-                db,
-                run_id,
-                status="failed",
-                error="Intake data too incomplete (score < 50)",
+            intake_agent = IntakeValidationAgent(db=db, run_id=run_id)
+            validated = intake_agent.run(
+                {"intake": intake, "sector": sector, "language": language}
             )
-            return
+            if validated.get("completeness_score", 100) < 50:
+                _update_run(
+                    db,
+                    run_id,
+                    status="failed",
+                    error="Intake data too incomplete (score < 50)",
+                )
+                return
 
         _update_run(db, run_id, step="تحديد مسار التقرير...", progress=8)
-        from app.agents.sector_router_agent import SectorRouterAgent
 
-        router = SectorRouterAgent(db=db, run_id=run_id)
-        routing = router.run({"validated_context": validated, "sector": sector})
+        if "SectorRouterAgent" in cached:
+            routing = cached["SectorRouterAgent"]
+        else:
+            from app.agents.sector_router_agent import SectorRouterAgent
+
+            router = SectorRouterAgent(db=db, run_id=run_id)
+            routing = router.run({"validated_context": validated, "sector": sector})
 
         # Build project context passed to all agents
         ctx = {
@@ -135,12 +166,18 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
         franchise_result = real_estate_result = {}
 
         def run_market():
+            if "MarketResearchAgent" in cached:
+                return cached["MarketResearchAgent"]
             return MarketResearchAgent(db=db, run_id=run_id).run(ctx)
 
         def run_legal():
+            if "LegalRegulatoryAgent" in cached:
+                return cached["LegalRegulatoryAgent"]
             return LegalRegulatoryAgent(db=db, run_id=run_id).run(ctx)
 
         def run_hr():
+            if "HRSaudizationAgent" in cached:
+                return cached["HRSaudizationAgent"]
             return HRSaudizationAgent(db=db, run_id=run_id).run(ctx)
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
@@ -156,15 +193,21 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
                     FranchiseOrchestrator as FranchiseAgent,
                 )
 
-                futures["franchise"] = executor.submit(
-                    lambda: FranchiseAgent(db=db, run_id=run_id).run(ctx)
-                )
+                def run_franchise():
+                    if "FranchiseAgent" in cached:
+                        return cached["FranchiseAgent"]
+                    return FranchiseAgent(db=db, run_id=run_id).run(ctx)
+
+                futures["franchise"] = executor.submit(run_franchise)
             elif sector == "real_estate":
                 from app.agents.real_estate_agent import RealEstateAgent
 
-                futures["real_estate"] = executor.submit(
-                    lambda: RealEstateAgent(db=db, run_id=run_id).run(ctx)
-                )
+                def run_real_estate():
+                    if "RealEstateAgent" in cached:
+                        return cached["RealEstateAgent"]
+                    return RealEstateAgent(db=db, run_id=run_id).run(ctx)
+
+                futures["real_estate"] = executor.submit(run_real_estate)
 
             for key, future in futures.items():
                 try:
@@ -204,9 +247,13 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
         financial_result = competitive_result = {}
 
         def run_financial():
+            if "FinancialModelingAgent" in cached:
+                return cached["FinancialModelingAgent"]
             return FinancialModelingAgent(db=db, run_id=run_id).run(ctx_2b)
 
         def run_competitive():
+            if "CompetitiveAnalysisAgent" in cached:
+                return cached["CompetitiveAnalysisAgent"]
             return CompetitiveAnalysisAgent(db=db, run_id=run_id).run(ctx_2b)
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
@@ -240,9 +287,13 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
         vision_result = risk_result = {}
 
         def run_vision():
+            if "Vision2030Agent" in cached:
+                return cached["Vision2030Agent"]
             return Vision2030Agent(db=db, run_id=run_id).run(ctx_2c)
 
         def run_risk():
+            if "RiskAssessmentAgent" in cached:
+                return cached["RiskAssessmentAgent"]
             return RiskAssessmentAgent(db=db, run_id=run_id).run(ctx_2c)
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
@@ -274,44 +325,56 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
 
         from app.agents.chart_generation_agent import ChartGenerationAgent
 
-        chart_agent = ChartGenerationAgent(db=db, run_id=run_id)
-        chart_result = chart_agent.run(all_results)
+        if "ChartGenerationAgent" in cached:
+            chart_result = cached["ChartGenerationAgent"]
+        else:
+            chart_agent = ChartGenerationAgent(db=db, run_id=run_id)
+            chart_result = chart_agent.run(all_results)
 
         _update_run(db, run_id, step="تجميع التقرير النهائي...", progress=75)
 
         from app.agents.report_compiler_agent import ReportCompilerAgent
 
-        compiler = ReportCompilerAgent(db=db, run_id=run_id)
-        report_doc = compiler.run(
-            {
-                **all_results,
-                "charts": chart_result,
-                "intake": intake,
-                "sector": sector,
-                "language": language,
-            }
-        )
+        if "ReportCompilerAgent" in cached:
+            report_doc = cached["ReportCompilerAgent"]
+        else:
+            compiler = ReportCompilerAgent(db=db, run_id=run_id)
+            report_doc = compiler.run(
+                {
+                    **all_results,
+                    "charts": chart_result,
+                    "intake": intake,
+                    "sector": sector,
+                    "language": language,
+                }
+            )
 
         _update_run(db, run_id, step="مراجعة جودة التقرير...", progress=85)
 
         from app.agents.quality_review_agent import QualityReviewAgent
 
-        qa_agent = QualityReviewAgent(db=db, run_id=run_id)
-        qa_result = qa_agent.run({"report_doc": report_doc, "language": language})
+        if "QualityReviewAgent" in cached:
+            qa_result = cached["QualityReviewAgent"]
+        else:
+            qa_agent = QualityReviewAgent(db=db, run_id=run_id)
+            qa_result = qa_agent.run({"report_doc": report_doc, "language": language})
 
         _update_run(db, run_id, step="توليد ملف PDF...", progress=90)
 
         from app.agents.pdf_render_agent import PDFRenderAgent
 
-        pdf_agent = PDFRenderAgent(db=db, run_id=run_id)
-        pdf_result = pdf_agent.run(
-            {
-                "report_doc": qa_result.get("reviewed_report", report_doc),
-                "charts": chart_result,
-                "language": language,
-                "branding": intake.get("branding", {}),
-            }
-        )
+        if "PDFRenderAgent" in cached:
+            pdf_result = cached["PDFRenderAgent"]
+        else:
+            pdf_agent = PDFRenderAgent(db=db, run_id=run_id)
+            pdf_result = pdf_agent.run(
+                {
+                    "report_doc": qa_result.get("reviewed_report", report_doc),
+                    "charts": chart_result,
+                    "language": language,
+                    "branding": intake.get("branding", {}),
+                }
+            )
 
         _update_run(db, run_id, step="رفع التقرير إلى التخزين السحابي...", progress=95)
 

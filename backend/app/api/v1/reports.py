@@ -99,6 +99,85 @@ async def stream_progress(
     return StreamingResponse(event_generator(), media_type="text/event-stream")
 
 
+@router.post("/{run_id}/retry")
+def retry_report(
+    run_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Retry a failed report run, resuming from last checkpoint."""
+    run = db.query(ReportRun).filter(ReportRun.id == run_id).first()
+    if not run:
+        raise HTTPException(404, "Report run not found")
+
+    project = (
+        db.query(Project)
+        .filter(Project.id == run.project_id, Project.user_id == current_user.id)
+        .first()
+    )
+    if not project:
+        raise HTTPException(404, "Project not found")
+
+    if run.status not in ("failed",):
+        raise HTTPException(400, "Can only retry failed runs")
+
+    run.status = "queued"
+    run.error_message = None
+    run.progress_percent = 0
+    run.current_step = "إعادة المحاولة..."
+    db.commit()
+
+    from app.tasks.pipeline import run_report_pipeline
+
+    task = run_report_pipeline.delay(str(run.id), "ar")
+    run.celery_task_id = task.id
+    run.status = "running"
+    db.commit()
+
+    return {"run_id": str(run.id), "status": "retrying"}
+
+
+@router.get("/{run_id}/agent-logs")
+def get_agent_logs(
+    run_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Get agent logs for a report run (user must own the project)."""
+    from app.models.report import AgentLog
+
+    run = db.query(ReportRun).filter(ReportRun.id == run_id).first()
+    if not run:
+        raise HTTPException(404, "Run not found")
+
+    project = (
+        db.query(Project)
+        .filter(Project.id == run.project_id, Project.user_id == current_user.id)
+        .first()
+    )
+    if not project:
+        raise HTTPException(403, "Not authorized")
+
+    logs = (
+        db.query(AgentLog)
+        .filter(AgentLog.run_id == run_id)
+        .order_by(AgentLog.started_at)
+        .all()
+    )
+
+    return [
+        {
+            "agent_name": log.agent_name,
+            "status": log.status,
+            "tokens_used": log.tokens_used or 0,
+            "output_data": log.output_data if log.output_data else {},
+            "started_at": log.started_at.isoformat() if log.started_at else None,
+            "completed_at": log.completed_at.isoformat() if log.completed_at else None,
+        }
+        for log in logs
+    ]
+
+
 @router.get("/{run_id}/download")
 def download_report(
     run_id: str,
