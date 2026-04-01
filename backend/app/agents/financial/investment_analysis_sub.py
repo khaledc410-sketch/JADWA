@@ -15,7 +15,7 @@ CORPORATE_DISCOUNT_RATE = 0.12  # Typical WACC for Saudi SMEs
 class InvestmentAnalysisSubAgent(BaseAgent):
     name: str = "InvestmentAnalysisSubAgent"
     description: str = "IRR, NPV, payback period, and break-even calculations"
-    max_tokens: int = 4096
+    max_tokens: int = 2000
     temperature: float = 0.2
 
     @property

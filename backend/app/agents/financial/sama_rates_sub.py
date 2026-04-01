@@ -17,7 +17,7 @@ from app.services.data_tools import (
 class SAMARatesSubAgent(BaseAgent):
     name: str = "SAMARatesSubAgent"
     description: str = "Fetches SAMA rates, SAIBOR, VAT, Zakat, and SIDF loan programs"
-    max_tokens: int = 4096
+    max_tokens: int = 2000
     temperature: float = 0.1
 
     @property

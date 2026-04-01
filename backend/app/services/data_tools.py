@@ -28,10 +28,30 @@ SECTOR_ALIASES = {
     "manufacturing": "manufacturing",
     "logistics": "logistics",
     "hospitality": "hospitality",
+    "hotel": "hospitality",
+    "tourism": "hospitality",
     "construction": "construction",
     "automotive": "automotive",
     "finance": "finance",
     "it_telecom": "it_telecom",
+    "medical": "healthcare",
+    "clinic": "healthcare",
+    "pharmacy": "healthcare",
+    "dental": "healthcare",
+    "school": "education",
+    "training": "education",
+    "university": "education",
+    "saas": "technology",
+    "it": "technology",
+    "fintech": "technology",
+    "ecommerce": "technology",
+    "transport": "logistics",
+    "shipping": "logistics",
+    "warehousing": "logistics",
+    "delivery": "logistics",
+    "factory": "manufacturing",
+    "industrial": "manufacturing",
+    "production": "manufacturing",
 }
 
 
@@ -54,7 +74,10 @@ def load_seed(source: str) -> Any:
     """Load a seed JSON file by source name.
 
     Valid sources: sama_rates, rfta_franchises, gastat_demographics,
-                   hrdf_nitaqat_ratios, vision2030_kpis, mci_licenses
+                   hrdf_nitaqat_ratios, vision2030_kpis, mci_licenses,
+                   moh_healthcare, moe_education, citc_tech, sta_tourism,
+                   modon_manufacturing, logistics_transport,
+                   bank_requirements, government_programs, templates
     """
     filename_map = {
         "sama_rates": "sama_rates.json",
@@ -69,6 +92,23 @@ def load_seed(source: str) -> Any:
         "vision2030": "vision2030_kpis.json",
         "mci_licenses": "mci_licenses.json",
         "mci": "mci_licenses.json",
+        # New sector-specific seeds
+        "moh_healthcare": "moh_healthcare.json",
+        "moh": "moh_healthcare.json",
+        "moe_education": "moe_education.json",
+        "moe": "moe_education.json",
+        "citc_tech": "citc_tech.json",
+        "citc": "citc_tech.json",
+        "sta_tourism": "sta_tourism.json",
+        "sta": "sta_tourism.json",
+        "modon_manufacturing": "modon_manufacturing.json",
+        "modon": "modon_manufacturing.json",
+        "logistics_transport": "logistics_transport.json",
+        "logistics": "logistics_transport.json",
+        # Cross-sector seeds
+        "bank_requirements": "bank_requirements.json",
+        "government_programs": "government_programs.json",
+        "templates": "templates.json",
     }
     filename = filename_map.get(source.lower(), f"{source}.json")
     return _load_json(filename)
@@ -296,6 +336,247 @@ def get_licenses(sector: str) -> list:
     return []
 
 
+# ── MOH Healthcare ─────────────────────────────────────────────────────────
+
+
+def get_moh_licenses() -> list:
+    """MOH facility license types for healthcare."""
+    data = load_seed("moh_healthcare")
+    return data.get("facility_licenses", data.get("licenses", []))
+
+
+def get_cchi_categories() -> list:
+    """CCHI insurance categories."""
+    data = load_seed("moh_healthcare")
+    return data.get("cchi_insurance", data.get("insurance_categories", []))
+
+
+def get_medical_device_regs() -> list:
+    """SFDA medical device import regulations."""
+    data = load_seed("moh_healthcare")
+    return data.get("medical_devices", data.get("sfda_devices", []))
+
+
+def get_healthcare_staffing() -> dict:
+    """Healthcare staffing ratios and salary benchmarks."""
+    data = load_seed("moh_healthcare")
+    return data.get("staffing_ratios", data.get("staffing", {}))
+
+
+def get_cbahi_requirements() -> dict:
+    """CBAHI accreditation requirements."""
+    data = load_seed("moh_healthcare")
+    return data.get("cbahi_accreditation", data.get("cbahi", {}))
+
+
+# ── MOE Education ──────────────────────────────────────────────────────────
+
+
+def get_moe_school_types() -> list:
+    """MOE school/institute types and requirements."""
+    data = load_seed("moe_education")
+    return data.get("school_types", data.get("institutions", []))
+
+
+def get_moe_curriculum_reqs() -> dict:
+    """MOE curriculum requirements."""
+    data = load_seed("moe_education")
+    return data.get("curriculum_requirements", data.get("curriculum", {}))
+
+
+def get_teacher_ratios() -> dict:
+    """Teacher-student ratios by education level."""
+    data = load_seed("moe_education")
+    return data.get("teacher_ratios", data.get("ratios", {}))
+
+
+def get_education_facility_reqs() -> dict:
+    """Education facility requirements."""
+    data = load_seed("moe_education")
+    return data.get("facility_requirements", data.get("facilities", {}))
+
+
+# ── CITC Tech ──────────────────────────────────────────────────────────────
+
+
+def get_citc_licenses() -> list:
+    """CITC license types for tech/telecom companies."""
+    data = load_seed("citc_tech")
+    return data.get("license_types", data.get("licenses", []))
+
+
+def get_data_localization_rules() -> dict:
+    """NDMO data localization rules."""
+    data = load_seed("citc_tech")
+    return data.get("data_localization", data.get("ndmo", {}))
+
+
+def get_fintech_sandbox() -> dict:
+    """SAMA fintech sandbox requirements."""
+    data = load_seed("citc_tech")
+    return data.get("fintech_sandbox", data.get("sama_sandbox", {}))
+
+
+def get_ecommerce_regs() -> dict:
+    """E-commerce regulations."""
+    data = load_seed("citc_tech")
+    return data.get("ecommerce_regulations", data.get("ecommerce", {}))
+
+
+def get_pdpl_requirements() -> dict:
+    """PDPL (Personal Data Protection Law) requirements."""
+    data = load_seed("citc_tech")
+    return data.get("pdpl_compliance", data.get("pdpl", {}))
+
+
+# ── STA Tourism/Hospitality ────────────────────────────────────────────────
+
+
+def get_sta_licenses() -> list:
+    """STA tourism license types."""
+    data = load_seed("sta_tourism")
+    return data.get("license_types", data.get("licenses", []))
+
+
+def get_hotel_classification() -> list:
+    """Hotel classification standards (1-5 star)."""
+    data = load_seed("sta_tourism")
+    return data.get("hotel_classification", data.get("classification", []))
+
+
+def get_entertainment_permits() -> list:
+    """GEA entertainment permit types."""
+    data = load_seed("sta_tourism")
+    return data.get("entertainment_permits", data.get("gea_permits", []))
+
+
+# ── MODON Manufacturing ────────────────────────────────────────────────────
+
+
+def get_modon_cities() -> list:
+    """MODON industrial cities with plot costs and infrastructure."""
+    data = load_seed("modon_manufacturing")
+    return data.get("industrial_cities", data.get("cities", []))
+
+
+def get_industrial_licenses() -> list:
+    """Industrial license categories."""
+    data = load_seed("modon_manufacturing")
+    return data.get("license_categories", data.get("licenses", []))
+
+
+def get_sidf_industrial_programs() -> list:
+    """SIDF industrial financing programs (expanded)."""
+    data = load_seed("modon_manufacturing")
+    return data.get("sidf_programs", data.get("financing", []))
+
+
+def get_nic_incentives() -> dict:
+    """NIC (National Industrial Center) incentives."""
+    data = load_seed("modon_manufacturing")
+    return data.get("nic_incentives", data.get("incentives", {}))
+
+
+def get_environmental_compliance() -> dict:
+    """NCEC environmental compliance requirements."""
+    data = load_seed("modon_manufacturing")
+    return data.get("environmental_compliance", data.get("ncec", {}))
+
+
+# ── Logistics/Transport ────────────────────────────────────────────────────
+
+
+def get_transport_licenses() -> list:
+    """MOT transport and logistics license types."""
+    data = load_seed("logistics_transport")
+    return data.get("transport_licenses", data.get("licenses", []))
+
+
+def get_logistics_hubs() -> list:
+    """Saudi logistics hub zones and ports."""
+    data = load_seed("logistics_transport")
+    return data.get("logistics_hubs", data.get("hubs", []))
+
+
+def get_free_zones() -> list:
+    """Free zone benefits and locations."""
+    data = load_seed("logistics_transport")
+    return data.get("free_zones", data.get("zones", []))
+
+
+def get_customs_categories() -> list:
+    """ZATCA customs duty categories."""
+    data = load_seed("logistics_transport")
+    return data.get("customs_categories", data.get("customs", []))
+
+
+# ── Bank Requirements ──────────────────────────────────────────────────────
+
+
+def get_bank_requirements(bank_name: str = None) -> Any:
+    """Get bank loan requirements. If bank_name provided, returns single bank."""
+    data = load_seed("bank_requirements")
+    banks = data.get("banks", [])
+    if bank_name:
+        bank_lower = bank_name.lower()
+        for b in banks:
+            if (
+                bank_lower in b.get("name_en", "").lower()
+                or bank_lower in b.get("name_ar", "")
+                or bank_lower in b.get("key", "").lower()
+            ):
+                return b
+        return None
+    return banks
+
+
+def get_kafalah_requirements() -> dict:
+    """Kafalah guarantee program requirements."""
+    data = load_seed("bank_requirements")
+    return data.get("kafalah", data.get("kafalah_program", {}))
+
+
+# ── Government Programs ────────────────────────────────────────────────────
+
+
+def get_government_programs(sector: str = None) -> list:
+    """Government support programs, optionally filtered by sector."""
+    data = load_seed("government_programs")
+    programs = data.get("programs", [])
+    if sector:
+        norm = normalize_sector(sector)
+        return [
+            p
+            for p in programs
+            if not p.get("eligible_sectors")
+            or norm in [normalize_sector(s) for s in p.get("eligible_sectors", [])]
+        ]
+    return programs
+
+
+# ── Templates ──────────────────────────────────────────────────────────────
+
+
+def get_templates(sector: str = None) -> list:
+    """Project templates, optionally filtered by sector."""
+    data = load_seed("templates")
+    templates = data.get("templates", [])
+    if sector:
+        norm = normalize_sector(sector)
+        return [t for t in templates if normalize_sector(t.get("sector", "")) == norm]
+    return templates
+
+
+def get_template(template_id: str) -> Optional[dict]:
+    """Get a single template by ID."""
+    data = load_seed("templates")
+    templates = data.get("templates", [])
+    for t in templates:
+        if t.get("id") == template_id:
+            return t
+    return None
+
+
 # ── Bulk seed to DB ─────────────────────────────────────────────────────────
 
 
@@ -311,6 +592,14 @@ def seed_all_data(db) -> int:
         "hrdf_nitaqat_ratios",
         "vision2030_kpis",
         "mci_licenses",
+        "moh_healthcare",
+        "moe_education",
+        "citc_tech",
+        "sta_tourism",
+        "modon_manufacturing",
+        "logistics_transport",
+        "bank_requirements",
+        "government_programs",
     ]
     count = 0
     expires = datetime.utcnow() + timedelta(days=90)

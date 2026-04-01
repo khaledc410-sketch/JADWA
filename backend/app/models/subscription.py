@@ -26,28 +26,52 @@ class Subscription(Base):
 
     # Plan limits
     PLAN_LIMITS = {
+        "free": {
+            "reports_per_month": 1,
+            "sectors": -1,  # all sectors
+            "languages": ["ar"],
+            "verdict_only": True,
+            "interactive_report": False,
+            "pdf_export": False,
+            "pitch_deck": False,
+            "bank_package": False,
+        },
         "basic": {
             "reports_per_month": 2,
-            "sectors": 2,
+            "sectors": -1,  # all 10 sectors
             "languages": ["ar"],
-            "pages": 40,
+            "verdict_only": False,
+            "interactive_report": True,
+            "pdf_export": True,
+            "pitch_deck": False,
+            "bank_package": False,
         },
         "pro": {
             "reports_per_month": 10,
-            "sectors": 4,
+            "sectors": -1,
             "languages": ["ar", "en"],
-            "pages": 50,
+            "verdict_only": False,
+            "interactive_report": True,
+            "pdf_export": True,
+            "pitch_deck": True,
+            "bank_package": True,
         },
         "enterprise": {
-            "reports_per_month": -1,
-            "sectors": 4,
+            "reports_per_month": -1,  # unlimited
+            "sectors": -1,
             "languages": ["ar", "en"],
-            "pages": 55,
+            "verdict_only": False,
+            "interactive_report": True,
+            "pdf_export": True,
+            "pitch_deck": True,
+            "bank_package": True,
+            "white_label": True,
         },
     }
 
     # SAR pricing
     PLAN_PRICES_SAR = {
+        "free": 0,
         "basic": 99,
         "pro": 299,
         "enterprise": 799,

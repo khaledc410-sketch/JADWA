@@ -1,0 +1,653 @@
+{
+  "metadata": {
+    "source": "MOT + ZATCA + TGA + SAL + MODON + Various Free Zone Authorities",
+    "source_ar": "وزارة النقل والخدمات اللوجستية + هيئة الزكاة والضريبة والجمارك + الهيئة العامة للنقل + الشركة السعودية للخدمات اللوجستية + مدن + هيئات المناطق الحرة",
+    "last_updated": "2025-01",
+    "notes": "Saudi Arabia logistics and transport sector regulations, costs, and requirements as of Q1 2025. Part of Vision 2030 National Transport and Logistics Strategy (NTLS)."
+  },
+  "mot_transport_licenses": {
+    "sector_name_ar": "قطاع النقل والخدمات اللوجستية",
+    "sector_name_en": "Transport & Logistics",
+    "notes": "All transport licenses require a valid CR (Commercial Registration) from MCI as a prerequisite. Managed via the TGA Unified Portal.",
+    "items": [
+      {
+        "id": "TL-001",
+        "license_type_ar": "ترخيص نقل البضائع بين المدن",
+        "license_type_en": "Inter-City Freight Transport License",
+        "authority": "TGA - Transport General Authority",
+        "authority_ar": "الهيئة العامة للنقل",
+        "estimated_cost_sar": 5000,
+        "renewal_annual_sar": 3000,
+        "timeline_days": 30,
+        "portal": "tga.gov.sa",
+        "requirements": [
+          "Valid Commercial Registration (CR) with freight transport activity code",
+          "Minimum fleet of 5 trucks meeting SASO safety standards",
+          "GPS/AVL tracking system installed on all vehicles",
+          "Third-party liability insurance (minimum 500,000 SAR coverage)",
+          "Driver qualification cards (Istimara for heavy vehicles)",
+          "MHRSD labor office registration",
+          "35% Saudization ratio compliance"
+        ],
+        "vehicle_requirements": {
+          "min_fleet_size": 5,
+          "max_vehicle_age_years": 15,
+          "gps_tracking_required": true,
+          "safety_inspection_interval_months": 6,
+          "emission_standards": "Euro 4 minimum"
+        },
+        "notes_en": "Covers intercity and cross-regional heavy freight transport. Vehicles must pass Fahas (periodic inspection) every 6 months."
+      },
+      {
+        "id": "TL-002",
+        "license_type_ar": "ترخيص التوصيل داخل المدن (الميل الأخير)",
+        "license_type_en": "Last-Mile Delivery License",
+        "authority": "TGA - Transport General Authority",
+        "authority_ar": "الهيئة العامة للنقل",
+        "estimated_cost_sar": 3000,
+        "renewal_annual_sar": 2000,
+        "timeline_days": 21,
+        "portal": "tga.gov.sa",
+        "requirements": [
+          "Valid CR with delivery services activity code",
+          "Minimum 10 delivery vehicles or motorcycles",
+          "Real-time tracking system for all delivery units",
+          "Delivery driver training certification",
+          "Third-party liability insurance",
+          "Customer complaint handling system",
+          "CITC compliance for delivery app (if app-based)"
+        ],
+        "vehicle_requirements": {
+          "min_fleet_size": 10,
+          "max_vehicle_age_years": 10,
+          "gps_tracking_required": true,
+          "vehicle_types_allowed": ["van", "motorcycle", "light_truck"],
+          "branded_vehicle_required": true
+        },
+        "notes_en": "Covers last-mile and same-day intra-city delivery. Includes motorcycle couriers and van-based delivery fleets."
+      },
+      {
+        "id": "TL-003",
+        "license_type_ar": "ترخيص التخزين والإيداع",
+        "license_type_en": "Warehousing & Storage License",
+        "authority": "TGA + Balady",
+        "authority_ar": "الهيئة العامة للنقل + الأمانة البلدية",
+        "estimated_cost_sar": 8000,
+        "renewal_annual_sar": 5000,
+        "timeline_days": 45,
+        "portal": "tga.gov.sa / balady.gov.sa",
+        "requirements": [
+          "Valid CR with warehousing activity code",
+          "Municipal license (Balady) for warehouse premises",
+          "Fire safety certificate from Civil Defense",
+          "WMS (Warehouse Management System) implementation",
+          "Compliance with SASO storage standards",
+          "Environmental impact assessment for large facilities (>5,000 sqm)",
+          "SFDA license if storing food or pharmaceuticals"
+        ],
+        "vehicle_requirements": null,
+        "notes_en": "Warehousing license covers 3PL storage, fulfillment centers, and bonded warehouses. Additional SFDA approval needed for food/pharma storage."
+      },
+      {
+        "id": "TL-004",
+        "license_type_ar": "ترخيص التخليص الجمركي",
+        "license_type_en": "Customs Brokerage License",
+        "authority": "ZATCA - Zakat, Tax and Customs Authority",
+        "authority_ar": "هيئة الزكاة والضريبة والجمارك",
+        "estimated_cost_sar": 10000,
+        "renewal_annual_sar": 5000,
+        "timeline_days": 60,
+        "portal": "zatca.gov.sa",
+        "requirements": [
+          "Valid CR with customs brokerage activity code",
+          "Licensed customs broker with ZATCA certification exam",
+          "Bank guarantee of 100,000 SAR",
+          "Office premises near customs point or port",
+          "Electronic connectivity to ZATCA Fasah system",
+          "Professional indemnity insurance",
+          "Clean record (no customs violations in 3 years)"
+        ],
+        "vehicle_requirements": null,
+        "notes_en": "Customs brokers must pass the ZATCA certification exam. All declarations processed via the Fasah single-window platform."
+      },
+      {
+        "id": "TL-005",
+        "license_type_ar": "ترخيص وكالة الشحن والتخليص",
+        "license_type_en": "Freight Forwarding License",
+        "authority": "TGA - Transport General Authority",
+        "authority_ar": "الهيئة العامة للنقل",
+        "estimated_cost_sar": 7000,
+        "renewal_annual_sar": 4000,
+        "timeline_days": 30,
+        "portal": "tga.gov.sa",
+        "requirements": [
+          "Valid CR with freight forwarding activity code",
+          "FIATA membership or equivalent international accreditation",
+          "Bank guarantee of 50,000 SAR",
+          "Cargo liability insurance (minimum 1,000,000 SAR)",
+          "Qualified staff with logistics certifications",
+          "Electronic integration with carrier systems",
+          "35% Saudization ratio compliance"
+        ],
+        "vehicle_requirements": null,
+        "notes_en": "Covers arranging shipments by air, sea, and land on behalf of shippers. FIATA accreditation preferred but not mandatory."
+      },
+      {
+        "id": "TL-006",
+        "license_type_ar": "ترخيص نقل سلسلة التبريد",
+        "license_type_en": "Cold Chain Logistics License",
+        "authority": "TGA + SFDA",
+        "authority_ar": "الهيئة العامة للنقل + هيئة الغذاء والدواء",
+        "estimated_cost_sar": 12000,
+        "renewal_annual_sar": 7000,
+        "timeline_days": 45,
+        "portal": "tga.gov.sa / sfda.gov.sa",
+        "requirements": [
+          "Valid CR with cold chain transport activity code",
+          "Refrigerated vehicles with continuous temperature monitoring",
+          "SFDA cold chain compliance certification",
+          "Temperature data logging and 90-day record retention",
+          "Staff trained in cold chain handling (SFDA-approved courses)",
+          "Emergency contingency plan for equipment failure",
+          "Calibrated temperature sensors (annual calibration certificate)"
+        ],
+        "vehicle_requirements": {
+          "min_fleet_size": 3,
+          "refrigeration_unit_required": true,
+          "temperature_range_celsius": "-25 to +8",
+          "gps_tracking_required": true,
+          "temperature_monitoring_real_time": true,
+          "max_vehicle_age_years": 10
+        },
+        "notes_en": "Mandatory for perishable food, dairy, pharmaceutical, and vaccine transport. SFDA conducts unannounced inspections."
+      },
+      {
+        "id": "TL-007",
+        "license_type_ar": "ترخيص نقل المواد الخطرة",
+        "license_type_en": "Dangerous Goods Transport License",
+        "authority": "TGA + Civil Defense + RCJY (if applicable)",
+        "authority_ar": "الهيئة العامة للنقل + الدفاع المدني",
+        "estimated_cost_sar": 15000,
+        "renewal_annual_sar": 10000,
+        "timeline_days": 60,
+        "portal": "tga.gov.sa",
+        "requirements": [
+          "Valid CR with hazardous materials transport code",
+          "ADR-certified drivers (Dangerous Goods driving certificate)",
+          "Specialized hazmat vehicles with UN-standard markings",
+          "Emergency response plan approved by Civil Defense",
+          "Hazmat liability insurance (minimum 2,000,000 SAR)",
+          "Route approval from TGA for each shipment corridor",
+          "MSDS (Material Safety Data Sheets) for all transported materials",
+          "Spill containment equipment on each vehicle"
+        ],
+        "vehicle_requirements": {
+          "min_fleet_size": 2,
+          "hazmat_certified_vehicles": true,
+          "un_standard_markings": true,
+          "fire_suppression_system": true,
+          "gps_tracking_required": true,
+          "max_vehicle_age_years": 10,
+          "emergency_equipment_required": true
+        },
+        "notes_en": "Covers chemicals, petroleum products, gases, and explosives transport. Routes must avoid residential areas. 24/7 emergency hotline required."
+      },
+      {
+        "id": "TL-008",
+        "license_type_ar": "ترخيص خدمات النقل والترحيل",
+        "license_type_en": "Moving & Relocation Services License",
+        "authority": "TGA - Transport General Authority",
+        "authority_ar": "الهيئة العامة للنقل",
+        "estimated_cost_sar": 4000,
+        "renewal_annual_sar": 2500,
+        "timeline_days": 21,
+        "portal": "tga.gov.sa",
+        "requirements": [
+          "Valid CR with moving services activity code",
+          "Minimum 3 enclosed trucks",
+          "Cargo insurance covering customer goods",
+          "Trained staff for furniture handling and packing",
+          "Standard service contract template approved by MCI",
+          "Customer complaint resolution system"
+        ],
+        "vehicle_requirements": {
+          "min_fleet_size": 3,
+          "enclosed_body_required": true,
+          "gps_tracking_required": true,
+          "max_vehicle_age_years": 12
+        },
+        "notes_en": "Covers household and commercial moving services. Standard contracts must include itemized inventory, valuation, and damage liability clauses."
+      },
+      {
+        "id": "TL-009",
+        "license_type_ar": "ترخيص خدمات البريد السريع",
+        "license_type_en": "Courier & Express Services License",
+        "authority": "TGA + CITC",
+        "authority_ar": "الهيئة العامة للنقل + هيئة الاتصالات وتقنية المعلومات",
+        "estimated_cost_sar": 6000,
+        "renewal_annual_sar": 4000,
+        "timeline_days": 30,
+        "portal": "tga.gov.sa",
+        "requirements": [
+          "Valid CR with courier/postal services code",
+          "CITC postal services license",
+          "Minimum 15 delivery vehicles",
+          "Nationwide coverage plan (or regional coverage declaration)",
+          "Real-time parcel tracking system",
+          "Customer service center with defined SLAs",
+          "Data privacy compliance per PDPL"
+        ],
+        "vehicle_requirements": {
+          "min_fleet_size": 15,
+          "gps_tracking_required": true,
+          "vehicle_types_allowed": ["van", "motorcycle", "light_truck"],
+          "branded_vehicle_required": true
+        },
+        "notes_en": "Combined TGA transport and CITC postal license required. Must comply with Saudi Personal Data Protection Law (PDPL) for customer data."
+      },
+      {
+        "id": "TL-010",
+        "license_type_ar": "ترخيص تشغيل محطة ميناء",
+        "license_type_en": "Port Terminal Operator License",
+        "authority": "Mawani (Saudi Ports Authority)",
+        "authority_ar": "الهيئة العامة للموانئ (موانئ)",
+        "estimated_cost_sar": 500000,
+        "renewal_annual_sar": 250000,
+        "timeline_days": 180,
+        "portal": "mawani.gov.sa",
+        "requirements": [
+          "Valid CR with port operations activity code",
+          "Minimum paid-up capital of 50,000,000 SAR",
+          "International port operation experience (5+ years)",
+          "ISPS Code compliance (International Ship and Port Facility Security)",
+          "Environmental impact assessment approval",
+          "Concession agreement with Mawani",
+          "Heavy port equipment (cranes, reach stackers, terminal tractors)",
+          "Integrated Terminal Operating System (TOS)"
+        ],
+        "vehicle_requirements": null,
+        "notes_en": "Major concession-based license. Awarded via competitive tender. Typical concession periods are 25-30 years."
+      }
+    ]
+  },
+  "logistics_hub_zones": {
+    "sector_name_ar": "المناطق اللوجستية الرئيسية",
+    "sector_name_en": "Major Logistics Hub Zones",
+    "notes": "Key ports and dry ports under the National Transport and Logistics Strategy (NTLS). Warehouse costs are average market rates.",
+    "items": [
+      {
+        "id": "HUB-001",
+        "hub_name_ar": "ميناء الملك عبدالله - مدينة الملك عبدالله الاقتصادية",
+        "hub_name_en": "King Abdullah Port (KAEC)",
+        "region": "Makkah - Rabigh",
+        "warehouse_cost_sqm_sar": 180,
+        "annual_throughput_teu": 3000000,
+        "specializations": ["containerized_cargo", "ro_ro", "bulk_cargo", "bonded_logistics"],
+        "connectivity": {
+          "railway": true,
+          "highway": "Jeddah-Madinah Expressway",
+          "nearest_airport": "King Abdulaziz International (JED) - 120 km",
+          "free_zone_adjacent": true
+        },
+        "notes_en": "Privately operated mega-port. Part of KAEC Free Zone with customs duty advantages."
+      },
+      {
+        "id": "HUB-002",
+        "hub_name_ar": "ميناء جدة الإسلامي",
+        "hub_name_en": "Jeddah Islamic Port",
+        "region": "Makkah - Jeddah",
+        "warehouse_cost_sqm_sar": 250,
+        "annual_throughput_teu": 5500000,
+        "specializations": ["containerized_cargo", "pilgrim_logistics", "food_imports", "consumer_goods"],
+        "connectivity": {
+          "railway": false,
+          "highway": "Jeddah Ring Road / Haramain Expressway",
+          "nearest_airport": "King Abdulaziz International (JED) - 15 km",
+          "free_zone_adjacent": false
+        },
+        "notes_en": "Largest port on the Red Sea. Handles majority of Hajj/Umrah logistics and consumer imports for the Western Region."
+      },
+      {
+        "id": "HUB-003",
+        "hub_name_ar": "ميناء الملك عبدالعزيز بالدمام",
+        "hub_name_en": "Dammam Port (King Abdulaziz Port)",
+        "region": "Eastern Province - Dammam",
+        "warehouse_cost_sqm_sar": 200,
+        "annual_throughput_teu": 2200000,
+        "specializations": ["containerized_cargo", "petrochemical_exports", "industrial_cargo", "grain_imports"],
+        "connectivity": {
+          "railway": true,
+          "highway": "Dammam-Riyadh Highway",
+          "nearest_airport": "King Fahd International (DMM) - 45 km",
+          "free_zone_adjacent": false
+        },
+        "notes_en": "Primary gateway for the Eastern Province and central Saudi Arabia via rail. Connected to Dry Port Riyadh by SAR railway."
+      },
+      {
+        "id": "HUB-004",
+        "hub_name_ar": "الميناء الجاف بالرياض",
+        "hub_name_en": "Dry Port Riyadh (SAR Inland Container Depot)",
+        "region": "Riyadh",
+        "warehouse_cost_sqm_sar": 160,
+        "annual_throughput_teu": 500000,
+        "specializations": ["inland_clearance", "container_consolidation", "distribution_hub", "e_commerce_fulfillment"],
+        "connectivity": {
+          "railway": true,
+          "highway": "Riyadh Ring Road / multiple expressways",
+          "nearest_airport": "King Khalid International (RUH) - 35 km",
+          "free_zone_adjacent": false
+        },
+        "notes_en": "Inland container depot connected to Dammam Port via SAR railway. Customs clearance available on-site. Key hub for Riyadh distribution."
+      },
+      {
+        "id": "HUB-005",
+        "hub_name_ar": "ميناء الملك فهد الصناعي بالجبيل",
+        "hub_name_en": "King Fahd Industrial Port - Jubail",
+        "region": "Eastern Province - Jubail",
+        "warehouse_cost_sqm_sar": 140,
+        "annual_throughput_teu": 800000,
+        "specializations": ["petrochemical_exports", "industrial_raw_materials", "bulk_liquids", "heavy_project_cargo"],
+        "connectivity": {
+          "railway": true,
+          "highway": "Jubail Industrial City Road Network",
+          "nearest_airport": "King Fahd International (DMM) - 95 km",
+          "free_zone_adjacent": true
+        },
+        "notes_en": "Serves SABIC, Saudi Aramco, and other petrochemical giants in Jubail Industrial City. Specialized in liquid bulk and project cargo."
+      },
+      {
+        "id": "HUB-006",
+        "hub_name_ar": "ميناء جازان",
+        "hub_name_en": "Jazan Port",
+        "region": "Jazan",
+        "warehouse_cost_sqm_sar": 100,
+        "annual_throughput_teu": 250000,
+        "specializations": ["agricultural_imports", "construction_materials", "general_cargo", "economic_city_support"],
+        "connectivity": {
+          "railway": false,
+          "highway": "Jeddah-Jazan Coastal Highway",
+          "nearest_airport": "Jazan Airport (GIZ) - 10 km",
+          "free_zone_adjacent": true
+        },
+        "notes_en": "Serves the Jazan Economic City and southwestern region. Growing role in Red Sea trade corridor and African trade routes."
+      }
+    ]
+  },
+  "zatca_customs_categories": {
+    "sector_name_ar": "التعريفات الجمركية وأحكام الاستيراد",
+    "sector_name_en": "Customs Tariffs & Import Provisions",
+    "notes": "Based on GCC Common External Tariff (CET). VAT at 15% applies on CIF value plus customs duty. Processed via ZATCA Fasah platform.",
+    "items": [
+      {
+        "id": "CUS-001",
+        "category_ar": "رسوم الاستيراد حسب فئة المنتج",
+        "category_en": "Import Duty Rates by Product Category",
+        "rates": [
+          { "product_en": "Foodstuffs & agricultural products", "product_ar": "المواد الغذائية والزراعية", "duty_percent": 5 },
+          { "product_en": "Machinery & industrial equipment", "product_ar": "الآلات والمعدات الصناعية", "duty_percent": 5 },
+          { "product_en": "Vehicles & automotive parts", "product_ar": "المركبات وقطع الغيار", "duty_percent": 5 },
+          { "product_en": "Textiles & garments", "product_ar": "المنسوجات والملابس", "duty_percent": 12 },
+          { "product_en": "Chemicals & plastics", "product_ar": "المواد الكيميائية والبلاستيك", "duty_percent": 5 },
+          { "product_en": "Electronics & appliances", "product_ar": "الإلكترونيات والأجهزة", "duty_percent": 5 },
+          { "product_en": "Building materials (cement, steel)", "product_ar": "مواد البناء (أسمنت، حديد)", "duty_percent": 12 },
+          { "product_en": "Tobacco products", "product_ar": "منتجات التبغ", "duty_percent": 100 },
+          { "product_en": "Energy drinks", "product_ar": "مشروبات الطاقة", "duty_percent": 5, "excise_tax_percent": 100 },
+          { "product_en": "Soft drinks / carbonated beverages", "product_ar": "المشروبات الغازية", "duty_percent": 5, "excise_tax_percent": 50 }
+        ],
+        "notes_en": "Most goods carry 5% CET duty. Selective excise tax applies in addition to customs duty on tobacco, energy drinks, and sugary beverages."
+      },
+      {
+        "id": "CUS-002",
+        "category_ar": "ضريبة القيمة المضافة على الواردات",
+        "category_en": "VAT on Imports",
+        "vat_rate_percent": 15,
+        "applied_on": "CIF value + customs duty",
+        "notes_en": "15% VAT applied at point of import. Recoverable as input VAT for registered businesses. Deferral scheme available for authorized economic operators (AEO)."
+      },
+      {
+        "id": "CUS-003",
+        "category_ar": "التعرفة الجمركية الموحدة لدول مجلس التعاون",
+        "category_en": "GCC Common Customs Tariff",
+        "gcc_origin_duty_percent": 0,
+        "requirements": ["GCC Certificate of Origin", "Minimum 40% GCC value-added content"],
+        "notes_en": "Goods originating from GCC member states (UAE, Kuwait, Bahrain, Oman, Qatar) enter duty-free with valid GCC Certificate of Origin."
+      },
+      {
+        "id": "CUS-004",
+        "category_ar": "أحكام الاستيراد المؤقت",
+        "category_en": "Temporary Import Provisions",
+        "provisions": [
+          { "type_en": "ATA Carnet (exhibitions & samples)", "type_ar": "دفتر ATA (المعارض والعينات)", "max_duration_months": 12, "duty_suspended": true },
+          { "type_en": "Project equipment temporary import", "type_ar": "استيراد مؤقت لمعدات المشاريع", "max_duration_months": 24, "bond_required": true },
+          { "type_en": "Inward processing relief", "type_ar": "إعفاء التصنيع الداخلي", "max_duration_months": 12, "re_export_required": true }
+        ],
+        "notes_en": "Temporary imports require a customs bond or bank guarantee. Goods must be re-exported within the allowed period or full duties apply."
+      },
+      {
+        "id": "CUS-005",
+        "category_ar": "إجراءات إعادة التصدير",
+        "category_en": "Re-Export Procedures",
+        "requirements": [
+          "Goods must remain in original condition (or processed under inward processing relief)",
+          "Re-export declaration via Fasah within 12 months of import",
+          "Duty drawback claim submitted within 18 months",
+          "Original import declaration reference number required"
+        ],
+        "duty_drawback_percent": 100,
+        "processing_time_days": 30,
+        "notes_en": "Full duty drawback available for goods re-exported in original condition. Partial drawback for goods processed under inward processing."
+      }
+    ]
+  },
+  "free_zone_benefits": {
+    "sector_name_ar": "مزايا المناطق الحرة والاقتصادية",
+    "sector_name_en": "Free Zone & Economic City Benefits",
+    "notes": "Special economic zones offering tax and customs incentives under the Saudi Special Economic Zones framework.",
+    "items": [
+      {
+        "id": "FZ-001",
+        "zone_name_ar": "المنطقة الحرة بمدينة الملك عبدالله الاقتصادية",
+        "zone_name_en": "KAEC Free Zone (Emaar Economic City)",
+        "region": "Rabigh - Makkah Region",
+        "benefits": [
+          "0% corporate income tax for up to 50 years",
+          "0% personal income tax",
+          "0% customs duty on imports within the zone",
+          "0% withholding tax on repatriation of profits",
+          "Streamlined business licensing (single-window)"
+        ],
+        "tax_exemptions": { "corporate_tax_years": 50, "customs_duty_exempt": true, "vat_on_intra_zone": false },
+        "foreign_ownership_allowed": true,
+        "foreign_ownership_percent": 100,
+        "customs_advantages": "Duty-free import of raw materials and equipment. Duties apply only on goods entering the Saudi customs territory.",
+        "min_investment_sar": 1000000,
+        "notes_en": "KAEC is Saudi Arabia's first designated Special Economic Zone. Ideal for manufacturing, logistics, and light industry."
+      },
+      {
+        "id": "FZ-002",
+        "zone_name_ar": "مدينة جازان الاقتصادية",
+        "zone_name_en": "Jazan City for Primary and Downstream Industries (JCPDI)",
+        "region": "Jazan",
+        "benefits": [
+          "0% corporate income tax for up to 50 years",
+          "Subsidized industrial land and utilities",
+          "Customs duty exemption on imported raw materials",
+          "Proximity to Jazan Port for direct import/export",
+          "Government-funded infrastructure"
+        ],
+        "tax_exemptions": { "corporate_tax_years": 50, "customs_duty_exempt": true, "vat_on_intra_zone": false },
+        "foreign_ownership_allowed": true,
+        "foreign_ownership_percent": 100,
+        "customs_advantages": "Bonded zone status. Duty suspension on materials used for manufacturing and re-export.",
+        "min_investment_sar": 2000000,
+        "notes_en": "Focus on mining, minerals processing, and energy-intensive industries. Benefits from proximity to raw material sources."
+      },
+      {
+        "id": "FZ-003",
+        "zone_name_ar": "مدينة المعرفة الاقتصادية بالمدينة المنورة",
+        "zone_name_en": "Knowledge Economic City (KEC) - Madinah",
+        "region": "Madinah",
+        "benefits": [
+          "0% corporate income tax for up to 50 years",
+          "100% foreign ownership permitted",
+          "Customs duty exemption",
+          "Proximity to Prince Mohammad bin Abdulaziz Airport",
+          "Focus on knowledge-based and tech industries"
+        ],
+        "tax_exemptions": { "corporate_tax_years": 50, "customs_duty_exempt": true, "vat_on_intra_zone": false },
+        "foreign_ownership_allowed": true,
+        "foreign_ownership_percent": 100,
+        "customs_advantages": "Duty-free import for zone-based operations. Standard tariffs on goods leaving the zone into Saudi customs territory.",
+        "min_investment_sar": 500000,
+        "notes_en": "Focus on tech, education, and knowledge-based industries. Unique positioning serving Hajj/Umrah tourism logistics."
+      },
+      {
+        "id": "FZ-004",
+        "zone_name_ar": "المنطقة اللوجستية المتكاملة المربوطة جمركياً (ILBZ)",
+        "zone_name_en": "Integrated Logistics Bonded Zone (ILBZ) - Riyadh",
+        "region": "Riyadh",
+        "benefits": [
+          "Customs duty deferral until goods enter domestic market",
+          "VAT deferral on goods stored within zone",
+          "Consolidation and value-added services (labeling, kitting, packaging)",
+          "Simplified re-export procedures",
+          "24/7 customs clearance services"
+        ],
+        "tax_exemptions": { "corporate_tax_years": 0, "customs_duty_exempt": false, "customs_duty_deferred": true, "vat_on_intra_zone": false },
+        "foreign_ownership_allowed": true,
+        "foreign_ownership_percent": 100,
+        "customs_advantages": "Duty and VAT deferred until goods are released into Saudi domestic market. No duty on re-exported goods.",
+        "min_investment_sar": 750000,
+        "notes_en": "Located near King Khalid International Airport. Designed for e-commerce fulfillment, 3PL, and distribution. Not a full SEZ tax holiday zone."
+      }
+    ]
+  },
+  "ecommerce_logistics_requirements": {
+    "sector_name_ar": "متطلبات الخدمات اللوجستية للتجارة الإلكترونية",
+    "sector_name_en": "E-Commerce Logistics Requirements",
+    "notes": "Regulated under the E-Commerce Law (Royal Decree M/126) and MCI E-Commerce regulations. Enforced by MCI and TGA.",
+    "items": [
+      {
+        "id": "ECL-001",
+        "requirement_ar": "أنظمة التوصيل في نفس اليوم",
+        "requirement_en": "Same-Day Delivery Regulations",
+        "rules": [
+          "Delivery time commitment must be clearly stated at checkout",
+          "Delayed delivery beyond stated window entitles customer to compensation or cancellation",
+          "Real-time tracking link must be provided via SMS or email",
+          "Delivery attempt must be documented with timestamp and GPS coordinates",
+          "Failed delivery must trigger customer notification within 1 hour"
+        ]
+      },
+      {
+        "id": "ECL-002",
+        "requirement_ar": "متطلبات الإرجاع اللوجستي",
+        "requirement_en": "Return Logistics Requirements",
+        "rules": [
+          "7-day unconditional return right for e-commerce purchases (E-Commerce Law Article 12)",
+          "Seller must provide free return shipping for defective goods",
+          "Return pickup must be offered (not only drop-off)",
+          "Refund must be processed within 15 business days of return receipt",
+          "Return policy must be displayed prominently on the store"
+        ]
+      },
+      {
+        "id": "ECL-003",
+        "requirement_ar": "متطلبات الدفع عند الاستلام",
+        "requirement_en": "Cash on Delivery (COD) Handling",
+        "rules": [
+          "COD amounts must be deposited to merchant within 5 business days",
+          "Driver must carry POS terminal for electronic COD option",
+          "Maximum COD value per shipment: 5,000 SAR",
+          "COD reconciliation report provided to merchant daily",
+          "Cash handling insurance required for logistics provider"
+        ]
+      },
+      {
+        "id": "ECL-004",
+        "requirement_ar": "حدود حجم ووزن الطرود",
+        "requirement_en": "Package Size and Weight Limits",
+        "rules": [
+          "Standard parcel max weight: 30 kg (last-mile delivery)",
+          "Oversize freight: above 30 kg requires freight transport license",
+          "Maximum single dimension: 150 cm for standard courier",
+          "Lithium battery shipments must comply with ICAO/IATA DG regulations",
+          "Packaging must comply with SASO marking and labeling standards"
+        ]
+      },
+      {
+        "id": "ECL-005",
+        "requirement_ar": "متطلبات التأمين",
+        "requirement_en": "Insurance Requirements",
+        "rules": [
+          "Logistics provider must carry cargo liability insurance",
+          "Minimum coverage: declared value of goods or 100 SAR/kg (whichever is higher)",
+          "Insurance certificate must be available for customer inspection on request",
+          "High-value shipments (>10,000 SAR) require additional declared-value coverage",
+          "Third-party liability insurance mandatory for all delivery vehicles"
+        ]
+      }
+    ]
+  },
+  "salary_benchmarks": {
+    "sector_name_ar": "معايير الرواتب في قطاع الخدمات اللوجستية",
+    "sector_name_en": "Logistics Sector Salary Benchmarks",
+    "notes": "Average monthly salaries in SAR for logistics roles in major Saudi cities (Riyadh, Jeddah, Dammam). Based on 2024-2025 market data. Saudization (Nitaqat) requirement for logistics sector is 35%.",
+    "saudization_requirement_percent": 35,
+    "nitaqat_sector": "Transport and Logistics",
+    "items": [
+      {
+        "id": "SAL-001",
+        "role_ar": "مدير مستودعات",
+        "role_en": "Warehouse Manager",
+        "salary_range_sar": { "min": 12000, "max": 22000 },
+        "nationality_preference": "Saudi preferred (Nitaqat points)",
+        "experience_years": "5-10"
+      },
+      {
+        "id": "SAL-002",
+        "role_ar": "منسق لوجستي",
+        "role_en": "Logistics Coordinator",
+        "salary_range_sar": { "min": 7000, "max": 13000 },
+        "nationality_preference": "Saudi or expat",
+        "experience_years": "2-5"
+      },
+      {
+        "id": "SAL-003",
+        "role_ar": "سائق توصيل (سعودي)",
+        "role_en": "Delivery Driver (Saudi)",
+        "salary_range_sar": { "min": 5500, "max": 8000 },
+        "nationality_preference": "Saudi",
+        "experience_years": "0-3",
+        "notes_en": "Higher pay for Saudi drivers due to Nitaqat incentives. Many companies offer performance bonuses per delivery."
+      },
+      {
+        "id": "SAL-004",
+        "role_ar": "سائق توصيل (وافد)",
+        "role_en": "Delivery Driver (Expat)",
+        "salary_range_sar": { "min": 3000, "max": 5000 },
+        "nationality_preference": "Expat",
+        "experience_years": "1-5",
+        "notes_en": "Expat drivers typically receive housing and transport allowances in addition to base salary."
+      },
+      {
+        "id": "SAL-005",
+        "role_ar": "أخصائي جمارك",
+        "role_en": "Customs Specialist",
+        "salary_range_sar": { "min": 9000, "max": 16000 },
+        "nationality_preference": "Saudi preferred",
+        "experience_years": "3-7",
+        "notes_en": "ZATCA certification holders command higher salaries. Bilingual (Arabic/English) is required."
+      },
+      {
+        "id": "SAL-006",
+        "role_ar": "محلل سلسلة الإمداد",
+        "role_en": "Supply Chain Analyst",
+        "salary_range_sar": { "min": 10000, "max": 18000 },
+        "nationality_preference": "Saudi or expat",
+        "experience_years": "3-7",
+        "notes_en": "High demand role. CSCP or APICS certification adds 15-20% salary premium."
+      }
+    ]
+  }
+}

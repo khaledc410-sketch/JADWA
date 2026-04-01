@@ -1,0 +1,403 @@
+{
+  "metadata": {
+    "source": "JADWA Project Templates",
+    "description_ar": "قوالب مشاريع جاهزة لتسريع عملية إنشاء دراسة الجدوى",
+    "description_en": "Pre-built project templates to accelerate feasibility study creation",
+    "last_updated": "2026-04-01"
+  },
+  "templates": [
+    {
+      "id": "coffee-shop-riyadh",
+      "name_ar": "مقهى متخصص في الرياض",
+      "name_en": "Specialty Coffee Shop in Riyadh",
+      "sector": "fnb",
+      "icon": "☕",
+      "typical_investment_sar": 350000,
+      "typical_irr": 28,
+      "description_ar": "مقهى قهوة مختصة في حي راقٍ بالرياض — طاقة 40 مقعد + توصيل",
+      "prefill": {
+        "city": "الرياض",
+        "restaurant_concept": "cafe",
+        "service_model": "dine_in_delivery",
+        "kitchen_type": "full_commercial",
+        "planned_branches": "1",
+        "seating_capacity": "40",
+        "delivery_platforms": "multi_platform",
+        "sfda_required": "yes",
+        "investment_sar": "350000",
+        "funding_source": "self"
+      }
+    },
+    {
+      "id": "qsr-restaurant-riyadh",
+      "name_ar": "مطعم وجبات سريعة في الرياض",
+      "name_en": "QSR Restaurant in Riyadh",
+      "sector": "fnb",
+      "icon": "🍔",
+      "typical_investment_sar": 500000,
+      "typical_irr": 32,
+      "description_ar": "مطعم وجبات سريعة مع خط درايف ثرو ومنصات توصيل",
+      "prefill": {
+        "city": "الرياض",
+        "restaurant_concept": "qsr",
+        "service_model": "drive_thru",
+        "kitchen_type": "full_commercial",
+        "planned_branches": "1",
+        "seating_capacity": "60",
+        "delivery_platforms": "multi_platform",
+        "sfda_required": "yes",
+        "investment_sar": "500000",
+        "funding_source": "bank_loan"
+      }
+    },
+    {
+      "id": "dental-clinic-jeddah",
+      "name_ar": "عيادة أسنان في جدة",
+      "name_en": "Dental Clinic in Jeddah",
+      "sector": "healthcare",
+      "icon": "🦷",
+      "typical_investment_sar": 1500000,
+      "typical_irr": 22,
+      "description_ar": "عيادة أسنان متخصصة بـ 4 كراسي في حي تجاري بجدة",
+      "prefill": {
+        "city": "جدة",
+        "facility_type": "dental_clinic",
+        "medical_specialty": "dental",
+        "clinic_branches": "1",
+        "cchi_category": "enhanced",
+        "cbahi_accreditation": "optional",
+        "healthcare_investment_sar": "1500000",
+        "ownership_structure": "saudi_100"
+      }
+    },
+    {
+      "id": "polyclinic-riyadh",
+      "name_ar": "مجمع عيادات في الرياض",
+      "name_en": "Polyclinic Complex in Riyadh",
+      "sector": "healthcare",
+      "icon": "🏥",
+      "typical_investment_sar": 5000000,
+      "typical_irr": 18,
+      "description_ar": "مجمع عيادات متعدد التخصصات في الرياض — 8 عيادات + مختبر",
+      "prefill": {
+        "city": "الرياض",
+        "facility_type": "polyclinic",
+        "medical_specialty": "multi_specialty",
+        "clinic_branches": "1",
+        "cchi_category": "enhanced",
+        "cbahi_accreditation": "yes",
+        "healthcare_investment_sar": "5000000",
+        "ownership_structure": "saudi_100"
+      }
+    },
+    {
+      "id": "pharmacy-makkah",
+      "name_ar": "صيدلية في مكة المكرمة",
+      "name_en": "Pharmacy in Makkah",
+      "sector": "healthcare",
+      "icon": "💊",
+      "typical_investment_sar": 400000,
+      "typical_irr": 25,
+      "description_ar": "صيدلية مجتمعية قرب الحرم — تخدم الحجاج والمقيمين",
+      "prefill": {
+        "city": "مكة المكرمة",
+        "facility_type": "pharmacy",
+        "medical_specialty": "general",
+        "clinic_branches": "1",
+        "healthcare_investment_sar": "400000",
+        "ownership_structure": "saudi_100"
+      }
+    },
+    {
+      "id": "private-school-dammam",
+      "name_ar": "مدرسة أهلية في الدمام",
+      "name_en": "Private School in Dammam",
+      "sector": "education",
+      "icon": "📚",
+      "typical_investment_sar": 8000000,
+      "typical_irr": 15,
+      "description_ar": "مدرسة أهلية K-12 بالمنهج الوطني — طاقة 500 طالب",
+      "prefill": {
+        "city": "الدمام",
+        "school_type": "k12",
+        "curriculum_type": "national",
+        "student_capacity": "500",
+        "education_level": "all_ages",
+        "campus_area_sqm": "5000",
+        "education_investment_sar": "8000000",
+        "ownership_structure": "saudi_100"
+      }
+    },
+    {
+      "id": "training-center-riyadh",
+      "name_ar": "مركز تدريب مهني في الرياض",
+      "name_en": "Vocational Training Center in Riyadh",
+      "sector": "education",
+      "icon": "🎓",
+      "typical_investment_sar": 1000000,
+      "typical_irr": 30,
+      "description_ar": "مركز تدريب معتمد من TVTC في مجالات التقنية والحاسب",
+      "prefill": {
+        "city": "الرياض",
+        "school_type": "training_center",
+        "curriculum_type": "vocational",
+        "student_capacity": "200",
+        "education_level": "adult",
+        "education_investment_sar": "1000000",
+        "ownership_structure": "saudi_100"
+      }
+    },
+    {
+      "id": "saas-platform-riyadh",
+      "name_ar": "منصة SaaS في الرياض",
+      "name_en": "SaaS Platform in Riyadh",
+      "sector": "technology",
+      "icon": "💻",
+      "typical_investment_sar": 500000,
+      "typical_irr": 45,
+      "description_ar": "منصة برمجيات كخدمة (SaaS) للشركات السعودية — B2B",
+      "prefill": {
+        "city": "الرياض",
+        "tech_type": "saas",
+        "saas_model": "subscription",
+        "target_market": "b2b",
+        "data_hosting": "saudi_cloud",
+        "fintech_component": "none",
+        "pdpl_compliance_status": "in_progress",
+        "tech_investment_sar": "500000",
+        "ownership_structure": "saudi_100"
+      }
+    },
+    {
+      "id": "ecommerce-fashion",
+      "name_ar": "متجر إلكتروني أزياء",
+      "name_en": "Fashion E-commerce Store",
+      "sector": "retail",
+      "icon": "👗",
+      "typical_investment_sar": 200000,
+      "typical_irr": 35,
+      "description_ar": "متجر إلكتروني لبيع الأزياء والإكسسوارات — سوق سعودي",
+      "prefill": {
+        "city": "الرياض",
+        "business_channel": "ecommerce",
+        "product_category": "fashion",
+        "sourcing_model": "private_label",
+        "ecommerce_platform": "both",
+        "payment_methods": "full_suite",
+        "inventory_model": "own_warehouse",
+        "annual_revenue_sar": "1000000",
+        "ownership_structure": "saudi_100"
+      }
+    },
+    {
+      "id": "fintech-app-riyadh",
+      "name_ar": "تطبيق Fintech في الرياض",
+      "name_en": "Fintech App in Riyadh",
+      "sector": "technology",
+      "icon": "🏦",
+      "typical_investment_sar": 2000000,
+      "typical_irr": 40,
+      "description_ar": "تطبيق مدفوعات رقمية — Sandbox SAMA + ترخيص CITC",
+      "prefill": {
+        "city": "الرياض",
+        "tech_type": "fintech",
+        "saas_model": "transaction",
+        "target_market": "b2c",
+        "data_hosting": "saudi_cloud",
+        "fintech_component": "payments",
+        "pdpl_compliance_status": "in_progress",
+        "tech_investment_sar": "2000000",
+        "ownership_structure": "saudi_100"
+      }
+    },
+    {
+      "id": "boutique-hotel-alula",
+      "name_ar": "فندق بوتيك في العلا",
+      "name_en": "Boutique Hotel in AlUla",
+      "sector": "hospitality",
+      "icon": "🏨",
+      "typical_investment_sar": 15000000,
+      "typical_irr": 14,
+      "description_ar": "فندق بوتيك 30 غرفة في العلا — سياحة تراثية وثقافية",
+      "prefill": {
+        "city": "العلا",
+        "hospitality_type": "boutique_hotel",
+        "star_rating": "boutique",
+        "room_count": "30",
+        "entertainment_component": "pool_spa",
+        "event_hosting": "none",
+        "hajj_umrah_services": "na",
+        "hospitality_investment_sar": "15000000"
+      }
+    },
+    {
+      "id": "hotel-apartments-jeddah",
+      "name_ar": "شقق فندقية في جدة",
+      "name_en": "Hotel Apartments in Jeddah",
+      "sector": "hospitality",
+      "icon": "🏢",
+      "typical_investment_sar": 8000000,
+      "typical_irr": 16,
+      "description_ar": "مشروع شقق فندقية 50 وحدة في جدة — عائلات ورجال أعمال",
+      "prefill": {
+        "city": "جدة",
+        "hospitality_type": "hotel_apartments",
+        "star_rating": "3_star",
+        "room_count": "50",
+        "hajj_umrah_services": "umrah_only",
+        "hospitality_investment_sar": "8000000"
+      }
+    },
+    {
+      "id": "food-factory-sudair",
+      "name_ar": "مصنع مواد غذائية في سدير",
+      "name_en": "Food Processing Factory in Sudair",
+      "sector": "manufacturing",
+      "icon": "🏭",
+      "typical_investment_sar": 10000000,
+      "typical_irr": 20,
+      "description_ar": "مصنع تعبئة وتغليف أغذية في مدينة سدير الصناعية",
+      "prefill": {
+        "city": "الرياض",
+        "manufacturing_type": "food_processing",
+        "modon_city_preference": "sudair",
+        "production_capacity": "5,000 طن سنوياً",
+        "environmental_classification": "green",
+        "export_oriented": "domestic",
+        "manufacturing_investment_sar": "10000000",
+        "funding_source": "sidf"
+      }
+    },
+    {
+      "id": "plastics-factory-jeddah",
+      "name_ar": "مصنع بلاستيك وتغليف في جدة",
+      "name_en": "Plastics & Packaging Factory in Jeddah",
+      "sector": "manufacturing",
+      "icon": "📦",
+      "typical_investment_sar": 7000000,
+      "typical_irr": 22,
+      "description_ar": "مصنع إنتاج عبوات بلاستيكية ومواد تغليف في المدينة الصناعية بجدة",
+      "prefill": {
+        "city": "جدة",
+        "manufacturing_type": "plastics",
+        "modon_city_preference": "jeddah",
+        "environmental_classification": "yellow",
+        "export_oriented": "gcc_export",
+        "manufacturing_investment_sar": "7000000",
+        "funding_source": "sidf"
+      }
+    },
+    {
+      "id": "last-mile-delivery-riyadh",
+      "name_ar": "شركة توصيل الميل الأخير في الرياض",
+      "name_en": "Last-Mile Delivery Company in Riyadh",
+      "sector": "logistics",
+      "icon": "🚚",
+      "typical_investment_sar": 1500000,
+      "typical_irr": 30,
+      "description_ar": "شركة توصيل طلبات تجارة إلكترونية داخل الرياض — 20 مركبة",
+      "prefill": {
+        "city": "الرياض",
+        "logistics_type": "last_mile",
+        "fleet_size": "6_20",
+        "warehouse_sqm": "500",
+        "coverage_area": "city",
+        "cold_chain": "no",
+        "free_zone_interest": "no",
+        "logistics_investment_sar": "1500000"
+      }
+    },
+    {
+      "id": "cold-chain-dammam",
+      "name_ar": "شركة سلسلة تبريد في الدمام",
+      "name_en": "Cold Chain Logistics in Dammam",
+      "sector": "logistics",
+      "icon": "❄️",
+      "typical_investment_sar": 5000000,
+      "typical_irr": 18,
+      "description_ar": "شركة نقل وتخزين مبرّد ومجمّد — تخدم المطاعم وسلاسل التجزئة",
+      "prefill": {
+        "city": "الدمام",
+        "logistics_type": "cold_chain",
+        "fleet_size": "6_20",
+        "warehouse_sqm": "2000",
+        "coverage_area": "region",
+        "cold_chain": "both",
+        "free_zone_interest": "exploring",
+        "logistics_investment_sar": "5000000"
+      }
+    },
+    {
+      "id": "franchise-fnb-riyadh",
+      "name_ar": "امتياز مطعم عالمي في الرياض",
+      "name_en": "International F&B Franchise in Riyadh",
+      "sector": "franchise",
+      "icon": "🏪",
+      "typical_investment_sar": 1500000,
+      "typical_irr": 25,
+      "description_ar": "امتياز لعلامة مطاعم دولية — وحدة واحدة في الرياض",
+      "prefill": {
+        "city": "الرياض",
+        "franchise_model": "single_unit",
+        "franchisor_origin": "international",
+        "franchise_industry": "fnb",
+        "territory_exclusivity": "city",
+        "initial_fee_sar": "250000",
+        "royalty_rate_pct": "4_6",
+        "investment_per_unit_sar": "1500000"
+      }
+    },
+    {
+      "id": "fitness-studio-riyadh",
+      "name_ar": "استوديو لياقة في الرياض",
+      "name_en": "Fitness Studio in Riyadh",
+      "sector": "healthcare",
+      "icon": "💪",
+      "typical_investment_sar": 800000,
+      "typical_irr": 28,
+      "description_ar": "استوديو لياقة ورياضة متخصص — يوغا وتمارين وظيفية",
+      "prefill": {
+        "city": "الرياض",
+        "facility_type": "rehab",
+        "medical_specialty": "general",
+        "clinic_branches": "1",
+        "healthcare_investment_sar": "800000",
+        "ownership_structure": "saudi_100"
+      }
+    },
+    {
+      "id": "residential-villas-riyadh",
+      "name_ar": "مشروع فلل سكنية في الرياض",
+      "name_en": "Residential Villas in Riyadh",
+      "sector": "real_estate",
+      "icon": "🏡",
+      "typical_investment_sar": 20000000,
+      "typical_irr": 16,
+      "description_ar": "مشروع 20 فيلا سكنية في شمال الرياض — بيع على الخارطة",
+      "prefill": {
+        "city": "الرياض",
+        "development_type": "residential_villas",
+        "delivery_model": "offplan",
+        "land_status": "owned",
+        "total_units_planned": "20"
+      }
+    },
+    {
+      "id": "travel-agency-jeddah",
+      "name_ar": "وكالة سفر وسياحة في جدة",
+      "name_en": "Travel Agency in Jeddah",
+      "sector": "hospitality",
+      "icon": "✈️",
+      "typical_investment_sar": 300000,
+      "typical_irr": 35,
+      "description_ar": "وكالة سفر متخصصة في الرحلات السياحية والعمرة",
+      "prefill": {
+        "city": "جدة",
+        "hospitality_type": "travel_agency",
+        "star_rating": "na",
+        "hajj_umrah_services": "umrah_only",
+        "hospitality_investment_sar": "300000"
+      }
+    }
+  ]
+}

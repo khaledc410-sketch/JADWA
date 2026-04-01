@@ -74,7 +74,7 @@ DEFAULT_SECTOR = {"revenue_mult": 1.8, "cogs": 0.40, "opex": 0.35, "growth": 0.1
 class PnLModelingSubAgent(BaseAgent):
     name: str = "PnLModelingSubAgent"
     description: str = "Builds 5-year P&L projections for Saudi SMEs"
-    max_tokens: int = 4096
+    max_tokens: int = 2000
     temperature: float = 0.2
 
     @property

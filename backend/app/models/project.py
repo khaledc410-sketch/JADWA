@@ -12,8 +12,11 @@ class Project(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
 
-    # Sector: franchise | real_estate | fnb | retail
+    # Sector: franchise | real_estate | fnb | retail | healthcare | education | technology | hospitality | manufacturing | logistics
     sector = Column(String(50), nullable=False)
+
+    # Template used to pre-fill intake (nullable — null means started from scratch)
+    template_id = Column(String(100), nullable=True)
 
     # Project name (bilingual)
     name_ar = Column(String(255))

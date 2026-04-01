@@ -14,7 +14,7 @@ class FranchiseEconomicsSubAgent(BaseAgent):
     description: str = (
         "Franchise unit economics, territory analysis, and growth modeling"
     )
-    max_tokens: int = 4096
+    max_tokens: int = 2000
     temperature: float = 0.2
 
     @property

@@ -20,8 +20,9 @@ class BaseAgent(ABC):
 
     name: str = "BaseAgent"
     description: str = ""
-    max_tokens: int = 8192
+    max_tokens: int = 3000  # Optimized from 8192 — sub-agents rarely need >2K output
     temperature: float = 0.3  # Low for factual/analytical tasks
+    max_tool_loops: int = 8  # Generous limit — enough for any agent to finish cleanly
 
     def __init__(self, db=None, run_id: Optional[str] = None):
         self.db = db
@@ -65,9 +66,11 @@ class BaseAgent(ABC):
             raise
 
     def _run_agent_loop(self, messages: list) -> dict:
-        """Agentic loop: keep calling Claude until no more tool_use calls."""
+        """Agentic loop: keep calling Claude until no more tool_use calls.
+        Limited to max_tool_loops iterations to control API costs."""
         import time as _time
 
+        loop_count = 0
         while True:
             kwargs = {
                 "model": settings.CLAUDE_MODEL,
@@ -78,15 +81,20 @@ class BaseAgent(ABC):
             if self.tools:
                 kwargs["tools"] = self.tools
 
-            # Retry with exponential backoff for rate limits
-            max_retries = 8
+            # Retry with exponential backoff — never let a customer see a failure
+            max_retries = 10
             for attempt in range(max_retries):
                 try:
                     response = self.client.messages.create(**kwargs)
                     break
                 except Exception as e:
-                    if "429" in str(e) or "rate_limit" in str(e):
-                        wait = min(2**attempt * 5, 120)  # 5s, 10s, 20s, ... max 120s
+                    err_str = str(e).lower()
+                    if (
+                        "429" in err_str
+                        or "rate_limit" in err_str
+                        or "overloaded" in err_str
+                    ):
+                        wait = min(2**attempt * 3, 90)  # 3s, 6s, 12s, ... max 90s
                         _time.sleep(wait)
                         if attempt == max_retries - 1:
                             raise
@@ -101,16 +109,26 @@ class BaseAgent(ABC):
                 return self._parse_response(response)
 
             if response.stop_reason == "tool_use":
+                loop_count += 1
+
+                # Force end after max_tool_loops to prevent runaway API costs
+                if loop_count >= self.max_tool_loops:
+                    return self._parse_response(response)
+
                 # Execute all tool calls in this response
                 tool_results = []
                 for block in response.content:
                     if block.type == "tool_use":
                         tool_result = self.execute_tool(block.name, block.input)
+                        # Truncate tool results to save input tokens on next call
+                        result_str = str(tool_result)
+                        if len(result_str) > 2000:
+                            result_str = result_str[:2000] + "... [truncated]"
                         tool_results.append(
                             {
                                 "type": "tool_result",
                                 "tool_use_id": block.id,
-                                "content": str(tool_result),
+                                "content": result_str,
                             }
                         )
 
@@ -137,7 +155,7 @@ class BaseAgent(ABC):
 
     def _build_user_message(self, context: dict) -> str:
         """Build the user message from context dict. Override for custom formatting."""
-        truncated = self._truncate_context(context, max_chars=3000)
+        truncated = self._truncate_context(context, max_chars=2000)
         return f"Analyze the following business project data and provide your analysis:\n\n{truncated}"
 
     def _parse_json_output(self, raw: str) -> dict:
@@ -223,7 +241,9 @@ class SubAgentOrchestrator(BaseAgent):
       - name, description
     """
 
-    reviewer_max_tokens: int = 8192
+    reviewer_max_tokens: int = (
+        4000  # Optimized from 8192 — enough for quality synthesis
+    )
     reviewer_temperature: float = 0.2
 
     @abstractmethod
@@ -322,7 +342,7 @@ class SubAgentOrchestrator(BaseAgent):
         return slim
 
     @staticmethod
-    def _truncate_sub_outputs(sub_outputs: dict, max_per_agent: int = 2000) -> dict:
+    def _truncate_sub_outputs(sub_outputs: dict, max_per_agent: int = 1200) -> dict:
         """Truncate each sub-agent output to max_per_agent chars."""
         truncated = {}
         for agent_name, output in sub_outputs.items():

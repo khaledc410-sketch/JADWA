@@ -14,7 +14,7 @@ class IncentiveProgramsSubAgent(BaseAgent):
     description: str = (
         "Matches project to government incentive programs and support packages"
     )
-    max_tokens: int = 4096
+    max_tokens: int = 2000
     temperature: float = 0.2
 
     @property

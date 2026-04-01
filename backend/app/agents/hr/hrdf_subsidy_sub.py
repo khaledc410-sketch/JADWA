@@ -19,7 +19,7 @@ class HRDFSubsidySubAgent(BaseAgent):
         "HRDF training programs, Nafis, Tamheer subsidies, "
         "and Saudi workforce development incentives"
     )
-    max_tokens: int = 4096
+    max_tokens: int = 2000
     temperature: float = 0.1
 
     @property

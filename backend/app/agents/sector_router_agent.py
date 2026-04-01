@@ -28,6 +28,12 @@ ALWAYS_ON_AGENTS = [
 SECTOR_EXTRA_AGENTS = {
     "franchise": ["franchise"],
     "real_estate": ["real_estate"],
+    "healthcare": ["healthcare"],
+    "education": ["education"],
+    "technology": ["tech"],
+    "hospitality": ["tourism"],
+    "manufacturing": ["manufacturing"],
+    "logistics": ["logistics"],
 }
 
 REPORT_TEMPLATES = {
@@ -37,6 +43,10 @@ REPORT_TEMPLATES = {
     "food_beverage": "restaurant_cafe",
     "technology": "tech_startup",
     "manufacturing": "industrial",
+    "education": "regulated_sector",
+    "hospitality": "hospitality",
+    "logistics": "logistics",
+    "retail": "standard_sme",
     "default": "standard_sme",
 }
 

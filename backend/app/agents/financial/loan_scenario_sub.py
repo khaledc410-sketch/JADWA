@@ -16,7 +16,7 @@ from app.services.data_tools import (
 class LoanScenarioSubAgent(BaseAgent):
     name: str = "LoanScenarioSubAgent"
     description: str = "Models SIDF, commercial bank, and Islamic financing scenarios"
-    max_tokens: int = 4096
+    max_tokens: int = 2000
     temperature: float = 0.2
 
     @property

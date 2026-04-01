@@ -40,7 +40,7 @@ def _load_completed_agents(db, run_id: str) -> dict:
     }
 
 
-def _extract_essentials(result: dict, max_chars: int = 1500) -> dict:
+def _extract_essentials(result: dict, max_chars: int = 800) -> dict:
     """
     Extract essential fields from an agent result, dropping raw_output
     and truncating to max_chars to keep downstream context small.
@@ -164,6 +164,8 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
 
         market_result = legal_result = hr_result = {}
         franchise_result = real_estate_result = {}
+        healthcare_result = education_result = tech_result = {}
+        tourism_result = manufacturing_result = logistics_result = {}
 
         def run_market():
             if "MarketResearchAgent" in cached:
@@ -209,6 +211,68 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
 
                 futures["real_estate"] = executor.submit(run_real_estate)
 
+            elif sector == "healthcare":
+                from app.agents.healthcare.orchestrator import HealthcareOrchestrator
+
+                def run_healthcare():
+                    if "HealthcareAgent" in cached:
+                        return cached["HealthcareAgent"]
+                    return HealthcareOrchestrator(db=db, run_id=run_id).run(ctx)
+
+                futures["healthcare"] = executor.submit(run_healthcare)
+
+            elif sector == "education":
+                from app.agents.education.orchestrator import EducationOrchestrator
+
+                def run_education():
+                    if "EducationAgent" in cached:
+                        return cached["EducationAgent"]
+                    return EducationOrchestrator(db=db, run_id=run_id).run(ctx)
+
+                futures["education"] = executor.submit(run_education)
+
+            elif sector == "technology":
+                from app.agents.tech.orchestrator import TechOrchestrator
+
+                def run_tech():
+                    if "TechAgent" in cached:
+                        return cached["TechAgent"]
+                    return TechOrchestrator(db=db, run_id=run_id).run(ctx)
+
+                futures["tech"] = executor.submit(run_tech)
+
+            elif sector == "hospitality":
+                from app.agents.tourism.orchestrator import TourismOrchestrator
+
+                def run_tourism():
+                    if "TourismAgent" in cached:
+                        return cached["TourismAgent"]
+                    return TourismOrchestrator(db=db, run_id=run_id).run(ctx)
+
+                futures["tourism"] = executor.submit(run_tourism)
+
+            elif sector == "manufacturing":
+                from app.agents.manufacturing.orchestrator import (
+                    ManufacturingOrchestrator,
+                )
+
+                def run_manufacturing():
+                    if "ManufacturingAgent" in cached:
+                        return cached["ManufacturingAgent"]
+                    return ManufacturingOrchestrator(db=db, run_id=run_id).run(ctx)
+
+                futures["manufacturing"] = executor.submit(run_manufacturing)
+
+            elif sector == "logistics":
+                from app.agents.logistics.orchestrator import LogisticsOrchestrator
+
+                def run_logistics():
+                    if "LogisticsAgent" in cached:
+                        return cached["LogisticsAgent"]
+                    return LogisticsOrchestrator(db=db, run_id=run_id).run(ctx)
+
+                futures["logistics"] = executor.submit(run_logistics)
+
             for key, future in futures.items():
                 try:
                     result = future.result(timeout=300)
@@ -222,6 +286,18 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
                         franchise_result = result
                     elif key == "real_estate":
                         real_estate_result = result
+                    elif key == "healthcare":
+                        healthcare_result = result
+                    elif key == "education":
+                        education_result = result
+                    elif key == "tech":
+                        tech_result = result
+                    elif key == "tourism":
+                        tourism_result = result
+                    elif key == "manufacturing":
+                        manufacturing_result = result
+                    elif key == "logistics":
+                        logistics_result = result
                 except Exception as e:
                     _update_run(
                         db, run_id, step=f"تحذير: فشل وكيل {key}", progress=None
@@ -321,6 +397,12 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
             "risk": risk_result,
             "franchise": franchise_result,
             "real_estate": real_estate_result,
+            "healthcare": healthcare_result,
+            "education": education_result,
+            "tech": tech_result,
+            "tourism": tourism_result,
+            "manufacturing": manufacturing_result,
+            "logistics": logistics_result,
         }
 
         from app.agents.chart_generation_agent import ChartGenerationAgent
@@ -348,6 +430,77 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
                     "language": language,
                 }
             )
+
+        # ── PERSIST VERDICT + SECTIONS FOR EARLY ACCESS ──────────────
+        try:
+            verdict = {}
+            sections = {}
+            if isinstance(report_doc, dict):
+                sections = report_doc.get("sections", report_doc)
+                exec_summary = sections.get("executive_summary", {})
+                # Extract structured verdict data from executive summary
+                key_metrics = exec_summary.get("key_metrics", {})
+                verdict = {
+                    "verdict_en": exec_summary.get("feasibility_verdict_en", ""),
+                    "verdict_ar": exec_summary.get("feasibility_verdict_ar", ""),
+                    "verdict_color": exec_summary.get("verdict_color", "yellow"),
+                    "feasibility_score": key_metrics.get("feasibility_score", 0),
+                    "investment_required_sar": key_metrics.get(
+                        "total_investment_sar", 0
+                    ),
+                    "payback_months": key_metrics.get("payback_period_months", 0),
+                    "irr_percent": key_metrics.get("irr", 0),
+                    "npv_sar": key_metrics.get("npv_sar", 0),
+                    "break_even_months": key_metrics.get("break_even_month", 0),
+                    "risk_level": key_metrics.get("risk_rating", "medium"),
+                    "nitaqat_band": key_metrics.get("nitaqat_band", ""),
+                    "vision2030_score": key_metrics.get("vision_score", 0),
+                    "monthly_revenue_year1": key_metrics.get(
+                        "monthly_revenue_year1", 0
+                    ),
+                    "net_profit_margin_year3": key_metrics.get(
+                        "net_profit_margin_year3", 0
+                    ),
+                    "top_recommendations": exec_summary.get(
+                        "top_recommendations_ar", []
+                    ),
+                    "top_risks": exec_summary.get("top_risks_ar", []),
+                    "project_name_ar": intake.get("name_ar", ""),
+                    "project_name_en": intake.get("name_en", ""),
+                    "sector": sector,
+                    "city": intake.get("city", ""),
+                }
+            run.verdict_data = verdict
+            run.sections_data = report_doc
+            db.commit()
+        except Exception:
+            pass  # Don't block pipeline for verdict persistence failure
+
+        # ── FREE TIER EARLY STOP ──────────────────────────────────────
+        from app.models.subscription import Subscription
+
+        sub = (
+            db.query(Subscription)
+            .filter(
+                Subscription.user_id == project.user_id,
+                Subscription.status == "active",
+            )
+            .first()
+        )
+        if sub and sub.plan == "free":
+            run.pipeline_state = {
+                "agents_completed": list(all_results.keys()),
+                "verdict_only": True,
+            }
+            run.completed_at = datetime.utcnow()
+            _update_run(
+                db,
+                run_id,
+                status="completed",
+                step="اكتمل التحليل! (نتيجة الجدوى)",
+                progress=100,
+            )
+            return {"run_id": run_id, "status": "completed", "verdict_only": True}
 
         _update_run(db, run_id, step="مراجعة جودة التقرير...", progress=85)
 

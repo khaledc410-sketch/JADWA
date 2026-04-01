@@ -1,0 +1,785 @@
+{
+  "metadata": {
+    "source": "MODON + NIC + SIDF + NCEC + MIM",
+    "source_ar": "الهيئة السعودية للمدن الصناعية ومناطق التقنية (مدن) + المركز الوطني للتنمية الصناعية + صندوق التنمية الصناعية السعودي + المركز الوطني للرقابة على الالتزام البيئي + وزارة الصناعة والثروة المعدنية",
+    "last_updated": "2025-01",
+    "notes": "Saudi manufacturing sector data: MODON industrial cities, industrial licensing, SIDF financing, NIC incentives, and NCEC environmental compliance as of Q1 2025."
+  },
+  "modon_industrial_cities": [
+    {
+      "id": "MODON-IC-001",
+      "city_name_ar": "المدينة الصناعية الأولى بالرياض",
+      "city_name_en": "Riyadh 1st Industrial City",
+      "region": "Riyadh",
+      "region_ar": "منطقة الرياض",
+      "land_cost_sqm_sar": 10,
+      "annual_lease_sqm_sar": 4.5,
+      "utility_costs": {
+        "electricity_kwh_sar": 0.18,
+        "water_m3_sar": 6.0,
+        "natural_gas_mmbtu_sar": 6.75,
+        "wastewater_m3_sar": 3.0
+      },
+      "available_plot_sizes_sqm": [1000, 2500, 5000, 10000, 25000, 50000],
+      "infrastructure": {
+        "water": true,
+        "electricity": true,
+        "natural_gas": true,
+        "telecom": true,
+        "waste_management": true,
+        "roads": true,
+        "rail_access": true
+      },
+      "total_area_sqkm": 37,
+      "occupancy_percent": 92
+    },
+    {
+      "id": "MODON-IC-002",
+      "city_name_ar": "المدينة الصناعية الثانية بالرياض",
+      "city_name_en": "Riyadh 2nd Industrial City",
+      "region": "Riyadh",
+      "region_ar": "منطقة الرياض",
+      "land_cost_sqm_sar": 8,
+      "annual_lease_sqm_sar": 3.5,
+      "utility_costs": {
+        "electricity_kwh_sar": 0.18,
+        "water_m3_sar": 6.0,
+        "natural_gas_mmbtu_sar": 6.75,
+        "wastewater_m3_sar": 3.0
+      },
+      "available_plot_sizes_sqm": [2000, 5000, 10000, 25000, 50000],
+      "infrastructure": {
+        "water": true,
+        "electricity": true,
+        "natural_gas": true,
+        "telecom": true,
+        "waste_management": true,
+        "roads": true,
+        "rail_access": true
+      },
+      "total_area_sqkm": 20,
+      "occupancy_percent": 88
+    },
+    {
+      "id": "MODON-IC-003",
+      "city_name_ar": "المدينة الصناعية الثالثة بالرياض",
+      "city_name_en": "Riyadh 3rd Industrial City",
+      "region": "Riyadh",
+      "region_ar": "منطقة الرياض",
+      "land_cost_sqm_sar": 6,
+      "annual_lease_sqm_sar": 2.5,
+      "utility_costs": {
+        "electricity_kwh_sar": 0.18,
+        "water_m3_sar": 6.0,
+        "natural_gas_mmbtu_sar": 6.75,
+        "wastewater_m3_sar": 3.0
+      },
+      "available_plot_sizes_sqm": [5000, 10000, 25000, 50000, 100000],
+      "infrastructure": {
+        "water": true,
+        "electricity": true,
+        "natural_gas": true,
+        "telecom": true,
+        "waste_management": true,
+        "roads": true,
+        "rail_access": false
+      },
+      "total_area_sqkm": 28,
+      "occupancy_percent": 65
+    },
+    {
+      "id": "MODON-IC-004",
+      "city_name_ar": "المدينة الصناعية بجدة",
+      "city_name_en": "Jeddah Industrial City",
+      "region": "Makkah",
+      "region_ar": "منطقة مكة المكرمة",
+      "land_cost_sqm_sar": 12,
+      "annual_lease_sqm_sar": 5.0,
+      "utility_costs": {
+        "electricity_kwh_sar": 0.18,
+        "water_m3_sar": 8.0,
+        "natural_gas_mmbtu_sar": 6.75,
+        "wastewater_m3_sar": 4.0
+      },
+      "available_plot_sizes_sqm": [1000, 2500, 5000, 10000, 25000],
+      "infrastructure": {
+        "water": true,
+        "electricity": true,
+        "natural_gas": true,
+        "telecom": true,
+        "waste_management": true,
+        "roads": true,
+        "rail_access": false
+      },
+      "total_area_sqkm": 17,
+      "occupancy_percent": 95
+    },
+    {
+      "id": "MODON-IC-005",
+      "city_name_ar": "المدينة الصناعية الأولى بالدمام",
+      "city_name_en": "Dammam 1st Industrial City",
+      "region": "Eastern Province",
+      "region_ar": "المنطقة الشرقية",
+      "land_cost_sqm_sar": 9,
+      "annual_lease_sqm_sar": 4.0,
+      "utility_costs": {
+        "electricity_kwh_sar": 0.18,
+        "water_m3_sar": 5.0,
+        "natural_gas_mmbtu_sar": 4.50,
+        "wastewater_m3_sar": 2.5
+      },
+      "available_plot_sizes_sqm": [2000, 5000, 10000, 25000, 50000],
+      "infrastructure": {
+        "water": true,
+        "electricity": true,
+        "natural_gas": true,
+        "telecom": true,
+        "waste_management": true,
+        "roads": true,
+        "rail_access": true
+      },
+      "total_area_sqkm": 22,
+      "occupancy_percent": 90
+    },
+    {
+      "id": "MODON-IC-006",
+      "city_name_ar": "المدينة الصناعية الثانية بالدمام",
+      "city_name_en": "Dammam 2nd Industrial City",
+      "region": "Eastern Province",
+      "region_ar": "المنطقة الشرقية",
+      "land_cost_sqm_sar": 7,
+      "annual_lease_sqm_sar": 3.0,
+      "utility_costs": {
+        "electricity_kwh_sar": 0.18,
+        "water_m3_sar": 5.0,
+        "natural_gas_mmbtu_sar": 4.50,
+        "wastewater_m3_sar": 2.5
+      },
+      "available_plot_sizes_sqm": [5000, 10000, 25000, 50000],
+      "infrastructure": {
+        "water": true,
+        "electricity": true,
+        "natural_gas": true,
+        "telecom": true,
+        "waste_management": true,
+        "roads": true,
+        "rail_access": true
+      },
+      "total_area_sqkm": 15,
+      "occupancy_percent": 78
+    },
+    {
+      "id": "MODON-IC-007",
+      "city_name_ar": "المدينة الصناعية الثالثة بالدمام",
+      "city_name_en": "Dammam 3rd Industrial City",
+      "region": "Eastern Province",
+      "region_ar": "المنطقة الشرقية",
+      "land_cost_sqm_sar": 5,
+      "annual_lease_sqm_sar": 2.0,
+      "utility_costs": {
+        "electricity_kwh_sar": 0.18,
+        "water_m3_sar": 5.0,
+        "natural_gas_mmbtu_sar": 4.50,
+        "wastewater_m3_sar": 2.5
+      },
+      "available_plot_sizes_sqm": [10000, 25000, 50000, 100000],
+      "infrastructure": {
+        "water": true,
+        "electricity": true,
+        "natural_gas": true,
+        "telecom": true,
+        "waste_management": true,
+        "roads": true,
+        "rail_access": false
+      },
+      "total_area_sqkm": 30,
+      "occupancy_percent": 55
+    },
+    {
+      "id": "MODON-IC-008",
+      "city_name_ar": "مدينة سدير للصناعة والأعمال",
+      "city_name_en": "Sudair Industrial City",
+      "region": "Riyadh",
+      "region_ar": "منطقة الرياض",
+      "land_cost_sqm_sar": 3,
+      "annual_lease_sqm_sar": 1.5,
+      "utility_costs": {
+        "electricity_kwh_sar": 0.18,
+        "water_m3_sar": 5.0,
+        "natural_gas_mmbtu_sar": 6.75,
+        "wastewater_m3_sar": 2.0
+      },
+      "available_plot_sizes_sqm": [10000, 25000, 50000, 100000, 250000],
+      "infrastructure": {
+        "water": true,
+        "electricity": true,
+        "natural_gas": true,
+        "telecom": true,
+        "waste_management": true,
+        "roads": true,
+        "rail_access": true
+      },
+      "total_area_sqkm": 265,
+      "occupancy_percent": 40
+    },
+    {
+      "id": "MODON-IC-009",
+      "city_name_ar": "المدينة الصناعية بالجبيل",
+      "city_name_en": "Jubail Industrial City",
+      "region": "Eastern Province",
+      "region_ar": "المنطقة الشرقية",
+      "land_cost_sqm_sar": 4,
+      "annual_lease_sqm_sar": 2.0,
+      "utility_costs": {
+        "electricity_kwh_sar": 0.18,
+        "water_m3_sar": 4.0,
+        "natural_gas_mmbtu_sar": 4.50,
+        "wastewater_m3_sar": 2.0
+      },
+      "available_plot_sizes_sqm": [10000, 25000, 50000, 100000],
+      "infrastructure": {
+        "water": true,
+        "electricity": true,
+        "natural_gas": true,
+        "telecom": true,
+        "waste_management": true,
+        "roads": true,
+        "rail_access": true
+      },
+      "total_area_sqkm": 45,
+      "occupancy_percent": 70,
+      "notes": "Adjacent to Royal Commission Jubail industrial zone. Petrochemical feedstock advantage."
+    },
+    {
+      "id": "MODON-IC-010",
+      "city_name_ar": "المدينة الصناعية بينبع",
+      "city_name_en": "Yanbu Industrial City",
+      "region": "Madinah",
+      "region_ar": "منطقة المدينة المنورة",
+      "land_cost_sqm_sar": 4,
+      "annual_lease_sqm_sar": 2.0,
+      "utility_costs": {
+        "electricity_kwh_sar": 0.18,
+        "water_m3_sar": 5.0,
+        "natural_gas_mmbtu_sar": 5.00,
+        "wastewater_m3_sar": 2.5
+      },
+      "available_plot_sizes_sqm": [5000, 10000, 25000, 50000],
+      "infrastructure": {
+        "water": true,
+        "electricity": true,
+        "natural_gas": true,
+        "telecom": true,
+        "waste_management": true,
+        "roads": true,
+        "rail_access": false
+      },
+      "total_area_sqkm": 18,
+      "occupancy_percent": 72
+    },
+    {
+      "id": "MODON-IC-011",
+      "city_name_ar": "المدينة الصناعية بحائل",
+      "city_name_en": "Hail Industrial City",
+      "region": "Hail",
+      "region_ar": "منطقة حائل",
+      "land_cost_sqm_sar": 2,
+      "annual_lease_sqm_sar": 1.0,
+      "utility_costs": {
+        "electricity_kwh_sar": 0.18,
+        "water_m3_sar": 5.0,
+        "natural_gas_mmbtu_sar": 6.75,
+        "wastewater_m3_sar": 2.0
+      },
+      "available_plot_sizes_sqm": [5000, 10000, 25000, 50000, 100000],
+      "infrastructure": {
+        "water": true,
+        "electricity": true,
+        "natural_gas": false,
+        "telecom": true,
+        "waste_management": true,
+        "roads": true,
+        "rail_access": false
+      },
+      "total_area_sqkm": 12,
+      "occupancy_percent": 45,
+      "notes": "Incentives for agri-processing given Hail's agricultural output."
+    },
+    {
+      "id": "MODON-IC-012",
+      "city_name_ar": "المدينة الصناعية بجازان",
+      "city_name_en": "Jazan Industrial City",
+      "region": "Jazan",
+      "region_ar": "منطقة جازان",
+      "land_cost_sqm_sar": 2,
+      "annual_lease_sqm_sar": 1.0,
+      "utility_costs": {
+        "electricity_kwh_sar": 0.18,
+        "water_m3_sar": 5.0,
+        "natural_gas_mmbtu_sar": 6.75,
+        "wastewater_m3_sar": 2.0
+      },
+      "available_plot_sizes_sqm": [5000, 10000, 25000, 50000, 100000],
+      "infrastructure": {
+        "water": true,
+        "electricity": true,
+        "natural_gas": false,
+        "telecom": true,
+        "waste_management": true,
+        "roads": true,
+        "rail_access": false
+      },
+      "total_area_sqkm": 10,
+      "occupancy_percent": 35,
+      "notes": "Part of Jazan Economic City. Port access for export-oriented manufacturing."
+    }
+  ],
+  "industrial_license_categories": [
+    {
+      "id": "ILC-001",
+      "license_type_ar": "رخصة صناعية - تصنيع وتجهيز الأغذية",
+      "license_type_en": "Industrial License - Food Processing & FMCG",
+      "regulator": "MIM + SFDA",
+      "regulator_ar": "وزارة الصناعة والثروة المعدنية + هيئة الغذاء والدواء",
+      "requirements": [
+        "Commercial Registration (CR)",
+        "MODON land allocation or private industrial land approval",
+        "SFDA food manufacturing facility license",
+        "Environmental compliance certificate (NCEC)",
+        "Civil defense safety certificate",
+        "SASO product conformity certification",
+        "Municipal operating license"
+      ],
+      "estimated_cost_sar": 75000,
+      "timeline_days": 90,
+      "saudization_min_percent": 25
+    },
+    {
+      "id": "ILC-002",
+      "license_type_ar": "رخصة صناعية - الصناعات الكيميائية والبتروكيماوية",
+      "license_type_en": "Industrial License - Chemical & Petrochemical",
+      "regulator": "MIM + RCJY",
+      "regulator_ar": "وزارة الصناعة والثروة المعدنية + الهيئة الملكية للجبيل وينبع",
+      "requirements": [
+        "Commercial Registration (CR)",
+        "Environmental Impact Assessment (EIA)",
+        "NCEC environmental permit",
+        "Civil defense hazardous materials certificate",
+        "MODON or Royal Commission land allocation",
+        "Process safety management plan",
+        "Emergency response plan",
+        "SASO product certification"
+      ],
+      "estimated_cost_sar": 250000,
+      "timeline_days": 180,
+      "saudization_min_percent": 30
+    },
+    {
+      "id": "ILC-003",
+      "license_type_ar": "رخصة صناعية - الصناعات الدوائية",
+      "license_type_en": "Industrial License - Pharmaceutical Manufacturing",
+      "regulator": "MIM + SFDA",
+      "regulator_ar": "وزارة الصناعة والثروة المعدنية + هيئة الغذاء والدواء",
+      "requirements": [
+        "Commercial Registration (CR)",
+        "SFDA GMP certification",
+        "SFDA pharmaceutical manufacturing license",
+        "Environmental compliance certificate (NCEC)",
+        "Qualified pharmacist on staff",
+        "Quality control laboratory certification",
+        "Cold chain and storage compliance",
+        "SASO product registration"
+      ],
+      "estimated_cost_sar": 500000,
+      "timeline_days": 270,
+      "saudization_min_percent": 35
+    },
+    {
+      "id": "ILC-004",
+      "license_type_ar": "رخصة صناعية - المعادن والتصنيع المعدني",
+      "license_type_en": "Industrial License - Metals & Fabrication",
+      "regulator": "MIM",
+      "regulator_ar": "وزارة الصناعة والثروة المعدنية",
+      "requirements": [
+        "Commercial Registration (CR)",
+        "MODON land allocation",
+        "Environmental compliance certificate (NCEC)",
+        "Civil defense safety certificate",
+        "SASO product conformity certification",
+        "Mining license (if raw material extraction)"
+      ],
+      "estimated_cost_sar": 120000,
+      "timeline_days": 120,
+      "saudization_min_percent": 25
+    },
+    {
+      "id": "ILC-005",
+      "license_type_ar": "رخصة صناعية - المنسوجات والملابس",
+      "license_type_en": "Industrial License - Textiles & Garments",
+      "regulator": "MIM",
+      "regulator_ar": "وزارة الصناعة والثروة المعدنية",
+      "requirements": [
+        "Commercial Registration (CR)",
+        "MODON land allocation or approved industrial zone",
+        "Environmental compliance certificate (NCEC)",
+        "Civil defense safety certificate",
+        "SASO textile standards compliance"
+      ],
+      "estimated_cost_sar": 60000,
+      "timeline_days": 75,
+      "saudization_min_percent": 20
+    },
+    {
+      "id": "ILC-006",
+      "license_type_ar": "رخصة صناعية - مواد البناء",
+      "license_type_en": "Industrial License - Building Materials",
+      "regulator": "MIM",
+      "regulator_ar": "وزارة الصناعة والثروة المعدنية",
+      "requirements": [
+        "Commercial Registration (CR)",
+        "MODON land allocation",
+        "Environmental Impact Assessment (EIA)",
+        "NCEC environmental permit",
+        "Civil defense safety certificate",
+        "SASO building material standards certification",
+        "Mining license (if quarrying raw materials)"
+      ],
+      "estimated_cost_sar": 150000,
+      "timeline_days": 120,
+      "saudization_min_percent": 25
+    },
+    {
+      "id": "ILC-007",
+      "license_type_ar": "رخصة صناعية - البلاستيك والتعبئة والتغليف",
+      "license_type_en": "Industrial License - Plastics & Packaging",
+      "regulator": "MIM",
+      "regulator_ar": "وزارة الصناعة والثروة المعدنية",
+      "requirements": [
+        "Commercial Registration (CR)",
+        "MODON land allocation",
+        "Environmental compliance certificate (NCEC)",
+        "Civil defense safety certificate",
+        "SASO packaging standards compliance",
+        "SFDA approval (if food-contact packaging)"
+      ],
+      "estimated_cost_sar": 85000,
+      "timeline_days": 90,
+      "saudization_min_percent": 20
+    },
+    {
+      "id": "ILC-008",
+      "license_type_ar": "رخصة صناعية - الإلكترونيات والأجهزة الكهربائية",
+      "license_type_en": "Industrial License - Electronics & Electrical Equipment",
+      "regulator": "MIM + CITC",
+      "regulator_ar": "وزارة الصناعة والثروة المعدنية + هيئة الاتصالات وتقنية المعلومات",
+      "requirements": [
+        "Commercial Registration (CR)",
+        "MODON land allocation",
+        "Environmental compliance certificate (NCEC)",
+        "CITC type approval (for telecom equipment)",
+        "SASO IECEE conformity certification",
+        "Civil defense safety certificate",
+        "ESD and cleanroom standards (if applicable)"
+      ],
+      "estimated_cost_sar": 180000,
+      "timeline_days": 150,
+      "saudization_min_percent": 30
+    }
+  ],
+  "sidf_manufacturing_programs": [
+    {
+      "id": "SIDF-MFG-001",
+      "program_name_ar": "قرض التنمية الصناعية",
+      "program_name_en": "Industrial Development Loan",
+      "provider": "SIDF",
+      "provider_ar": "صندوق التنمية الصناعية السعودي",
+      "max_financing_sar": 200000000,
+      "max_financing_percent": 75,
+      "interest_rate_percent": 2.0,
+      "interest_type": "fixed",
+      "repayment_years": 20,
+      "grace_period_years": 3,
+      "eligibility": [
+        "Saudi-registered industrial entity",
+        "Minimum 25% Saudi equity ownership",
+        "Valid industrial license from MIM",
+        "Approved feasibility study",
+        "Project located in approved industrial zone"
+      ],
+      "priority_sectors": ["petrochemicals", "metals", "building_materials", "pharmaceuticals"]
+    },
+    {
+      "id": "SIDF-MFG-002",
+      "program_name_ar": "قرض تمويل المنشآت الصناعية الصغيرة والمتوسطة",
+      "program_name_en": "SME Manufacturing Loan",
+      "provider": "SIDF",
+      "provider_ar": "صندوق التنمية الصناعية السعودي",
+      "max_financing_sar": 30000000,
+      "max_financing_percent": 80,
+      "interest_rate_percent": 1.5,
+      "interest_type": "fixed",
+      "repayment_years": 15,
+      "grace_period_years": 2,
+      "eligibility": [
+        "Classified as SME per Monsha'at definition",
+        "Saudi-registered entity",
+        "Valid industrial license or MIM approval-in-principle",
+        "Revenue under SAR 200 million",
+        "Fewer than 200 employees"
+      ],
+      "priority_sectors": ["food_processing", "textiles", "plastics", "packaging"]
+    },
+    {
+      "id": "SIDF-MFG-003",
+      "program_name_ar": "قرض تمويل التصنيع الزراعي",
+      "program_name_en": "Agricultural Processing Loan",
+      "provider": "SIDF + ADF",
+      "provider_ar": "صندوق التنمية الصناعية + صندوق التنمية الزراعية",
+      "max_financing_sar": 50000000,
+      "max_financing_percent": 85,
+      "interest_rate_percent": 1.0,
+      "interest_type": "fixed",
+      "repayment_years": 15,
+      "grace_period_years": 3,
+      "eligibility": [
+        "Agricultural processing or food manufacturing entity",
+        "Saudi-registered with valid CR",
+        "Sourcing minimum 40% raw materials from Saudi farms",
+        "Approved feasibility study",
+        "Located in MODON or approved agri-processing zone"
+      ],
+      "priority_sectors": ["dairy", "poultry_processing", "dates_processing", "grain_milling", "aquaculture"]
+    },
+    {
+      "id": "SIDF-MFG-004",
+      "program_name_ar": "قرض تمويل التصنيع التقني",
+      "program_name_en": "Technology Manufacturing Loan",
+      "provider": "SIDF",
+      "provider_ar": "صندوق التنمية الصناعية السعودي",
+      "max_financing_sar": 100000000,
+      "max_financing_percent": 75,
+      "interest_rate_percent": 1.5,
+      "interest_type": "fixed",
+      "repayment_years": 15,
+      "grace_period_years": 2,
+      "eligibility": [
+        "Manufacturing of technology products or components",
+        "Saudi-registered industrial entity",
+        "Valid industrial license from MIM",
+        "Technology transfer or R&D commitment",
+        "Minimum 30% Saudi workforce"
+      ],
+      "priority_sectors": ["semiconductors", "electronics", "ev_components", "renewable_energy_equipment", "defense_manufacturing"]
+    },
+    {
+      "id": "SIDF-MFG-005",
+      "program_name_ar": "قرض الامتثال البيئي",
+      "program_name_en": "Environmental Compliance Loan",
+      "provider": "SIDF",
+      "provider_ar": "صندوق التنمية الصناعية السعودي",
+      "max_financing_sar": 20000000,
+      "max_financing_percent": 90,
+      "interest_rate_percent": 0.5,
+      "interest_type": "fixed",
+      "repayment_years": 10,
+      "grace_period_years": 1,
+      "eligibility": [
+        "Existing industrial facility requiring environmental upgrades",
+        "Valid industrial license",
+        "NCEC compliance improvement plan",
+        "Environmental audit report from accredited assessor"
+      ],
+      "priority_sectors": ["all_manufacturing"]
+    }
+  ],
+  "nic_incentives": {
+    "source": "National Industrial Center (NIC)",
+    "source_ar": "المركز الوطني للتنمية الصناعية",
+    "notes": "Incentives under the National Industrial Strategy and Made in Saudi program",
+    "tax_incentives": [
+      {
+        "id": "NIC-TAX-001",
+        "incentive_name_ar": "إعفاء ضريبة الدخل على الشركات - المناطق الاقتصادية الخاصة",
+        "incentive_name_en": "CIT Exemption - Special Economic Zones",
+        "description": "5-year corporate income tax exemption for qualifying manufacturers in designated SEZs, with possible 5-year extension",
+        "cit_rate_standard_percent": 20,
+        "cit_rate_sez_percent": 0,
+        "exemption_years": 5,
+        "extension_years": 5,
+        "eligibility": "New manufacturing facilities in MODON SEZs with minimum SAR 10M capital investment"
+      },
+      {
+        "id": "NIC-TAX-002",
+        "incentive_name_ar": "إعفاء ضريبة الاستقطاع",
+        "incentive_name_en": "Withholding Tax Exemption",
+        "description": "Exemption from 5% withholding tax on dividends repatriated by foreign investors in priority manufacturing sectors",
+        "standard_wht_percent": 5,
+        "sez_wht_percent": 0,
+        "eligibility": "Foreign investors in priority manufacturing sectors within SEZs"
+      }
+    ],
+    "customs_exemptions": [
+      {
+        "id": "NIC-CUST-001",
+        "incentive_name_ar": "إعفاء الرسوم الجمركية على المواد الخام الصناعية",
+        "incentive_name_en": "Customs Duty Exemption - Industrial Raw Materials",
+        "description": "Full exemption on customs duties for imported raw materials used in manufacturing, subject to MIM approval",
+        "standard_duty_percent": 5,
+        "exempted_duty_percent": 0,
+        "eligibility": "Licensed manufacturers importing raw materials not available domestically"
+      },
+      {
+        "id": "NIC-CUST-002",
+        "incentive_name_ar": "إعفاء الرسوم الجمركية على الآلات والمعدات الصناعية",
+        "incentive_name_en": "Customs Duty Exemption - Industrial Machinery & Equipment",
+        "description": "Full exemption on customs duties for imported production machinery and equipment",
+        "standard_duty_percent": 5,
+        "exempted_duty_percent": 0,
+        "eligibility": "Licensed manufacturers importing machinery with no local equivalent"
+      }
+    ],
+    "training_subsidies": [
+      {
+        "id": "NIC-TRAIN-001",
+        "incentive_name_ar": "دعم التدريب الصناعي - صندوق تنمية الموارد البشرية",
+        "incentive_name_en": "Industrial Training Subsidy - HRDF Tamheer Program",
+        "description": "Subsidized on-the-job training for Saudi nationals in manufacturing roles",
+        "subsidy_per_trainee_monthly_sar": 3000,
+        "training_duration_months": 6,
+        "max_trainees_per_company": 50,
+        "eligibility": "Saudi manufacturers hiring and training Saudi nationals in technical roles"
+      }
+    ],
+    "export_support": [
+      {
+        "id": "NIC-EXP-001",
+        "incentive_name_ar": "برنامج دعم الصادرات السعودية",
+        "incentive_name_en": "Saudi Export Development Authority (SEDA) Program",
+        "description": "Export financing, market access support, and trade mission participation for Saudi manufacturers",
+        "export_credit_max_sar": 50000000,
+        "export_credit_rate_percent": 2.0,
+        "services": [
+          "Export credit insurance",
+          "Market intelligence reports",
+          "Trade mission sponsorship",
+          "International exhibition support",
+          "Buyer-seller matchmaking"
+        ]
+      }
+    ],
+    "made_in_saudi": {
+      "id": "NIC-MIS-001",
+      "program_name_ar": "برنامج صنع في السعودية",
+      "program_name_en": "Made in Saudi Program",
+      "description": "National branding program to promote Saudi-manufactured products domestically and internationally",
+      "benefits": [
+        "Priority in government procurement (up to 10% price preference)",
+        "Made in Saudi certification and branding rights",
+        "Listing on the Made in Saudi platform and directory",
+        "International marketing and branding support",
+        "Access to exclusive trade events and exhibitions"
+      ],
+      "local_content_min_percent": 40,
+      "eligibility": "Saudi-licensed manufacturers meeting IKTVA or local content requirements"
+    }
+  },
+  "ncec_environmental_compliance": {
+    "source": "NCEC - National Center for Environmental Compliance",
+    "source_ar": "المركز الوطني للرقابة على الالتزام البيئي",
+    "categories": [
+      {
+        "id": "NCEC-EIA-001",
+        "requirement_name_ar": "تقييم الأثر البيئي",
+        "requirement_name_en": "Environmental Impact Assessment (EIA)",
+        "description": "Mandatory environmental study before construction of any industrial facility",
+        "applies_to": "All new industrial projects and major expansions",
+        "estimated_cost_sar": 150000,
+        "timeline_days": 90,
+        "validity_years": 5,
+        "requirements": [
+          "Baseline environmental survey",
+          "Air quality impact modeling",
+          "Water resource impact assessment",
+          "Noise impact analysis",
+          "Waste generation forecast",
+          "Mitigation measures plan",
+          "Community consultation (for high-impact projects)"
+        ]
+      },
+      {
+        "id": "NCEC-EM-001",
+        "requirement_name_ar": "تصريح الانبعاثات الهوائية",
+        "requirement_name_en": "Air Emissions Permit",
+        "description": "Permit for industrial facilities emitting air pollutants, with monitoring and reporting obligations",
+        "applies_to": "Facilities with combustion processes, chemical reactions, or volatile compound emissions",
+        "estimated_cost_sar": 50000,
+        "timeline_days": 60,
+        "renewal_years": 3,
+        "key_pollutants_monitored": ["PM10", "PM2.5", "SO2", "NOx", "CO", "VOCs", "H2S"],
+        "requirements": [
+          "Continuous Emissions Monitoring System (CEMS) for large facilities",
+          "Quarterly emissions reporting",
+          "Annual stack testing by accredited laboratory",
+          "Compliance with NCEC ambient air quality standards"
+        ]
+      },
+      {
+        "id": "NCEC-WM-001",
+        "requirement_name_ar": "تصريح إدارة النفايات الصناعية",
+        "requirement_name_en": "Industrial Waste Management Permit",
+        "description": "Permit for generation, storage, transport, and disposal of industrial waste",
+        "applies_to": "All manufacturing facilities generating industrial or hazardous waste",
+        "estimated_cost_sar": 30000,
+        "timeline_days": 45,
+        "renewal_years": 2,
+        "requirements": [
+          "Waste management plan",
+          "Hazardous waste manifest system registration",
+          "Licensed waste transport contractor",
+          "Approved waste disposal or recycling facility contracts",
+          "Monthly waste generation and disposal reporting"
+        ]
+      },
+      {
+        "id": "NCEC-WU-001",
+        "requirement_name_ar": "تصريح استخدام المياه الصناعية",
+        "requirement_name_en": "Industrial Water Usage Permit",
+        "description": "Permit for industrial water extraction, usage, and wastewater discharge",
+        "applies_to": "Facilities using more than 500 m3/day of water or discharging industrial wastewater",
+        "estimated_cost_sar": 25000,
+        "timeline_days": 45,
+        "renewal_years": 3,
+        "requirements": [
+          "Water usage audit and efficiency plan",
+          "Wastewater treatment system specifications",
+          "Discharge quality compliance with NCEC standards",
+          "Water recycling targets (minimum 20% for large facilities)",
+          "Quarterly water quality monitoring reports"
+        ]
+      },
+      {
+        "id": "NCEC-CM-001",
+        "requirement_name_ar": "برنامج الرقابة البيئية المستمرة",
+        "requirement_name_en": "Continuous Environmental Compliance Monitoring",
+        "description": "Ongoing monitoring and inspection program for operational industrial facilities",
+        "applies_to": "All licensed industrial facilities",
+        "inspection_frequency": "Semi-annual for high-risk; annual for medium-risk; biennial for low-risk",
+        "penalties": {
+          "minor_violation_sar": 10000,
+          "major_violation_sar": 100000,
+          "critical_violation_sar": 500000,
+          "repeated_violation_multiplier": 2,
+          "max_penalty_sar": 10000000,
+          "facility_shutdown": "Possible for critical violations or non-remediation within deadline"
+        },
+        "requirements": [
+          "Designated environmental compliance officer",
+          "Annual environmental performance report to NCEC",
+          "Self-monitoring and record-keeping system",
+          "Incident reporting within 24 hours",
+          "Corrective action plan for any violations"
+        ]
+      }
+    ]
+  }
+}

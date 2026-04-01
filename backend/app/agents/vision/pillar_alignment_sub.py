@@ -14,7 +14,7 @@ class PillarAlignmentSubAgent(BaseAgent):
     description: str = (
         "Maps project to Vision 2030 pillars and evaluates alignment scores"
     )
-    max_tokens: int = 4096
+    max_tokens: int = 2000
     temperature: float = 0.2
 
     @property

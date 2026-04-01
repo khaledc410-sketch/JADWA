@@ -1,0 +1,928 @@
+{
+  "metadata": {
+    "source": "MOH + CCHI + SFDA + CBAHI + SCFHS + PDPL",
+    "source_ar": "وزارة الصحة + مجلس الضمان الصحي + هيئة الغذاء والدواء + المركز السعودي لاعتماد المنشآت الصحية + الهيئة السعودية للتخصصات الصحية + نظام حماية البيانات الشخصية",
+    "last_updated": "2025-01",
+    "notes": "Saudi healthcare sector regulations, licensing, staffing, and compliance requirements as of Q1 2025. Covers MOH facility licensing, CCHI insurance, SFDA medical devices, CBAHI accreditation, and telemedicine."
+  },
+  "moh_facility_licenses": {
+    "sector_name_ar": "تراخيص المنشآت الصحية",
+    "sector_name_en": "MOH Healthcare Facility Licenses",
+    "notes": "All private healthcare facilities require MOH licensing via the Seha platform (seha.sa). Facilities must also register with CBAHI for accreditation.",
+    "items": [
+      {
+        "id": "MOH-FL001",
+        "license_type_ar": "مستشفى عام",
+        "license_type_en": "General Hospital",
+        "authority": "MOH - Ministry of Health",
+        "authority_ar": "وزارة الصحة",
+        "estimated_cost_sar": 100000,
+        "renewal_annual_sar": 50000,
+        "timeline_days": 180,
+        "renewal_period_years": 3,
+        "min_bed_capacity": 50,
+        "online": true,
+        "portal": "seha.sa",
+        "requirements": [
+          "Commercial Registration (CR) with healthcare activity code",
+          "Municipal license from Balady for healthcare facility",
+          "Building completion certificate meeting MOH facility standards",
+          "Fire safety certificate from Civil Defense",
+          "Environmental compliance certificate",
+          "Medical director with valid SCFHS classification",
+          "CBAHI pre-accreditation survey",
+          "Medical waste management contract with approved provider"
+        ],
+        "required_documents": [
+          "السجل التجاري - Commercial Registration",
+          "الرخصة البلدية - Municipal License",
+          "شهادة إتمام البناء - Building Completion Certificate",
+          "شهادة الدفاع المدني - Civil Defense Certificate",
+          "عقد إدارة النفايات الطبية - Medical Waste Contract",
+          "عقد المدير الطبي - Medical Director Contract",
+          "خطة التوظيف - Staffing Plan",
+          "مخططات المنشأة الهندسية - Facility Engineering Plans"
+        ],
+        "notes_ar": "يجب ألا يقل عدد الأسرة عن 50 سريراً. يشترط وجود أقسام الطوارئ والعمليات والتنويم والصيدلية والمختبر والأشعة",
+        "notes_en": "Minimum 50 beds. Must include emergency, surgical, inpatient, pharmacy, laboratory, and radiology departments. CBAHI accreditation required within 2 years of operation."
+      },
+      {
+        "id": "MOH-FL002",
+        "license_type_ar": "مستشفى تخصصي",
+        "license_type_en": "Specialized Hospital",
+        "authority": "MOH - Ministry of Health",
+        "authority_ar": "وزارة الصحة",
+        "estimated_cost_sar": 150000,
+        "renewal_annual_sar": 75000,
+        "timeline_days": 240,
+        "renewal_period_years": 3,
+        "min_bed_capacity": 30,
+        "online": true,
+        "portal": "seha.sa",
+        "requirements": [
+          "All general hospital requirements",
+          "Specialty-specific equipment and facility standards",
+          "Minimum 3 consultants in the declared specialty with SCFHS classification",
+          "Specialty-specific nursing staff ratios",
+          "Fellowship-trained medical director in the relevant specialty"
+        ],
+        "required_documents": [
+          "جميع وثائق المستشفى العام - All General Hospital documents",
+          "شهادات التخصص للأطباء - Specialty Board Certifications",
+          "قائمة الأجهزة التخصصية - Specialty Equipment Inventory",
+          "بروتوكولات العلاج التخصصية - Specialty Treatment Protocols"
+        ],
+        "notes_ar": "يشمل مستشفيات العيون والأسنان والنفسية والتأهيل وأمراض القلب وغيرها. يشترط حد أدنى 30 سريراً",
+        "notes_en": "Includes ophthalmology, dental, psychiatric, rehabilitation, cardiac, and other specialty hospitals. Minimum 30 beds required."
+      },
+      {
+        "id": "MOH-FL003",
+        "license_type_ar": "مجمع عيادات طبي",
+        "license_type_en": "Medical Complex (Polyclinic)",
+        "authority": "MOH - Ministry of Health",
+        "authority_ar": "وزارة الصحة",
+        "estimated_cost_sar": 50000,
+        "renewal_annual_sar": 25000,
+        "timeline_days": 90,
+        "renewal_period_years": 3,
+        "online": true,
+        "portal": "seha.sa",
+        "requirements": [
+          "Commercial Registration with polyclinic activity code",
+          "Municipal license for medical complex",
+          "Minimum 4 medical specialties offered",
+          "On-site pharmacy and laboratory",
+          "Qualified medical director with SCFHS classification",
+          "Civil Defense fire safety approval",
+          "Minimum facility area of 300 sqm"
+        ],
+        "required_documents": [
+          "السجل التجاري - Commercial Registration",
+          "الرخصة البلدية - Municipal License",
+          "عقد المدير الطبي - Medical Director Contract",
+          "قائمة التخصصات الطبية - List of Medical Specialties",
+          "شهادات الأطباء المصنفين - SCFHS Classified Physician Certificates"
+        ],
+        "notes_ar": "يجب أن يضم 4 تخصصات طبية على الأقل مع صيدلية ومختبر داخلي",
+        "notes_en": "Must offer at least 4 medical specialties with on-site pharmacy and lab. Day-surgery capability optional but requires separate approval."
+      },
+      {
+        "id": "MOH-FL004",
+        "license_type_ar": "عيادة تخصص واحد",
+        "license_type_en": "Single Specialty Clinic",
+        "authority": "MOH - Ministry of Health",
+        "authority_ar": "وزارة الصحة",
+        "estimated_cost_sar": 15000,
+        "renewal_annual_sar": 10000,
+        "timeline_days": 60,
+        "renewal_period_years": 3,
+        "online": true,
+        "portal": "seha.sa",
+        "requirements": [
+          "Commercial Registration",
+          "Municipal license for medical clinic",
+          "Licensed physician with SCFHS classification in the declared specialty",
+          "Civil Defense fire safety approval",
+          "Minimum facility area of 80 sqm"
+        ],
+        "required_documents": [
+          "السجل التجاري - Commercial Registration",
+          "الرخصة البلدية - Municipal License",
+          "شهادة تصنيف الطبيب - SCFHS Classification Certificate",
+          "عقد إيجار أو ملكية الموقع - Lease or Ownership Document"
+        ],
+        "notes_ar": "عيادة تخصص واحد مثل عيادة جلدية أو عيادة عيون. لا يسمح بإجراء عمليات جراحية كبرى",
+        "notes_en": "Single specialty clinic such as dermatology or ophthalmology. Major surgical procedures not permitted."
+      },
+      {
+        "id": "MOH-FL005",
+        "license_type_ar": "عيادة أسنان",
+        "license_type_en": "Dental Clinic",
+        "authority": "MOH - Ministry of Health",
+        "authority_ar": "وزارة الصحة",
+        "estimated_cost_sar": 20000,
+        "renewal_annual_sar": 10000,
+        "timeline_days": 60,
+        "renewal_period_years": 3,
+        "online": true,
+        "portal": "seha.sa",
+        "requirements": [
+          "Commercial Registration with dental activity code",
+          "Municipal license",
+          "Licensed dentist with SCFHS classification",
+          "Dental X-ray equipment license from KACST/SFDA",
+          "Sterilization and infection control protocols",
+          "Civil Defense fire safety approval"
+        ],
+        "required_documents": [
+          "السجل التجاري - Commercial Registration",
+          "الرخصة البلدية - Municipal License",
+          "شهادة تصنيف طبيب الأسنان - Dentist SCFHS Classification",
+          "ترخيص أجهزة الأشعة - Radiology Equipment License",
+          "بروتوكول مكافحة العدوى - Infection Control Protocol"
+        ],
+        "notes_ar": "يشترط وجود غرفة تعقيم منفصلة وأجهزة أشعة مرخصة. يجب الالتزام بمعايير مكافحة العدوى",
+        "notes_en": "Requires separate sterilization room and licensed radiology equipment. Must comply with MOH infection control standards."
+      },
+      {
+        "id": "MOH-FL006",
+        "license_type_ar": "صيدلية مجتمعية",
+        "license_type_en": "Retail Pharmacy",
+        "authority": "MOH - Ministry of Health / SFDA",
+        "authority_ar": "وزارة الصحة / هيئة الغذاء والدواء",
+        "estimated_cost_sar": 15000,
+        "renewal_annual_sar": 8000,
+        "timeline_days": 45,
+        "renewal_period_years": 3,
+        "online": true,
+        "portal": "seha.sa",
+        "requirements": [
+          "Commercial Registration with pharmacy activity code",
+          "Municipal license",
+          "Licensed pharmacist with SCFHS classification as pharmacy director",
+          "SFDA establishment license for pharmaceutical activities",
+          "Cold chain storage for temperature-sensitive medications",
+          "Controlled substance handling license (if applicable)",
+          "Minimum pharmacy area of 48 sqm"
+        ],
+        "required_documents": [
+          "السجل التجاري - Commercial Registration",
+          "الرخصة البلدية - Municipal License",
+          "شهادة تصنيف الصيدلي المدير - Pharmacist Director SCFHS Classification",
+          "ترخيص منشأة هيئة الغذاء والدواء - SFDA Establishment License",
+          "شهادة نظام التبريد - Cold Chain Compliance Certificate"
+        ],
+        "notes_ar": "يجب أن لا تقل مساحة الصيدلية عن 48 متراً مربعاً مع وجود صيدلي سعودي مدير",
+        "notes_en": "Minimum 48 sqm floor area. Must have a Saudi pharmacist as director. SFDA registration for drug dispensing required."
+      },
+      {
+        "id": "MOH-FL007",
+        "license_type_ar": "مختبر تشخيصي",
+        "license_type_en": "Diagnostic Laboratory",
+        "authority": "MOH - Ministry of Health",
+        "authority_ar": "وزارة الصحة",
+        "estimated_cost_sar": 40000,
+        "renewal_annual_sar": 20000,
+        "timeline_days": 90,
+        "renewal_period_years": 3,
+        "online": true,
+        "portal": "seha.sa",
+        "requirements": [
+          "Commercial Registration with laboratory activity code",
+          "Municipal license",
+          "Laboratory director with SCFHS classification in clinical pathology",
+          "Quality management system (ISO 15189 recommended)",
+          "Biosafety level compliance based on test scope",
+          "Medical waste management contract",
+          "Equipment calibration certificates"
+        ],
+        "required_documents": [
+          "السجل التجاري - Commercial Registration",
+          "الرخصة البلدية - Municipal License",
+          "شهادة تصنيف مدير المختبر - Lab Director SCFHS Classification",
+          "شهادات معايرة الأجهزة - Equipment Calibration Certificates",
+          "خطة إدارة الجودة - Quality Management Plan",
+          "عقد النفايات الطبية - Medical Waste Contract"
+        ],
+        "notes_ar": "يشترط وجود أخصائي أمراض سريرية مصنف كمدير للمختبر. يوصى بالحصول على اعتماد ISO 15189",
+        "notes_en": "Must have a classified clinical pathologist as lab director. ISO 15189 accreditation recommended. Scope of tests determines biosafety requirements."
+      },
+      {
+        "id": "MOH-FL008",
+        "license_type_ar": "مركز بصريات",
+        "license_type_en": "Optical Center",
+        "authority": "MOH - Ministry of Health",
+        "authority_ar": "وزارة الصحة",
+        "estimated_cost_sar": 10000,
+        "renewal_annual_sar": 5000,
+        "timeline_days": 45,
+        "renewal_period_years": 3,
+        "online": true,
+        "portal": "seha.sa",
+        "requirements": [
+          "Commercial Registration with optical services activity code",
+          "Municipal license",
+          "Licensed optometrist with SCFHS classification",
+          "Refraction and lens-fitting equipment",
+          "Civil Defense fire safety approval"
+        ],
+        "required_documents": [
+          "السجل التجاري - Commercial Registration",
+          "الرخصة البلدية - Municipal License",
+          "شهادة تصنيف أخصائي البصريات - Optometrist SCFHS Classification",
+          "قائمة الأجهزة البصرية - Optical Equipment Inventory"
+        ],
+        "notes_ar": "يشترط وجود أخصائي بصريات مصنف. لا يسمح بإجراء فحوصات طبية للعيون بدون طبيب عيون مرخص",
+        "notes_en": "Requires classified optometrist. Medical eye examinations require a licensed ophthalmologist. Contact lens fitting requires additional certification."
+      },
+      {
+        "id": "MOH-FL009",
+        "license_type_ar": "مركز تأهيل وعلاج طبيعي",
+        "license_type_en": "Rehabilitation and Physiotherapy Center",
+        "authority": "MOH - Ministry of Health",
+        "authority_ar": "وزارة الصحة",
+        "estimated_cost_sar": 30000,
+        "renewal_annual_sar": 15000,
+        "timeline_days": 60,
+        "renewal_period_years": 3,
+        "online": true,
+        "portal": "seha.sa",
+        "requirements": [
+          "Commercial Registration with rehabilitation activity code",
+          "Municipal license",
+          "Licensed physiotherapist or rehabilitation physician as director with SCFHS classification",
+          "Appropriate rehabilitation equipment",
+          "Accessible facility design (wheelchair, disability compliant)",
+          "Civil Defense fire safety approval"
+        ],
+        "required_documents": [
+          "السجل التجاري - Commercial Registration",
+          "الرخصة البلدية - Municipal License",
+          "شهادة تصنيف المدير الطبي - Director SCFHS Classification",
+          "قائمة أجهزة التأهيل - Rehabilitation Equipment List",
+          "شهادة سهولة الوصول - Accessibility Compliance Certificate"
+        ],
+        "notes_ar": "يشمل العلاج الطبيعي والوظيفي والتأهيل النفسي. يشترط تصميم المنشأة لذوي الإعاقة",
+        "notes_en": "Covers physical therapy, occupational therapy, and psychological rehabilitation. Facility must be fully accessible for persons with disabilities."
+      },
+      {
+        "id": "MOH-FL010",
+        "license_type_ar": "منصة طب عن بُعد",
+        "license_type_en": "Telemedicine Platform",
+        "authority": "MOH - Ministry of Health",
+        "authority_ar": "وزارة الصحة",
+        "estimated_cost_sar": 25000,
+        "renewal_annual_sar": 15000,
+        "timeline_days": 120,
+        "renewal_period_years": 2,
+        "online": true,
+        "portal": "seha.sa",
+        "requirements": [
+          "Commercial Registration with telemedicine/health IT activity code",
+          "MOH telemedicine service provider license",
+          "CITC compliance for telecommunications services",
+          "PDPL (Personal Data Protection Law) compliance certification",
+          "End-to-end encrypted communication platform",
+          "Data hosting within Saudi Arabia (or approved jurisdiction)",
+          "Medical director with SCFHS classification",
+          "Electronic medical records system"
+        ],
+        "required_documents": [
+          "السجل التجاري - Commercial Registration",
+          "ترخيص خدمات الطب عن بُعد - Telemedicine Service License",
+          "شهادة الامتثال لنظام حماية البيانات - PDPL Compliance Certificate",
+          "شهادة هيئة الاتصالات - CITC Compliance Certificate",
+          "وثيقة أمن المعلومات - Information Security Document",
+          "عقد استضافة البيانات - Data Hosting Agreement"
+        ],
+        "notes_ar": "يجب استضافة البيانات الصحية داخل المملكة. يشترط التشفير الكامل للاتصالات وتوافق مع نظام حماية البيانات الشخصية",
+        "notes_en": "Health data must be hosted in Saudi Arabia. End-to-end encryption mandatory. Must comply with PDPL and MOH telemedicine practice guidelines issued in 2021."
+      }
+    ]
+  },
+  "cchi_insurance_categories": {
+    "sector_name_ar": "فئات التأمين الصحي الإلزامي",
+    "sector_name_en": "CCHI Mandatory Health Insurance Categories",
+    "authority": "CCHI - Council of Cooperative Health Insurance",
+    "authority_ar": "مجلس الضمان الصحي التعاوني",
+    "portal": "chi.gov.sa",
+    "notes": "All private sector employers must provide health insurance for employees and dependents under the Cooperative Health Insurance Law (Royal Decree M/10, 1999). CCHI defines minimum benefit categories.",
+    "categories": [
+      {
+        "id": "CCHI-CAT-A",
+        "category_ar": "الفئة أ (VIP)",
+        "category_en": "Category A (VIP)",
+        "annual_premium_range_sar": { "min": 8000, "max": 20000 },
+        "coverage_limit_sar": 500000,
+        "inpatient_coverage": true,
+        "outpatient_coverage": true,
+        "dental_coverage": true,
+        "optical_coverage": true,
+        "maternity_coverage": true,
+        "private_room": true,
+        "international_coverage": true,
+        "notes_ar": "أعلى فئة تشمل تغطية شاملة مع غرفة خاصة وعلاج دولي",
+        "notes_en": "Highest tier with comprehensive coverage including private room, international treatment, dental, and optical."
+      },
+      {
+        "id": "CCHI-CAT-B",
+        "category_ar": "الفئة ب (الذهبية)",
+        "category_en": "Category B (Gold)",
+        "annual_premium_range_sar": { "min": 4000, "max": 8000 },
+        "coverage_limit_sar": 500000,
+        "inpatient_coverage": true,
+        "outpatient_coverage": true,
+        "dental_coverage": true,
+        "optical_coverage": true,
+        "maternity_coverage": true,
+        "private_room": false,
+        "international_coverage": false,
+        "notes_ar": "تغطية شاملة داخل المملكة مع أسنان وبصريات بدون غرفة خاصة",
+        "notes_en": "Comprehensive domestic coverage with dental and optical. Shared room accommodation. No international coverage."
+      },
+      {
+        "id": "CCHI-CAT-C",
+        "category_ar": "الفئة ج (الفضية)",
+        "category_en": "Category C (Silver)",
+        "annual_premium_range_sar": { "min": 2000, "max": 4000 },
+        "coverage_limit_sar": 500000,
+        "inpatient_coverage": true,
+        "outpatient_coverage": true,
+        "dental_coverage": false,
+        "optical_coverage": false,
+        "maternity_coverage": true,
+        "private_room": false,
+        "international_coverage": false,
+        "notes_ar": "تغطية أساسية للعلاج الداخلي والخارجي والأمومة بدون أسنان وبصريات",
+        "notes_en": "Core inpatient/outpatient and maternity coverage. No dental or optical. Shared room accommodation."
+      },
+      {
+        "id": "CCHI-CAT-D",
+        "category_ar": "الفئة د (البرونزية / الحد الأدنى الموحد)",
+        "category_en": "Category D (Bronze / Unified Minimum)",
+        "annual_premium_range_sar": { "min": 1200, "max": 2000 },
+        "coverage_limit_sar": 500000,
+        "inpatient_coverage": true,
+        "outpatient_coverage": true,
+        "dental_coverage": false,
+        "optical_coverage": false,
+        "maternity_coverage": true,
+        "private_room": false,
+        "international_coverage": false,
+        "notes_ar": "الحد الأدنى الإلزامي من التغطية وفقاً لوثيقة الضمان الصحي الموحدة",
+        "notes_en": "Minimum mandatory coverage per the Unified Health Insurance Policy. Most common category for blue-collar workers. Coverage limit SAR 500,000 per person per year."
+      },
+      {
+        "id": "CCHI-VISIT",
+        "category_ar": "تأمين الزيارة",
+        "category_en": "Visit Visa Insurance",
+        "annual_premium_range_sar": { "min": 100, "max": 500 },
+        "coverage_limit_sar": 100000,
+        "inpatient_coverage": true,
+        "outpatient_coverage": true,
+        "dental_coverage": false,
+        "optical_coverage": false,
+        "maternity_coverage": false,
+        "private_room": false,
+        "international_coverage": false,
+        "notes_ar": "تأمين إلزامي لحاملي تأشيرات الزيارة. يغطي الطوارئ والحالات الحرجة",
+        "notes_en": "Mandatory insurance for visit visa holders. Covers emergency and critical care only."
+      }
+    ],
+    "employer_obligations": {
+      "notes_en": "Private sector employers must insure all employees and eligible dependents. Non-compliance results in fines and suspension of government services (Iqama renewal, exit/re-entry visas).",
+      "notes_ar": "يلتزم صاحب العمل في القطاع الخاص بالتأمين على جميع العاملين ومن يعولونهم. عدم الالتزام يؤدي لغرامات وإيقاف خدمات حكومية",
+      "penalty_per_uninsured_employee_sar": 500,
+      "grace_period_days": 30,
+      "eligible_dependents": ["Spouse", "Children under 25", "Parents (if sponsored)"]
+    }
+  },
+  "sfda_medical_devices": {
+    "sector_name_ar": "تصنيف واستيراد الأجهزة الطبية",
+    "sector_name_en": "SFDA Medical Device Classification and Import",
+    "authority": "SFDA - Saudi Food and Drug Authority",
+    "authority_ar": "الهيئة العامة للغذاء والدواء",
+    "portal": "mdma.sfda.gov.sa",
+    "notes": "Medical devices must be registered with SFDA before import or sale. Classification follows GHTF/IMDRF risk-based system adopted by SFDA in the Medical Devices Interim Regulation (2017, updated 2023).",
+    "device_classes": [
+      {
+        "id": "SFDA-MD-I",
+        "class_ar": "الفئة الأولى (منخفضة المخاطر)",
+        "class_en": "Class I (Low Risk)",
+        "risk_level": "low",
+        "examples_en": ["Bandages", "Tongue depressors", "Non-electric wheelchairs", "Reusable surgical instruments"],
+        "examples_ar": ["ضمادات", "خافضات اللسان", "كراسي متحركة غير كهربائية", "أدوات جراحية قابلة لإعادة الاستخدام"],
+        "registration_fee_sar": 2000,
+        "annual_listing_fee_sar": 1000,
+        "approval_timeline_days": 30,
+        "clinical_evidence_required": false,
+        "import_permit_required": true,
+        "requirements": [
+          "SFDA establishment license for importer",
+          "Manufacturer declaration of conformity",
+          "Product technical documentation",
+          "Free sale certificate from country of origin",
+          "Arabic labeling compliance"
+        ],
+        "notes_en": "Lowest risk class. Listing-based registration (notification). No clinical data required."
+      },
+      {
+        "id": "SFDA-MD-II",
+        "class_ar": "الفئة الثانية (متوسطة المخاطر)",
+        "class_en": "Class II (Medium Risk)",
+        "risk_level": "medium",
+        "examples_en": ["Powered wheelchairs", "Infusion pumps", "Surgical gloves", "Pregnancy test kits", "Blood pressure monitors"],
+        "examples_ar": ["كراسي متحركة كهربائية", "مضخات التسريب", "قفازات جراحية", "أجهزة اختبار الحمل", "أجهزة قياس ضغط الدم"],
+        "registration_fee_sar": 5000,
+        "annual_listing_fee_sar": 2500,
+        "approval_timeline_days": 60,
+        "clinical_evidence_required": false,
+        "import_permit_required": true,
+        "requirements": [
+          "All Class I requirements",
+          "Quality management system certification (ISO 13485)",
+          "Performance testing data",
+          "Risk analysis report (ISO 14971)"
+        ],
+        "notes_en": "Requires ISO 13485 QMS certification and risk analysis. Verification-based registration."
+      },
+      {
+        "id": "SFDA-MD-III",
+        "class_ar": "الفئة الثالثة (متوسطة إلى عالية المخاطر)",
+        "class_en": "Class III (Medium-High Risk)",
+        "risk_level": "medium-high",
+        "examples_en": ["Orthopedic implants", "Hemodialysis equipment", "Ventilators", "Coronary stents"],
+        "examples_ar": ["زراعات العظام", "أجهزة غسيل الكلى", "أجهزة التنفس الصناعي", "دعامات الشرايين التاجية"],
+        "registration_fee_sar": 10000,
+        "annual_listing_fee_sar": 5000,
+        "approval_timeline_days": 120,
+        "clinical_evidence_required": true,
+        "import_permit_required": true,
+        "requirements": [
+          "All Class II requirements",
+          "Clinical evaluation report",
+          "Post-market surveillance plan",
+          "Biocompatibility testing (if applicable)",
+          "Notified body or regulatory approval from reference country (FDA, CE, PMDA, TGA, Health Canada)"
+        ],
+        "notes_en": "Requires clinical evidence and post-market surveillance. Prior approval from at least one recognized reference regulatory authority."
+      },
+      {
+        "id": "SFDA-MD-IV",
+        "class_ar": "الفئة الرابعة (عالية المخاطر)",
+        "class_en": "Class IV (High Risk)",
+        "risk_level": "high",
+        "examples_en": ["Pacemakers", "Heart valves", "Defibrillators", "Spinal implants", "Drug-eluting stents"],
+        "examples_ar": ["أجهزة تنظيم ضربات القلب", "صمامات القلب", "أجهزة الصدمات الكهربائية", "زراعات العمود الفقري", "دعامات مغلفة بالأدوية"],
+        "registration_fee_sar": 20000,
+        "annual_listing_fee_sar": 10000,
+        "approval_timeline_days": 180,
+        "clinical_evidence_required": true,
+        "import_permit_required": true,
+        "requirements": [
+          "All Class III requirements",
+          "Full clinical investigation data",
+          "Long-term safety and performance data",
+          "Comprehensive post-market clinical follow-up plan",
+          "Unique Device Identification (UDI) compliance",
+          "Saudi-specific clinical data may be requested"
+        ],
+        "notes_en": "Highest risk class requiring full clinical investigation data. SFDA may require additional Saudi-specific clinical data. Extended review timeline."
+      },
+      {
+        "id": "SFDA-MD-IVD",
+        "class_ar": "أجهزة التشخيص المخبري",
+        "class_en": "In Vitro Diagnostic (IVD) Devices",
+        "risk_level": "varies",
+        "examples_en": ["Blood glucose meters", "PCR test kits", "Rapid diagnostic tests", "Clinical chemistry analyzers"],
+        "examples_ar": ["أجهزة قياس السكر", "أجهزة فحص PCR", "أجهزة الفحص السريع", "أجهزة تحليل الكيمياء السريرية"],
+        "registration_fee_sar": 5000,
+        "annual_listing_fee_sar": 2500,
+        "approval_timeline_days": 90,
+        "clinical_evidence_required": true,
+        "import_permit_required": true,
+        "requirements": [
+          "SFDA IVD establishment license",
+          "ISO 13485 QMS certification",
+          "Performance evaluation data",
+          "Analytical and clinical validation studies",
+          "Arabic instructions for use"
+        ],
+        "notes_en": "IVDs classified separately under SFDA IVD regulation. Risk-based classification (Class A through D). Performance evaluation studies required."
+      }
+    ]
+  },
+  "healthcare_staffing": {
+    "sector_name_ar": "نسب التوظيف ومتطلبات الكوادر الصحية",
+    "sector_name_en": "Healthcare Staffing Ratios and Requirements",
+    "notes": "Based on MOH licensing standards and CBAHI accreditation requirements. SCFHS (Saudi Commission for Health Specialties) classification is mandatory for all clinical staff practicing in Saudi Arabia.",
+    "staffing_ratios": [
+      {
+        "id": "STAFF-R001",
+        "ratio_type_ar": "نسبة الأطباء إلى الأسرة (مستشفيات عامة)",
+        "ratio_type_en": "Doctor-to-Bed Ratio (General Hospitals)",
+        "ratio": "1:5",
+        "description_en": "Minimum 1 physician per 5 inpatient beds. Includes all specialties on staff.",
+        "description_ar": "طبيب واحد على الأقل لكل 5 أسرة تنويم. يشمل جميع التخصصات"
+      },
+      {
+        "id": "STAFF-R002",
+        "ratio_type_ar": "نسبة الأطباء إلى الأسرة (العناية المركزة)",
+        "ratio_type_en": "Doctor-to-Bed Ratio (ICU)",
+        "ratio": "1:2",
+        "description_en": "Minimum 1 intensivist per 2 ICU beds. 24/7 physician coverage required.",
+        "description_ar": "طبيب عناية مركزة واحد على الأقل لكل سريرين. تغطية طبية على مدار الساعة"
+      },
+      {
+        "id": "STAFF-R003",
+        "ratio_type_ar": "نسبة التمريض إلى المرضى (أجنحة عامة)",
+        "ratio_type_en": "Nurse-to-Patient Ratio (General Wards)",
+        "ratio": "1:4",
+        "description_en": "Minimum 1 registered nurse per 4 patients in general inpatient wards.",
+        "description_ar": "ممرض مسجل واحد على الأقل لكل 4 مرضى في أجنحة التنويم العامة"
+      },
+      {
+        "id": "STAFF-R004",
+        "ratio_type_ar": "نسبة التمريض إلى المرضى (العناية المركزة)",
+        "ratio_type_en": "Nurse-to-Patient Ratio (ICU)",
+        "ratio": "1:1",
+        "description_en": "1:1 nurse-to-patient ratio in ICU. Must be critical care trained.",
+        "description_ar": "ممرض واحد لكل مريض في العناية المركزة. يشترط التدريب على الرعاية الحرجة"
+      },
+      {
+        "id": "STAFF-R005",
+        "ratio_type_ar": "نسبة الصيادلة (مستشفيات)",
+        "ratio_type_en": "Pharmacist Requirements (Hospitals)",
+        "ratio": "1:50 beds",
+        "description_en": "Minimum 1 pharmacist per 50 beds for hospital pharmacies. 24/7 pharmacy coverage required for hospitals.",
+        "description_ar": "صيدلي واحد على الأقل لكل 50 سريراً. تغطية صيدلانية على مدار الساعة"
+      }
+    ],
+    "saudization_requirements": {
+      "sector_name_ar": "نسب التوطين في القطاع الصحي",
+      "sector_name_en": "Healthcare Saudization (Nitaqat) Requirements",
+      "reference": "MHRSD Nitaqat Program / MOH Regulations",
+      "roles": [
+        {
+          "role_ar": "صيادلة",
+          "role_en": "Pharmacists",
+          "saudization_target_percent": 80,
+          "notes_en": "Retail pharmacy director must be Saudi. Community pharmacies require 80% Saudi pharmacists by 2025 target."
+        },
+        {
+          "role_ar": "أطباء أسنان",
+          "role_en": "Dentists",
+          "saudization_target_percent": 35,
+          "notes_en": "Progressive Saudization target for dentistry sector."
+        },
+        {
+          "role_ar": "أخصائيو بصريات",
+          "role_en": "Optometrists",
+          "saudization_target_percent": 70,
+          "notes_en": "High Saudization target for optical sector. Optical centers must have Saudi optometrist."
+        },
+        {
+          "role_ar": "تمريض",
+          "role_en": "Nurses",
+          "saudization_target_percent": 30,
+          "notes_en": "Gradual increase target. Nursing historically has lower Saudization due to workforce availability."
+        },
+        {
+          "role_ar": "أطباء عامون",
+          "role_en": "General Physicians",
+          "saudization_target_percent": 25,
+          "notes_en": "Lower target due to reliance on international medical graduates. Target increasing annually."
+        },
+        {
+          "role_ar": "إداريون صحيون",
+          "role_en": "Healthcare Administrators",
+          "saudization_target_percent": 60,
+          "notes_en": "Administrative and non-clinical roles have higher Saudization targets."
+        }
+      ]
+    },
+    "average_salaries_sar": {
+      "sector_name_ar": "متوسط الرواتب الشهرية للكوادر الصحية",
+      "sector_name_en": "Average Monthly Salaries for Healthcare Staff (SAR)",
+      "notes": "Market averages for private sector healthcare in major Saudi cities (Riyadh, Jeddah, Dammam). Actual salaries vary by experience, facility size, and nationality.",
+      "roles": [
+        {
+          "role_ar": "استشاري طبي",
+          "role_en": "Medical Consultant",
+          "salary_range_sar": { "min": 40000, "max": 80000 },
+          "scfhs_classification": "Consultant"
+        },
+        {
+          "role_ar": "أخصائي أول",
+          "role_en": "Senior Specialist / Registrar",
+          "salary_range_sar": { "min": 25000, "max": 45000 },
+          "scfhs_classification": "Senior Specialist"
+        },
+        {
+          "role_ar": "أخصائي",
+          "role_en": "Specialist",
+          "salary_range_sar": { "min": 18000, "max": 30000 },
+          "scfhs_classification": "Specialist"
+        },
+        {
+          "role_ar": "طبيب عام / مقيم",
+          "role_en": "General Practitioner / Resident",
+          "salary_range_sar": { "min": 12000, "max": 20000 },
+          "scfhs_classification": "Resident / GP"
+        },
+        {
+          "role_ar": "طبيب أسنان",
+          "role_en": "Dentist",
+          "salary_range_sar": { "min": 15000, "max": 35000 },
+          "scfhs_classification": "Specialist / Consultant"
+        },
+        {
+          "role_ar": "صيدلي",
+          "role_en": "Pharmacist",
+          "salary_range_sar": { "min": 8000, "max": 18000 },
+          "scfhs_classification": "Pharmacist"
+        },
+        {
+          "role_ar": "ممرض مسجل",
+          "role_en": "Registered Nurse",
+          "salary_range_sar": { "min": 6000, "max": 14000 },
+          "scfhs_classification": "Nurse Specialist / Technician"
+        },
+        {
+          "role_ar": "فني مختبر",
+          "role_en": "Lab Technician",
+          "salary_range_sar": { "min": 5000, "max": 10000 },
+          "scfhs_classification": "Technician"
+        },
+        {
+          "role_ar": "فني أشعة",
+          "role_en": "Radiology Technician",
+          "salary_range_sar": { "min": 5500, "max": 12000 },
+          "scfhs_classification": "Technician"
+        },
+        {
+          "role_ar": "أخصائي علاج طبيعي",
+          "role_en": "Physiotherapist",
+          "salary_range_sar": { "min": 7000, "max": 15000 },
+          "scfhs_classification": "Specialist"
+        }
+      ]
+    }
+  },
+  "cbahi_accreditation": {
+    "sector_name_ar": "اعتماد المركز السعودي لاعتماد المنشآت الصحية",
+    "sector_name_en": "CBAHI Accreditation (Central Board for Accreditation of Healthcare Institutions)",
+    "authority": "CBAHI",
+    "authority_ar": "المركز السعودي لاعتماد المنشآت الصحية",
+    "portal": "cbahi.gov.sa",
+    "notes": "CBAHI accreditation is mandatory for all private healthcare facilities in Saudi Arabia as per Council of Ministers Resolution No. 17 (2014). CBAHI standards are aligned with ISQua (International Society for Quality in Health Care).",
+    "accreditation_types": [
+      {
+        "id": "CBAHI-ACC-HOSP",
+        "type_ar": "اعتماد المستشفيات",
+        "type_en": "Hospital Accreditation",
+        "applicable_to": "Hospitals (general and specialized)",
+        "timeline_months": 12,
+        "validity_years": 3,
+        "survey_fee_sar": 75000,
+        "annual_fee_sar": 25000,
+        "standards_count": 810,
+        "notes_en": "Comprehensive survey covering 810 standards across patient care, safety, governance, infection control, and facility management."
+      },
+      {
+        "id": "CBAHI-ACC-PHC",
+        "type_ar": "اعتماد الرعاية الصحية الأولية",
+        "type_en": "Primary Healthcare Accreditation",
+        "applicable_to": "Polyclinics, medical complexes, single specialty clinics",
+        "timeline_months": 9,
+        "validity_years": 3,
+        "survey_fee_sar": 35000,
+        "annual_fee_sar": 12000,
+        "standards_count": 490,
+        "notes_en": "Covers 490 standards for ambulatory care settings including patient rights, clinical care, and safety."
+      },
+      {
+        "id": "CBAHI-ACC-DENT",
+        "type_ar": "اعتماد عيادات الأسنان",
+        "type_en": "Dental Clinic Accreditation",
+        "applicable_to": "Dental clinics and centers",
+        "timeline_months": 6,
+        "validity_years": 3,
+        "survey_fee_sar": 20000,
+        "annual_fee_sar": 8000,
+        "standards_count": 320,
+        "notes_en": "Covers 320 standards specific to dental care including infection control, radiology safety, and patient care."
+      }
+    ],
+    "key_standard_domains": [
+      {
+        "domain_ar": "حقوق المرضى والأسر",
+        "domain_en": "Patient and Family Rights",
+        "weight_percent": 15
+      },
+      {
+        "domain_ar": "إدارة الدواء",
+        "domain_en": "Medication Management",
+        "weight_percent": 12
+      },
+      {
+        "domain_ar": "مكافحة العدوى",
+        "domain_en": "Infection Prevention and Control",
+        "weight_percent": 15
+      },
+      {
+        "domain_ar": "سلامة المرضى",
+        "domain_en": "Patient Safety",
+        "weight_percent": 18
+      },
+      {
+        "domain_ar": "الحوكمة والقيادة",
+        "domain_en": "Governance and Leadership",
+        "weight_percent": 10
+      },
+      {
+        "domain_ar": "إدارة المرافق والسلامة",
+        "domain_en": "Facility Management and Safety",
+        "weight_percent": 10
+      },
+      {
+        "domain_ar": "تحسين الجودة",
+        "domain_en": "Quality Improvement",
+        "weight_percent": 10
+      },
+      {
+        "domain_ar": "إدارة المعلومات الصحية",
+        "domain_en": "Health Information Management",
+        "weight_percent": 10
+      }
+    ],
+    "process_steps": [
+      "Application submission via CBAHI portal",
+      "Self-assessment against CBAHI standards",
+      "Gap analysis and corrective action planning",
+      "Mock survey (optional but recommended)",
+      "Formal survey by CBAHI surveyor team (3-5 days on-site)",
+      "Survey report and findings",
+      "Corrective action plan for deficiencies",
+      "Accreditation decision by CBAHI board",
+      "Ongoing compliance monitoring (annual focused surveys)"
+    ]
+  },
+  "telemedicine_regulations": {
+    "sector_name_ar": "تنظيمات الطب عن بُعد",
+    "sector_name_en": "Telemedicine Regulations",
+    "authority": "MOH - Ministry of Health",
+    "authority_ar": "وزارة الصحة",
+    "reference": "MOH Telemedicine Regulations (2021), PDPL (Royal Decree M/19, 2021, effective March 2023)",
+    "notes": "Saudi Arabia issued comprehensive telemedicine regulations in 2021 under MOH. The Personal Data Protection Law (PDPL) governs health data privacy. CITC regulates telecommunications infrastructure.",
+    "licensing_requirements": [
+      {
+        "id": "TELE-REQ001",
+        "requirement_ar": "ترخيص مقدم خدمة الطب عن بُعد من وزارة الصحة",
+        "requirement_en": "MOH Telemedicine Service Provider License",
+        "mandatory": true,
+        "notes_en": "Separate license category from physical facility licenses. Application via Seha platform."
+      },
+      {
+        "id": "TELE-REQ002",
+        "requirement_ar": "تصنيف جميع الأطباء في الهيئة السعودية للتخصصات الصحية",
+        "requirement_en": "SCFHS Classification for All Practicing Physicians",
+        "mandatory": true,
+        "notes_en": "All physicians providing telemedicine must hold valid SCFHS professional classification. Cross-border practice requires additional approval."
+      },
+      {
+        "id": "TELE-REQ003",
+        "requirement_ar": "تعيين مدير طبي مقيم في المملكة",
+        "requirement_en": "Saudi-Resident Medical Director",
+        "mandatory": true,
+        "notes_en": "Medical director must be physically based in Saudi Arabia with valid SCFHS classification."
+      },
+      {
+        "id": "TELE-REQ004",
+        "requirement_ar": "الامتثال لنظام حماية البيانات الشخصية",
+        "requirement_en": "PDPL Compliance Certification",
+        "mandatory": true,
+        "notes_en": "Must comply with the Personal Data Protection Law including data minimization, purpose limitation, consent management, and breach notification within 72 hours."
+      }
+    ],
+    "platform_technical_requirements": [
+      {
+        "id": "TELE-TECH001",
+        "requirement_ar": "تشفير الاتصالات من طرف إلى طرف",
+        "requirement_en": "End-to-End Encryption",
+        "standard": "AES-256 minimum",
+        "mandatory": true
+      },
+      {
+        "id": "TELE-TECH002",
+        "requirement_ar": "استضافة البيانات الصحية داخل المملكة",
+        "requirement_en": "Health Data Hosting in Saudi Arabia",
+        "standard": "Data residency within KSA borders or NCA-approved jurisdiction",
+        "mandatory": true
+      },
+      {
+        "id": "TELE-TECH003",
+        "requirement_ar": "نظام سجلات طبية إلكترونية متوافق مع معايير HL7",
+        "requirement_en": "HL7-Compatible Electronic Medical Records",
+        "standard": "HL7 FHIR or HL7 v2 interoperability",
+        "mandatory": true
+      },
+      {
+        "id": "TELE-TECH004",
+        "requirement_ar": "التحقق من هوية المريض إلكترونياً",
+        "requirement_en": "Electronic Patient Identity Verification",
+        "standard": "Integration with Absher or National ID verification",
+        "mandatory": true
+      },
+      {
+        "id": "TELE-TECH005",
+        "requirement_ar": "تسجيل وحفظ الجلسات الطبية عن بُعد",
+        "requirement_en": "Session Recording and Archival",
+        "standard": "Minimum 10-year retention for clinical records",
+        "mandatory": true
+      },
+      {
+        "id": "TELE-TECH006",
+        "requirement_ar": "شهادة الأمن السيبراني من الهيئة الوطنية للأمن السيبراني",
+        "requirement_en": "NCA Cybersecurity Compliance",
+        "standard": "NCA Essential Cybersecurity Controls (ECC)",
+        "mandatory": true
+      }
+    ],
+    "permitted_services": [
+      "General medical consultations",
+      "Follow-up appointments",
+      "Mental health counseling",
+      "Chronic disease management",
+      "Dermatology consultations (with image sharing)",
+      "Prescription renewals for stable conditions",
+      "Laboratory result interpretation",
+      "Second opinions"
+    ],
+    "prohibited_services": [
+      "Controlled substance prescriptions (narcotics, psychotropics) without in-person visit",
+      "Surgical procedures or invasive interventions",
+      "Emergency care as primary modality",
+      "Initial diagnosis of complex conditions requiring physical examination",
+      "Death certification"
+    ],
+    "pdpl_compliance": {
+      "law_name_ar": "نظام حماية البيانات الشخصية",
+      "law_name_en": "Personal Data Protection Law (PDPL)",
+      "effective_date": "2023-03-17",
+      "authority": "SDAIA - Saudi Data and AI Authority",
+      "authority_ar": "الهيئة السعودية للبيانات والذكاء الاصطناعي",
+      "key_requirements": [
+        {
+          "requirement_en": "Explicit consent for health data collection and processing",
+          "requirement_ar": "الموافقة الصريحة لجمع ومعالجة البيانات الصحية"
+        },
+        {
+          "requirement_en": "Data minimization - collect only necessary health information",
+          "requirement_ar": "تقليل البيانات - جمع المعلومات الصحية الضرورية فقط"
+        },
+        {
+          "requirement_en": "Purpose limitation - use data only for declared medical purposes",
+          "requirement_ar": "تحديد الغرض - استخدام البيانات للأغراض الطبية المعلنة فقط"
+        },
+        {
+          "requirement_en": "Data breach notification to SDAIA within 72 hours",
+          "requirement_ar": "إبلاغ الهيئة بأي خرق للبيانات خلال 72 ساعة"
+        },
+        {
+          "requirement_en": "Right of data subject to access, correct, and delete personal health data",
+          "requirement_ar": "حق صاحب البيانات في الوصول إلى بياناته الصحية وتصحيحها وحذفها"
+        },
+        {
+          "requirement_en": "Cross-border data transfer restrictions - requires SDAIA approval",
+          "requirement_ar": "قيود نقل البيانات عبر الحدود - يتطلب موافقة الهيئة"
+        }
+      ],
+      "penalties": {
+        "max_fine_sar": 5000000,
+        "imprisonment_years_max": 2,
+        "notes_en": "Fines up to SAR 5 million and/or imprisonment up to 2 years for violations. Health data classified as sensitive personal data with stricter protections."
+      }
+    }
+  }
+}

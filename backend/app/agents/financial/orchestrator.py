@@ -16,8 +16,8 @@ from app.agents.financial.investment_analysis_sub import InvestmentAnalysisSubAg
 class FinancialOrchestrator(SubAgentOrchestrator):
     name: str = "FinancialModelingAgent"
     description: str = "5-year Saudi SME financial model: P&L, cash flow, IRR, NPV"
-    max_tokens: int = 8192
-    reviewer_max_tokens: int = 8192
+    max_tokens: int = 4000  # Financial model needs more than default but not 8K
+    reviewer_max_tokens: int = 4000
     reviewer_temperature: float = 0.2
 
     def get_sub_agents(self, context: dict) -> list:

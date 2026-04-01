@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 
 from app.core.config import settings
 from app.core.database import Base, engine
-from app.api.v1 import auth, projects, reports, admin
+from app.api.v1 import auth, projects, reports, admin, templates
 
 
 @asynccontextmanager
@@ -28,6 +28,13 @@ async def lifespan(app: FastAPI):
         "hrdf_nitaqat_ratios",
         "vision2030_kpis",
         "mci_licenses",
+        "moh_healthcare",
+        "moe_education",
+        "citc_tech",
+        "sta_tourism",
+        "modon_manufacturing",
+        "logistics_transport",
+        "templates",
     ]:
         load_seed(source)
     yield
@@ -56,6 +63,7 @@ app.include_router(auth.router, prefix="/api/v1")
 app.include_router(projects.router, prefix="/api/v1")
 app.include_router(reports.router, prefix="/api/v1")
 app.include_router(admin.router, prefix="/api/v1")
+app.include_router(templates.router, prefix="/api/v1")
 
 
 @app.get("/")

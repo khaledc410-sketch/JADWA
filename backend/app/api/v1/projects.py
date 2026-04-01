@@ -31,7 +31,18 @@ class ProjectResponse(BaseModel):
         from_attributes = True
 
 
-VALID_SECTORS = {"franchise", "real_estate", "fnb", "retail"}
+VALID_SECTORS = {
+    "franchise",
+    "real_estate",
+    "fnb",
+    "retail",
+    "healthcare",
+    "education",
+    "technology",
+    "hospitality",
+    "manufacturing",
+    "logistics",
+}
 
 
 @router.post("/", response_model=ProjectResponse)

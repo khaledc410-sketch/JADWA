@@ -265,7 +265,7 @@ class StaffingSubAgent(BaseAgent):
         "Staffing plans, salary benchmarks, and GOSI cost calculations "
         "for Saudi businesses"
     )
-    max_tokens: int = 4096
+    max_tokens: int = 2000
     temperature: float = 0.2
 
     @property

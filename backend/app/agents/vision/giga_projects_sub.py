@@ -12,7 +12,7 @@ from app.services.data_tools import get_giga_projects, get_sez_benefits
 class GigaProjectsSubAgent(BaseAgent):
     name: str = "GigaProjectsSubAgent"
     description: str = "Aligns project with Saudi giga-projects and SEZ benefits"
-    max_tokens: int = 4096
+    max_tokens: int = 2000
     temperature: float = 0.2
 
     @property

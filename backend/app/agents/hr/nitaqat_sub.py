@@ -28,7 +28,7 @@ class NitaqatSubAgent(BaseAgent):
         "Nitaqat Saudization ratio calculations, band thresholds, "
         "and compliance analysis"
     )
-    max_tokens: int = 4096
+    max_tokens: int = 2000
     temperature: float = 0.1
 
     @property

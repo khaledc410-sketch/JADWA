@@ -1,0 +1,580 @@
+{
+  "metadata": {
+    "source": "STA + GEA + MOT + RCU + SHA + SCTH",
+    "source_ar": "هيئة السياحة السعودية + هيئة الترفيه + وزارة السياحة + الهيئة الملكية لمحافظة العلا + هيئة التراث + الهيئة السعودية للسياحة",
+    "last_updated": "2025-01",
+    "notes": "Saudi tourism and hospitality licensing, hotel classification, entertainment permits, and salary benchmarks as of Q1 2025. Tourism licensing is now managed via the unified tourism platform (mt.gov.sa)."
+  },
+  "licenses": {
+    "tourism_hospitality": {
+      "sector_name_ar": "قطاع السياحة والضيافة",
+      "sector_name_en": "Tourism & Hospitality",
+      "notes": "Tourism businesses must obtain a tourism license from the Ministry of Tourism in addition to the standard CR and municipal license.",
+      "items": [
+        {
+          "id": "STA-L001",
+          "license_type_ar": "رخصة فندق (تصنيف 1-5 نجوم)",
+          "license_type_en": "Hotel License (1-5 Star Classification)",
+          "authority": "MOT - Ministry of Tourism",
+          "authority_ar": "وزارة السياحة",
+          "estimated_cost_sar": 15000,
+          "renewal_annual_sar": 10000,
+          "timeline_days": 60,
+          "required": true,
+          "online": true,
+          "portal": "mt.gov.sa",
+          "requirements": [
+            "Commercial Registration (CR) with hotel activity code",
+            "Municipal operating license (Balady)",
+            "Civil defense safety certificate",
+            "Building completion certificate",
+            "GOSI and MHRSD registration",
+            "Minimum room count per star classification",
+            "Fire safety and evacuation plan approval"
+          ],
+          "classification_criteria": "Star rating determined by MOT inspection based on room count, facility amenities, service quality, and staff ratios",
+          "notes_ar": "يجب الحصول على تصنيف نجوم من وزارة السياحة. التصنيف يتم بناءً على معايير محددة تشمل عدد الغرف والمرافق وجودة الخدمة",
+          "notes_en": "Star classification is mandatory and determined by MOT inspection. Hotels must display their star rating prominently. Re-inspection occurs every 3 years."
+        },
+        {
+          "id": "STA-L002",
+          "license_type_ar": "رخصة شقق فندقية / شقق مفروشة",
+          "license_type_en": "Hotel Apartments / Serviced Apartments License",
+          "authority": "MOT - Ministry of Tourism",
+          "authority_ar": "وزارة السياحة",
+          "estimated_cost_sar": 10000,
+          "renewal_annual_sar": 7000,
+          "timeline_days": 45,
+          "required": true,
+          "online": true,
+          "portal": "mt.gov.sa",
+          "requirements": [
+            "Commercial Registration with furnished apartments activity code",
+            "Municipal operating license",
+            "Civil defense certificate",
+            "Minimum 10 furnished units",
+            "Reception area and 24-hour front desk",
+            "CCTV and security system",
+            "GOSI and MHRSD registration"
+          ],
+          "classification_criteria": "Classified into 3 categories: Standard, Superior, and Deluxe based on unit size, furnishing quality, and amenities",
+          "notes_ar": "تشمل الشقق المفروشة والشقق الفندقية. يجب أن تحتوي على استقبال ونظام أمني",
+          "notes_en": "Includes both serviced apartments and furnished units for short-term rental. Must comply with Ejar platform registration for rental contracts."
+        },
+        {
+          "id": "STA-L003",
+          "license_type_ar": "رخصة منتجع سياحي",
+          "license_type_en": "Resort License",
+          "authority": "MOT - Ministry of Tourism",
+          "authority_ar": "وزارة السياحة",
+          "estimated_cost_sar": 25000,
+          "renewal_annual_sar": 15000,
+          "timeline_days": 90,
+          "required": true,
+          "online": true,
+          "portal": "mt.gov.sa",
+          "requirements": [
+            "Commercial Registration with resort activity code",
+            "Municipal license and land use permit",
+            "Environmental impact assessment (NCEC)",
+            "Civil defense safety certificate",
+            "Minimum 50 rooms or units",
+            "Recreational facilities (pool, spa, or beach access)",
+            "On-site F&B facilities with SFDA license",
+            "Landscaping and environmental compliance"
+          ],
+          "classification_criteria": "Classified 3-5 stars based on location, facilities, room quality, recreational offerings, and service level",
+          "notes_ar": "المنتجعات السياحية تتطلب تقييم أثر بيئي وموافقة المركز الوطني للرقابة على الالتزام البيئي",
+          "notes_en": "Resorts require environmental clearance from NCEC. Coastal resorts need additional permits from the Royal Commission for coastal development zones."
+        },
+        {
+          "id": "STA-L004",
+          "license_type_ar": "رخصة نُزل على الطريق (موتيل)",
+          "license_type_en": "Motel / Roadside Inn License",
+          "authority": "MOT - Ministry of Tourism",
+          "authority_ar": "وزارة السياحة",
+          "estimated_cost_sar": 5000,
+          "renewal_annual_sar": 3500,
+          "timeline_days": 30,
+          "required": true,
+          "online": true,
+          "portal": "mt.gov.sa",
+          "requirements": [
+            "Commercial Registration",
+            "Municipal operating license",
+            "Civil defense certificate",
+            "Minimum 15 rooms",
+            "Parking facilities for at least 20 vehicles",
+            "Basic F&B service or proximity to dining"
+          ],
+          "classification_criteria": "Classified as 1-3 stars based on room quality, cleanliness standards, and roadside amenities",
+          "notes_ar": "تقع عادةً على الطرق السريعة بين المدن. تتطلب مواقف سيارات كافية",
+          "notes_en": "Located along inter-city highways. Must comply with MOT roadside hospitality standards. Parking capacity is a key requirement."
+        },
+        {
+          "id": "STA-L005",
+          "license_type_ar": "رخصة وكالة سفر وسياحة (داخلية / خارجية)",
+          "license_type_en": "Travel Agency License (Inbound / Outbound)",
+          "authority": "MOT - Ministry of Tourism",
+          "authority_ar": "وزارة السياحة",
+          "estimated_cost_sar": 8000,
+          "renewal_annual_sar": 5000,
+          "timeline_days": 30,
+          "required": true,
+          "online": true,
+          "portal": "mt.gov.sa",
+          "requirements": [
+            "Commercial Registration with travel agency activity code",
+            "IATA accreditation (for outbound air ticketing)",
+            "Bank guarantee of SAR 100,000 (outbound) or SAR 50,000 (inbound)",
+            "Office premises with minimum 40 sqm",
+            "Qualified Saudi manager with tourism diploma or equivalent",
+            "Professional liability insurance",
+            "GOSI and MHRSD registration"
+          ],
+          "classification_criteria": "Licensed separately for inbound, outbound, or both. Outbound agencies require IATA accreditation.",
+          "notes_ar": "وكالات السفر الخارجية تتطلب اعتماد IATA وضمان بنكي. الوكالات الداخلية تحتاج ضمان بنكي أقل",
+          "notes_en": "Outbound agencies must hold IATA accreditation and a SAR 100,000 bank guarantee. Inbound-only agencies need SAR 50,000 guarantee. Both require a Saudi national as branch manager."
+        },
+        {
+          "id": "STA-L006",
+          "license_type_ar": "رخصة منظم رحلات سياحية",
+          "license_type_en": "Tour Operator License",
+          "authority": "MOT - Ministry of Tourism",
+          "authority_ar": "وزارة السياحة",
+          "estimated_cost_sar": 10000,
+          "renewal_annual_sar": 6000,
+          "timeline_days": 45,
+          "required": true,
+          "online": true,
+          "portal": "mt.gov.sa",
+          "requirements": [
+            "Commercial Registration with tour operator activity code",
+            "Bank guarantee of SAR 75,000",
+            "Professional liability insurance (minimum SAR 500,000 coverage)",
+            "Qualified Saudi tour manager",
+            "Fleet of licensed transport vehicles or contracted transport agreement",
+            "Emergency response plan",
+            "GOSI and MHRSD registration"
+          ],
+          "classification_criteria": "Licensed for domestic tours, international tours, or adventure tourism. Each category has specific vehicle and safety requirements.",
+          "notes_ar": "منظمو الرحلات يحتاجون تأمين مسؤولية مهنية وخطة استجابة للطوارئ",
+          "notes_en": "Tour operators must carry professional liability insurance and maintain an emergency response plan. Adventure tourism operators need additional safety certifications."
+        },
+        {
+          "id": "STA-L007",
+          "license_type_ar": "رخصة منظم فعاليات ومؤتمرات (MICE)",
+          "license_type_en": "Event / MICE Organizer License",
+          "authority": "MOT + GEA - General Entertainment Authority",
+          "authority_ar": "وزارة السياحة + هيئة الترفيه العامة",
+          "estimated_cost_sar": 12000,
+          "renewal_annual_sar": 8000,
+          "timeline_days": 45,
+          "required": true,
+          "online": true,
+          "portal": "mt.gov.sa / gea.gov.sa",
+          "requirements": [
+            "Commercial Registration with event management activity code",
+            "GEA event organizer registration",
+            "Professional liability insurance (minimum SAR 1,000,000 coverage)",
+            "Crowd management and safety plan",
+            "Civil defense event safety approval",
+            "Qualified event safety officer on staff",
+            "GOSI and MHRSD registration"
+          ],
+          "classification_criteria": "Licensed for conferences, exhibitions, festivals, or sporting events. Large-scale events (1000+ attendees) require additional GEA and civil defense approvals.",
+          "notes_ar": "تنظيم الفعاليات الكبيرة يتطلب موافقة هيئة الترفيه والدفاع المدني",
+          "notes_en": "MICE organizers need dual licensing from MOT and GEA. Events over 1,000 attendees require separate GEA event permits per event."
+        },
+        {
+          "id": "STA-L008",
+          "license_type_ar": "رخصة مرشد سياحي",
+          "license_type_en": "Tourist Guide License",
+          "authority": "MOT - Ministry of Tourism",
+          "authority_ar": "وزارة السياحة",
+          "estimated_cost_sar": 2000,
+          "renewal_annual_sar": 1000,
+          "timeline_days": 21,
+          "required": true,
+          "online": true,
+          "portal": "mt.gov.sa",
+          "requirements": [
+            "Saudi national or resident with valid iqama",
+            "Completion of MOT-accredited tour guide training program (120 hours)",
+            "Proficiency in Arabic and at least one foreign language",
+            "Clean criminal record",
+            "First aid certification",
+            "Knowledge test on Saudi heritage, history, and geography",
+            "Annual CPD hours (16 hours minimum)"
+          ],
+          "classification_criteria": "Licensed for general, heritage/cultural, adventure, or religious tourism specializations",
+          "notes_ar": "يجب اجتياز برنامج تدريبي معتمد واختبار معرفي. المرشدون السعوديون لهم أولوية",
+          "notes_en": "Saudi nationals are prioritized. Non-Saudi guides must hold specific language skills and serve inbound tourists only. License renewed annually with CPD requirement."
+        },
+        {
+          "id": "STA-L009",
+          "license_type_ar": "رخصة مقدم خدمات الحج والعمرة",
+          "license_type_en": "Hajj and Umrah Service Provider License",
+          "authority": "MOH (Hajj Ministry) + MOT",
+          "authority_ar": "وزارة الحج والعمرة + وزارة السياحة",
+          "estimated_cost_sar": 50000,
+          "renewal_annual_sar": 30000,
+          "timeline_days": 90,
+          "required": true,
+          "online": true,
+          "portal": "haj.gov.sa / mt.gov.sa",
+          "requirements": [
+            "Commercial Registration with Hajj/Umrah services activity code",
+            "Ministry of Hajj and Umrah operating license",
+            "Bank guarantee of SAR 500,000",
+            "Approved accommodation in Makkah and Madinah",
+            "Licensed transport fleet or contracted agreement",
+            "Professional liability insurance (SAR 2,000,000 minimum)",
+            "Saudi national company (100% Saudi ownership required)",
+            "Minimum 3 years experience in tourism sector"
+          ],
+          "classification_criteria": "Licensed for domestic Hajj services, international Umrah packages, or both. International operators must have MOH country-specific quota allocation.",
+          "notes_ar": "يتطلب ملكية سعودية كاملة وضمان بنكي كبير. تخصيص الحصص يتم سنوياً من وزارة الحج",
+          "notes_en": "Requires 100% Saudi ownership. Bank guarantee and insurance requirements are the highest in the tourism sector. Quota allocations are managed annually by the Ministry of Hajj."
+        },
+        {
+          "id": "STA-L010",
+          "license_type_ar": "رخصة سياحة المغامرات",
+          "license_type_en": "Adventure Tourism Operator License",
+          "authority": "MOT - Ministry of Tourism",
+          "authority_ar": "وزارة السياحة",
+          "estimated_cost_sar": 8000,
+          "renewal_annual_sar": 5000,
+          "timeline_days": 45,
+          "required": true,
+          "online": true,
+          "portal": "mt.gov.sa",
+          "requirements": [
+            "Commercial Registration with adventure tourism activity code",
+            "Professional liability insurance (SAR 1,000,000 minimum)",
+            "Certified safety instructors (international certifications accepted)",
+            "Equipment safety inspection certificates",
+            "Emergency evacuation and rescue plan",
+            "First aid trained staff (minimum 2 per trip)",
+            "Participant waiver and medical fitness documentation process"
+          ],
+          "classification_criteria": "Covers diving, hiking, rock climbing, desert safari, zip-lining, paragliding, and water sports. Each activity type requires specific safety certifications.",
+          "notes_ar": "أنشطة المغامرات تتطلب تأمين مسؤولية عالي ومدربي سلامة معتمدين دولياً",
+          "notes_en": "Adventure operators must carry high liability coverage. Equipment must pass annual safety inspections. Guides must hold internationally recognized certifications for their specific activity."
+        }
+      ]
+    }
+  },
+  "hotel_classification": {
+    "section_name_ar": "تصنيف الفنادق",
+    "section_name_en": "Hotel Star Classification Standards",
+    "authority": "MOT - Ministry of Tourism",
+    "authority_ar": "وزارة السياحة",
+    "notes": "Star classification is determined by MOT inspection teams. Hotels must meet all minimum criteria for their target star level.",
+    "stars": [
+      {
+        "star_rating": 1,
+        "name_ar": "فندق نجمة واحدة",
+        "name_en": "One Star Hotel",
+        "min_rooms": 15,
+        "min_room_size_sqm": 14,
+        "facility_requirements": ["Reception area", "Daily housekeeping", "Basic parking"],
+        "service_standards": ["8-hour front desk", "Room cleaning daily", "Basic toiletries"],
+        "staff_ratio_per_room": 0.3,
+        "inspection_frequency_years": 3
+      },
+      {
+        "star_rating": 2,
+        "name_ar": "فندق نجمتين",
+        "name_en": "Two Star Hotel",
+        "min_rooms": 20,
+        "min_room_size_sqm": 16,
+        "facility_requirements": ["Reception area", "Breakfast room or café", "Parking", "Luggage storage", "Wi-Fi in public areas"],
+        "service_standards": ["12-hour front desk", "Room cleaning daily", "Toiletries and towel change", "Wake-up call service"],
+        "staff_ratio_per_room": 0.4,
+        "inspection_frequency_years": 3
+      },
+      {
+        "star_rating": 3,
+        "name_ar": "فندق ثلاث نجوم",
+        "name_en": "Three Star Hotel",
+        "min_rooms": 30,
+        "min_room_size_sqm": 20,
+        "facility_requirements": ["24-hour reception", "Restaurant", "Parking", "Elevator", "Wi-Fi throughout", "Luggage storage", "Laundry service"],
+        "service_standards": ["24-hour front desk", "Room service (limited hours)", "Daily housekeeping with linen change", "Multilingual staff (Arabic + English)"],
+        "staff_ratio_per_room": 0.6,
+        "inspection_frequency_years": 3
+      },
+      {
+        "star_rating": 4,
+        "name_ar": "فندق أربع نجوم",
+        "name_en": "Four Star Hotel",
+        "min_rooms": 50,
+        "min_room_size_sqm": 26,
+        "facility_requirements": ["24-hour reception", "Multiple restaurants", "Swimming pool", "Fitness center", "Business center", "Parking with valet", "Elevator", "Concierge desk", "Meeting rooms", "Wi-Fi throughout"],
+        "service_standards": ["24-hour front desk and room service", "Twice-daily housekeeping", "Turndown service", "Multilingual staff (Arabic + English + one additional)", "Concierge services"],
+        "staff_ratio_per_room": 0.9,
+        "inspection_frequency_years": 2
+      },
+      {
+        "star_rating": 5,
+        "name_ar": "فندق خمس نجوم",
+        "name_en": "Five Star Hotel",
+        "min_rooms": 80,
+        "min_room_size_sqm": 32,
+        "facility_requirements": ["24-hour reception", "Multiple restaurants (minimum 2)", "Swimming pool", "Full-service spa", "Fitness center", "Business center", "Valet parking", "Elevators", "Concierge desk", "Meeting and banquet facilities", "Kids club or family facilities", "High-speed Wi-Fi throughout", "Executive lounge"],
+        "service_standards": ["24-hour front desk, room service, and concierge", "Twice-daily housekeeping with turndown", "Personalized guest services", "Multilingual staff (Arabic + English + two additional)", "Butler service for suites", "Airport transfer service"],
+        "staff_ratio_per_room": 1.5,
+        "inspection_frequency_years": 2
+      }
+    ]
+  },
+  "gea_entertainment_permits": {
+    "section_name_ar": "تصاريح هيئة الترفيه",
+    "section_name_en": "GEA Entertainment Permits",
+    "authority": "GEA - General Entertainment Authority",
+    "authority_ar": "هيئة الترفيه العامة",
+    "portal": "gea.gov.sa",
+    "notes": "All entertainment events in Saudi Arabia require GEA permits. Fees vary by event type and capacity.",
+    "permit_types": [
+      {
+        "id": "GEA-P001",
+        "type_ar": "تصريح حفل موسيقي / استعراضي",
+        "type_en": "Concert / Live Performance Permit",
+        "fee_sar_small": 5000,
+        "fee_sar_medium": 15000,
+        "fee_sar_large": 50000,
+        "capacity_thresholds": {"small": "up to 500", "medium": "501-5000", "large": "5001+"},
+        "timeline_days": 30,
+        "requirements": ["GEA event application", "Venue safety certificate", "Civil defense approval", "Crowd management plan", "Medical emergency plan", "Noise impact assessment", "Artist/performer contracts"],
+        "safety_requirements": ["Emergency exits per 250 attendees", "On-site medical team", "Fire suppression systems", "Security personnel (1 per 50 attendees)", "CCTV coverage"]
+      },
+      {
+        "id": "GEA-P002",
+        "type_ar": "تصريح مهرجان / موسم ترفيهي",
+        "type_en": "Festival / Entertainment Season Permit",
+        "fee_sar_small": 10000,
+        "fee_sar_medium": 50000,
+        "fee_sar_large": 200000,
+        "capacity_thresholds": {"small": "up to 1000", "medium": "1001-10000", "large": "10001+"},
+        "timeline_days": 60,
+        "requirements": ["GEA seasonal event application", "Multi-day venue safety plan", "Civil defense approval", "Traffic management plan", "Environmental impact plan", "Food safety permits (SFDA)", "Vendor and operator permits"],
+        "safety_requirements": ["Perimeter fencing and access control", "On-site ambulance and medical station", "Fire safety team on standby", "Crowd flow simulation plan", "Security personnel (1 per 40 attendees)"]
+      },
+      {
+        "id": "GEA-P003",
+        "type_ar": "تصريح معرض / مؤتمر",
+        "type_en": "Exhibition / Conference Permit",
+        "fee_sar_small": 3000,
+        "fee_sar_medium": 10000,
+        "fee_sar_large": 30000,
+        "capacity_thresholds": {"small": "up to 300", "medium": "301-3000", "large": "3001+"},
+        "timeline_days": 21,
+        "requirements": ["GEA exhibition application", "Venue approval", "Exhibitor list and booth layout", "Civil defense certificate for venue", "Intellectual property clearance for displayed content"],
+        "safety_requirements": ["Fire exits and suppression", "Security screening at entry", "Medical first aid station", "Accessible facilities for persons with disabilities"]
+      },
+      {
+        "id": "GEA-P004",
+        "type_ar": "تصريح فعالية رياضية",
+        "type_en": "Sporting Event Permit",
+        "fee_sar_small": 5000,
+        "fee_sar_medium": 20000,
+        "fee_sar_large": 100000,
+        "capacity_thresholds": {"small": "up to 500", "medium": "501-5000", "large": "5001+"},
+        "timeline_days": 45,
+        "requirements": ["GEA sports event application", "Saudi Olympic Committee or relevant federation approval", "Venue safety certification", "Anti-doping compliance", "Medical team and ambulance", "Broadcast and media coordination plan"],
+        "safety_requirements": ["Sports-specific medical team", "Ambulance on standby", "Player and athlete insurance", "Spectator crowd management plan", "Security personnel (1 per 50 spectators)"]
+      }
+    ]
+  },
+  "tourism_regulations": {
+    "section_name_ar": "الأنظمة السياحية الخاصة",
+    "section_name_en": "Tourism-Specific Regulations",
+    "items": [
+      {
+        "id": "REG-T001",
+        "name_ar": "متطلبات التأشيرة السياحية",
+        "name_en": "Tourist Visa Requirements",
+        "authority": "MOFA + MOI + MOT",
+        "authority_ar": "وزارة الخارجية + وزارة الداخلية + وزارة السياحة",
+        "details": {
+          "e_visa_eligible_countries": 63,
+          "visa_on_arrival_countries": 63,
+          "visa_fee_sar": 535,
+          "visa_validity_days": 365,
+          "max_stay_per_visit_days": 90,
+          "total_stay_per_year_days": 180,
+          "portal": "visa.visitsaudi.com",
+          "notes_en": "Saudi tourist e-visa launched September 2019. Citizens of 63 countries can apply online or on arrival. GCC nationals do not need a visa."
+        }
+      },
+      {
+        "id": "REG-T002",
+        "name_ar": "متطلبات هيئة التراث السعودية",
+        "name_en": "Saudi Heritage Authority (SHA) Requirements",
+        "authority": "SHA - Saudi Heritage Authority",
+        "authority_ar": "هيئة التراث",
+        "details": {
+          "heritage_site_permit_fee_sar": 5000,
+          "guide_certification_required": true,
+          "construction_buffer_zone_meters": 200,
+          "requirements": ["Heritage impact assessment for developments near registered sites", "SHA approval for any tourism activity at heritage sites", "Certified heritage guide for group visits", "No commercial construction within 200m buffer zone of UNESCO sites"],
+          "registered_heritage_sites": 7,
+          "unesco_sites_count": 6,
+          "notes_en": "SHA oversees 7 registered heritage areas. Tourism operators near heritage sites must obtain SHA clearance. UNESCO sites have additional buffer zone restrictions."
+        }
+      },
+      {
+        "id": "REG-T003",
+        "name_ar": "متطلبات سياحة البحر الأحمر (مشروع أمالا والبحر الأحمر)",
+        "name_en": "Red Sea Tourism (RSG) Requirements",
+        "authority": "RSG - Red Sea Global",
+        "authority_ar": "مشروع البحر الأحمر العالمي",
+        "details": {
+          "operator_license_fee_sar": 25000,
+          "environmental_compliance": "Net positive conservation impact required",
+          "requirements": ["RSG operator approval and concession agreement", "Environmental sustainability certification", "Zero single-use plastic policy", "Coral reef protection compliance", "Marine wildlife interaction protocols", "Carbon neutrality plan or offset agreement"],
+          "notes_en": "Red Sea Global mandates net-positive conservation. Operators must meet strict environmental standards. Tourism capacity is capped to protect marine ecosystems."
+        }
+      },
+      {
+        "id": "REG-T004",
+        "name_ar": "أحكام السياحة في نيوم",
+        "name_en": "NEOM Tourism Provisions",
+        "authority": "NEOM Company",
+        "authority_ar": "شركة نيوم",
+        "details": {
+          "operator_license_fee_sar": 30000,
+          "requirements": ["NEOM business registration and operator license", "Compliance with NEOM sustainability framework", "Technology integration requirements (smart tourism systems)", "NEOM-specific building and design codes", "Workforce housing provisions"],
+          "notes_en": "NEOM operates as a special economic zone with its own regulatory framework. Tourism operators must register directly with NEOM and comply with its technology and sustainability standards."
+        }
+      },
+      {
+        "id": "REG-T005",
+        "name_ar": "متطلبات سياحة العلا (الهيئة الملكية لمحافظة العلا)",
+        "name_en": "AlUla Tourism (RCU) Requirements",
+        "authority": "RCU - Royal Commission for AlUla",
+        "authority_ar": "الهيئة الملكية لمحافظة العلا",
+        "details": {
+          "operator_license_fee_sar": 15000,
+          "requirements": ["RCU tourism operator registration", "Heritage sensitivity training for all staff", "Low-impact tourism operations plan", "RCU-approved architectural design for new builds", "Local community employment commitment (minimum 30% AlUla residents)", "Waste management and recycling plan"],
+          "registered_sites": ["Hegra (UNESCO World Heritage)", "Dadan", "Jabal Ikmah", "Old Town of AlUla", "Maraya Concert Hall"],
+          "notes_en": "RCU manages all tourism activities in AlUla governorate. Operators must align with the AlUla Master Plan and prioritize local employment and heritage preservation."
+        }
+      }
+    ]
+  },
+  "salary_benchmarks": {
+    "section_name_ar": "مرجعيات الرواتب في قطاع السياحة والضيافة",
+    "section_name_en": "Tourism & Hospitality Salary Benchmarks",
+    "currency": "SAR",
+    "period": "monthly",
+    "last_updated": "2025-01",
+    "saudization_requirement_pct": 40,
+    "saudization_notes_en": "Tourism and hospitality sector requires 40% Saudization under Nitaqat. Tour guide positions require Saudi nationals. Hotel management roles have higher Saudization targets.",
+    "saudization_notes_ar": "يتطلب قطاع السياحة والضيافة نسبة توطين 40% وفق نظام نطاقات. وظائف المرشدين السياحيين مقصورة على السعوديين",
+    "roles": [
+      {
+        "role_ar": "مدير عام فندق",
+        "role_en": "Hotel General Manager",
+        "salary_min_sar": 25000,
+        "salary_max_sar": 65000,
+        "median_sar": 40000,
+        "saudization_priority": true,
+        "notes": "Varies significantly by hotel star rating and chain affiliation. 5-star international chains at the higher end."
+      },
+      {
+        "role_ar": "مدير عمليات الضيافة",
+        "role_en": "Hospitality Operations Manager",
+        "salary_min_sar": 15000,
+        "salary_max_sar": 35000,
+        "median_sar": 22000,
+        "saudization_priority": true
+      },
+      {
+        "role_ar": "موظف استقبال فندقي",
+        "role_en": "Hotel Front Desk / Receptionist",
+        "salary_min_sar": 4500,
+        "salary_max_sar": 9000,
+        "median_sar": 6000,
+        "saudization_priority": true,
+        "notes": "Saudization strongly encouraged for front-facing roles. Bilingual staff command higher salaries."
+      },
+      {
+        "role_ar": "مشرف مكتب الاستقبال",
+        "role_en": "Front Office Supervisor",
+        "salary_min_sar": 7000,
+        "salary_max_sar": 14000,
+        "median_sar": 9500,
+        "saudization_priority": true
+      },
+      {
+        "role_ar": "شيف تنفيذي (فندق)",
+        "role_en": "Executive Chef (Hotel)",
+        "salary_min_sar": 15000,
+        "salary_max_sar": 40000,
+        "median_sar": 25000,
+        "saudization_priority": false,
+        "notes": "International hotel chains often recruit executive chefs globally. Sous chefs and line cooks have lower Saudization requirements."
+      },
+      {
+        "role_ar": "مدير أغذية ومشروبات",
+        "role_en": "F&B Manager (Hotel)",
+        "salary_min_sar": 12000,
+        "salary_max_sar": 28000,
+        "median_sar": 18000,
+        "saudization_priority": true
+      },
+      {
+        "role_ar": "نادل / مقدم طعام فندقي",
+        "role_en": "Hotel Waiter / F&B Server",
+        "salary_min_sar": 3500,
+        "salary_max_sar": 6500,
+        "median_sar": 4500,
+        "saudization_priority": false
+      },
+      {
+        "role_ar": "مشرف تدبير منزلي",
+        "role_en": "Housekeeping Supervisor",
+        "salary_min_sar": 5000,
+        "salary_max_sar": 10000,
+        "median_sar": 7000,
+        "saudization_priority": false
+      },
+      {
+        "role_ar": "عامل تدبير منزلي",
+        "role_en": "Housekeeping Attendant",
+        "salary_min_sar": 2500,
+        "salary_max_sar": 4500,
+        "median_sar": 3200,
+        "saudization_priority": false
+      },
+      {
+        "role_ar": "مرشد سياحي",
+        "role_en": "Tour Guide",
+        "salary_min_sar": 6000,
+        "salary_max_sar": 15000,
+        "median_sar": 9000,
+        "saudization_priority": true,
+        "notes": "Tour guide positions are reserved for Saudi nationals. Specialized heritage and adventure guides earn at the higher end."
+      },
+      {
+        "role_ar": "مدير وكالة سفر",
+        "role_en": "Travel Agency Manager",
+        "salary_min_sar": 12000,
+        "salary_max_sar": 25000,
+        "median_sar": 16000,
+        "saudization_priority": true,
+        "notes": "Branch managers must be Saudi nationals per MOT regulations."
+      },
+      {
+        "role_ar": "منسق حجوزات سياحية",
+        "role_en": "Tourism Reservations Coordinator",
+        "salary_min_sar": 5000,
+        "salary_max_sar": 10000,
+        "median_sar": 7000,
+        "saudization_priority": true
+      }
+    ]
+  }
+}

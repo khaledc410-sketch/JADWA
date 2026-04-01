@@ -1,0 +1,598 @@
+{
+  "metadata": {
+    "source": "CITC + NDMO + SAMA + MCIT + NCA + SDAIA + ZATCA",
+    "source_ar": "هيئة الاتصالات وتقنية المعلومات + المكتب الوطني لإدارة البيانات + البنك المركزي السعودي + وزارة الاتصالات + الهيئة الوطنية للأمن السيبراني + الهيئة السعودية للبيانات والذكاء الاصطناعي + هيئة الزكاة والضريبة والجمارك",
+    "last_updated": "2025-01",
+    "notes": "Saudi Arabia technology sector regulations covering ICT licensing, data protection, fintech, e-commerce, and cybersecurity as of Q1 2025."
+  },
+  "citc_license_types": {
+    "sector_name_ar": "تراخيص قطاع الاتصالات وتقنية المعلومات",
+    "sector_name_en": "ICT Sector Licenses",
+    "notes": "CITC regulates all ICT service providers in Saudi Arabia. Licenses are categorized by service type. All applicants must be Saudi-registered entities.",
+    "items": [
+      {
+        "id": "CITC-L001",
+        "license_type_ar": "رخصة مقدم خدمة إنترنت",
+        "license_type_en": "Internet Service Provider (ISP)",
+        "regulator": "CITC",
+        "regulator_ar": "هيئة الاتصالات وتقنية المعلومات",
+        "estimated_cost_sar": 500000,
+        "timeline_days": 90,
+        "requirements": [
+          "Saudi-registered company with minimum 30% Saudi ownership",
+          "Minimum capital of SAR 10,000,000",
+          "Technical infrastructure plan approved by CITC",
+          "Network security and lawful interception capability",
+          "Content filtering compliance per CITC regulations"
+        ],
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "Articles of Association",
+          "Technical feasibility study",
+          "Network architecture diagram",
+          "Financial statements (audited, last 2 years)",
+          "CITC application form (Form ISP-01)"
+        ],
+        "notes_ar": "يتطلب بنية تحتية للشبكة وقدرات أمنية معتمدة من الهيئة",
+        "notes_en": "Requires approved network infrastructure, content filtering, and lawful interception capabilities."
+      },
+      {
+        "id": "CITC-L002",
+        "license_type_ar": "رخصة خدمات القيمة المضافة",
+        "license_type_en": "Value Added Services (VAS)",
+        "regulator": "CITC",
+        "regulator_ar": "هيئة الاتصالات وتقنية المعلومات",
+        "estimated_cost_sar": 50000,
+        "timeline_days": 45,
+        "requirements": [
+          "Saudi-registered company",
+          "Partnership agreement with licensed telecom operator",
+          "Content compliance with CITC standards",
+          "Consumer protection mechanisms in place"
+        ],
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "Telecom operator partnership agreement",
+          "Service description and pricing plan",
+          "Consumer complaint handling procedure",
+          "CITC application form (Form VAS-01)"
+        ],
+        "notes_ar": "تشمل خدمات الرسائل القصيرة والمحتوى الرقمي والتطبيقات",
+        "notes_en": "Covers SMS services, digital content, mobile apps, and other value-added telecom services."
+      },
+      {
+        "id": "CITC-L003",
+        "license_type_ar": "رخصة مقدم خدمات حوسبة سحابية",
+        "license_type_en": "Cloud Service Provider (CSP)",
+        "regulator": "CITC + NDMO",
+        "regulator_ar": "هيئة الاتصالات وتقنية المعلومات + المكتب الوطني لإدارة البيانات",
+        "estimated_cost_sar": 200000,
+        "timeline_days": 60,
+        "requirements": [
+          "Saudi-registered entity or licensed foreign branch",
+          "Data center presence in Saudi Arabia (or commitment to establish within 12 months)",
+          "NDMO Cloud Service Provider certification",
+          "Compliance with Cloud Computing Regulatory Framework (CCRF)",
+          "Data residency guarantees for government and sensitive data"
+        ],
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "NDMO CSP certification application",
+          "Data center specifications and location",
+          "Security certifications (ISO 27001, SOC 2)",
+          "Data residency and sovereignty commitments",
+          "Business continuity and disaster recovery plan"
+        ],
+        "notes_ar": "يجب الحصول على شهادة المكتب الوطني لإدارة البيانات لخدمة الجهات الحكومية",
+        "notes_en": "NDMO CSP certification is mandatory to serve government entities. Local data center presence required."
+      },
+      {
+        "id": "CITC-L004",
+        "license_type_ar": "رخصة تشغيل مركز بيانات",
+        "license_type_en": "Data Center Operator",
+        "regulator": "CITC",
+        "regulator_ar": "هيئة الاتصالات وتقنية المعلومات",
+        "estimated_cost_sar": 300000,
+        "timeline_days": 120,
+        "requirements": [
+          "Minimum Tier III data center classification (Uptime Institute or equivalent)",
+          "Physical security and access controls per NCA standards",
+          "Redundant power and cooling systems",
+          "Saudi-registered entity with minimum capital of SAR 5,000,000",
+          "Fire suppression and environmental monitoring systems"
+        ],
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "Facility design and engineering plans",
+          "Tier certification or assessment report",
+          "NCA cybersecurity compliance assessment",
+          "Environmental impact assessment",
+          "Operational procedures manual"
+        ],
+        "notes_ar": "يجب أن يكون مركز البيانات داخل المملكة ويستوفي معايير التصنيف الدولية",
+        "notes_en": "Data center must be located within Saudi Arabia and meet international tier classification standards."
+      },
+      {
+        "id": "CITC-L005",
+        "license_type_ar": "رخصة مقدم خدمات الأمن السيبراني",
+        "license_type_en": "Cybersecurity Service Provider",
+        "regulator": "NCA + CITC",
+        "regulator_ar": "الهيئة الوطنية للأمن السيبراني + هيئة الاتصالات",
+        "estimated_cost_sar": 100000,
+        "timeline_days": 60,
+        "requirements": [
+          "NCA-registered cybersecurity service provider",
+          "Certified cybersecurity professionals on staff (minimum 3)",
+          "Compliance with NCA Cybersecurity Service Provider requirements",
+          "Saudi-registered entity",
+          "Professional liability insurance"
+        ],
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "NCA registration application",
+          "Staff certifications (CISSP, CISM, CEH, or equivalent)",
+          "Service portfolio and methodology documentation",
+          "Professional liability insurance certificate",
+          "CITC application form"
+        ],
+        "notes_ar": "يجب التسجيل لدى الهيئة الوطنية للأمن السيبراني وتوظيف كوادر معتمدة",
+        "notes_en": "Must register with NCA and employ certified cybersecurity professionals."
+      },
+      {
+        "id": "CITC-L006",
+        "license_type_ar": "رخصة مشغل منصة إنترنت الأشياء",
+        "license_type_en": "IoT Platform Operator",
+        "regulator": "CITC",
+        "regulator_ar": "هيئة الاتصالات وتقنية المعلومات",
+        "estimated_cost_sar": 75000,
+        "timeline_days": 45,
+        "requirements": [
+          "CITC IoT regulatory framework compliance",
+          "Device certification for radio frequency compliance",
+          "Data privacy and security measures per PDPL",
+          "Saudi-registered entity",
+          "Spectrum usage authorization (if applicable)"
+        ],
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "IoT platform architecture documentation",
+          "RF device type approval certificates",
+          "Data protection impact assessment",
+          "CITC application form (Form IoT-01)"
+        ],
+        "notes_ar": "تشمل الأجهزة المتصلة والمنصات الذكية ويجب الامتثال لتنظيمات الطيف الترددي",
+        "notes_en": "Covers connected devices and smart platforms. RF spectrum compliance required for wireless IoT devices."
+      },
+      {
+        "id": "CITC-L007",
+        "license_type_ar": "رخصة منصة تجارة إلكترونية",
+        "license_type_en": "E-Commerce Platform",
+        "regulator": "MCI + CITC",
+        "regulator_ar": "وزارة التجارة + هيئة الاتصالات",
+        "estimated_cost_sar": 15000,
+        "timeline_days": 30,
+        "requirements": [
+          "Commercial Registration with e-commerce activity code",
+          "Maroof platform registration",
+          "Compliance with E-Commerce Law (Royal Decree M/126)",
+          "Consumer protection and return policy publication",
+          "Payment gateway integration with Mada support",
+          "ZATCA e-invoicing (Fatoorah) compliance"
+        ],
+        "required_documents": [
+          "Commercial Registration (CR) with ISIC code 4791",
+          "Maroof registration certificate",
+          "Terms and conditions (Arabic)",
+          "Privacy policy (Arabic)",
+          "Payment gateway agreement",
+          "ZATCA e-invoicing integration certificate"
+        ],
+        "notes_ar": "يجب التسجيل في منصة معروف والامتثال لنظام التجارة الإلكترونية",
+        "notes_en": "Must register on Maroof platform and comply with Saudi E-Commerce Law. Mada payment support mandatory."
+      },
+      {
+        "id": "CITC-L008",
+        "license_type_ar": "رخصة صندوق تجريبي للتقنية المالية (ساما)",
+        "license_type_en": "Fintech Sandbox (SAMA Regulatory Sandbox)",
+        "regulator": "SAMA",
+        "regulator_ar": "البنك المركزي السعودي",
+        "estimated_cost_sar": 25000,
+        "timeline_days": 90,
+        "requirements": [
+          "Innovative fintech solution not currently available in Saudi market",
+          "Saudi-registered company or willingness to establish one",
+          "Minimum capital as determined by SAMA based on activity type",
+          "AML/CFT compliance framework",
+          "Consumer protection mechanisms",
+          "Technology risk management plan"
+        ],
+        "required_documents": [
+          "SAMA Sandbox application form",
+          "Business plan and financial projections",
+          "Technology architecture and security documentation",
+          "AML/CFT policy and procedures",
+          "Founders and key personnel CVs",
+          "Proof of concept or prototype demonstration"
+        ],
+        "notes_ar": "مخصص للحلول المالية المبتكرة. مدة الصندوق التجريبي من 12 إلى 24 شهراً",
+        "notes_en": "For innovative financial solutions. Sandbox period is 12-24 months with possibility of full license upon graduation."
+      },
+      {
+        "id": "CITC-L009",
+        "license_type_ar": "رخصة مقدم خدمات البرمجيات السحابية (SaaS)",
+        "license_type_en": "SaaS Provider (General)",
+        "regulator": "CITC + MCI",
+        "regulator_ar": "هيئة الاتصالات + وزارة التجارة",
+        "estimated_cost_sar": 5000,
+        "timeline_days": 14,
+        "requirements": [
+          "Commercial Registration with IT services activity code",
+          "PDPL compliance for data processing",
+          "Service level agreement templates",
+          "Data hosting disclosure (local or international)"
+        ],
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "PDPL compliance self-assessment",
+          "Service terms and SLA documentation",
+          "Data processing and hosting disclosure"
+        ],
+        "notes_ar": "تسجيل تجاري مع نشاط تقنية المعلومات. لا تتطلب ترخيصاً خاصاً من الهيئة إلا إذا تضمنت بيانات حكومية",
+        "notes_en": "Requires CR with IT activity code. Special CITC/NDMO licensing only if handling government data."
+      },
+      {
+        "id": "CITC-L010",
+        "license_type_ar": "رخصة إعادة بيع خدمات الاتصالات",
+        "license_type_en": "Telecom Reseller",
+        "regulator": "CITC",
+        "regulator_ar": "هيئة الاتصالات وتقنية المعلومات",
+        "estimated_cost_sar": 30000,
+        "timeline_days": 30,
+        "requirements": [
+          "Authorized reseller agreement with licensed telecom operator",
+          "Saudi-registered entity",
+          "CITC reseller registration",
+          "Consumer complaint handling process",
+          "Compliance with CITC pricing and billing regulations"
+        ],
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "Telecom operator authorization letter",
+          "Reseller business plan",
+          "Customer service and complaint procedures",
+          "CITC application form (Form TR-01)"
+        ],
+        "notes_ar": "يتطلب اتفاقية مع مشغل اتصالات مرخص من الهيئة",
+        "notes_en": "Requires formal authorization agreement with a CITC-licensed telecom operator."
+      }
+    ]
+  },
+  "ndmo_data_localization": {
+    "sector_name_ar": "تصنيف البيانات ومتطلبات التوطين",
+    "sector_name_en": "Data Classification & Localization Rules",
+    "regulator": "NDMO - National Data Management Office",
+    "regulator_ar": "المكتب الوطني لإدارة البيانات",
+    "notes": "NDMO data classification and localization requirements apply to all government entities and their contractors. Private sector encouraged to adopt.",
+    "classifications": [
+      {
+        "level": 1,
+        "classification_ar": "بيانات عامة",
+        "classification_en": "Public",
+        "description_en": "Data intended for public disclosure with no restrictions",
+        "local_hosting_required": false,
+        "cross_border_transfer": "Permitted without restrictions",
+        "cloud_requirements": "Any cloud provider acceptable"
+      },
+      {
+        "level": 2,
+        "classification_ar": "بيانات داخلية",
+        "classification_en": "Internal",
+        "description_en": "Data for internal organizational use, not intended for public release",
+        "local_hosting_required": false,
+        "cross_border_transfer": "Permitted with data processing agreement",
+        "cloud_requirements": "CSP must have NDMO registration"
+      },
+      {
+        "level": 3,
+        "classification_ar": "بيانات حساسة",
+        "classification_en": "Sensitive",
+        "description_en": "Data whose disclosure could harm organizational or national interests",
+        "local_hosting_required": true,
+        "cross_border_transfer": "Requires NDMO approval and adequate safeguards",
+        "cloud_requirements": "NDMO-certified CSP with local data center required"
+      },
+      {
+        "level": 4,
+        "classification_ar": "بيانات حساسة جداً",
+        "classification_en": "Highly Sensitive",
+        "description_en": "Data whose disclosure could cause significant damage to national security or critical interests",
+        "local_hosting_required": true,
+        "cross_border_transfer": "Prohibited. Must remain within Saudi borders",
+        "cloud_requirements": "NDMO-certified CSP with sovereign cloud infrastructure in Saudi Arabia. Government Community Cloud preferred"
+      }
+    ],
+    "csp_certification_requirements": [
+      "ISO 27001 certification",
+      "SOC 2 Type II report",
+      "Data center located within Saudi Arabia",
+      "Compliance with NDMO Cloud First Policy",
+      "NCA cybersecurity controls compliance",
+      "Data residency and sovereignty guarantees",
+      "Business continuity plan with local failover"
+    ]
+  },
+  "sama_fintech_sandbox": {
+    "sector_name_ar": "الصندوق التجريبي للتقنية المالية",
+    "sector_name_en": "SAMA Fintech Regulatory Sandbox",
+    "regulator": "SAMA - Saudi Central Bank",
+    "regulator_ar": "البنك المركزي السعودي (ساما)",
+    "notes": "SAMA operates the Fintech Regulatory Sandbox to enable innovative financial services in a controlled environment.",
+    "eligible_categories": [
+      {
+        "category_ar": "المدفوعات",
+        "category_en": "Payments",
+        "examples": ["Digital wallets", "Payment processing", "Cross-border remittances", "QR code payments"]
+      },
+      {
+        "category_ar": "الإقراض",
+        "category_en": "Lending",
+        "examples": ["Peer-to-peer lending", "Micro-lending platforms", "Buy-now-pay-later", "Invoice financing"]
+      },
+      {
+        "category_ar": "التأمين",
+        "category_en": "Insurance (InsurTech)",
+        "examples": ["Digital insurance distribution", "Claims automation", "Usage-based insurance", "Micro-insurance"]
+      },
+      {
+        "category_ar": "الاستثمار",
+        "category_en": "Investment",
+        "examples": ["Robo-advisory", "Crowdfunding platforms", "Digital asset management", "Fractional investing"]
+      }
+    ],
+    "application_requirements": [
+      "Innovative solution addressing a gap in the Saudi financial market",
+      "Functional prototype or proof of concept",
+      "Clear value proposition for Saudi consumers or businesses",
+      "Risk mitigation and consumer protection strategy",
+      "Technology and information security framework",
+      "AML/CFT compliance plan",
+      "Exit strategy in case of sandbox failure"
+    ],
+    "sandbox_phases": [
+      {
+        "phase": 1,
+        "name_ar": "التقديم والتقييم",
+        "name_en": "Application & Evaluation",
+        "duration_days": 60,
+        "description": "Initial application review, due diligence, and eligibility assessment by SAMA"
+      },
+      {
+        "phase": 2,
+        "name_ar": "التجربة المحدودة",
+        "name_en": "Limited Testing",
+        "duration_days": 180,
+        "description": "Controlled testing with limited customers (max 500), capped transaction volumes"
+      },
+      {
+        "phase": 3,
+        "name_ar": "التوسع التجريبي",
+        "name_en": "Expanded Testing",
+        "duration_days": 180,
+        "description": "Expanded customer base (up to 5,000), increased transaction limits, performance monitoring"
+      },
+      {
+        "phase": 4,
+        "name_ar": "التخرج أو الخروج",
+        "name_en": "Graduation or Exit",
+        "duration_days": 90,
+        "description": "Assessment for full licensing or orderly wind-down of operations"
+      }
+    ],
+    "capital_requirements_sar": {
+      "payments": 5000000,
+      "lending": 15000000,
+      "insurance": 10000000,
+      "investment": 5000000,
+      "notes": "Capital requirements may be reduced during sandbox phase at SAMA discretion. Full capital required upon graduation."
+    },
+    "graduation_criteria": [
+      "Successful completion of all sandbox phases",
+      "No material regulatory breaches during testing",
+      "Demonstrated consumer protection and complaint handling",
+      "Full AML/CFT compliance",
+      "Sustainable business model with clear path to profitability",
+      "Adequate capital and liquidity",
+      "Technology infrastructure meeting SAMA standards",
+      "Positive SAMA assessment report"
+    ]
+  },
+  "ecommerce_regulations": {
+    "sector_name_ar": "تنظيمات التجارة الإلكترونية",
+    "sector_name_en": "E-Commerce Regulations",
+    "regulator": "MCI + CITC + ZATCA",
+    "regulator_ar": "وزارة التجارة + هيئة الاتصالات + هيئة الزكاة والضريبة والجمارك",
+    "law_reference": "Royal Decree M/126 - E-Commerce Law (2019)",
+    "requirements": [
+      {
+        "id": "EC-R001",
+        "requirement_ar": "الإفصاح عن هوية المتجر",
+        "requirement_en": "Store Identity Disclosure",
+        "description": "E-commerce stores must disclose: business name, CR number, contact details, physical address, and Maroof registration",
+        "mandatory": true
+      },
+      {
+        "id": "EC-R002",
+        "requirement_ar": "سياسة الإرجاع والاستبدال",
+        "requirement_en": "Return & Refund Policy",
+        "description": "Consumers have the right to return products within 7 days of receipt if unused and in original packaging. Digital products excluded unless defective. Full refund within 14 days of return approval",
+        "mandatory": true
+      },
+      {
+        "id": "EC-R003",
+        "requirement_ar": "الشروط والأحكام باللغة العربية",
+        "requirement_en": "Arabic Terms & Conditions",
+        "description": "All e-commerce platforms must provide terms and conditions in Arabic. Bilingual is acceptable but Arabic is legally binding",
+        "mandatory": true
+      },
+      {
+        "id": "EC-R004",
+        "requirement_ar": "دعم بوابة مدى للدفع",
+        "requirement_en": "Mada Payment Gateway Integration",
+        "description": "All e-commerce platforms operating in Saudi Arabia must support Mada debit card payments. Additional payment methods (Visa, Mastercard, Apple Pay, STC Pay) are optional",
+        "mandatory": true
+      },
+      {
+        "id": "EC-R005",
+        "requirement_ar": "الامتثال للفوترة الإلكترونية (فاتورة)",
+        "requirement_en": "ZATCA E-Invoicing (Fatoorah) Compliance",
+        "description": "All taxable businesses must generate e-invoices in ZATCA-approved format. Phase 1 (Generation) effective Dec 2021. Phase 2 (Integration) rolled out in waves based on revenue thresholds",
+        "mandatory": true
+      },
+      {
+        "id": "EC-R006",
+        "requirement_ar": "حماية بيانات المستهلك",
+        "requirement_en": "Consumer Data Protection",
+        "description": "E-commerce platforms must obtain explicit consent before collecting personal data, provide clear privacy policy, and allow consumers to request data deletion per PDPL",
+        "mandatory": true
+      }
+    ],
+    "penalties": {
+      "failure_to_disclose_identity_sar": 1000000,
+      "misleading_advertising_sar": 500000,
+      "violation_of_return_policy_sar": 500000,
+      "data_protection_violation_sar": 5000000,
+      "notes": "Penalties may include temporary or permanent store closure in addition to fines"
+    }
+  },
+  "pdpl_compliance": {
+    "sector_name_ar": "نظام حماية البيانات الشخصية",
+    "sector_name_en": "Personal Data Protection Law (PDPL)",
+    "regulator": "SDAIA - Saudi Data and Artificial Intelligence Authority",
+    "regulator_ar": "الهيئة السعودية للبيانات والذكاء الاصطناعي",
+    "law_reference": "Royal Decree M/19 - Personal Data Protection Law (effective September 2023, enforcement from September 2024)",
+    "key_requirements": [
+      {
+        "id": "PDPL-001",
+        "requirement_ar": "الموافقة على معالجة البيانات",
+        "requirement_en": "Data Processing Consent",
+        "description": "Explicit consent required before collecting or processing personal data. Consent must be freely given, specific, informed, and unambiguous. Exceptions for legal obligations and vital interests."
+      },
+      {
+        "id": "PDPL-002",
+        "requirement_ar": "الإخطار بخرق البيانات",
+        "requirement_en": "Data Breach Notification",
+        "description": "Data controllers must notify SDAIA within 72 hours of discovering a personal data breach. Affected individuals must be notified without undue delay if breach poses high risk to their rights."
+      },
+      {
+        "id": "PDPL-003",
+        "requirement_ar": "تعيين مسؤول حماية البيانات",
+        "requirement_en": "Data Protection Officer (DPO)",
+        "description": "Organizations processing large-scale personal data or sensitive data must appoint a DPO. Threshold: processing data of more than 100,000 individuals or systematic monitoring activities."
+      },
+      {
+        "id": "PDPL-004",
+        "requirement_ar": "حقوق أصحاب البيانات",
+        "requirement_en": "Data Subject Rights",
+        "description": "Individuals have the right to: access their data, request correction, request deletion, restrict processing, data portability, and object to automated decision-making."
+      },
+      {
+        "id": "PDPL-005",
+        "requirement_ar": "نقل البيانات خارج المملكة",
+        "requirement_en": "Cross-Border Data Transfer",
+        "description": "Transfer of personal data outside Saudi Arabia requires adequate level of protection in receiving country (as determined by SDAIA) or binding corporate rules and contractual safeguards."
+      }
+    ],
+    "penalties": {
+      "max_fine_sar": 5000000,
+      "imprisonment_years_max": 2,
+      "fine_per_violation_sar": 3000000,
+      "repeat_offender_multiplier": 2,
+      "notes": "Penalties can include both fines and imprisonment. SDAIA may order data destruction or processing suspension."
+    }
+  },
+  "nca_cybersecurity": {
+    "sector_name_ar": "متطلبات الأمن السيبراني",
+    "sector_name_en": "NCA Cybersecurity Requirements",
+    "regulator": "NCA - National Cybersecurity Authority",
+    "regulator_ar": "الهيئة الوطنية للأمن السيبراني",
+    "notes": "NCA cybersecurity controls are mandatory for government entities, critical national infrastructure operators, and their suppliers.",
+    "frameworks": [
+      {
+        "id": "NCA-F001",
+        "name_ar": "الضوابط الأساسية للأمن السيبراني",
+        "name_en": "Essential Cybersecurity Controls (ECC)",
+        "version": "ECC-1:2018 (updated 2022)",
+        "applicable_to": "All government entities and critical infrastructure operators",
+        "domains": [
+          "Cybersecurity Governance",
+          "Cybersecurity Defense",
+          "Cybersecurity Resilience",
+          "Third-Party and Cloud Cybersecurity",
+          "Industrial Control Systems Security"
+        ],
+        "total_controls": 114
+      },
+      {
+        "id": "NCA-F002",
+        "name_ar": "ضوابط الأمن السيبراني للأنظمة الحساسة",
+        "name_en": "Critical Systems Cybersecurity Controls (CSCC)",
+        "version": "CSCC-1:2019",
+        "applicable_to": "Operators of critical national infrastructure (energy, water, telecom, finance, health, transport)",
+        "domains": [
+          "Asset Management",
+          "Identity and Access Management",
+          "Data Protection and Privacy",
+          "Application Security",
+          "Infrastructure Security",
+          "Incident and Threat Management"
+        ],
+        "total_controls": 105
+      },
+      {
+        "id": "NCA-F003",
+        "name_ar": "ضوابط الأمن السيبراني للحوسبة السحابية",
+        "name_en": "Cloud Cybersecurity Controls (CCC)",
+        "version": "CCC-1:2020",
+        "applicable_to": "Cloud service providers and cloud consumers in government and critical sectors",
+        "domains": [
+          "Cloud Governance and Risk Management",
+          "Cloud Security Architecture",
+          "Cloud Data Protection",
+          "Cloud Identity and Access Management",
+          "Cloud Incident Management",
+          "Cloud Business Continuity"
+        ],
+        "total_controls": 76
+      }
+    ],
+    "compliance_assessment": {
+      "assessment_types": [
+        {
+          "type_ar": "تقييم ذاتي",
+          "type_en": "Self-Assessment",
+          "description": "Organizations conduct internal assessment against NCA controls. Required annually.",
+          "frequency": "Annual"
+        },
+        {
+          "type_ar": "تقييم خارجي",
+          "type_en": "Third-Party Assessment",
+          "description": "Assessment by NCA-authorized cybersecurity assessment providers. Required for critical infrastructure every 2 years.",
+          "frequency": "Biennial"
+        },
+        {
+          "type_ar": "تقييم الهيئة",
+          "type_en": "NCA Direct Assessment",
+          "description": "NCA may conduct direct assessments at any time for critical entities or in response to incidents.",
+          "frequency": "As needed"
+        }
+      ],
+      "non_compliance_consequences": [
+        "Warning and corrective action plan requirement",
+        "Mandatory remediation within specified timeframe",
+        "Escalation to entity leadership and relevant minister",
+        "Public disclosure of non-compliance status",
+        "Potential service suspension for critical non-compliance"
+      ]
+    }
+  }
+}

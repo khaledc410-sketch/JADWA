@@ -23,6 +23,10 @@ class ReportRun(Base):
     current_step = Column(String(255))
     progress_percent = Column(Integer, default=0)
 
+    # Verdict + structured sections (saved after Compiler, before PDF)
+    verdict_data = Column(JSONB)  # Executive summary verdict JSON
+    sections_data = Column(JSONB)  # All compiled report sections
+
     error_message = Column(Text)
     started_at = Column(DateTime)
     completed_at = Column(DateTime)

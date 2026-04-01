@@ -1,0 +1,667 @@
+{
+  "metadata": {
+    "source": "MOE - Ministry of Education + TVTC + Education & Training Evaluation Commission",
+    "source_ar": "وزارة التعليم + المؤسسة العامة للتدريب التقني والمهني + هيئة تقويم التعليم والتدريب",
+    "last_updated": "2025-01",
+    "notes": "Saudi Arabia private education licensing requirements, facility standards, staffing ratios, and salary benchmarks as of Q1 2025. Governed by the Private Education Regulations and MOE circulars."
+  },
+  "private_school_types": {
+    "sector_name_ar": "أنواع المدارس والمؤسسات التعليمية الخاصة",
+    "sector_name_en": "Private School and Educational Institution Types",
+    "items": [
+      {
+        "id": "EDU-T001",
+        "school_type_ar": "حضانة / روضة أطفال",
+        "school_type_en": "Nursery / Preschool (KG)",
+        "age_range": "0-6",
+        "moe_requirements": [
+          "MOE private school license",
+          "Municipal operating license (Balady)",
+          "Civil Defense safety certificate",
+          "Health certificate for all staff (MOH)",
+          "GOSI and labor office registration"
+        ],
+        "estimated_setup_cost_sar": 800000,
+        "license_fee_sar": 5000,
+        "renewal_annual_sar": 3000,
+        "timeline_days": 90,
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "Building lease or ownership deed",
+          "Floor plan approved by municipality",
+          "Civil Defense clearance",
+          "Owner criminal background check",
+          "Principal qualification certificates",
+          "Curriculum plan submission to MOE"
+        ],
+        "capacity_requirements": {
+          "min_students": 20,
+          "max_students_per_classroom": 25,
+          "min_sqm_per_student": 3.0,
+          "outdoor_play_area_required": true,
+          "min_outdoor_sqm": 100
+        }
+      },
+      {
+        "id": "EDU-T002",
+        "school_type_ar": "مدرسة ابتدائية خاصة",
+        "school_type_en": "Private Elementary School",
+        "age_range": "6-12",
+        "moe_requirements": [
+          "MOE private school license",
+          "Municipal operating license (Balady)",
+          "Civil Defense safety certificate",
+          "GOSI and labor office registration",
+          "National curriculum approval or MOE-approved international curriculum",
+          "Mandatory Arabic language and Islamic studies programs"
+        ],
+        "estimated_setup_cost_sar": 2500000,
+        "license_fee_sar": 10000,
+        "renewal_annual_sar": 5000,
+        "timeline_days": 120,
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "Building lease or ownership deed",
+          "Floor plan approved by municipality",
+          "Civil Defense clearance",
+          "Owner criminal background check",
+          "Principal qualification certificates (BA minimum + 5 years experience)",
+          "Curriculum plan with MOE alignment documentation",
+          "Teacher qualification certificates"
+        ],
+        "capacity_requirements": {
+          "min_students": 50,
+          "max_students_per_classroom": 30,
+          "min_sqm_per_student": 2.5,
+          "min_classrooms": 6,
+          "library_required": true,
+          "science_lab_required": false,
+          "computer_lab_required": true
+        }
+      },
+      {
+        "id": "EDU-T003",
+        "school_type_ar": "مدرسة متوسطة خاصة",
+        "school_type_en": "Private Middle School",
+        "age_range": "12-15",
+        "moe_requirements": [
+          "MOE private school license",
+          "Municipal operating license (Balady)",
+          "Civil Defense safety certificate",
+          "GOSI and labor office registration",
+          "National curriculum or MOE-approved international curriculum",
+          "Mandatory Arabic language and Islamic studies",
+          "Science laboratory facilities"
+        ],
+        "estimated_setup_cost_sar": 3500000,
+        "license_fee_sar": 10000,
+        "renewal_annual_sar": 5000,
+        "timeline_days": 120,
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "Building lease or ownership deed",
+          "Floor plan approved by municipality",
+          "Civil Defense clearance",
+          "Owner criminal background check",
+          "Principal qualification certificates (BA minimum + 7 years experience)",
+          "Curriculum plan with MOE alignment",
+          "Science lab safety compliance report"
+        ],
+        "capacity_requirements": {
+          "min_students": 60,
+          "max_students_per_classroom": 30,
+          "min_sqm_per_student": 2.5,
+          "min_classrooms": 9,
+          "library_required": true,
+          "science_lab_required": true,
+          "computer_lab_required": true
+        }
+      },
+      {
+        "id": "EDU-T004",
+        "school_type_ar": "مدرسة ثانوية خاصة",
+        "school_type_en": "Private High School",
+        "age_range": "15-18",
+        "moe_requirements": [
+          "MOE private school license",
+          "Municipal operating license (Balady)",
+          "Civil Defense safety certificate",
+          "GOSI and labor office registration",
+          "National curriculum or MOE-approved international curriculum",
+          "Mandatory Arabic language and Islamic studies",
+          "Science and computer laboratory facilities",
+          "Career guidance counselor on staff"
+        ],
+        "estimated_setup_cost_sar": 5000000,
+        "license_fee_sar": 15000,
+        "renewal_annual_sar": 7500,
+        "timeline_days": 150,
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "Building lease or ownership deed",
+          "Floor plan approved by municipality",
+          "Civil Defense clearance",
+          "Owner criminal background check",
+          "Principal qualification certificates (MA preferred + 10 years experience)",
+          "Curriculum plan with MOE alignment",
+          "Lab safety compliance reports",
+          "Student assessment and certification plan"
+        ],
+        "capacity_requirements": {
+          "min_students": 60,
+          "max_students_per_classroom": 30,
+          "min_sqm_per_student": 2.5,
+          "min_classrooms": 12,
+          "library_required": true,
+          "science_lab_required": true,
+          "computer_lab_required": true,
+          "sports_facility_required": true
+        }
+      },
+      {
+        "id": "EDU-T005",
+        "school_type_ar": "مدرسة دولية (K-12)",
+        "school_type_en": "K-12 International School",
+        "age_range": "3-18",
+        "moe_requirements": [
+          "MOE international school license",
+          "Municipal operating license (Balady)",
+          "Civil Defense safety certificate",
+          "GOSI and labor office registration",
+          "International curriculum accreditation (IB, British, American)",
+          "Mandatory Arabic language instruction for all students",
+          "Mandatory Islamic studies for Muslim students",
+          "MOE-approved assessment framework"
+        ],
+        "estimated_setup_cost_sar": 15000000,
+        "license_fee_sar": 25000,
+        "renewal_annual_sar": 15000,
+        "timeline_days": 180,
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "Building lease or ownership deed",
+          "Floor plan approved by municipality",
+          "Civil Defense clearance",
+          "International accreditation documentation",
+          "Principal qualification certificates (MA + international school experience)",
+          "Full curriculum and assessment plan",
+          "Lab safety and facility compliance reports",
+          "Foreign investor license (if applicable)"
+        ],
+        "capacity_requirements": {
+          "min_students": 100,
+          "max_students_per_classroom": 25,
+          "min_sqm_per_student": 3.0,
+          "min_classrooms": 24,
+          "library_required": true,
+          "science_lab_required": true,
+          "computer_lab_required": true,
+          "sports_facility_required": true,
+          "auditorium_required": true
+        }
+      },
+      {
+        "id": "EDU-T006",
+        "school_type_ar": "مركز تعليم ذوي الاحتياجات الخاصة",
+        "school_type_en": "Special Needs Education Center",
+        "age_range": "3-18",
+        "moe_requirements": [
+          "MOE special education license",
+          "Municipal operating license (Balady)",
+          "Civil Defense safety certificate",
+          "GOSI and labor office registration",
+          "Specialized curriculum approval from MOE Special Education Department",
+          "Qualified special education staff",
+          "Full accessibility compliance"
+        ],
+        "estimated_setup_cost_sar": 4000000,
+        "license_fee_sar": 10000,
+        "renewal_annual_sar": 5000,
+        "timeline_days": 150,
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "Building lease or ownership deed",
+          "Accessibility compliance certificate",
+          "Civil Defense clearance",
+          "Specialized staff qualification certificates",
+          "Individualized Education Plan (IEP) framework",
+          "Therapeutic equipment and facility plan"
+        ],
+        "capacity_requirements": {
+          "min_students": 15,
+          "max_students_per_classroom": 10,
+          "min_sqm_per_student": 5.0,
+          "therapy_rooms_required": true,
+          "sensory_room_required": true,
+          "full_accessibility_required": true
+        }
+      },
+      {
+        "id": "EDU-T007",
+        "school_type_ar": "مركز تدريب خاص",
+        "school_type_en": "Private Training Center",
+        "age_range": "18+",
+        "moe_requirements": [
+          "TVTC or MOE training center license",
+          "Municipal operating license (Balady)",
+          "Civil Defense safety certificate",
+          "GOSI and labor office registration",
+          "Training program accreditation from ETEC"
+        ],
+        "estimated_setup_cost_sar": 500000,
+        "license_fee_sar": 5000,
+        "renewal_annual_sar": 3000,
+        "timeline_days": 60,
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "Building lease or ownership deed",
+          "Floor plan approved by municipality",
+          "Civil Defense clearance",
+          "Trainer qualification certificates",
+          "Training program outlines and learning outcomes",
+          "ETEC institutional accreditation application"
+        ],
+        "capacity_requirements": {
+          "min_sqm_per_trainee": 2.0,
+          "min_training_rooms": 2,
+          "computer_lab_required": true,
+          "max_trainees_per_room": 25
+        }
+      },
+      {
+        "id": "EDU-T008",
+        "school_type_ar": "معهد تدريب مهني (المؤسسة العامة للتدريب التقني والمهني)",
+        "school_type_en": "TVTC Vocational Training Institute",
+        "age_range": "18+",
+        "moe_requirements": [
+          "TVTC vocational institute license",
+          "Municipal operating license (Balady)",
+          "Civil Defense safety certificate",
+          "GOSI and labor office registration",
+          "TVTC curriculum alignment and program accreditation",
+          "Workshop and practical training facilities"
+        ],
+        "estimated_setup_cost_sar": 3000000,
+        "license_fee_sar": 10000,
+        "renewal_annual_sar": 5000,
+        "timeline_days": 120,
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "Building lease or ownership deed",
+          "Workshop and facility compliance report",
+          "Civil Defense clearance",
+          "Instructor qualification certificates (industry certifications required)",
+          "TVTC program approval documentation",
+          "Equipment and machinery inventory"
+        ],
+        "capacity_requirements": {
+          "min_sqm_per_trainee": 4.0,
+          "workshop_area_min_sqm": 200,
+          "max_trainees_per_workshop": 15,
+          "safety_equipment_required": true
+        }
+      },
+      {
+        "id": "EDU-T009",
+        "school_type_ar": "معهد لغات خاص",
+        "school_type_en": "Private Language School",
+        "age_range": "12+",
+        "moe_requirements": [
+          "MOE or TVTC language institute license",
+          "Municipal operating license (Balady)",
+          "Civil Defense safety certificate",
+          "GOSI and labor office registration",
+          "Language program accreditation"
+        ],
+        "estimated_setup_cost_sar": 400000,
+        "license_fee_sar": 5000,
+        "renewal_annual_sar": 3000,
+        "timeline_days": 60,
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "Building lease or ownership deed",
+          "Floor plan approved by municipality",
+          "Civil Defense clearance",
+          "Instructor qualification certificates (language teaching certifications)",
+          "Curriculum and assessment framework"
+        ],
+        "capacity_requirements": {
+          "min_sqm_per_student": 2.0,
+          "max_students_per_classroom": 20,
+          "language_lab_required": true,
+          "min_classrooms": 3
+        }
+      },
+      {
+        "id": "EDU-T010",
+        "school_type_ar": "مركز تعليم إضافي / تقوية",
+        "school_type_en": "Tutoring / Supplementary Education Center",
+        "age_range": "6-18",
+        "moe_requirements": [
+          "MOE tutoring center license",
+          "Municipal operating license (Balady)",
+          "Civil Defense safety certificate",
+          "GOSI and labor office registration"
+        ],
+        "estimated_setup_cost_sar": 200000,
+        "license_fee_sar": 3000,
+        "renewal_annual_sar": 2000,
+        "timeline_days": 45,
+        "required_documents": [
+          "Commercial Registration (CR)",
+          "Building lease or ownership deed",
+          "Floor plan approved by municipality",
+          "Civil Defense clearance",
+          "Tutor qualification certificates (BA minimum)"
+        ],
+        "capacity_requirements": {
+          "min_sqm_per_student": 2.0,
+          "max_students_per_room": 15,
+          "min_rooms": 2
+        }
+      }
+    ]
+  },
+  "curriculum_requirements": {
+    "section_name_ar": "اشتراطات المناهج الدراسية",
+    "section_name_en": "MOE Curriculum Requirements",
+    "national_curriculum": {
+      "name_ar": "المنهج الوطني السعودي",
+      "name_en": "Saudi National Curriculum",
+      "mandatory_for": "All private schools unless approved for international curriculum",
+      "subjects_ar": ["اللغة العربية", "التربية الإسلامية", "الرياضيات", "العلوم", "الدراسات الاجتماعية", "اللغة الإنجليزية", "التربية البدنية", "التربية الفنية", "المهارات الرقمية"],
+      "subjects_en": ["Arabic Language", "Islamic Studies", "Mathematics", "Science", "Social Studies", "English Language", "Physical Education", "Art Education", "Digital Skills"],
+      "notes_en": "All private schools using national curriculum must follow MOE textbooks and assessment standards. Digital Skills added as mandatory subject from Grade 4."
+    },
+    "international_curricula": [
+      {
+        "id": "CUR-001",
+        "name_ar": "البكالوريا الدولية (IB)",
+        "name_en": "International Baccalaureate (IB)",
+        "accreditation_body": "International Baccalaureate Organization (IBO)",
+        "accreditation_fee_sar": 75000,
+        "annual_fee_sar": 40000,
+        "accreditation_timeline_months": 24,
+        "moe_conditions": [
+          "Must teach Arabic language (minimum 4 periods/week)",
+          "Must teach Islamic studies for Muslim students (minimum 2 periods/week)",
+          "Must teach Saudi national studies/social studies",
+          "MOE approval required before applying to IBO"
+        ]
+      },
+      {
+        "id": "CUR-002",
+        "name_ar": "المنهج البريطاني (IGCSE / A-Levels)",
+        "name_en": "British Curriculum (IGCSE / A-Levels)",
+        "accreditation_body": "Cambridge Assessment International Education / Pearson Edexcel",
+        "accreditation_fee_sar": 50000,
+        "annual_fee_sar": 30000,
+        "accreditation_timeline_months": 12,
+        "moe_conditions": [
+          "Must teach Arabic language (minimum 4 periods/week)",
+          "Must teach Islamic studies for Muslim students (minimum 2 periods/week)",
+          "Must teach Saudi national studies/social studies",
+          "MOE approval required"
+        ]
+      },
+      {
+        "id": "CUR-003",
+        "name_ar": "المنهج الأمريكي",
+        "name_en": "American Curriculum",
+        "accreditation_body": "AdvancED / NEASC / MSA / WASC",
+        "accreditation_fee_sar": 55000,
+        "annual_fee_sar": 25000,
+        "accreditation_timeline_months": 18,
+        "moe_conditions": [
+          "Must teach Arabic language (minimum 4 periods/week)",
+          "Must teach Islamic studies for Muslim students (minimum 2 periods/week)",
+          "Must teach Saudi national studies/social studies",
+          "MOE approval required",
+          "High school diploma must be attested by MOE for local university admission"
+        ]
+      }
+    ],
+    "arabic_language_mandate": {
+      "name_ar": "اشتراطات تدريس اللغة العربية",
+      "name_en": "Arabic Language Teaching Requirements",
+      "min_periods_per_week_national": 7,
+      "min_periods_per_week_international": 4,
+      "qualified_teacher_required": true,
+      "teacher_qualification": "BA in Arabic Language or Arabic Language Education",
+      "notes_en": "Arabic language instruction is mandatory in all private schools regardless of curriculum. International schools must allocate a minimum of 4 periods per week."
+    },
+    "islamic_studies_mandate": {
+      "name_ar": "اشتراطات تدريس التربية الإسلامية",
+      "name_en": "Islamic Studies Requirements",
+      "applicable_to": "All Muslim students in all school types",
+      "min_periods_per_week_national": 4,
+      "min_periods_per_week_international": 2,
+      "qualified_teacher_required": true,
+      "teacher_qualification": "BA in Islamic Studies or Islamic Education",
+      "notes_en": "Islamic studies mandatory for all Muslim students. Non-Muslim students may be exempted with parental written request. Quran memorization programs are encouraged but not mandatory."
+    },
+    "physical_education_mandate": {
+      "name_ar": "اشتراطات التربية البدنية",
+      "name_en": "Physical Education Requirements",
+      "min_periods_per_week": 2,
+      "applicable_to": "All students (male and female)",
+      "notes_en": "Physical education is mandatory for all students in all school types. Girls' PE was officially introduced in 2017. Schools must have adequate indoor or outdoor sports facilities."
+    }
+  },
+  "teacher_student_ratios": {
+    "section_name_ar": "نسب المعلمين إلى الطلاب",
+    "section_name_en": "Teacher-Student Ratios by Level",
+    "items": [
+      {
+        "level_ar": "حضانة / روضة",
+        "level_en": "Nursery / Preschool",
+        "ratio": "1:8",
+        "max_class_size": 25,
+        "teaching_assistant_required": true,
+        "notes_en": "One qualified teacher and one assistant per group of 8 children. Maximum 25 children per classroom with 3 adults."
+      },
+      {
+        "level_ar": "ابتدائي",
+        "level_en": "Elementary",
+        "ratio": "1:20",
+        "max_class_size": 30,
+        "teaching_assistant_required": false,
+        "notes_en": "Maximum 30 students per classroom. Schools should aim for 1:20 ratio for effective instruction."
+      },
+      {
+        "level_ar": "متوسط",
+        "level_en": "Middle School",
+        "ratio": "1:25",
+        "max_class_size": 30,
+        "teaching_assistant_required": false,
+        "notes_en": "Subject-specialist teachers required. Maximum 25 teaching periods per week per teacher."
+      },
+      {
+        "level_ar": "ثانوي",
+        "level_en": "High School",
+        "ratio": "1:25",
+        "max_class_size": 30,
+        "teaching_assistant_required": false,
+        "notes_en": "Subject-specialist teachers required. Career counselor recommended for every 250 students."
+      },
+      {
+        "level_ar": "تعليم ذوي الاحتياجات الخاصة",
+        "level_en": "Special Needs Education",
+        "ratio": "1:5",
+        "max_class_size": 10,
+        "teaching_assistant_required": true,
+        "notes_en": "Specialized qualification in special education required. One-on-one aides for students with severe disabilities."
+      }
+    ],
+    "staffing_requirements": {
+      "min_saudi_teacher_percentage": 50,
+      "saudization_target_2025": 60,
+      "saudization_notes_en": "Private schools must meet Nitaqat Saudization requirements. Administrative positions have higher Saudization targets (70%). MOE encourages hiring Saudi teachers with financial incentives.",
+      "min_qualified_teacher_percentage": 100,
+      "teacher_min_qualification": "Bachelor's degree in relevant subject or education",
+      "principal_min_qualification": "Bachelor's degree with 5+ years teaching experience",
+      "teacher_license_required": true,
+      "teacher_license_authority": "Education & Training Evaluation Commission (ETEC)",
+      "teacher_license_authority_ar": "هيئة تقويم التعليم والتدريب"
+    }
+  },
+  "facility_requirements": {
+    "section_name_ar": "اشتراطات المرافق والمباني",
+    "section_name_en": "Facility and Building Requirements",
+    "space_per_student": [
+      { "level_en": "Nursery / Preschool", "level_ar": "حضانة / روضة", "min_sqm_per_student": 3.0 },
+      { "level_en": "Elementary", "level_ar": "ابتدائي", "min_sqm_per_student": 2.5 },
+      { "level_en": "Middle School", "level_ar": "متوسط", "min_sqm_per_student": 2.5 },
+      { "level_en": "High School", "level_ar": "ثانوي", "min_sqm_per_student": 2.5 },
+      { "level_en": "Special Needs", "level_ar": "ذوي الاحتياجات الخاصة", "min_sqm_per_student": 5.0 },
+      { "level_en": "Training Center", "level_ar": "مركز تدريب", "min_sqm_per_student": 2.0 }
+    ],
+    "safety_requirements": [
+      "Civil Defense fire safety certificate",
+      "Fire extinguishers on every floor (1 per 200 sqm)",
+      "Emergency exit signs and illuminated pathways",
+      "Fire alarm system connected to Civil Defense",
+      "Annual fire drill documentation",
+      "First aid room with qualified nurse",
+      "CCTV surveillance system covering all common areas",
+      "Perimeter fencing or walls (minimum 2m height)"
+    ],
+    "laboratory_requirements": {
+      "science_lab": {
+        "required_from": "Middle School (Grade 7+)",
+        "min_sqm": 60,
+        "safety_equipment": ["Fume hood", "Eye wash station", "Fire extinguisher", "First aid kit", "Chemical storage cabinet"],
+        "max_students_per_session": 20
+      },
+      "computer_lab": {
+        "required_from": "Elementary (Grade 4+)",
+        "min_sqm": 50,
+        "min_devices_per_student_ratio": "1:2",
+        "internet_required": true
+      }
+    },
+    "library_requirements": {
+      "required_from": "Elementary (Grade 1+)",
+      "min_sqm": 40,
+      "min_books_per_student": 5,
+      "must_include_arabic_collection": true,
+      "librarian_qualification": "BA in Library Science or equivalent"
+    },
+    "sports_facilities": {
+      "required_from": "All levels",
+      "indoor_or_outdoor": "At least one must be provided",
+      "min_outdoor_area_sqm": 200,
+      "notes_en": "Indoor multipurpose hall acceptable for schools in dense urban areas. Must accommodate PE curriculum requirements for both male and female students."
+    },
+    "accessibility_requirements": [
+      "Wheelchair ramps at all entrances",
+      "Accessible restrooms on each floor",
+      "Elevator access for buildings above 2 floors",
+      "Braille signage for visually impaired students",
+      "Designated parking for persons with disabilities",
+      "Classroom door width minimum 90cm"
+    ]
+  },
+  "salary_benchmarks_sar": {
+    "section_name_ar": "مرجعيات الرواتب في قطاع التعليم الخاص",
+    "section_name_en": "Private Education Sector Salary Benchmarks (SAR/month)",
+    "notes": "Ranges reflect typical private school salaries in major cities (Riyadh, Jeddah, Dammam) as of 2025. International schools tend to pay at the higher end. Includes basic salary only; housing and transport allowances are additional.",
+    "teaching_staff": {
+      "saudi_teachers": {
+        "label_ar": "معلم سعودي",
+        "label_en": "Saudi Teacher",
+        "elementary": { "min_sar": 7000, "max_sar": 12000 },
+        "middle_school": { "min_sar": 8000, "max_sar": 14000 },
+        "high_school": { "min_sar": 9000, "max_sar": 16000 },
+        "notes_en": "Saudi teachers receive GOSI contributions. HRDF subsidies may apply for first 2 years under Tamheer or similar programs."
+      },
+      "expat_teachers": {
+        "label_ar": "معلم غير سعودي",
+        "label_en": "Expatriate Teacher",
+        "elementary": { "min_sar": 4500, "max_sar": 8000 },
+        "middle_school": { "min_sar": 5000, "max_sar": 9000 },
+        "high_school": { "min_sar": 5500, "max_sar": 10000 },
+        "international_school_premium": { "min_sar": 8000, "max_sar": 18000 },
+        "notes_en": "Expat teachers typically receive housing allowance (15-25% of basic), annual flight ticket, and medical insurance. Western-qualified teachers in international schools command premium rates."
+      },
+      "special_education_teachers": {
+        "label_ar": "معلم تربية خاصة",
+        "label_en": "Special Education Teacher",
+        "saudi": { "min_sar": 9000, "max_sar": 15000 },
+        "expat": { "min_sar": 6000, "max_sar": 11000 },
+        "notes_en": "High demand and short supply. Specialized certifications command higher salaries."
+      }
+    },
+    "administrative_staff": {
+      "principal": {
+        "label_ar": "مدير مدرسة",
+        "label_en": "School Principal",
+        "saudi": { "min_sar": 15000, "max_sar": 30000 },
+        "expat": { "min_sar": 12000, "max_sar": 25000 },
+        "notes_en": "International school principals with Western qualifications can earn SAR 25,000-40,000."
+      },
+      "vice_principal": {
+        "label_ar": "وكيل مدرسة",
+        "label_en": "Vice Principal",
+        "saudi": { "min_sar": 12000, "max_sar": 22000 },
+        "expat": { "min_sar": 9000, "max_sar": 18000 }
+      },
+      "academic_coordinator": {
+        "label_ar": "منسق أكاديمي",
+        "label_en": "Academic Coordinator",
+        "saudi": { "min_sar": 10000, "max_sar": 18000 },
+        "expat": { "min_sar": 7000, "max_sar": 14000 }
+      },
+      "school_counselor": {
+        "label_ar": "مرشد طلابي",
+        "label_en": "School Counselor",
+        "saudi": { "min_sar": 8000, "max_sar": 14000 },
+        "expat": { "min_sar": 5500, "max_sar": 10000 }
+      }
+    },
+    "support_staff": {
+      "school_nurse": {
+        "label_ar": "ممرض/ة مدرسة",
+        "label_en": "School Nurse",
+        "min_sar": 4000,
+        "max_sar": 8000
+      },
+      "lab_technician": {
+        "label_ar": "فني مختبر",
+        "label_en": "Lab Technician",
+        "min_sar": 3500,
+        "max_sar": 6000
+      },
+      "librarian": {
+        "label_ar": "أمين مكتبة",
+        "label_en": "Librarian",
+        "min_sar": 3500,
+        "max_sar": 6000
+      },
+      "it_support": {
+        "label_ar": "دعم تقنية المعلومات",
+        "label_en": "IT Support",
+        "min_sar": 4000,
+        "max_sar": 7000
+      },
+      "security_guard": {
+        "label_ar": "حارس أمن",
+        "label_en": "Security Guard",
+        "min_sar": 2500,
+        "max_sar": 4000
+      },
+      "driver": {
+        "label_ar": "سائق حافلة مدرسية",
+        "label_en": "School Bus Driver",
+        "min_sar": 2500,
+        "max_sar": 4500
+      },
+      "cleaning_staff": {
+        "label_ar": "عامل نظافة",
+        "label_en": "Cleaning Staff",
+        "min_sar": 1800,
+        "max_sar": 3000
+      }
+    }
+  }
+}

@@ -12,7 +12,7 @@ from app.services.data_tools import lookup_franchise, search_franchises
 class RFTALookupSubAgent(BaseAgent):
     name: str = "RFTALookupSubAgent"
     description: str = "Matches franchise brands against the RFTA registry"
-    max_tokens: int = 4096
+    max_tokens: int = 2000
     temperature: float = 0.1
 
     @property
