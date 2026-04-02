@@ -79,3 +79,17 @@ def login(form: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get
 def get_me(db: Session = Depends(get_db)):
     """Placeholder — use get_current_user dependency in protected routes."""
     return {"message": "Use Authorization header with Bearer token"}
+
+
+@router.post("/bootstrap-admin")
+def bootstrap_admin(db: Session = Depends(get_db)):
+    """One-time setup: promote the first registered user to admin. Only works if no admins exist."""
+    existing_admin = db.query(User).filter(User.role == "admin").first()
+    if existing_admin:
+        raise HTTPException(status_code=400, detail="Admin already exists")
+    first_user = db.query(User).order_by(User.created_at).first()
+    if not first_user:
+        raise HTTPException(status_code=404, detail="No users found")
+    first_user.role = "admin"
+    db.commit()
+    return {"message": f"User {first_user.email} promoted to admin"}
