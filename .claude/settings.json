@@ -1,0 +1,43 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILEPATH=$(echo \"$CLAUDE_TOOL_INPUT\" | sed -n 's/.*\"file_path\"[[:space:]]*:[[:space:]]*\"\\([^\"]*\\)\".*/\\1/p'); if [ -n \"$FILEPATH\" ] && echo \"$FILEPATH\" | grep -qE '\\.env$|\\.env\\.'; then echo 'BLOCKED: Do not edit .env files directly. Set environment variables in the shell or docker-compose.yml instead.' >&2; exit 1; fi"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILEPATH=$(echo \"$CLAUDE_TOOL_INPUT\" | sed -n 's/.*\"file_path\"[[:space:]]*:[[:space:]]*\"\\([^\"]*\\)\".*/\\1/p'); if [ -n \"$FILEPATH\" ] && echo \"$FILEPATH\" | grep -qE '\\.py$'; then /opt/anaconda3/bin/python3 -c \"import ast; ast.parse(open('$FILEPATH').read())\" 2>&1 || true; fi"
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Edit",
+      "Write",
+      "Read",
+      "Bash(cd *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(git *)",
+      "Bash(npm *)",
+      "Bash(PATH=* npm *)",
+      "Bash(sed *)",
+      "Bash(mkdir *)",
+      "Bash(find *)",
+      "Bash(wc *)"
+    ]
+  }
+}
