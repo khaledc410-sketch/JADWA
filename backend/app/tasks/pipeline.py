@@ -473,8 +473,19 @@ def run_report_pipeline(self, run_id: str, language: str = "ar"):
             run.verdict_data = verdict
             run.sections_data = report_doc
             db.commit()
-        except Exception:
-            pass  # Don't block pipeline for verdict persistence failure
+        except Exception as e:
+            print(f"WARNING: Failed to persist verdict/sections: {e}")
+            # Try saving just the verdict without sections (sections might be too large)
+            try:
+                import json as _json
+
+                # Force JSON serialization to catch non-serializable objects
+                run.verdict_data = _json.loads(_json.dumps(verdict, default=str))
+                run.sections_data = _json.loads(_json.dumps(report_doc, default=str))
+                db.commit()
+                print("Saved verdict/sections with default=str fallback")
+            except Exception as e2:
+                print(f"WARNING: Second attempt also failed: {e2}")
 
         # ── FREE TIER EARLY STOP ──────────────────────────────────────
         from app.models.subscription import Subscription
