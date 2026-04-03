@@ -302,8 +302,9 @@ class PDFRenderAgent(BaseAgent):
             )
             return pdf_bytes
 
-        except (ImportError, OSError):
-            # WeasyPrint unavailable (missing system libs) — fall back to fpdf2
+        except Exception as e:
+            # WeasyPrint failed (missing libs, version bug, etc.) — fall back to fpdf2
+            print(f"WeasyPrint failed ({e}), falling back to fpdf2")
             return self._fpdf2_pdf(html_content)
 
     def _fpdf2_pdf(self, html_content: str) -> bytes:
