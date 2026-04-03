@@ -1,4 +1,5 @@
 import asyncio
+import threading
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
@@ -40,17 +41,31 @@ def generate_report(
     db.commit()
     db.refresh(run)
 
-    # Dispatch to Celery
-    from app.tasks.pipeline import run_report_pipeline
-
-    task = run_report_pipeline.delay(str(run.id), language)
-
-    # Store celery task id
-    run.celery_task_id = task.id
     run.status = "running"
     db.commit()
 
-    return {"run_id": str(run.id), "status": "queued"}
+    # Try Celery first; fall back to background thread if Redis unavailable
+    run_id_str = str(run.id)
+    try:
+        from app.tasks.pipeline import run_report_pipeline
+
+        task = run_report_pipeline.delay(run_id_str, language)
+        run.celery_task_id = task.id
+        db.commit()
+    except Exception as e:
+        print(f"Celery unavailable ({e}), running pipeline in background thread")
+
+        def _run_in_thread(rid, lang):
+            from app.tasks.pipeline import run_report_pipeline
+
+            run_report_pipeline(rid, lang)
+
+        t = threading.Thread(
+            target=_run_in_thread, args=(run_id_str, language), daemon=True
+        )
+        t.start()
+
+    return {"run_id": run_id_str, "status": "queued"}
 
 
 @router.get("/{run_id}/status")
@@ -127,11 +142,24 @@ def retry_report(
     run.current_step = "إعادة المحاولة..."
     db.commit()
 
-    from app.tasks.pipeline import run_report_pipeline
-
-    task = run_report_pipeline.delay(str(run.id), "ar")
-    run.celery_task_id = task.id
     run.status = "running"
+    run_id_str = str(run.id)
+    try:
+        from app.tasks.pipeline import run_report_pipeline
+
+        task = run_report_pipeline.delay(run_id_str, "ar")
+        run.celery_task_id = task.id
+    except Exception:
+
+        def _run_in_thread(rid, lang):
+            from app.tasks.pipeline import run_report_pipeline
+
+            run_report_pipeline(rid, lang)
+
+        t = threading.Thread(
+            target=_run_in_thread, args=(run_id_str, "ar"), daemon=True
+        )
+        t.start()
     db.commit()
 
     return {"run_id": str(run.id), "status": "retrying"}
